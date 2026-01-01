@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  1 JAN 2026 13:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  2 JAN 2026 02:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -590,7 +590,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 132--152
 
 [2]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 188.
+(Font)              <10.95> on input line 180.
 
 Underfull \hbox (badness 10000) in paragraph at lines 185--217
 
@@ -608,151 +608,207 @@ Underfull \hbox (badness 10000) in paragraph at lines 185--217
 
 
 
-[3{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
+[3{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
 
-[4{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
+[4{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
+Underfull \hbox (badness 10000) in paragraph at lines 245--277
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 245--277
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 245--277
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--304
+
+ []
+
+
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 293--311
+Underfull \hbox (badness 10000) in paragraph at lines 328--377
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 328--377
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 328--377
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 328--377
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 328--377
 
  []
 
 
 
 [6]
-Overfull \hbox (26.96698pt too wide) in paragraph at lines 364--405
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 399--408
+
+ []
+
+
+
+[8{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
+Underfull \hbox (badness 10000) in paragraph at lines 483--501
+
+ []
+
+
+
+[9]
+Overfull \hbox (26.96698pt too wide) in paragraph at lines 554--595
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 339--406
+Underfull \hbox (badness 10000) in paragraph at lines 529--596
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 339--406
-
- []
-
-
-
-[7]
-
-[8]
-
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 494--522
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 494--522
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 524--547
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 524--547
+Underfull \hbox (badness 10000) in paragraph at lines 529--596
 
  []
 
 
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 570--591
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 570--591
-
- []
-
-
 
 [11]
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 658--672
+Underfull \hbox (badness 10000) in paragraph at lines 684--712
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 658--672
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 674--710
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 674--710
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 674--710
+Underfull \hbox (badness 10000) in paragraph at lines 684--712
 
  []
 
 
 
 [13]
+Underfull \hbox (badness 10000) in paragraph at lines 714--737
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 714--737
+
+ []
+
+
 
 [14]
+Underfull \hbox (badness 10000) in paragraph at lines 760--781
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 760--781
+
+ []
+
+
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 812--844
+Underfull \hbox (badness 10000) in paragraph at lines 848--862
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 812--844
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 812--844
+Underfull \hbox (badness 10000) in paragraph at lines 848--862
 
  []
 
 
 
 [16]
-Underfull \hbox (badness 1874) in paragraph at lines 862--865
-[]\T1/lmr/m/n/10.95 (+20) T. P. Lil-l-i-crap \T1/lmr/m/it/10.95 (+20) et al.\T1/lmr/m/n/10.95 (+20) ,  ``Con-tin-u-ous con-trol with deep re-in-force-ment learn-ing,''
+Underfull \hbox (badness 10000) in paragraph at lines 864--900
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 864--900
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 864--900
+
  []
 
 
 
 [17]
 
-[18] (paper.aux)
+[18]
+
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 1002--1034
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1002--1034
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1002--1034
+
+ []
+
+
+
+[20]
+Underfull \hbox (badness 1874) in paragraph at lines 1052--1055
+[]\T1/lmr/m/n/10.95 (+20) T. P. Lil-l-i-crap \T1/lmr/m/it/10.95 (+20) et al.\T1/lmr/m/n/10.95 (+20) ,  ``Con-tin-u-ous con-trol with deep re-in-force-ment learn-ing,''
+ []
+
+
+
+[21] (paper.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-14>
  ***********
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: EE7C314B460D8C97EDE838E8BC63D66B;1344.
+(rerunfilecheck)             Checksum: 3E4B4A06305C21C11A4170EFDE2F3055;1558.
  ) 
 Here is how much of TeX's memory you used:
- 16366 strings out of 469941
- 260548 string characters out of 5469430
- 691664 words of memory out of 5000000
- 42727 multiletter control sequences out of 15000+600000
- 698425 words of font info for 181 fonts, out of 8000000 for 9000
+ 16376 strings out of 469941
+ 260648 string characters out of 5469430
+ 692664 words of memory out of 5000000
+ 42729 multiletter control sequences out of 15000+600000
+ 698593 words of font info for 183 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,18n,79p,1110b,584s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb>
-Output written on paper.pdf (18 pages, 339152 bytes).
+ 75i,18n,79p,1110b,580s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on paper.pdf (21 pages, 371237 bytes).
 PDF statistics:
- 209 PDF objects out of 1000 (max. 8388607)
- 36 named destinations out of 1000 (max. 500000)
- 43057 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 234 PDF objects out of 1000 (max. 8388607)
+ 40 named destinations out of 1000 (max. 500000)
+ 43065 words of extra memory for PDF output out of 51595 (max. 10000000)
 

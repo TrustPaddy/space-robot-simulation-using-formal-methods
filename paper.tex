@@ -177,7 +177,7 @@ motion are calculated continuously for use in the reward and for post-run analys
   \item Safety Monitors: crucial safety subsystems are integrated to monitor and enforce constraints. A
 Collision Monitor checks distances between the robot’s components (e.g., between the arm
 links and the base) and triggers a safety halt if any distance falls below a defined safe threshold
-d<sub>safe</sub>. Similarly, a joint-limit monitor observes the arm’s joint angles and triggers an
+$d_{safe}$. Similarly, a joint-limit monitor observes the arm’s joint angles and triggers an
 emergency stop if any joint exceeds its allowed range. These monitors interface with both the
 plant and controller: they can terminate an episode and nullify the agent’s torque outputs if a
 violation is detected (see Formal Methods Integration section for details).
@@ -203,8 +203,8 @@ fails to learn it, it is due to learning limitations rather than an unattainable
 \\ \\
 During simulation, the reference subsystem outputs both the desired end-effector position and velocity
 (as time series $EE_{ref}(t)$ and $EE_{vref}(t)$ in the workspace) at each time step. From
-these, instantaneous tracking error signals are computed: let e<sub>p</sub> = (current EE position –
-desired position) and e<sub>v</sub> = (current EE velocity – desired velocity). These error signals (position and velocity error of the end-effector) are key components of the observation and are also
+these, instantaneous tracking error signals are computed: let $e_p$ = (current EE position –
+desired position) and $e_v$ = (current EE velocity – desired velocity). These error signals (position and velocity error of the end-effector) are key components of the observation and are also
 used in the reward computation (penalizing large errors) as described later. The trajectory
 parameters (circle radius, speed, etc.) can be varied to adjust the task’s difficulty; for the experiments
 reported here, we choose moderate values that challenge the controller but do not push the arm to its
@@ -214,6 +214,197 @@ In summary, the simulation environment provides a realistic and challenging plat
 with a free-floating base, a non-trivial trajectory control task, and integrated mechanisms to measure
 performance and enforce safety. Next, we describe how the reinforcement learning problem is
 formulated in this environment.
+
+\section{Reinforcement Learning Frramework}
+State (Observation) Space: At each time step, the RL agent receives an observation capturing the
+system’s key state information relevant to control. The state vector is composed of the following
+elements:
+\begin{itemize}
+  \item End-Effector Tracking Error: The position error $e_p \in \mathbb{R}^3$ between the endeffector’s current position and the reference target position (in Cartesian coordinates). If the
+end-effector is exactly on the desired trajectory point, $e_{p}$=0. Additionally, the error
+in end-effector velocity $e_v \in \mathbb{R}^3$ (difference between current and target endeffector velocities) is included. Together, ($e_{p}$, $e_{v}$) provides the agent a
+direct indication of tracking performance – it tells the agent how far off the trajectory the endeffector is and whether it is lagging or overshooting in velocity.
+  \item Arm Joint States: The positions and velocities of each of the 4 arm joints. We include the joint
+angles $q \in \mathbb{R}^4$ and joint angular velocities $\dot x \in \mathbb{R}^4$ in the observation.
+These inform the agent of the manipulator’s configuration and motion. (Note: Joint angles can
+be normalized or wrapped as needed; in our implementation they are provided in radians along
+with known joint limits.)
+  \item Base Motion: The free-floating base’s orientation and angular velocity. We parameterize the
+base’s orientation by a three-parameter representation of the rotation (such as a normalized
+quaternion vector part or Euler angles) such that $ori_{base} \in \mathbb{R}^3$ represents the
+attitude error of the base from the reference (usually the identity rotation). Because the base
+is expected to remain mostly inertially fixed, this orientation error is ideally kept near zero by the
+agent’s actions. The base’s angular velocity $\omega_{base} \in \mathbb{R}^3$ is also included, as it
+captures any ongoing rotation of the base. (The base’s translational velocity could also be
+considered; however, in a free-floating scenario with no external forces and zero initial
+momentum, the center-of-mass linear velocity remains constant. In our case the base’s linear
+momentum is initially zero and remains near zero, so base translational motion is minimal by
+design. Thus, base linear velocity is not a major factor and can be omitted or included for
+completeness; our state focuses on rotational movement of the base.)
+\end{itemize}
+\noindent
+Combining these components, the overall observation vector has dimension $3 (e_{p}) + 3
+(e_{v}) + 4 (q) + 4 (\dot x) + 3 (ori_{base}) + 3 (\omega_{base}) = 20 dimensions$ (in
+our implementation, a few additional state features like a boolean flag for terminal state can bring it to
+23, but the core physical state is 20-dimensional). This rich state description provides the agent with all
+necessary information: how far the end-effector is from target, how the arm is configured/moving, and
+how the base is reacting.
+\\ \\
+Action Space: The agent’s action is a vector of continuous joint torque commands for the
+manipulator’s joints. At each decision step, the agent outputs $a = (\tau_{1}, \tau_{2},
+\tau_{3}, \tau_{4})$, corresponding to the torque to apply at each of the 4 revolute joints
+of the arm. These actions are real-valued and are constrained by the actuator capabilities. We enforce
+symmetric torque limits: each $|\tau_{i}| \leq \tau_{\max} (for i=1..4)$. In the simulation, this
+is implemented by saturation blocks that clip the commanded torque to the range $[-\tau_{\max},
++\tau_{\max}]$. The value of $\tau_{\max}$ is set based on the robot’s design (for example,
+$tau_{\max}=5 Nm$ for all joints, though the exact value is not critical as long as it is sufficient to
+follow the trajectory). These saturation limits not only model physical actuator limits but also serve as a
+safety measure to prevent excessive torques. The action space is thus continuous $\mathbb{R}_4$ (bounded), making
+this a continuous control problem that suits policy gradient and actor-critic RL methods.
+\\ \\
+The agent’s policy (the controller we are learning) is a mapping from the 20-dimensional state space to
+the 4-dimensional action space: $\pi: s \mapsto  a$. Internally, this policy is represented by a neural network
+whose parameters are adjusted during training to maximize cumulative reward (described next). The
+control frequency (agent decision frequency) is chosen such that the agent outputs a new torque
+command at a fixed interval $\Delta t (e.g., 0.1 s)$. This $\Delta t$ is the “agent sampling time” in Simulink and is
+consistent with the simulation’s fixed step to maintain alignment.
+\\ \\
+Reward Function Design: A crucial aspect of the RL formulation is the reward signal, which guides the
+agent toward the desired behavior. We define the reward $r_{t}$ at each time step t to reflect
+the dual objectives of accurate trajectory tracking and minimal base disturbance, along with
+penalties for unsafe actions. The reward is essentially the negative of a weighted cost function that
+includes several terms:
+\begin{itemize}
+  \item End-Effector Tracking Error: We assign a high cost to deviations from the reference trajectory.
+For example, the instantaneous squared position error $||e_{p}||^2$ (and possibly
+velocity error ||$e_{v}||^2$) can be used. This term drives the 
+  \item Base Motion Penalty: To keep the base as stable as possible, we include a penalty for base
+rotations and/or velocities. For instance, the squared norm of the base’s angular velocity ||
+$\omega_{base}||^2$ and orientation error $||ori_{base}||^2$ can be penalized. This
+term encourages the agent to execute arm motions in a way that minimizes imparted
+momentum to the base (in effect, preferring “reactionless” manipulation if possible).
+  \item Joint Velocity and Torque Penalties: Very fast joint movements or sudden large torques are
+undesirable both for mechanical reasons and because they tend to disturb the base. We include
+a mild penalty on the magnitude of joint velocities $||\dot x||^2$and on control effort $(e.g., ||\tau||^2)$. The
+latter also indirectly penalizes energy consumption. These terms ensure the agent prefers
+smoother, gentler motions rather than aggressive flailing, except as needed to improve tracking.
+\end{itemize}
+\noindent
+All these components are combined into an instantaneous cost function $c(t)$. The reward $r_t$ is defined as a negative weighted sum of these cost terms, so that maximizing reward
+corresponds to minimizing the weighted costs. In formula form, one can express $r_{t} = -
+[W_p\parallel e_{p}\parallel ^2 + W_{v}\parallel e_{v}\parallel ^2 + W_{b}\parallel \omega_{base}\parallel ^2 + W_{\dot q}\dot x\parallel ^2 + W_{\tau}\parallel \tau\parallel ^2]$, where the W coefficients are tunable weights
+that determine the relative importance of each term. We selected these weights empirically to
+balance the objectives (giving highest weight to end-effector error and base rotation, and smaller
+weights to smoothness/effort terms). The reward is thus higher (less negative) when the end-effector is
+on target and the base is steady, and lower (more negative) when the tracking error or base motion is
+large.
+\\ \\
+Reward Shaping and Terminal Rewards: In addition to the step-by-step reward, we implement several
+shaping strategies to aid learning:
+\begin{itemize}
+  \item Persistent Tracking Bonus: To encourage the agent to not only reach the trajectory but stay on
+it, we give a small positive reward for each time step the end-effector remains very close to the
+reference (within a tolerance). This is equivalent to lowering the cost when ‖$e_{p}$‖ is
+below a threshold, and helps reinforce good behavior over extended durations.
+  \item Terminal Success Reward: If the agent successfully completes an entire episode following the
+trajectory (e.g., completes one full circle) without any safety violation, a one-time bonus reward
+$R_{goal}$ is given at the end of the episode. This emphasizes the final objective
+of finishing the task. We adjusted $R_{goal}$ such that successful episodes are
+significantly rewarded, encouraging the agent to complete the trajectory rather than stopping
+early.
+  \item Safety Violation Penalty: Conversely, if at any time a safety-critical event occurs – such as a
+collision or a joint exceeding its limit – the episode is immediately terminated and a large
+penalty is applied. In our implementation, any such violation triggers an immediate reward
+of -1 (a very negative value in our normalized reward scale) and the episode ends. This
+teaches the agent to avoid those catastrophic actions. Similarly, if the system state diverged (e.g.
+due to a numerical instability or an “explosion” of the controller), we also terminate and penalize
+heavily to prevent the agent from exploring dangerous, unphysical regimes.
+  \item Numerical Guard: As a precaution, if the end-effector strays extremely far from the reference
+(indicating the agent might be doing something nonsensical, or a simulation error), we abort the
+episode with a heavy penalty. Specifically, if the end-effector position error exceeds a very
+large threshold (e.g. >10 units, far outside any reasonable range), we consider it a fault and end
+the trial. This prevents rare out-of-bound states from dominating training statistics.
+\end{itemize}
+\noindent
+These shaping measures were implemented via a reward function script in MATLAB (embedded in a
+Simulink MATLAB Function block). The weights of each term (stored in a structure W ) were tuned
+iteratively to ensure the agent receives informative feedback. The goal was to make the learning
+process efficient by guiding the agent away from obviously bad actions (crashing the robot) and
+towards the desired behavior, while still allowing enough exploration to discover the optimal policy.
+\\ \\
+Training Procedure: We adopt an episodic training approach. Each episode corresponds to a
+simulation of fixed duration (a finite horizon H seconds or a fixed number of time steps N). In our case,
+one episode lasts long enough for the end-effector to attempt following the circular trajectory (e.g., one
+or two loops of the circle). At the start of each episode, the system is reset to an initial condition by a
+custom reset function. The initial joint angles are set to a feasible configuration (e.g., the arm in a
+certain pose near the start of the trajectory) and the base is at a defined attitude (often the identity
+orientation, i.e., no initial rotation) or a small random perturbation thereof. All state variables, observer
+integrators, and logging signals are reset. We ensure the initial state is within safe bounds (no
+collisions or limit violations at t=0). The reset function can randomize the starting joint angles within a
+range or the phase of the trajectory to improve generalization, though within this study, we kept a
+consistent start pose for simplicity (with the end-effector at a specific point on the circle).
+\\ \\ 
+Once an episode begins, the agent receives observations at each step and outputs torque actions. The
+simulation runs until either the time horizon is reached (the episode length H) or a terminal condition
+occurs (task completed or safety violation). As described, reaching the end of the trajectory successfully
+or hitting a failure condition will terminate the episode early. In practice, an episode might end early
+if, for example, the agent causes a collision at 70\% of the trajectory – it will receive the penalty and the
+episode stops there.
+\\ \\
+We use a standard policy gradient training loop (as provided by MATLAB’s RL toolbox): after each
+episode (or after a set number of steps), the collected state, action, reward trajectories are used to
+update the agent’s policy (and value function, if applicable) via the chosen RL algorithm. The specifics of
+each algorithm (PPO, DDPG, etc.) are handled by their respective implementation – we supply the
+experience and let the algorithm update the neural network.
+All agents were trained for the same number of episodes to allow fair comparison. We chose
+$N_{train} = 1000$ episodes for each agent, which was sufficient for most algorithms to
+converge or reach a performance plateau. During training, we monitored metrics such as the
+cumulative reward per episode, the end-effector tracking error, and the base motion, averaged over
+each episode. A successful training run is characterized by the episode reward increasing (toward 0,
+since negative costs are used) and the tracking error and base movement decreasing over time. We
+also tracked the number of episodes that ended prematurely due to safety triggers, aiming for this to
+go to zero as training progresses.
+\\ \\
+For each algorithm, we performed multiple training runs and selected the best-performing policy
+(based on highest average reward achieved) for final evaluation. In practice, we found relatively
+consistent results across runs for the more stable algorithms (PPO, TRPO), whereas some runs of less
+stable methods (e.g. DDPG) would diverge – underscoring the importance of stability.
+\\ \\
+Evaluation and Metrics: After training, we evaluated each agent’s performance on $N_{eval}
+= 30$ independent episodes (with various initial conditions) to gather statistics. Over these
+evaluation runs, we compute a set of Key Performance Indicators (KPIs) to quantitatively compare the
+agents. These KPIs include: 
+\begin{itemize}
+  \item K1: Average Episodic Return – the mean cumulative reward per episode (higher is better; this
+reflects overall success in the task).
+  \item K2: Mean Squared End-Effector Position Error – averaged over the episode (lower is better;
+measures tracking accuracy).
+  \item K3: Maximum End-Effector Position Error – worst-case deviation during the episode (lower is
+better).
+  \item K4: Mean Base Orientation Error – e.g., average quaternion error magnitude (in radians)
+indicating how far the base drifted in attitude (lower is better).
+  \item K5: Collision Rate – the fraction of episodes in which a collision occurred (0 means no collisions;
+we expect this to be zero if the agent behaves safely).
+  \item K6: Joint Limit Violation Rate – fraction of episodes where any joint exceeded its range (again, 0
+is ideal).
+  \item K7: Control Smoothness (Jerk) – a measure of actuation smoothness, computed as the
+normalized jerk (time-derivative of acceleration) or second difference of joint torques. Lower
+K7 indicates s
+ \item K8: Mean Base Angular Velocity – a measure of residual base rotation (deg/s or rad/s) during
+the task (lower is better, ideally zero).
+  \item K9: Energy Consumption – approximate average energy expended by the joints (e.g., $\int_{}^{}\tau \cdot \omega dt$,
+in some units) or a proxy like sum of squared torques over time. Lower energy usage is
+better if achieved without sacrificing performance.
+\end{itemize}
+\noindent
+Additionally, we consider training-related metrics for comparison: T1: variance of the episodic reward
+in the later stage of training (indicating training stability), T2: variance of the value function or
+average reward (another stability metric), and T3: training time required to reach 1000 episodes
+(reflecting sample efficiency and computational load). These help to evaluate how easily an
+algorithm learns in this environment.
+\\ \\ 
+By evaluating all agents on these common metrics, we obtain an objective comparison of their
+performance and characteristics. The next section presents and discusses these comparative results.
 
 \section{Formal Methods Integration in the Learning Loop}
 Safety is paramount for space robotics. An autonomous controller must respect physical constraints
@@ -225,7 +416,7 @@ safety components were used:
   \item Momentum Conservation Monitor: In a free-floating system without external forces, the total
 linear momentum of the robot (base + arm) should remain constant (and in our case, near zero
 since initial momentum is zero). We implemented a Momentum Observer that continuously
-calculates the total linear momentum p<sub>tot</sub> of the system and checks for
+calculates the total linear momentum $p_{tot}$ of the system and checks for
 conservation. This is done by attaching virtual sensors to each body (base and links) to
 measure their velocities and computing $p_{tot} = \sum_{i} m_{i} v_{i}$. In an ideal
 simulation, $p_{tot}$ stays roughly zero at all times (small numerical deviations on the order of
@@ -240,9 +431,8 @@ diagnostic tool: any momentum drift would pause training for model inspection
 parts of the robot (for example, between the end-effector and the base structure). A Collision
 Monitor subsystem computes distances between predefined pairs of bodies each step (using the
 geometry from the URDF and Simscape’s collision detection capabilities). If any distance falls
-below the safe threshold d<sub>safe</sub> (indicating a potential collision or self-collision is
-imminent), the system triggers a collision event. In our simulation, we set, e.g., d<sub>safe</
-sub>=5 cm as the minimum clearance. When triggered, the following occurs: (1) a warning flag is
+below the safe threshold $d_{safe}$ (indicating a potential collision or self-collision is
+imminent), the system triggers a collision event. In our simulation, we set, e.g., $d_{safe}$=5 cm as the minimum clearance. When triggered, the following occurs: (1) a warning flag is
 raised and logged (for analysis), (2) a done signal is sent to terminate the episode
 immediately, and (3) all joint torque commands from the agent are overridden to zero to haltmotion. This mechanism effectively acts as an emergency brake, preventing the agent from
 continuing once a collision is about to happen. The collision monitor was tested by deliberately
