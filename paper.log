@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  2 JAN 2026 02:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  2 JAN 2026 09:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -676,11 +676,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 483--501
 
 
 [9]
-Overfull \hbox (26.96698pt too wide) in paragraph at lines 554--595
- [][] 
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 529--596
 
  []
@@ -798,15 +793,15 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 3E4B4A06305C21C11A4170EFDE2F3055;1558.
  ) 
 Here is how much of TeX's memory you used:
- 16376 strings out of 469941
- 260648 string characters out of 5469430
+ 16378 strings out of 469941
+ 260668 string characters out of 5469430
  692664 words of memory out of 5000000
  42729 multiletter control sequences out of 15000+600000
- 698593 words of font info for 183 fonts, out of 8000000 for 9000
+ 698676 words of font info for 184 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,18n,79p,1110b,580s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on paper.pdf (21 pages, 371237 bytes).
+Output written on paper.pdf (21 pages, 370507 bytes).
 PDF statistics:
  234 PDF objects out of 1000 (max. 8388607)
  40 named destinations out of 1000 (max. 500000)
