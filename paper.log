@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  2 JAN 2026 09:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  15 JAN 2026 15:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -577,233 +577,319 @@ Underfull \hbox (badness 10000) in paragraph at lines 78--94
 [1
 
 {C:/Users/pse18/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
-Underfull \hbox (badness 10000) in paragraph at lines 132--152
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 132--152
-
- []
-
+<Figures/ref_kreisbahn_1.png, id=44, 1002.74625pt x 700.6175pt>
+File: Figures/ref_kreisbahn_1.png Graphic file (type png)
+<use Figures/ref_kreisbahn_1.png>
+Package pdftex.def Info: Figures/ref_kreisbahn_1.png  used on input line 136.
+(pdftex.def)             Requested size: 218.51521pt x 152.67172pt.
+<Figures/ref_kreisbahn_2.png, id=45, 1002.74625pt x 700.6175pt>
+File: Figures/ref_kreisbahn_2.png Graphic file (type png)
+<use Figures/ref_kreisbahn_2.png>
+Package pdftex.def Info: Figures/ref_kreisbahn_2.png  used on input line 141.
+(pdftex.def)             Requested size: 218.51521pt x 152.67172pt.
+<Figures/ref_kreisbahn_3.png, id=46, 1002.74625pt x 700.6175pt>
+File: Figures/ref_kreisbahn_3.png Graphic file (type png)
+<use Figures/ref_kreisbahn_3.png>
+Package pdftex.def Info: Figures/ref_kreisbahn_3.png  used on input line 146.
+(pdftex.def)             Requested size: 218.51521pt x 152.67172pt.
 
 
 [2]
+Underfull \hbox (badness 10000) in paragraph at lines 151--169
+
+ []
+
+<Figures/Spacerobot_slx.png, id=53, 1038.88126pt x 519.44063pt>
+File: Figures/Spacerobot_slx.png Graphic file (type png)
+<use Figures/Spacerobot_slx.png>
+Package pdftex.def Info: Figures/Spacerobot_slx.png  used on input line 172.
+(pdftex.def)             Requested size: 455.24411pt x 227.61931pt.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 173.
+(C:\Users\pse18\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+
+[3 <./Figures/ref_kreisbahn_1.png (PNG copy)> <./Figures/ref_kreisbahn_2.png (PNG copy)> <./Figures/ref_kreisbahn_3.png (PNG copy)>]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 180.
-
-Underfull \hbox (badness 10000) in paragraph at lines 185--217
-
- []
+(Font)              <10.95> on input line 207.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 185--217
+[4 <./Figures/Spacerobot_slx.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 212--244
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 185--217
+Underfull \hbox (badness 10000) in paragraph at lines 212--244
 
  []
 
 
-
-[3{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
-
-[4{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
-Underfull \hbox (badness 10000) in paragraph at lines 245--277
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 245--277
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 245--277
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 292--304
+Underfull \hbox (badness 10000) in paragraph at lines 212--244
 
  []
 
 
 
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 328--377
+[5{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
+Underfull \hbox (badness 10000) in paragraph at lines 272--304
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 328--377
+Underfull \hbox (badness 10000) in paragraph at lines 272--304
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 328--377
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 328--377
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 328--377
+Underfull \hbox (badness 10000) in paragraph at lines 272--304
 
  []
 
 
 
 [6]
+Underfull \hbox (badness 10000) in paragraph at lines 319--331
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 355--404
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 355--404
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 355--404
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 355--404
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 355--404
+
+ []
+
+
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 399--408
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 426--435
+
+ []
+
+<Figures/impulserhaltung_scope.png, id=92, 1173.38374pt x 662.475pt>
+File: Figures/impulserhaltung_scope.png Graphic file (type png)
+<use Figures/impulserhaltung_scope.png>
+Package pdftex.def Info: Figures/impulserhaltung_scope.png  used on input line 445.
+(pdftex.def)             Requested size: 364.19667pt x 205.61784pt.
+
+
+[9{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
+<Figures/warning_collision.png, id=99, 421.575pt x 96.36pt>
+File: Figures/warning_collision.png Graphic file (type png)
+<use Figures/warning_collision.png>
+Package pdftex.def Info: Figures/warning_collision.png  used on input line 469.
+(pdftex.def)             Requested size: 273.14923pt x 62.43474pt.
+<Figures/tau_collision.png, id=100, 1168.365pt x 846.16125pt>
+File: Figures/tau_collision.png Graphic file (type png)
+<use Figures/tau_collision.png>
+Package pdftex.def Info: Figures/tau_collision.png  used on input line 476.
+(pdftex.def)             Requested size: 273.14923pt x 197.81502pt.
+
+
+[10 <./Figures/impulserhaltung_scope.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 483--519
 
  []
 
 
 
-[8{C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
-Underfull \hbox (badness 10000) in paragraph at lines 483--501
+[11 <./Figures/warning_collision.png> <./Figures/tau_collision.png (PNG copy)>]
+<Figures/verify_tau_reslult.png, id=114, 405.01312pt x 257.46187pt>
+File: Figures/verify_tau_reslult.png Graphic file (type png)
+<use Figures/verify_tau_reslult.png>
+Package pdftex.def Info: Figures/verify_tau_reslult.png  used on input line 522.
+(pdftex.def)             Requested size: 227.62206pt x 144.70015pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 526--562
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 526--562
 
  []
 
 
 
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 529--596
+[12 <./Figures/verify_tau_reslult.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 590--657
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 529--596
-
- []
-
-
-
-[10]
-
-[11]
-
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 684--712
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 684--712
+Underfull \hbox (badness 10000) in paragraph at lines 590--657
 
  []
 
 
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 714--737
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 714--737
-
- []
-
-
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 760--781
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 760--781
-
- []
-
-
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 848--862
+Underfull \hbox (badness 10000) in paragraph at lines 745--773
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 848--862
+Underfull \hbox (badness 10000) in paragraph at lines 745--773
 
  []
 
 
 
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 864--900
+Underfull \hbox (badness 10000) in paragraph at lines 775--798
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 864--900
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 864--900
+Underfull \hbox (badness 10000) in paragraph at lines 775--798
 
  []
 
 
 
 [17]
+<Figures/rainingsverlauf_ppo_default.png, id=144, 940.51375pt x 650.43pt>
+File: Figures/rainingsverlauf_ppo_default.png Graphic file (type png)
+<use Figures/rainingsverlauf_ppo_default.png>
+Package pdftex.def Info: Figures/rainingsverlauf_ppo_default.png  used on input line 830.
+(pdftex.def)             Requested size: 223.07211pt x 154.27031pt.
+<Figures/trainingsverlauf_ppo_optimized.png, id=145, 700.86844pt x 485.56406pt>
+File: Figures/trainingsverlauf_ppo_optimized.png Graphic file (type png)
+<use Figures/trainingsverlauf_ppo_optimized.png>
+Package pdftex.def Info: Figures/trainingsverlauf_ppo_optimized.png  used on input line 836.
+(pdftex.def)             Requested size: 223.07211pt x 154.54643pt.
+<Figures/soll_vs_ist_kreisbahn.png, id=147, 877.2775pt x 638.385pt>
+File: Figures/soll_vs_ist_kreisbahn.png Graphic file (type png)
+<use Figures/soll_vs_ist_kreisbahn.png>
+Package pdftex.def Info: Figures/soll_vs_ist_kreisbahn.png  used on input line 861.
+(pdftex.def)             Requested size: 223.07211pt x 162.32332pt.
+<Figures/soll_vs_ist_kreisbahn_opt.png, id=148, 878.28125pt x 638.385pt>
+File: Figures/soll_vs_ist_kreisbahn_opt.png Graphic file (type png)
+<use Figures/soll_vs_ist_kreisbahn_opt.png>
+Package pdftex.def Info: Figures/soll_vs_ist_kreisbahn_opt.png  used on input line 867.
+(pdftex.def)             Requested size: 223.07211pt x 162.13824pt.
 
-[18]
 
-[19]
-Underfull \hbox (badness 10000) in paragraph at lines 1002--1034
+[18 <./Figures/rainingsverlauf_ppo_default.png (PNG copy)> <./Figures/trainingsverlauf_ppo_optimized.png>]
+<Figures/basis_orientaion_ppo.png, id=155, 1168.365pt x 841.1425pt>
+File: Figures/basis_orientaion_ppo.png Graphic file (type png)
+<use Figures/basis_orientaion_ppo.png>
+Package pdftex.def Info: Figures/basis_orientaion_ppo.png  used on input line 878.
+(pdftex.def)             Requested size: 223.07211pt x 160.58882pt.
+<Figures/basis_orientation_ppo_optimized.png, id=156, 1166.3575pt x 840.13875pt>
+File: Figures/basis_orientation_ppo_optimized.png Graphic file (type png)
+<use Figures/basis_orientation_ppo_optimized.png>
+Package pdftex.def Info: Figures/basis_orientation_ppo_optimized.png  used on input line 884.
+(pdftex.def)             Requested size: 223.07211pt x 160.67921pt.
+
+
+[19 <./Figures/soll_vs_ist_kreisbahn.png (PNG copy)> <./Figures/soll_vs_ist_kreisbahn_opt.png (PNG copy)> <./Figures/basis_orientaion_ppo.png (PNG copy)> <./Figures/basis_orientation_ppo_optimized.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 960--974
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1002--1034
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1002--1034
+Underfull \hbox (badness 10000) in paragraph at lines 960--974
 
  []
 
 
 
 [20]
-Underfull \hbox (badness 1874) in paragraph at lines 1052--1055
+Underfull \hbox (badness 10000) in paragraph at lines 976--1012
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 976--1012
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 976--1012
+
+ []
+
+
+
+[21]
+
+[22]
+
+[23]
+Underfull \hbox (badness 10000) in paragraph at lines 1114--1146
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1114--1146
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1114--1146
+
+ []
+
+
+
+[24]
+Underfull \hbox (badness 1874) in paragraph at lines 1164--1167
 []\T1/lmr/m/n/10.95 (+20) T. P. Lil-l-i-crap \T1/lmr/m/it/10.95 (+20) et al.\T1/lmr/m/n/10.95 (+20) ,  ``Con-tin-u-ous con-trol with deep re-in-force-ment learn-ing,''
  []
 
 
 
-[21] (paper.aux)
+[25] (paper.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-14>
  ***********
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 3E4B4A06305C21C11A4170EFDE2F3055;1558.
+(rerunfilecheck)             Checksum: 1D7500F1628CFF3A613E821AAA4A6EBB;1553.
  ) 
 Here is how much of TeX's memory you used:
- 16378 strings out of 469941
- 260668 string characters out of 5469430
- 692664 words of memory out of 5000000
- 42729 multiletter control sequences out of 15000+600000
- 698676 words of font info for 184 fonts, out of 8000000 for 9000
+ 16577 strings out of 469941
+ 266348 string characters out of 5469430
+ 694244 words of memory out of 5000000
+ 42910 multiletter control sequences out of 15000+600000
+ 699078 words of font info for 186 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,18n,79p,1110b,580s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on paper.pdf (21 pages, 370507 bytes).
+<C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/pse18/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on paper.pdf (25 pages, 1009490 bytes).
 PDF statistics:
- 234 PDF objects out of 1000 (max. 8388607)
- 40 named destinations out of 1000 (max. 500000)
- 43065 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 298 PDF objects out of 1000 (max. 8388607)
+ 52 named destinations out of 1000 (max. 500000)
+ 43647 words of extra memory for PDF output out of 51595 (max. 10000000)
 
