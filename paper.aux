@@ -1,55 +1,105 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{papadopoulos2007minimum}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction and Background}{1}{section.1}\protected@file@percent }
+\citation{ribeiro2022dynamic}
 \@writefile{toc}{\contentsline {section}{\numberline {2}System Modeling and Simulation Environment}{3}{section.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Validation of the desired end effector circular path using inverse kinematics}}{3}{figure.caption.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Tracking the desired end effector circular path using inverse kinematics\relax }}{3}{figure.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:ref_kreis_gesamt}{{1}{3}{Validation of the desired end effector circular path using inverse kinematics}{figure.caption.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Overview of the Simulink model \texttt  {SpaceRobot.slx}}}{4}{figure.caption.2}\protected@file@percent }
-\newlabel{fig:spacerobot_slx}{{2}{4}{Overview of the Simulink model \texttt {SpaceRobot.slx}}{figure.caption.2}{}}
+\newlabel{fig:ref_kreis_gesamt}{{1}{3}{Tracking the desired end effector circular path using inverse kinematics\relax }{figure.caption.1}{}}
+\newlabel{fig:ref_kreis_gesamt@cref}{{[figure][1][]1}{[1][2][]3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Robot Model}{3}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Dynamic Simulation in MATLAB/Simulink}{3}{subsection.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Overview of the Simulink model \texttt  {SpaceRobot.slx}\relax }}{4}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:spacerobot_slx}{{2}{4}{Overview of the Simulink model \texttt {SpaceRobot.slx}\relax }{figure.caption.2}{}}
+\newlabel{fig:spacerobot_slx@cref}{{[figure][2][]2}{[1][3][]4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Reference Trajectory and Desired Task}{5}{subsection.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Reinforcement Learning Framework}{5}{section.3}\protected@file@percent }
+\newlabel{RL}{{3}{5}{Reinforcement Learning Framework}{section.3}{}}
+\newlabel{RL@cref}{{[section][3][]3}{[1][5][]5}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Formal Methods Integration in the Learning Loop}{9}{section.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Course of the robot's total momentum}}{10}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:impulserhaltung_scope}{{3}{10}{Course of the robot's total momentum}{figure.caption.3}{}}
-\newlabel{fig:collision_warning}{{4a}{11}{Automatically triggered collision warning}{figure.caption.4}{}}
-\newlabel{sub@fig:collision_warning}{{a}{11}{Automatically triggered collision warning}{figure.caption.4}{}}
-\newlabel{fig:collision_scope}{{4b}{11}{Scope of torque inputs in the event of a collision}{figure.caption.4}{}}
-\newlabel{sub@fig:collision_scope}{{b}{11}{Scope of torque inputs in the event of a collision}{figure.caption.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Representation of collision detection and the associated torque curves}}{11}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:collision_combined}{{4}{11}{Representation of collision detection and the associated torque curves}{figure.caption.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Result of the Simulink Design Verifier}}{12}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:verify_tau_result}{{5}{12}{Result of the Simulink Design Verifier}{figure.caption.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Comparison of Continuous RL Agents}{13}{section.5}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Selected performance metrics for each RL agent (best values in bold). PPO excels in most categories, achieving the lowest tracking errors (K2, K3), best base stability (K4), and smoothest control (K7), while maintaining short training time. TRPO is a close second in many metrics but requires more training time. Off-policy methods (TD3, SAC, DDPG) show larger errors or instabilities (e.g., high T1 for DDPG) despite some strengths (DDPG’s low max error K3). (KPI data from evaluation of 30 episodes per agent.)}}{14}{table.caption.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Optimization of the PPO Agent}{17}{section.6}\protected@file@percent }
-\newlabel{fig:training_ppo_default}{{6a}{18}{PPO (Default)}{figure.caption.7}{}}
-\newlabel{sub@fig:training_ppo_default}{{a}{18}{PPO (Default)}{figure.caption.7}{}}
-\newlabel{fig:training_ppo_opt}{{6b}{18}{PPO (Optimized)}{figure.caption.7}{}}
-\newlabel{sub@fig:training_ppo_opt}{{b}{18}{PPO (Optimized)}{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Comparison of episodic rewards for default and optimized PPO agents.}}{18}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:training_ppo_compare}{{6}{18}{Comparison of episodic rewards for default and optimized PPO agents}{figure.caption.7}{}}
-\newlabel{fig:traj_default}{{7a}{19}{PPO (Default)}{figure.caption.8}{}}
-\newlabel{sub@fig:traj_default}{{a}{19}{PPO (Default)}{figure.caption.8}{}}
-\newlabel{fig:traj_opt}{{7b}{19}{PPO (Optimized)}{figure.caption.8}{}}
-\newlabel{sub@fig:traj_opt}{{b}{19}{PPO (Optimized)}{figure.caption.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Target/actual comparison of the end effector trajectory in the XY plane.}}{19}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:trajektorie_xy_compare}{{7}{19}{Target/actual comparison of the end effector trajectory in the XY plane}{figure.caption.8}{}}
-\newlabel{fig:basis_default}{{8a}{19}{PPO (Default)}{figure.caption.9}{}}
-\newlabel{sub@fig:basis_default}{{a}{19}{PPO (Default)}{figure.caption.9}{}}
-\newlabel{fig:basis_opt}{{8b}{19}{PPO (Optimized)}{figure.caption.9}{}}
-\newlabel{sub@fig:basis_opt}{{b}{19}{PPO (Optimized)}{figure.caption.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Course of basic orientation (quaternion components) during a test episode.}}{19}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:basis_orientation_compare}{{8}{19}{Course of basic orientation (quaternion components) during a test episode}{figure.caption.9}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control).}}{20}{table.caption.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion and Conclusion}{21}{section.7}\protected@file@percent }
-\bibcite{SuttonBarto2018}{1}
-\bibcite{SchulmanTRPO2015}{2}
-\bibcite{SchulmanPPO2017}{3}
-\bibcite{LillicrapDDPG2015}{4}
-\bibcite{FujimotoTD32018}{5}
-\bibcite{HaarnojaSAC2018}{6}
-\bibcite{NanosPapadopoulos2017}{7}
-\bibcite{TobinDomainRand2017}{8}
-\gdef \@abspage@last{25}
+\newlabel{formal}{{4}{9}{Formal Methods Integration in the Learning Loop}{section.4}{}}
+\newlabel{formal@cref}{{[section][4][]4}{[1][9][]9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Course of the robot's total momentum\relax }}{9}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:impulserhaltung_scope}{{3}{9}{Course of the robot's total momentum\relax }{figure.caption.3}{}}
+\newlabel{fig:impulserhaltung_scope@cref}{{[figure][3][]3}{[1][9][]9}}
+\newlabel{momentumfig}{{\caption@xref {momentumfig}{ on input line 438}}{10}{Formal Methods Integration in the Learning Loop}{figure.caption.4}{}}
+\newlabel{momentumfig@cref}{{[section][4][]4}{[1][10][]10}}
+\newlabel{fig:collision_warning}{{4a}{10}{Automatically triggered collision warning\relax }{figure.caption.4}{}}
+\newlabel{fig:collision_warning@cref}{{[subfigure][1][4]4a}{[1][10][]10}}
+\newlabel{sub@fig:collision_warning}{{a}{10}{Automatically triggered collision warning\relax }{figure.caption.4}{}}
+\newlabel{sub@fig:collision_warning@cref}{{[subfigure][1][4]4a}{[1][10][]10}}
+\newlabel{fig:collision_scope}{{4b}{10}{Scope of torque inputs in the event of a collision\relax }{figure.caption.4}{}}
+\newlabel{fig:collision_scope@cref}{{[subfigure][2][4]4b}{[1][10][]10}}
+\newlabel{sub@fig:collision_scope}{{b}{10}{Scope of torque inputs in the event of a collision\relax }{figure.caption.4}{}}
+\newlabel{sub@fig:collision_scope@cref}{{[subfigure][2][4]4b}{[1][10][]10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Representation of collision detection and the associated torque curves\relax }}{10}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:collision_combined}{{4}{10}{Representation of collision detection and the associated torque curves\relax }{figure.caption.4}{}}
+\newlabel{fig:collision_combined@cref}{{[figure][4][]4}{[1][10][]10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Result of the Simulink Design Verifier\relax }}{11}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:verify_tau_result}{{5}{11}{Result of the Simulink Design Verifier\relax }{figure.caption.5}{}}
+\newlabel{fig:verify_tau_result@cref}{{[figure][5][]5}{[1][11][]11}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Comparison of Continuous RL Agents}{12}{section.5}\protected@file@percent }
+\newlabel{comparison}{{5}{12}{Comparison of Continuous RL Agents}{section.5}{}}
+\newlabel{comparison@cref}{{[section][5][]5}{[1][12][]12}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Selected performance metrics for each RL agent (best values in bold). PPO excels in most categories, achieving the lowest tracking errors (K2, K3), best base stability (K4), and smoothest control (K7), while maintaining short training time. TRPO is a close second in many metrics but requires more training time. Off-policy methods (TD3, SAC, DDPG) show larger errors or instabilities (e.g., high T1 for DDPG) despite some strengths (DDPG’s low max error K3). (KPI data from evaluation of 30 episodes per agent.)\relax }}{13}{table.caption.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Optimization of the PPO Agent}{16}{section.6}\protected@file@percent }
+\newlabel{fig:training_ppo_default}{{6a}{17}{PPO (Default)\relax }{figure.caption.7}{}}
+\newlabel{fig:training_ppo_default@cref}{{[subfigure][1][6]6a}{[1][17][]17}}
+\newlabel{sub@fig:training_ppo_default}{{a}{17}{PPO (Default)\relax }{figure.caption.7}{}}
+\newlabel{sub@fig:training_ppo_default@cref}{{[subfigure][1][6]6a}{[1][17][]17}}
+\newlabel{fig:training_ppo_opt}{{6b}{17}{PPO (Optimized)\relax }{figure.caption.7}{}}
+\newlabel{fig:training_ppo_opt@cref}{{[subfigure][2][6]6b}{[1][17][]17}}
+\newlabel{sub@fig:training_ppo_opt}{{b}{17}{PPO (Optimized)\relax }{figure.caption.7}{}}
+\newlabel{sub@fig:training_ppo_opt@cref}{{[subfigure][2][6]6b}{[1][17][]17}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Comparison of episodic rewards for default and optimized PPO agents.\relax }}{17}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:training_ppo_compare}{{6}{17}{Comparison of episodic rewards for default and optimized PPO agents.\relax }{figure.caption.7}{}}
+\newlabel{fig:training_ppo_compare@cref}{{[figure][6][]6}{[1][17][]17}}
+\newlabel{fig:traj_default}{{7a}{18}{PPO (Default)\relax }{figure.caption.8}{}}
+\newlabel{fig:traj_default@cref}{{[subfigure][1][7]7a}{[1][18][]18}}
+\newlabel{sub@fig:traj_default}{{a}{18}{PPO (Default)\relax }{figure.caption.8}{}}
+\newlabel{sub@fig:traj_default@cref}{{[subfigure][1][7]7a}{[1][18][]18}}
+\newlabel{fig:traj_opt}{{7b}{18}{PPO (Optimized)\relax }{figure.caption.8}{}}
+\newlabel{fig:traj_opt@cref}{{[subfigure][2][7]7b}{[1][18][]18}}
+\newlabel{sub@fig:traj_opt}{{b}{18}{PPO (Optimized)\relax }{figure.caption.8}{}}
+\newlabel{sub@fig:traj_opt@cref}{{[subfigure][2][7]7b}{[1][18][]18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Target/actual comparison of the end effector trajectory in the XY plane.\relax }}{18}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:trajektorie_xy_compare}{{7}{18}{Target/actual comparison of the end effector trajectory in the XY plane.\relax }{figure.caption.8}{}}
+\newlabel{fig:trajektorie_xy_compare@cref}{{[figure][7][]7}{[1][18][]18}}
+\newlabel{fig:basis_default}{{8a}{18}{PPO (Default)\relax }{figure.caption.9}{}}
+\newlabel{fig:basis_default@cref}{{[subfigure][1][8]8a}{[1][18][]18}}
+\newlabel{sub@fig:basis_default}{{a}{18}{PPO (Default)\relax }{figure.caption.9}{}}
+\newlabel{sub@fig:basis_default@cref}{{[subfigure][1][8]8a}{[1][18][]18}}
+\newlabel{fig:basis_opt}{{8b}{18}{PPO (Optimized)\relax }{figure.caption.9}{}}
+\newlabel{fig:basis_opt@cref}{{[subfigure][2][8]8b}{[1][18][]18}}
+\newlabel{sub@fig:basis_opt}{{b}{18}{PPO (Optimized)\relax }{figure.caption.9}{}}
+\newlabel{sub@fig:basis_opt@cref}{{[subfigure][2][8]8b}{[1][18][]18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Course of basic orientation (quaternion components) during a test episode.\relax }}{18}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:basis_orientation_compare}{{8}{18}{Course of basic orientation (quaternion components) during a test episode.\relax }{figure.caption.9}{}}
+\newlabel{fig:basis_orientation_compare@cref}{{[figure][8][]8}{[1][18][]18}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control).\relax }}{20}{table.caption.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion and Conclusion}{20}{section.7}\protected@file@percent }
+\bibcite{papadopoulos2007minimum}{1}
+\bibcite{ribeiro2022dynamic}{2}
+\bibcite{SuttonBarto2018}{3}
+\bibcite{SchulmanTRPO2015}{4}
+\bibcite{SchulmanPPO2017}{5}
+\bibcite{LillicrapDDPG2015}{6}
+\bibcite{FujimotoTD32018}{7}
+\bibcite{HaarnojaSAC2018}{8}
+\bibcite{NanosPapadopoulos2017}{9}
+\bibcite{TobinDomainRand2017}{10}
+\gdef \@abspage@last{24}
