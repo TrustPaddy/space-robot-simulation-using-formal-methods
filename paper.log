@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7) (preloaded format=pdflatex 2022.10.15)  24 JAN 2026 03:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7) (preloaded format=pdflatex 2022.10.15)  24 JAN 2026 03:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -709,17 +709,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 86--97
 [1
 
 {C:/Users/Kaigom/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
-<Figures/ref_kreisbahn_1.png, id=95, 1002.74625pt x 700.6175pt>
+<Figures/ref_kreisbahn_1.png, id=96, 1002.74625pt x 700.6175pt>
 File: Figures/ref_kreisbahn_1.png Graphic file (type png)
 <use Figures/ref_kreisbahn_1.png>
 Package pdftex.def Info: Figures/ref_kreisbahn_1.png  used on input line 146.
 (pdftex.def)             Requested size: 218.51521pt x 152.67172pt.
-<Figures/ref_kreisbahn_2.png, id=96, 1002.74625pt x 700.6175pt>
+<Figures/ref_kreisbahn_2.png, id=97, 1002.74625pt x 700.6175pt>
 File: Figures/ref_kreisbahn_2.png Graphic file (type png)
 <use Figures/ref_kreisbahn_2.png>
 Package pdftex.def Info: Figures/ref_kreisbahn_2.png  used on input line 151.
 (pdftex.def)             Requested size: 218.51521pt x 152.67172pt.
-<Figures/ref_kreisbahn_3.png, id=97, 1002.74625pt x 700.6175pt>
+<Figures/ref_kreisbahn_3.png, id=98, 1002.74625pt x 700.6175pt>
 File: Figures/ref_kreisbahn_3.png Graphic file (type png)
 <use Figures/ref_kreisbahn_3.png>
 Package pdftex.def Info: Figures/ref_kreisbahn_3.png  used on input line 156.
@@ -736,7 +736,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 165--174
 
  []
 
-<Figures/Spacerobot_slx.png, id=111, 1038.88126pt x 519.44063pt>
+<Figures/Spacerobot_slx.png, id=112, 1038.88126pt x 519.44063pt>
 File: Figures/Spacerobot_slx.png Graphic file (type png)
 <use Figures/Spacerobot_slx.png>
 Package pdftex.def Info: Figures/Spacerobot_slx.png  used on input line 183.
@@ -826,20 +826,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 422--431
 
  []
 
-<Figures/impulserhaltung_scope.png, id=154, 1173.38374pt x 662.475pt>
+<Figures/impulserhaltung_scope.png, id=155, 1173.38374pt x 662.475pt>
 File: Figures/impulserhaltung_scope.png Graphic file (type png)
 <use Figures/impulserhaltung_scope.png>
 Package pdftex.def Info: Figures/impulserhaltung_scope.png  used on input line 
 441.
 (pdftex.def)             Requested size: 364.19667pt x 205.61784pt.
 [10 <./Figures/impulserhaltung_scope.png (PNG copy)>]
-<Figures/warning_collision.png, id=162, 421.575pt x 96.36pt>
+<Figures/warning_collision.png, id=163, 421.575pt x 96.36pt>
 File: Figures/warning_collision.png Graphic file (type png)
 <use Figures/warning_collision.png>
 Package pdftex.def Info: Figures/warning_collision.png  used on input line 464.
 
 (pdftex.def)             Requested size: 273.14923pt x 62.43474pt.
-<Figures/tau_collision.png, id=163, 1168.365pt x 846.16125pt>
+<Figures/tau_collision.png, id=164, 1168.365pt x 846.16125pt>
 File: Figures/tau_collision.png Graphic file (type png)
 <use Figures/tau_collision.png>
 Package pdftex.def Info: Figures/tau_collision.png  used on input line 471.
@@ -850,7 +850,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 478--514
  []
 
 [11 <./Figures/warning_collision.png> <./Figures/tau_collision.png (PNG copy)>]
-<Figures/verify_tau_reslult.png, id=172, 405.01312pt x 257.46187pt>
+<Figures/verify_tau_reslult.png, id=173, 405.01312pt x 257.46187pt>
 File: Figures/verify_tau_reslult.png Graphic file (type png)
 <use Figures/verify_tau_reslult.png>
 Package pdftex.def Info: Figures/verify_tau_reslult.png  used on input line 517
@@ -897,13 +897,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 774--797
  []
 
 [17]
-<Figures/rainingsverlauf_ppo_default.png, id=202, 940.51375pt x 650.43pt>
+<Figures/rainingsverlauf_ppo_default.png, id=203, 940.51375pt x 650.43pt>
 File: Figures/rainingsverlauf_ppo_default.png Graphic file (type png)
 <use Figures/rainingsverlauf_ppo_default.png>
 Package pdftex.def Info: Figures/rainingsverlauf_ppo_default.png  used on input
  line 829.
 (pdftex.def)             Requested size: 223.07211pt x 154.27031pt.
-<Figures/trainingsverlauf_ppo_optimized.png, id=203, 700.86844pt x 485.56406pt>
+<Figures/trainingsverlauf_ppo_optimized.png, id=204, 700.86844pt x 485.56406pt>
 
 File: Figures/trainingsverlauf_ppo_optimized.png Graphic file (type png)
 <use Figures/trainingsverlauf_ppo_optimized.png>
@@ -912,25 +912,25 @@ put line 835.
 (pdftex.def)             Requested size: 223.07211pt x 154.54643pt.
  [18 <./Figures/rainingsverlauf_ppo_default.png (PNG copy)> <./Figures/training
 sverlauf_ppo_optimized.png>]
-<Figures/soll_vs_ist_kreisbahn.png, id=211, 877.2775pt x 638.385pt>
+<Figures/soll_vs_ist_kreisbahn.png, id=212, 877.2775pt x 638.385pt>
 File: Figures/soll_vs_ist_kreisbahn.png Graphic file (type png)
 <use Figures/soll_vs_ist_kreisbahn.png>
 Package pdftex.def Info: Figures/soll_vs_ist_kreisbahn.png  used on input line 
 860.
 (pdftex.def)             Requested size: 223.07211pt x 162.32332pt.
-<Figures/soll_vs_ist_kreisbahn_opt.png, id=212, 878.28125pt x 638.385pt>
+<Figures/soll_vs_ist_kreisbahn_opt.png, id=213, 878.28125pt x 638.385pt>
 File: Figures/soll_vs_ist_kreisbahn_opt.png Graphic file (type png)
 <use Figures/soll_vs_ist_kreisbahn_opt.png>
 Package pdftex.def Info: Figures/soll_vs_ist_kreisbahn_opt.png  used on input l
 ine 866.
 (pdftex.def)             Requested size: 223.07211pt x 162.13824pt.
-<Figures/basis_orientaion_ppo.png, id=213, 1168.365pt x 841.1425pt>
+<Figures/basis_orientaion_ppo.png, id=214, 1168.365pt x 841.1425pt>
 File: Figures/basis_orientaion_ppo.png Graphic file (type png)
 <use Figures/basis_orientaion_ppo.png>
 Package pdftex.def Info: Figures/basis_orientaion_ppo.png  used on input line 8
 77.
 (pdftex.def)             Requested size: 223.07211pt x 160.58882pt.
-<Figures/basis_orientation_ppo_optimized.png, id=214, 1166.3575pt x 840.13875pt
+<Figures/basis_orientation_ppo_optimized.png, id=215, 1166.3575pt x 840.13875pt
 >
 File: Figures/basis_orientation_ppo_optimized.png Graphic file (type png)
 <use Figures/basis_orientation_ppo_optimized.png>
@@ -1026,9 +1026,9 @@ C:/Users/Kaigom/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
 <C:/Users/Kaigom/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb
 ><C:/Users/Kaigom/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/sym
 bols/msbm10.pfb>
-Output written on paper.pdf (26 pages, 1034667 bytes).
+Output written on paper.pdf (26 pages, 1034878 bytes).
 PDF statistics:
- 365 PDF objects out of 1000 (max. 8388607)
+ 366 PDF objects out of 1000 (max. 8388607)
  73 named destinations out of 1000 (max. 500000)
  45727 words of extra memory for PDF output out of 51595 (max. 10000000)
 
