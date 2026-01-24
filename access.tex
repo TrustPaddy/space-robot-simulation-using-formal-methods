@@ -1,66 +1,45 @@
-% ============================================================
-% Full-length journal-style manuscript (single LaTeX file)
-% Paste into: paper.tex  (compile with pdflatex)
-% ============================================================
-
-\documentclass[11pt,a4paper]{article}
-
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{lmodern}
-\usepackage{microtype}
-\usepackage{geometry}
-\geometry{margin=25mm}
-
-\usepackage{amsmath,amssymb}
+\documentclass{ieeeaccess}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
 \usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{array}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{xcolor}
-\usepackage{hyperref}
-\usepackage{varioref}
-\usepackage{cleveref}
-\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
-
-\usepackage{listings}
-\lstset{
-  basicstyle=\ttfamily\small,
-  numbers=left,
-  numberstyle=\tiny,
-  stepnumber=1,
-  numbersep=8pt,
-  frame=single,
-  breaklines=true,
-  tabsize=2,
-  showstringspaces=false
-}
-
+\usepackage{textcomp}
 \usepackage{makecell}
 \usepackage{booktabs}
 \usepackage{float}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{varioref}
+\usepackage{cleveref}
+\usepackage{xcolor}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black}
 
-% --- Convenience macros ---
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
-
-\title{\vspace{-1.0em}
-Benchmarking Reinforcement Learning 
-and Quantifying the Impact of Hyperparameter Optimization for Proximal Policy Optimization  for Trajectory Tracking Skills of Free-Floating Space Robot Manipulators Using a Simulated Digital Twin
-\vspace{-0.5em}}
-
-\author{
-  Patrick Ermisch, Eric Guiffo Kaigom\thanks{steven.ermisch@stud.fra-uas.de, kaigom@fra-uas.de}\\
-  Faculty of Engineering and Computer Science, Frankfurt University of Applied Sciences
-}
-
-\date{} % leave empty for journal-style
-
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
-\maketitle
+\history{Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.}
+\doi{10.1109/ACCESS.2017.DOI}
 
-\begin{abstract} \noindent
+\title{Benchmarking Reinforcement Learning for Trajectory Tracking of Free-Floating Space Robot Manipulators:
+Quantifying the Impact of Hyperparameter Optimization for Proximal Policy Optimization Using a Simulated Digital Twin}
+\author{\uppercase{Patrick S. Ermisch}\authorrefmark{1}, \IEEEmembership{Fellow, IEEE} and 
+\uppercase{Eric Guiffo Keigom\authorrefmark{2}} \IEEEmembership{Member, IEEE}}
+\address[1]{National Institute of Standards and 
+Technology, Boulder, CO 80305 USA (e-mail: author@boulder.nist.gov)}
+\address[2]{Department of Physics, Colorado State University, Fort Collins, 
+CO 80523 USA (e-mail: author@lamar.colostate.edu)}
+\tfootnote{This paragraph of the first footnote will contain support 
+information, including sponsor and financial support acknowledgment. For 
+example, ``This work was supported in part by the U.S. Department of 
+Commerce under Grant BS123456.''}
+
+\markboth
+{Author \headeretal: Preparation of Papers for IEEE TRANSACTIONS and JOURNALS}
+{Author \headeretal: Preparation of Papers for IEEE TRANSACTIONS and JOURNALS}
+
+\corresp{Corresponding author: First A. Author (e-mail: author@ boulder.nist.gov).}
+
+\begin{abstract}
 Free-floating space manipulators exhibit strong dynamic coupling between manipulator motion and spacecraft base drift. This complicates their motion tracking capabilities. Data-driven approaches are hardly provided with the required  quantity and quality of data to develop control techniques that can accommodate uncertainties inherent to the robot dynamics and the space environment.
 This paper studies continuous-control reinforcement learning (RL) for end-effector trajectory tracking in a physics-based
 Simulink/Simscape environment with integrated safety monitoring. We benchmark six RL agents (TRPO, TD3, SAC, PPO,
@@ -74,7 +53,13 @@ the base orientation (72.2\% reduction in orientation error). Moreover, the opti
 violations in evaluation while slightly reducing energy consumption (15.98\%).
 \end{abstract}
 
-\noindent\textbf{Keywords:} space robotics, free-floating manipulation, reinforcement learning, PPO, safe simulation, trajectory tracking
+\begin{keywords}
+space robotics, free-floating manipulation, reinforcement learning, PPO, safe simulation, trajectory tracking
+\end{keywords}
+
+\titlepgskip=-15pt
+
+\maketitle
 
 \section{Introduction and Background}
 Free-floating robot manipulators operating in the space environment to inspect, capture, or de-orbit  satellites introduce unique control challenges compared to terrestrial robots. 
@@ -162,6 +147,7 @@ configuration ensures that momentum is conserved, motions of the arm can lead to
     \caption{Overview of the Simulink model \texttt{SpaceRobot.slx}}
     \label{fig:spacerobot_slx}
 \end{figure}
+
 \noindent
 The Simulink model is organized into modular subsystems, as illustrated  in~\autoref{fig:spacerobot_slx}
 (simulation architecture diagram). The main components of the model are:
@@ -170,6 +156,12 @@ The Simulink model is organized into modular subsystems, as illustrated  in~\aut
 floating robot (base + arm) at each time step. This subsystem takes joint torque inputs and
 outputs the resulting states (joint angles, base pose, velocities, etc.) by numerically integrating
 the equations of motion.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figures/spacerobot_slx_robot.png}
+    \caption{Overview of the Robot Subsystem in the -simulink Model \texttt{SpaceRobot.slx}}
+    \label{fig:spacerobot_slx_robot}
+\end{figure}
   \item Controller (RL Agent Block): a control subsystem where the learned RL policy is executed. The
 agent’s output (joint torque commands) is applied to the robot through this block. Before
 reaching the plant, these commands pass through saturation and safety verification blocks to
@@ -183,6 +175,12 @@ The center and radius of the path as well as the desired  tracking speed can be 
 difficulty levels.  The reference subsystem outputs the current target  position (and
 velocity) of the end-effector at each time step, as well as a nominal desired base orientation, which in our case
 remains fixed, as we prefer the base to stay inertially stable.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figures/spacerobot_slx_reference.png}
+    \caption{Overview of the Reference Subsystem in the Simulink Model \texttt{SpaceRobot.slx}}            
+    \label{fig:spacerobot_slx_reference}
+\end{figure}
   \item Sensors and Logging: various sensors measure the robot’s state (joint angles, joint velocities,
 base orientation, base angular velocity, etc.), and their outputs are combined into an observation
 signal for the RL agent (detailed in \cref{RL}). 
@@ -270,7 +268,14 @@ whose parameters are adjusted during training to maximize cumulative reward. The
 control frequency (agent decision frequency) is chosen such that the agent outputs a new torque
 command at a fixed interval $\Delta t~$ (e.g., 0.1 s). This $\Delta t$ is the “agent sampling time” in Simulink and is
 consistent with the simulation’s fixed step to maintain alignment.
-\\ \\
+
+\begin{figure}[H]
+    \centering   
+    \includegraphics[width=0.7\linewidth]{Figures/spacerobot_slx_redardfcn.png}
+    \caption{Overview of the Reward Subsystem in the Simulink Model \texttt{SpaceRobot.slx}}
+    \label{fig:reward_fcn}
+\end{figure}
+\noindent
 Reward Function Design: A crucial aspect of the RL formulation is the reward signal, which guides the
 agent toward the desired behavior. We define the reward $r_{t}$ at each time step t to reflect
 the dual objectives of accurate trajectory tracking and minimal base disturbance, along with
@@ -415,6 +420,12 @@ policies are not only effective but also safe and physically valid. The followin
 safety components were developed and integrated.
 
 \begin{figure}[H]
+\centering
+   \includegraphics[width=1\linewidth]{Figures/impuls_monitor.png}
+    \caption{Overview of the Impuls Monitor Subsystem in the Simulink Model \texttt{SpaceRobot.slx}}
+    \label{fig:impuls_monitor}
+\end{figure}
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.8\linewidth]{Figures/impulserhaltung_scope.png}
   \caption{Course of the robot's total momentum}
@@ -435,7 +446,13 @@ $0$ (within $10^{-6}$ Ns) throughout each episode with the learned policy, confi
 consistency (see~\autoref{fig:impulserhaltung_scope}). This momentum check provides confidence that the simulation adheres to
 Newton’s laws and the agent interacts with a physical correct process. This leverages the significance of the obtained policy. The Momentum Conservation Monitor also serves as a diagnostic tool because any momentum drift would pause training for model inspection.
 
-\begin{figure}[H] \label{momentumfig}
+\begin{figure}[H]
+    \centering    \includegraphics[width=1\linewidth]{Figures/spacerobot_slx_colissionmonitor.png}
+    \caption{Overview of the Collision Monitor Subsystem in the Simulink Model \texttt{SpaceRobot.slx}}
+    \label{fig:spacerobot_slx_colissionmonitor}
+\end{figure}
+\begin{figure}[H] 
+    \label{momentumfig}
     \centering
     \begin{subfigure}[b]{0.6\linewidth}
         \centering
@@ -490,6 +507,12 @@ instability: the agent’s torques were cut off momentarily when a limit was rea
 any damaging behavior, and the episode was marked as failed. Over time, the agent learned to
 avoid this scenario as well, especially in the optimized PPO version (where K6 dropped to 0).
 
+\begin{figure}[H]
+    \centering    
+    \includegraphics[width=0.5\linewidth]{Figures/verify_tau_slx.png}
+    \caption{Verification model with Simulink Design Verifier \texttt{Verify\_tau.slx}}
+    \label{fig:verify_tau}
+\end{figure}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{Figures/verify_tau_reslult.png}
@@ -569,11 +592,41 @@ stability issues given the complex dynamics and safety constraints. Indeed, DDPG
 expected to be the least reliable due to known tendencies for instability without additional
 regularization.
 \\ \\
+\begin{table}[H]
+\centering
+
+\label{tab:on_off_policy}
+\begin{tabular}{ll}
+\hline
+\textbf{Algorithm} & \textbf{Policy Type} \\
+\hline
+Policy Gradient (PG) & On-policy \\
+Proximal Policy Optimization (PPO) & On-policy  \\
+Trust Region Policy Optimization (TRPO) & On-policy  \\
+Deep Deterministic Policy Gradient (DDPG) & Off-policy  \\
+Twin Delayed DDPG (TD3) & Off-policy  \\
+Soft Actor-Critic (SAC) & Off-policy  \\
+\hline
+\end{tabular}
+\caption{Classification of the evaluated reinforcement learning algorithms}
+\end{table}
+\noindent
+On-policy vs. off-policy reinforcement learning: On-policy algorithms update their policies exclusively using data generated by the current policy itself. 
+As a result, the collected experience is always consistent with the policy being optimized, 
+which typically leads to stable learning behavior but lower sample efficiency. In contrast, 
+off-policy algorithms can reuse experience generated by previous policies or exploratory behavior stored in a replay buffer. 
+This improves sample efficiency but often increases sensitivity to hyperparameters and 
+instability in highly coupled or safety-critical environments.
+In the context of free-floating space robot control, the strong nonlinear coupling between manipulator motion and base dynamics, 
+combined with strict safety constraints, favors the stable policy updates of on-policy methods such as PPO and TRPO, 
+whereas off-policy methods may suffer from higher variance and tuning sensitivity.
+\\ \\
 Training Setup: Each agent was trained under identical conditions for fairness. We used the same
 network architecture (initially two hidden layers of 128 units each for policy and for value function,
 where applicable) and same reward structure for all. Hyperparameters (learning rate, discount
 factor $\lambda=0.99$, etc.) were initially set to default reasonable values and kept consistent across agents as
-much as possible. Hence, any performance differences can be
+much as possible. All agents were trained using a learning rate of $\alpha = 1 \times 10^{-3}$ for both actor and critic networks, unless stated otherwise.
+Hence, any performance differences can be
 attributed primarily to the algorithmic differences, not to unequal tuning. Later we will tune PPO
 further, but for the main comparison, PPO uses a default configuration as well. Each agent’s training
 run of 1000 episodes yielded a final policy which we then evaluated.
@@ -583,8 +636,8 @@ stability, etc.) by running 30 test episodes for each. Table 1 below summarizes 
 highlighting the differences between agents:
 \begin{table}[H]
 \centering
-\renewcommand{\arraystretch}{1.35}
-\setlength{\tabcolsep}{8pt}
+\renewcommand{\arraystretch}{1.8}
+\setlength{\tabcolsep}{2pt}
 \begin{tabular}{lcccccc}
 \hline
 \textbf{KPI (unit)} & \textbf{TRPO} & \textbf{TD3} & \textbf{SAC} & \textbf{PPO} & \textbf{PG} & \textbf{DDPG} \\
@@ -783,7 +836,10 @@ gradient estimates per update, which helped reduce the variance in training.
 but we tried slightly tighter (0.15) and looser (0.3) clips. A tighter clip ($\epsilon$=0.1–0.15) made updates
 more conservative. This reduced occasional policy overshoots at the cost of slower improvement.
 We settled on $\epsilon\approx0.2$ as it was already near-optimal, but this process confirmed that too high a
-clip would harm stability.
+clip would harm stability. The clip factor $\epsilon$ in PPO limits the magnitude of policy updates by constraining 
+the probability ratio between the new and the old policy. This prevents excessively large policy updates that could 
+destabilize training, particularly in highly nonlinear control tasks. In safety-critical scenarios such as free-floating 
+space robot control, clipping contributes significantly to stable and reliable convergence.
   \item Entropy regularization weight was tuned. PPO can include an entropy term to encourage
 exploration. We increased the entropy coefficient modestly (from 0 to 0.01) to avoid premature
 convergence to a suboptimal deterministic policy. This indeed improved the exploration in early
@@ -915,7 +971,7 @@ To summarize these improvements, Table 2 compares the default vs optimized PPO o
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.35}
-\setlength{\tabcolsep}{10pt}
+\setlength{\tabcolsep}{5pt}
 \begin{tabular}{lcc}
 \hline
 \textbf{Metric (KPI)} & \textbf{PPO (Default)} & \textbf{PPO (Optimized)} \\
@@ -1119,53 +1175,121 @@ and safeguards, “autonomous learning-based control” can be a powerful paradi
 robotic missions. The results encourage continued research at the intersection of robotics,
 reinforcement learning, and formal methods to further unlock the potential of intelligent space
 systems.
-% ============================================================
-\begin{thebibliography}{99}
 
-\bibitem{papadopoulos2007minimum}Papadopoulos, E., Kaliakatsos, I. \& Psarros, D. Minimum fuel techniques for a space robot simulator with a reaction wheel and PWM thrusters. {\em 2007 European Control Conference (ECC)}. pp. 3391-3398 (2007)
+\begin{thebibliography}{00}
 
-\bibitem{ribeiro2022dynamic}Ribeiro, E., Mendes, R., Terra, M. \& Grassi, V. Dynamic parameter identification of a 7-DoF lightweight robot manipulator using probabilistic differential optimization. {\em 2022 IEEE International Conference On Systems, Man, And Cybernetics (SMC)}. pp. 1917-1923 (2022)\\
+\bibitem{b1}
+A. Flores-Abad, O. Ma, K. Pham, and S. Ulrich, ``A review of space robotics technologies for on-orbit servicing,'' 
+\emph{Progress in Aerospace Sciences}, vol. 68, pp. 1--26, 2014.
+[Online]. Available: \underline{https://doi.org/10.1016/j.paerosci.2014.03.002}
 
-\bibitem{SuttonBarto2018}
-R.~S. Sutton and A.~G. Barto,
-\newblock \emph{Reinforcement Learning: An Introduction}, 2nd ed.
-\newblock MIT Press, 2018.
+\bibitem{b2}
+J. Kober, J. A. Bagnell, and J. Peters, ``Reinforcement learning in robotics: A survey,'' 
+\emph{The International Journal of Robotics Research}, vol. 32, no. 11, pp. 1238--1274, 2013.
+[Online]. Available: \underline{https://doi.org/10.1177/0278364913495721}
 
-\bibitem{SchulmanTRPO2015}
-J.~Schulman, S.~Levine, P.~Abbeel, M.~Jordan, and P.~Moritz,
-\newblock ``Trust Region Policy Optimization,''
-\newblock in \emph{Proc. ICML}, 2015.
+\bibitem{b3}
+MathWorks, ``6-DOF Joint (Simscape Multibody),'' The MathWorks, Inc., Natick, MA, USA, 2023.
+[Online]. Available: \underline{https://www.mathworks.com/help/sm/ref/6dofjoint.html}
 
-\bibitem{SchulmanPPO2017}
-J.~Schulman, F.~Wolski, P.~Dhariwal, A.~Radford, and O.~Klimov,
-\newblock ``Proximal Policy Optimization Algorithms,''
-\newblock \emph{arXiv:1707.06347}, 2017.
+\bibitem{b4}
+MathWorks, ``Reinforcement Learning Toolbox -- rlPPOAgent,'' The MathWorks, Inc., Natick, MA, USA, 2023.
+[Online]. Available: \underline{https://www.mathworks.com/help/reinforcement-learning/ref/rl.agent.rlppoagent.html}
 
-\bibitem{LillicrapDDPG2015}
-T.~P. Lillicrap \emph{et al.},
-\newblock ``Continuous control with deep reinforcement learning,''
-\newblock \emph{arXiv:1509.02971}, 2015.
+\bibitem{b5}
+MathWorks, ``Simulink Design Verifier,'' The MathWorks, Inc., Natick, MA, USA, 2023.
+[Online]. Available: \underline{https://www.mathworks.com/help/sldv/index.html}
 
-\bibitem{FujimotoTD32018}
-S.~Fujimoto, H.~van Hoof, and D.~Meger,
-\newblock ``Addressing function approximation error in actor-critic methods,''
-\newblock in \emph{Proc. ICML}, 2018. (TD3)
+\bibitem{b6}
+K. Nanos and E. G. Papadopoulos, ``On the dynamics and control of free-floating space manipulator systems in the presence of angular momentum,'' 
+\emph{Frontiers in Robotics and AI}, vol. 4, p. 26, 2017.
+[Online]. Available: \underline{https://doi.org/10.3389/frobt.2017.00026}
 
-\bibitem{HaarnojaSAC2018}
-T.~Haarnoja \emph{et al.},
-\newblock ``Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor,''
-\newblock in \emph{Proc. ICML}, 2018.
+\bibitem{b7}
+R. S. Sutton and A. G. Barto, \emph{Reinforcement Learning: An Introduction}, 2\textsuperscript{nd} ed.
+Cambridge, MA, USA: MIT Press, 2018, ch. 3.
+[Online]. Available: \underline{http://incompleteideas.net/book/the-book.html}
 
-\bibitem{NanosPapadopoulos2017}
-K.~Nanos and E.~G. Papadopoulos,
-\newblock ``On the dynamics and control of free-floating space manipulator systems in the presence of angular momentum,''
-\newblock \emph{Frontiers in Robotics and AI}, vol.~4, 2017.
+\bibitem{b8}
+J. Tobin \emph{et al.}, ``Domain randomization for transferring deep neural networks from simulation to the real world,'' 
+in \emph{Proc. IEEE/RSJ Int. Conf. Intelligent Robots and Systems (IROS)}, 2017, pp. 23--30.
+[Online]. Available: \underline{https://doi.org/10.1109/IROS.2017.8202133}
 
-\bibitem{TobinDomainRand2017}
-J.~Tobin \emph{et al.},
-\newblock ``Domain randomization for transferring deep neural networks from simulation to the real world,''
-\newblock in \emph{Proc. IEEE/RSJ IROS}, 2017.
+\bibitem{b9}
+J. Virgili-Llop, ``SPART: Spacecraft Robotics Toolkit,'' Open-source software, 2017.
+[Online]. Available: \underline{https://github.com/NPS-SRL/SPART}
+
+\bibitem{b10}
+ResearchGate, ``Space robot with a 4-DOF robotic arm,'' Scientific diagram.
+[Online]. Available: \underline{https://www.researchgate.net/figure/Space-robot-with-a-4-DOF-robotic-arm\_fig5\_321286132}
 
 \end{thebibliography}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{a1.png}}]{First A. Author} (M'76--SM'81--F'87) and all authors may include 
+biographies. Biographies are often not included in conference-related
+papers. This author became a Member (M) of IEEE in 1976, a Senior
+Member (SM) in 1981, and a Fellow (F) in 1987. The first paragraph may
+contain a place and/or date of birth (list place, then date). Next,
+the author's educational background is listed. The degrees should be
+listed with type of degree in what field, which institution, city,
+state, and country, and year the degree was earned. The author's major
+field of study should be lower-cased. 
+
+The second paragraph uses the pronoun of the person (he or she) and not the 
+author's last name. It lists military and work experience, including summer 
+and fellowship jobs. Job titles are capitalized. The current job must have a 
+location; previous positions may be listed 
+without one. Information concerning previous publications may be included. 
+Try not to list more than three books or published articles. The format for 
+listing publishers of a book within the biography is: title of book 
+(publisher name, year) similar to a reference. Current and previous research 
+interests end the paragraph. The third paragraph begins with the author's 
+title and last name (e.g., Dr.\ Smith, Prof.\ Jones, Mr.\ Kajor, Ms.\ Hunter). 
+List any memberships in professional societies other than the IEEE. Finally, 
+list any awards and work for IEEE committees and publications. If a 
+photograph is provided, it should be of good quality, and 
+professional-looking. Following are two examples of an author's biography.
+\end{IEEEbiography}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{a2.png}}]{Second B. Author} was born in Greenwich Village, New York, NY, USA in 
+1977. He received the B.S. and M.S. degrees in aerospace engineering from 
+the University of Virginia, Charlottesville, in 2001 and the Ph.D. degree in 
+mechanical engineering from Drexel University, Philadelphia, PA, in 2008.
+
+From 2001 to 2004, he was a Research Assistant with the Princeton Plasma 
+Physics Laboratory. Since 2009, he has been an Assistant Professor with the 
+Mechanical Engineering Department, Texas A{\&}M University, College Station. 
+He is the author of three books, more than 150 articles, and more than 70 
+inventions. His research interests include high-pressure and high-density 
+nonthermal plasma discharge processes and applications, microscale plasma 
+discharges, discharges in liquids, spectroscopic diagnostics, plasma 
+propulsion, and innovation plasma applications. He is an Associate Editor of 
+the journal \emph{Earth, Moon, Planets}, and holds two patents. 
+
+Dr. Author was a recipient of the International Association of Geomagnetism 
+and Aeronomy Young Scientist Award for Excellence in 2008, and the IEEE 
+Electromagnetic Compatibility Society Best Symposium Paper Award in 2011. 
+\end{IEEEbiography}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{a3.png}}]{Third C. Author, Jr.} (M'87) received the B.S. degree in mechanical 
+engineering from National Chung Cheng University, Chiayi, Taiwan, in 2004 
+and the M.S. degree in mechanical engineering from National Tsing Hua 
+University, Hsinchu, Taiwan, in 2006. He is currently pursuing the Ph.D. 
+degree in mechanical engineering at Texas A{\&}M University, College 
+Station, TX, USA.
+
+From 2008 to 2009, he was a Research Assistant with the Institute of 
+Physics, Academia Sinica, Tapei, Taiwan. His research interest includes the 
+development of surface processing and biological/medical treatment 
+techniques using nonthermal atmospheric pressure plasmas, fundamental study 
+of plasma sources, and fabrication of micro- or nanostructured surfaces. 
+
+Mr. Author's awards and honors include the Frew Fellowship (Australian 
+Academy of Science), the I. I. Rabi Prize (APS), the European Frequency and 
+Time Forum Award, the Carl Zeiss Research Award, the William F. Meggers 
+Award and the Adolph Lomb Medal (OSA).
+\end{IEEEbiography}
+
+\EOD
 
 \end{document}
