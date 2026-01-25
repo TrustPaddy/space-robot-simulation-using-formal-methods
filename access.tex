@@ -20,8 +20,8 @@
 \history{Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.}
 \doi{10.1109/ACCESS.2017.DOI}
 
-\title{Benchmarking Reinforcement Learning for Trajectory Tracking of Free-Floating Space Robot Manipulators:
-Quantifying the Impact of Hyperparameter Optimization for Proximal Policy Optimization Using a Simulated Digital Twin}
+\title{Benchmarking Deep Reinforcement Learning and Quantifying the Impact of Hyperparameter Tuning 
+for Proximal Policy Optimization  for Cartesian Path Tracking Skills of Free-Floating Space Robot Manipulators Using  Digital Twins}
 \author{\uppercase{Patrick S. Ermisch}\authorrefmark{1}, \IEEEmembership{Fellow, IEEE} and 
 \uppercase{Eric Guiffo Keigom\authorrefmark{2}} \IEEEmembership{Member, IEEE}}
 \address[1]{National Institute of Standards and 
@@ -40,13 +40,16 @@ Commerce under Grant BS123456.''}
 \corresp{Corresponding author: First A. Author (e-mail: author@ boulder.nist.gov).}
 
 \begin{abstract}
+
 Free-floating space manipulators exhibit strong dynamic coupling between manipulator motion and spacecraft base drift \cite{b6,b33}. 
-This complicates their motion tracking capabilities. Data-driven approaches are hardly provided with the required  quantity 
-and quality of data to develop control techniques that can accommodate uncertainties inherent to the robot dynamics and the space environment \cite{b1,b2,b22}.
-This paper studies continuous-control reinforcement learning (RL) for end-effector trajectory tracking in a physics-based
+This complicates their motion tracking capabilities. 
+Data-driven approaches are hardly provided with the required  quantity and quality of data to develop control techniques that can accommodate 
+uncertainties inherent to the robot dynamics and the space environment \cite{b1,b2,b22}.
+This paper therefore explores continuous-control reinforcement learning (RL) techniques for end-effector trajectory tracking in a physics-based
 Simulink/Simscape environment with integrated safety monitoring. We benchmark six RL agents (TRPO, TD3, SAC, PPO,
-Policy Gradient, and DDPG \cite{b7,b14,b17,b18,b15,b16,b21}) on the same circular end-effector tracking task and evaluate performance using a unified set
-of trajectory, stability, smoothness, energy, and safety KPIs. We observe that PPO achieves the best overall
+Policy Gradient, and DDPG) \cite{b7,b14,b17,b18,b15,b16,b21} on the same circular end-effector tracking task and evaluate performance using a unified set
+of trajectory, stability, smoothness, energy, and safety KPIs. 
+We observe that PPO achieves the best overall
 trade-off between tracking accuracy, base stabilization, training stability, and wall-clock efficiency.
 Building on this result, we quantify the effect of systematic PPO tuning (neural network architecture and key hyperparameters).
 Compared to a default PPO configuration, the optimized PPO improves the mean episodic return magnitude by 80.7\%,
@@ -64,6 +67,7 @@ space robotics, free-floating manipulation, reinforcement learning, PPO, safe si
 \maketitle
 
 \section{Introduction and Background}
+
 Free-floating robot manipulators operating in the space environment to inspect, capture, or de-orbit  satellites 
 introduce unique control challenges compared to terrestrial robots \cite{b1}. 
 In micro-gravity, the robot’s base (typically a spacecraft) is not fixed and thrusters are turned off. 
@@ -72,23 +76,47 @@ which in turn modifies the final pose of the end-effector. This reaction is due 
 the linear and angular momentum \cite{b6}. The free-floating dynamics of space robots has many benefits. 
 An expensive fuel (e.g., hydrazine ($N_2H_4$)) consumption  and  excitation of the robot dynamics for some activation 
 frequencies of the pulse width modulation for thruster control can be avoided \cite{b11}.
-
-However, a moving base complicates the achievement of robotized manipulations because the end-effector of the arm may 
-fail to reach the desired target point. Further constraints, such as communication latency and limited onboard computational resources, 
-complicate the real-time control and stabilization of the base \cite{b1,b32}. Traditional control
+\\ \\
+However, a free-floating, i.e., moving base complicates the achievement of robotized manipulations. 
+Indeed, the end-effector of the arm may fail to reach the desired target point if standard motion planning 
+dedicated to robots with a fixed base are simply applied. Further constrains, such as communication latency 
+and limited onboard computational resources, make more intricate the continuous real-time control and stabilization of the base \cite{b1,b32}. In fact, traditional control
 approaches that assume an accurate model of the robot dynamics (e.g. reactionless planning or precise attitude control) 
-can struggle to adapt to uncertainties or unmodeled dynamics. Data-driven approaches, on the other hand, 
-hardly apply because the required amount and quality of data are rather unavailable in the space sector. In many cases, 
-robotized tracking capabilities under a free-floating behavior need to be demonstrated long before the physical system is assembled and deployed.  
-These challenges motivate the exploration of learning-based control methods that can autonomously adapt to 
-complex and uncertain dynamics in virtual environments even in the case of data scarcity.
+can struggle to adapt to uncertainties or unmodeled dynamics. Data-driven approaches, on the other hand, hardly apply. 
+Usually, the required amount and quality of data are rather inaccessible or unavailable in the space sector. 
+In many cases, robotized tracking capabilities under a free-floating behavior of the arm's base need to be 
+demonstrated long before the physical robot system is assembled and deployed \cite{muhlbauer2025software,rybus2024robotic,maurenbrecher2024robograv}.  
+These challenges motivate the development and simulation of AI-empowered digital twins under desired operational condition to
+explore learning-based control methods that can autonomously adapt to complex and uncertain dynamics  even in the case of data scarcity.
 \\ \\
 Reinforcement Learning (RL) has emerged as a promising approach for robotics, enabling agents to
-learn control policies through trial-and-error interactions \cite{b2,b7}. Recent advances in deep RL have shown
-success in complex control tasks, but applying RL to space robots is still relatively novel. The work
-presented in this paper investigates the use of continuous-action deep RL for a free-floating space
-manipulator, with a focus on systematically comparing different RL algorithms and ensuring safety
-through formal methods. The key contributions and novelties of this work include:
+learn control policies through trial-and-error interactions with environments and processes. Recent advances in deep RL have shown
+success in complex control tasks, but applying RL to space robots is still relatively novel \cite{wu2020reinforcement,al2024path,hu2025deep,zhang2025learning,huang2023obstacle}.  
+The work presented in this paper investigates the use of continuous-action deep RL for a free-floating space
+manipulator. It differs from previous contribution in three ways. First, it focuses on a systematical comparison 
+of different RL algorithms beyond those mentioned in \cref{tab:sample}, thereby quantitatively and qualitatively 
+contributing to filling in a current gap in space robotics. Second,  constrains, such as safety, are monitored
+through formal methods applied from a software-enabled and practical perspective.  Finally, this work takes into 
+account the minimization of the base attitude. We are not aware of any previous work that compares DL algorithms 
+for the path tracking of free-floating space robots while considering the base attitude minimization and unifying 
+constrain monitoring through formal methods, to the best of our knowledge (see, also \cref{tab:sample}). The key 
+contributions and novelties of this work include:
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Contribution & RL algorithm &  Task objective & \makecell{Formal verification$\slash$ \\ Base disturbance minimization} \\ \hline\hline
+	(\cite{huang2023obstacle},~2023) & SAC & Obstacle avoidance & No$\slash$No \\ \hline
+		(\cite{al2024reinforcement},~2024) & DDPG & Collision avoidance &  No$\slash$No \\ \hline
+			(\cite{d2024failure},~2024) & PPO & Adaptation to  joint failure &  No$\slash$No \\ \hline
+ (\cite{al2024path},~2024)  & DDPG   & Path planning &  No$\slash$No \\ \hline
+		(\cite{hu2025deep},~2025) & PPO   & Trajectory planning &  No$\slash$No \\ \hline
+	(\cite{zhang2025learning},~2025) & LSAC & Trajectory post-processing  &  No$\slash$No \\ \hline
+	\end{tabular}
+	\caption{Recent advances in RL-based motion tracking for free-floating space robots.}
+	\label{tab:sample}
+\end{table} %d2024failure
 
 \begin{itemize}
   \item Comparative Evaluation of RL Agents: We implement and evaluate six state-of-the-art
@@ -111,7 +139,7 @@ regularization, etc.) to improve training stability and policy performance. The 
 PPO agent achieves significantly better tracking accuracy, smoother control inputs, and zero
 safety violations, outperforming the default configuration on all key metrics.
 \end{itemize}
-\noindent
+\newpage
 Overall, our study demonstrates that a combination of multiple-body simulation, deep RL, and formal
 verification can yield a robust and safe control policy for a free-floating space robot. In the
 following, we first describe the system modeling and RL framework, then detail the formal safety
@@ -139,6 +167,19 @@ agent’s performance, before concluding with broader insights and future direct
     \label{fig:ref_kreis_gesamt}
 \end{figure}
 \noindent
+\subsection{Advantages of AI-Endowed Digital Twin Technology in On-Orbit Servicing}
+Recent advances in AI-driven digital twinning have shown considerable benefits for on-orbit servicing. These range from the automated lifecycle 
+management of satellites up to  their of true missions. In the project In-Orbit factory \cite{leutert2024ai}, for instance,  digital twins  in 
+charge of a contextualized representation of information acquired in real-time from sensors and operations are combined with AI that accommodates 
+uncertainties and fosters robustness and generalization. This synergy not only helps bridge the physical and digital world with technical and 
+economic merits in terms of accelerated simulation-driven analysis of interdisciplinary robotized approaches under desired boundary conditions 
+at low costs. It also enables the development and orchestration \cite{muhlbauer2025towards} of skillful agents likely to autonomously carry 
+out complex  assembly, integration, and testing tasks throughout the lifespan of modular satellites  with a workspace penetration and operative 
+performance beyond human capabilities \cite{leutert2024ai,muhlbauer2025towards}. Verification and validation is 
+another domain in which an adaptation to evolving system designs and operational scenarios is increasingly important and where AI-upskilled 
+digital twin excel \cite{maqbool2025systems}. To this end, changes occurring during system design or stemming from operational scenarios are 
+described in scenario spaces and integrated with digital twins. This results in an accurate and economic capture and simulation of varied combinations 
+of design-scenarios that reveal emerging properties useful for flexible verification and validation in on-orbit servicing \cite{maqbool2025systems}.
 \subsection{Robot Model} The virtual testbed for this research allows for the simulation of a free-floating space manipulator inspired by
 the Spacecraft Robotics Toolkit (SPART) example \cite{b9}. The robot consists of a cuboid base (serving as the
 spacecraft) with a 4-degree-of-freedom (4-DOF) serial manipulator arm mounted on it (see~\autoref{fig:ref_kreis_gesamt}). The arm
@@ -1193,6 +1234,15 @@ systems.
 
 \begin{thebibliography}{00}
 
+\bibitem{b6}
+K. Nanos and E. G. Papadopoulos, ``On the dynamics and control of free-floating space manipulator systems in the presence of angular momentum,'' 
+\emph{Frontiers in Robotics and AI}, vol. 4, p. 26, 2017.
+[Online]. Available: \underline{https://doi.org/10.3389/frobt.2017.00026}
+
+\bibitem{b33}
+S. A. A. Moosavian and E. Papadopoulos, ``Free-flying robots in space: an overview of dynamics modeling, planning and control,''
+\emph{Robotica}, vol. 25, no. 5, pp. 537--547, 2007, doi: 10.1017/S0263574707003438.
+
 \bibitem{b1}
 A. Flores-Abad, O. Ma, K. Pham, and S. Ulrich, ``A review of space robotics technologies for on-orbit servicing,'' 
 \emph{Progress in Aerospace Sciences}, vol. 68, pp. 1--26, 2014.
@@ -1203,46 +1253,14 @@ J. Kober, J. A. Bagnell, and J. Peters, ``Reinforcement learning in robotics: A 
 \emph{The International Journal of Robotics Research}, vol. 32, no. 11, pp. 1238--1274, 2013.
 [Online]. Available: \underline{https://doi.org/10.1177/0278364913495721}
 
-\bibitem{b3}
-MathWorks, ``6-DOF Joint (Simscape Multibody),'' The MathWorks, Inc., Natick, MA, USA, 2023.
-[Online]. Available: \underline{https://www.mathworks.com/help/sm/ref/6dofjoint.html}
-
-\bibitem{b4}
-MathWorks, ``Reinforcement Learning Toolbox -- rlPPOAgent,'' The MathWorks, Inc., Natick, MA, USA, 2023.
-[Online]. Available: \underline{https://www.mathworks.com/help/reinforcement-learning/ref/rl.agent.rlppoagent.html}
-
-\bibitem{b5}
-MathWorks, ``Simulink Design Verifier,'' The MathWorks, Inc., Natick, MA, USA, 2023.
-[Online]. Available: \underline{https://www.mathworks.com/help/sldv/index.html}
-
-\bibitem{b6}
-K. Nanos and E. G. Papadopoulos, ``On the dynamics and control of free-floating space manipulator systems in the presence of angular momentum,'' 
-\emph{Frontiers in Robotics and AI}, vol. 4, p. 26, 2017.
-[Online]. Available: \underline{https://doi.org/10.3389/frobt.2017.00026}
+\bibitem{b22}
+J. Garc\'{\i}a and F. Fern\'andez, ``A comprehensive survey on safe reinforcement learning,''
+\emph{Journal of Machine Learning Research}, vol. 16, pp. 1437--1480, 2015.
 
 \bibitem{b7}
 R. S. Sutton and A. G. Barto, \emph{Reinforcement Learning: An Introduction}, 2\textsuperscript{nd} ed.
 Cambridge, MA, USA: MIT Press, 2018, ch. 3.
 [Online]. Available: \underline{http://incompleteideas.net/book/the-book.html}
-
-\bibitem{b8}
-J. Tobin \emph{et al.}, ``Domain randomization for transferring deep neural networks from simulation to the real world,'' 
-in \emph{Proc. IEEE/RSJ Int. Conf. Intelligent Robots and Systems (IROS)}, 2017, pp. 23--30.
-[Online]. Available: \underline{https://doi.org/10.1109/IROS.2017.8202133}
-
-\bibitem{b9}
-J. Virgili-Llop, ``SPART: Spacecraft Robotics Toolkit,'' Open-source software, 2017.
-[Online]. Available: \underline{https://github.com/NPS-SRL/SPART}
-
-\bibitem{b11}
-E. Papadopoulos, I. Kaliakatsos, and D. Psarros, ``Minimum fuel techniques for a space robot simulator with a reaction wheel and PWM thrusters,'' 
-in \emph{Proc. European Control Conf. (ECC)}, 2007, pp. 3391--3398.
-[Online]. Available: \underline{https://ieeexplore.ieee.org/document/7068796}
-
-\bibitem{b12}
-E. Ribeiro, R. Mendes, M. Terra, and V. Grassi, ``Dynamic parameter identification of a 7-DoF lightweight robot manipulator using probabilistic differential optimization,'' 
-in \emph{Proc. IEEE Int. Conf. Systems, Man, and Cybernetics (SMC)}, 2022, pp. 1917--1923.
-[Online]. Available: \underline{https://ieeexplore.ieee.org}
 
 \bibitem{b14}
 J. Schulman, S. Levine, P. Abbeel, M. Jordan, and P. Moritz, ``Trust region policy optimization,'' 
@@ -1269,23 +1287,40 @@ T. Haarnoja \emph{et al.}, ``Soft actor-critic: Off-policy maximum entropy deep 
 in \emph{Proc. Int. Conf. Machine Learning (ICML)}, 2018.
 [Online]. Available: \underline{https://arxiv.org/abs/1801.01290}
 
-% ====== NEU: Ergänzende Primär-/offizielle Quellen (empfohlen) ======
-
 \bibitem{b21}
 R. J. Williams, ``Simple statistical gradient-following algorithms for connectionist reinforcement learning,''
 \emph{Machine Learning}, vol. 8, pp. 229--256, 1992, doi: 10.1007/BF00992696.
 
-\bibitem{b22}
-J. Garc\'{\i}a and F. Fern\'andez, ``A comprehensive survey on safe reinforcement learning,''
-\emph{Journal of Machine Learning Research}, vol. 16, pp. 1437--1480, 2015.
+\bibitem{b11}
+E. Papadopoulos, I. Kaliakatsos, and D. Psarros, ``Minimum fuel techniques for a space robot simulator with a reaction wheel and PWM thrusters,'' 
+in \emph{Proc. European Control Conf. (ECC)}, 2007, pp. 3391--3398.
+[Online]. Available: \underline{https://ieeexplore.ieee.org/document/7068796}
 
-\bibitem{b23}
-M. Alshiekh \emph{et al.}, ``Safe reinforcement learning via shielding,''
-in \emph{Proc. AAAI Conf. Artificial Intelligence (AAAI)}, 2018.
+\bibitem{b32}
+E. Papadopoulos and A. Abu-Abed, ``Design and motion planning for a zero-reaction manipulator,''
+in \emph{Proc. IEEE Int. Conf. Robotics and Automation (ICRA)}, 1994, pp. 1554--1559, doi: 10.1109/ROBOT.1994.351367.
 
-\bibitem{b24}
-J. Achiam, D. Held, A. Tamar, and P. Abbeel, ``Constrained policy optimization,''
-in \emph{Proc. Int. Conf. Machine Learning (ICML)}, 2017.
+\bibitem{muhlbauer2025software}Mühlbauer, M., Chalon, M., Ulmer, M. \& Albu-Schaffer, A. Software for the SpaceDREAM robotic arm. {\em 2025 IEEE Aerospace Conference}. pp. 1-10 (2025)
+\bibitem{rybus2024robotic}Rybus, T. Robotic manipulators for in-orbit servicing and active debris removal: Review and comparison. {\em Progress In Aerospace Sciences}. \textbf{151} pp. 101055 (2024)
+\bibitem{maurenbrecher2024robograv}Maurenbrecher, H., Mühlbauer, M., Chalon, M., Kolb, A., Bahls, T., Deutschmann, B., Domsch, O., Grebenstein, M., Maier, M., Roa Garzon, M. \& Others RoboGrav-Towards Force Sensitive Space Manipulators. {\em I-SAIRAS 2024 International Symposium On Artificial Intelligence, Robotics And Automation In Space}. (2024)
+
+\bibitem{wu2020reinforcement}Wu, Y., Yu, Z., Li, C., He, M., Hua, B. \& Chen, Z. Reinforcement learning in dual-arm trajectory planning for a free-floating space robot. {\em Aerospace Science And Technology}. \textbf{98} pp. 105657 (2020)
+
+\bibitem{al2024path}Al Ali, A., Shi, J. \& Zhu, Z. Path planning of 6-DOF free-floating space robotic manipulators using reinforcement learning. {\em Acta Astronautica}. \textbf{224} pp. 367-378 (2024)
+
+\bibitem{hu2025deep}Hu, Y., Zhou, D., Yao, W., Shao, X. \& Sun, G. Deep Reinforcement Learning-based Trajectory Planning with Continuous Pose Representation for 6-DoF Free-floating Space Robot. {\em Aerospace Science And Technology}. pp. 110540 (2025)
+
+\bibitem{zhang2025learning}Zhang, O., Liu, Z., Shao, X., Yao, W., Wu, L. \& Liu, J. Learning-based task space trajectory planning frame-work with pre-planning and post-processing for uncertain free-floating space robots. {\em IEEE Transactions On Aerospace And Electronic Systems}. (2025)
+
+\bibitem{huang2023obstacle}Huang, Z., Chen, G., Shen, Y., Wang, R., Liu, C. \& Zhang, L. An obstacle-avoidance motion planning method for redundant space robot via reinforcement learning. {\em Actuators}. \textbf{12}, 69 (2023)
+
+\bibitem{al2024reinforcement}Al Ali, A. \& Zhu, Z. Reinforcement learning for path planning of free-floating space robotic manipulator with collision avoidance and observation noise. {\em Frontiers In Control Engineering}. \textbf{5} pp. 1394668 (2024)
+
+\bibitem{d2024failure}D'Ambrosio, M., Capra, L., Brandonisio, A., Lavagna, M. \& Others Failure Management via Deep Reinforcement Learning for Robotic In-Orbit Servicing. {\em SPAICE2024-1st Joint European Space Agency/IAA Conference On AI In And For Space}. pp. 335-339 (2024)
+
+\bibitem{b5}
+MathWorks, ``Simulink Design Verifier,'' The MathWorks, Inc., Natick, MA, USA, 2023.
+[Online]. Available: \underline{https://www.mathworks.com/help/sldv/index.html}
 
 \bibitem{b25}
 Open Robotics, ``URDF (Unified Robot Description Format),'' ROS~2 Documentation.
@@ -1303,6 +1338,37 @@ MathWorks, ``smimport -- Import a CAD, URDF, or Robotics System Toolbox model,''
 MathWorks, ``Mechanism Configuration -- Mechanism-wide gravity and simulation parameters,'' MATLAB \& Simulink Documentation.
 [Online]. Available: \url{https://www.mathworks.com/help/sm/ref/mechanismconfiguration.html}
 
+\bibitem{leutert2024ai}Leutert, F., Bohlig, D., Kempf, F., Schilling, K., Mühlbauer, M., Ayan, B., Hulin, T., Stulp, F., Albu-Schäffer, A., Kutscher, V. \& Others AI-enabled Cyber–Physical In-Orbit Factory-AI approaches based on digital twin technology for robotic small satellite production. {\em Acta Astronautica}. \textbf{217} pp. 1-17 (2024)
+
+\bibitem{muhlbauer2025towards}Mühlbauer, M., Leutert, F., Plesker, C., Hulin, T., Maier, M., Chalon, M., Silvério, J., Schilling, K., Schleich, B. \& Albu-Schäffer, A. Towards an in-orbit cubesat factory. {\em 76th International Astronautical Congress, IAC 2025}. (2025)
+
+\bibitem{maqbool2025systems}Maqbool, O. \& Roßmann, J. Systems Aware Scenario Engineering for Life Cycle-Spanning Verification and Validation of Complex CPS. {\em Authorea Preprints}. (2025)
+
+\bibitem{b9}
+J. Virgili-Llop, ``SPART: Spacecraft Robotics Toolkit,'' Open-source software, 2017.
+[Online]. Available: \underline{https://github.com/NPS-SRL/SPART}
+
+\bibitem{b12}
+E. Ribeiro, R. Mendes, M. Terra, and V. Grassi, ``Dynamic parameter identification of a 7-DoF lightweight robot manipulator using probabilistic differential optimization,'' 
+in \emph{Proc. IEEE Int. Conf. Systems, Man, and Cybernetics (SMC)}, 2022, pp. 1917--1923.
+[Online]. Available: \underline{https://ieeexplore.ieee.org}
+
+\bibitem{b3}
+MathWorks, ``6-DOF Joint (Simscape Multibody),'' The MathWorks, Inc., Natick, MA, USA, 2023.
+[Online]. Available: \underline{https://www.mathworks.com/help/sm/ref/6dofjoint.html}
+
+\bibitem{b34}
+A. D. Ames \emph{et al.}, ``Control barrier functions: theory and applications,''
+in \emph{Proc. European Control Conf. (ECC)}, 2019. (arXiv:1903.11199)
+
+\bibitem{b23}
+M. Alshiekh \emph{et al.}, ``Safe reinforcement learning via shielding,''
+in \emph{Proc. AAAI Conf. Artificial Intelligence (AAAI)}, 2018.
+
+\bibitem{b31}
+MathWorks, ``Spatial Contact Force -- Model spatial contact between two geometries,'' MATLAB \& Simulink Documentation.
+[Online]. Available: \url{https://www.mathworks.com/help/sm/ref/spatialcontactforce.html}
+
 \bibitem{b29}
 MathWorks, ``Solver Configuration -- Physical network environment and solver configuration,'' MATLAB \& Simulink Documentation.
 [Online]. Available: \url{https://www.mathworks.com/help/simscape/ref/solverconfiguration.html}
@@ -1311,21 +1377,19 @@ MathWorks, ``Solver Configuration -- Physical network environment and solver con
 MathWorks, ``Fixed-step size (fundamental sample time),'' MATLAB \& Simulink Documentation.
 [Online]. Available: \url{https://www.mathworks.com/help/simulink/gui/fixedstepsizefundamentalsampletime.html}
 
-\bibitem{b31}
-MathWorks, ``Spatial Contact Force -- Model spatial contact between two geometries,'' MATLAB \& Simulink Documentation.
-[Online]. Available: \url{https://www.mathworks.com/help/sm/ref/spatialcontactforce.html}
+\bibitem{b4}
+MathWorks, ``Reinforcement Learning Toolbox -- rlPPOAgent,'' The MathWorks, Inc., Natick, MA, USA, 2023.
+[Online]. Available: \underline{https://www.mathworks.com/help/reinforcement-learning/ref/rl.agent.rlppoagent.html}
 
-\bibitem{b32}
-E. Papadopoulos and A. Abu-Abed, ``Design and motion planning for a zero-reaction manipulator,''
-in \emph{Proc. IEEE Int. Conf. Robotics and Automation (ICRA)}, 1994, pp. 1554--1559, doi: 10.1109/ROBOT.1994.351367.
 
-\bibitem{b33}
-S. A. A. Moosavian and E. Papadopoulos, ``Free-flying robots in space: an overview of dynamics modeling, planning and control,''
-\emph{Robotica}, vol. 25, no. 5, pp. 537--547, 2007, doi: 10.1017/S0263574707003438.
+\bibitem{b8}
+J. Tobin \emph{et al.}, ``Domain randomization for transferring deep neural networks from simulation to the real world,'' 
+in \emph{Proc. IEEE/RSJ Int. Conf. Intelligent Robots and Systems (IROS)}, 2017, pp. 23--30.
+[Online]. Available: \underline{https://doi.org/10.1109/IROS.2017.8202133}
 
-\bibitem{b34}
-A. D. Ames \emph{et al.}, ``Control barrier functions: theory and applications,''
-in \emph{Proc. European Control Conf. (ECC)}, 2019. (arXiv:1903.11199)
+\bibitem{b24}
+J. Achiam, D. Held, A. Tamar, and P. Abbeel, ``Constrained policy optimization,''
+in \emph{Proc. Int. Conf. Machine Learning (ICML)}, 2017.
 
 
 \end{thebibliography}
