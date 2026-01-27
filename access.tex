@@ -20,10 +20,9 @@
 \history{Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.}
 \doi{10.1109/ACCESS.2017.DOI}
 
-\title{Benchmarking Deep Reinforcement Learning and Quantifying the Impact of Hyperparameter Tuning 
-for Proximal Policy Optimization  for Cartesian Path Tracking Skills of Free-Floating Space Robot Manipulators Using  Digital Twins}
+\title{Benchmarking  Deep Reinforcement Learning for Cartesian Path Tracking  of Free-Floating Space Robot Manipulators Using  Digital Twins}
 \author{\uppercase{Patrick S. Ermisch}\authorrefmark{1}, \IEEEmembership{Fellow, IEEE} and 
-\uppercase{Eric Guiffo Keigom\authorrefmark{2}} \IEEEmembership{Member, IEEE}}
+\uppercase{Eric Guiffo Kaigom\authorrefmark{2}} \IEEEmembership{Member, IEEE}}
 \address[1]{National Institute of Standards and 
 Technology, Boulder, CO 80305 USA (e-mail: author@boulder.nist.gov)}
 \address[2]{Department of Physics, Colorado State University, Fort Collins, 
@@ -41,17 +40,16 @@ Commerce under Grant BS123456.''}
 
 \begin{abstract}
 
-Free-floating space manipulators exhibit strong dynamic coupling between manipulator motion and spacecraft base drift \cite{b6,b33}. 
-This complicates their motion tracking capabilities. 
-Data-driven approaches are hardly provided with the required  quantity and quality of data to develop control techniques that can accommodate 
-uncertainties inherent to the robot dynamics and the space environment \cite{b1,b2,b22}.
-This paper therefore explores continuous-control reinforcement learning (RL) techniques for end-effector trajectory tracking in a physics-based
-Simulink/Simscape environment with integrated safety monitoring. We benchmark six RL agents (TRPO, TD3, SAC, PPO,
-Policy Gradient, and DDPG) \cite{b7,b14,b17,b18,b15,b16,b21} on the same circular end-effector tracking task and evaluate performance using a unified set
-of trajectory, stability, smoothness, energy, and safety KPIs. 
+Free-floating space robots can exhibit a strong dynamic coupling between the manipulator motion and the  base attitude disturbance. 
+This complicates the usage of these robots to track a desired Cartesian path of the end-effector. 
+Adopting data-driven approaches to this end is challenging because the quantity and quality of data are rather hard to acquire in the space sector.
+This paper therefore explores the performance of  trial-and-error learning techniques employed for Cartesian path tracking in a physics-based
+Simulink/Simscape environment with integrated safety monitoring. Since a  quantitative and qualitative comparison of these methods is currently missing in the on-orbit servicing realm, we benchmark six Reinforcement Learning agents, i.e., TRPO, TD3, SAC, PPO,
+Policy Gradient, and DDPG. We use each of them to track the same path of the end-effector and evaluate their performance using a unified set
+of key performance indexes related to the training duration and stability, tracking accuracy, base attitude disturbance, motion smoothness, energy consumption, and collision risks. 
 We observe that PPO achieves the best overall
-trade-off between tracking accuracy, base stabilization, training stability, and wall-clock efficiency.
-Building on this result, we quantify the effect of systematic PPO tuning (neural network architecture and key hyperparameters).
+trade-off between tracking accuracy, minimization of the base disturbance, as well as training stability and efficiency.
+Building on this result, we quantify the effect of systematic PPO tuning (neural network architecture and key hyperparameters) on both a circular and ramp-shaped Cartesian path of the end-effector.
 Compared to a default PPO configuration, the optimized PPO improves the mean episodic return magnitude by 80.7\%,
 reduces the mean squared end-effector tracking error by 84.9\% and the maximum tracking error by 70.3\%, and stabilizes
 the base orientation (72.2\% reduction in orientation error). Moreover, the optimized PPO eliminates collisions and joint-limit
@@ -77,13 +75,12 @@ the linear and angular momentum \cite{b6}. The free-floating dynamics of space r
 An expensive fuel (e.g., hydrazine ($N_2H_4$)) consumption  and  excitation of the robot dynamics for some activation 
 frequencies of the pulse width modulation for thruster control can be avoided \cite{b11}.
 \\ \\
-However, a free-floating, i.e., moving base complicates the achievement of robotized manipulations. 
-Indeed, the end-effector of the arm may fail to reach the desired target point if standard motion planning 
-dedicated to robots with a fixed base are simply applied. Further constrains, such as communication latency 
+However, a free-floating base complicates the achievement of robotized manipulations. 
+Indeed, the end-effector of the arm may fail to reach the desired target point if standard motion planning approaches dedicated to robots with a fixed base are simply applied. Further constrains, such as communication latency 
 and limited onboard computational resources, make more intricate the continuous real-time control and stabilization of the base \cite{b1,b32}. In fact, traditional control
 approaches that assume an accurate model of the robot dynamics (e.g. reactionless planning or precise attitude control) 
-can struggle to adapt to uncertainties or unmodeled dynamics. Data-driven approaches, on the other hand, hardly apply. 
-Usually, the required amount and quality of data are rather inaccessible or unavailable in the space sector. 
+can struggle to adapt to uncertainties and unmodeled dynamics. Data-driven approaches, on the other hand, hardly apply. 
+Usually, the required amount and quality of data are rather unavailable in the space sector. 
 In many cases, robotized tracking capabilities under a free-floating behavior of the arm's base need to be 
 demonstrated long before the physical robot system is assembled and deployed \cite{muhlbauer2025software,rybus2024robotic,maurenbrecher2024robograv}.  
 These challenges motivate the development and simulation of AI-empowered digital twins under desired operational condition to
@@ -102,7 +99,7 @@ for the path tracking of free-floating space robots while considering the base a
 constrain monitoring through formal methods, to the best of our knowledge (see, also \cref{tab:sample}). The key 
 contributions and novelties of this work include:
 
-\begin{table}[h]
+\begin{table*}[h]
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\hline
@@ -116,7 +113,7 @@ contributions and novelties of this work include:
 	\end{tabular}
 	\caption{Recent advances in RL-based motion tracking for free-floating space robots.}
 	\label{tab:sample}
-\end{table} %d2024failure
+\end{table*} %d2024failure
 
 \begin{itemize}
   \item Comparative Evaluation of RL Agents: We implement and evaluate six state-of-the-art
@@ -149,19 +146,19 @@ agent’s performance, before concluding with broader insights and future direct
 \section{System Modeling and Simulation Environment}
 \begin{figure}[H]
     \centering
-    \begin{subfigure}{0.48\linewidth}
+    \begin{subfigure}{\columnwidth}
         \centering
-        \includegraphics[width=\linewidth]{Figures/ref_kreisbahn_1.png}
+        \includegraphics[width=\columnwidth]{Figures/ref_kreisbahn_1.png}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.48\linewidth}
+    \begin{subfigure}{\columnwidth}
         \centering
-        \includegraphics[width=\linewidth]{Figures/ref_kreisbahn_2.png}
+        \includegraphics[width=\columnwidth]{Figures/ref_kreisbahn_2.png}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.48\linewidth}
+    \begin{subfigure}{\columnwidth}
         \centering
-        \includegraphics[width=\linewidth]{Figures/ref_kreisbahn_3.png}
+        \includegraphics[width=\columnwidth]{Figures/ref_kreisbahn_3.png}
     \end{subfigure}
     \caption{Tracking the desired end effector circular path using inverse kinematics}
     \label{fig:ref_kreis_gesamt}
