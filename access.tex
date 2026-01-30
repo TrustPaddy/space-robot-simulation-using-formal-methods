@@ -20,7 +20,7 @@
 \history{Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.}
 \doi{10.1109/ACCESS.2017.DOI}
 
-\title{Benchmarking  Deep Reinforcement Learning for Cartesian Path Tracking  of Free-Floating Space Robot Manipulators Using  Digital Twins}
+\title{Benchmarking  Deep Reinforcement Learning for Cartesian Path Tracking  of Free-Floating Space Robot Manipulators}
 \author{\uppercase{Patrick S. Ermisch}\authorrefmark{1}, \IEEEmembership{Fellow, IEEE} and 
 \uppercase{Eric Guiffo Kaigom\authorrefmark{2}} \IEEEmembership{Member, IEEE}}
 \address[1]{National Institute of Standards and 
@@ -46,10 +46,10 @@ Adopting data-driven approaches to this end is challenging because the quantity 
 This paper therefore explores the performance of  trial-and-error learning techniques employed for Cartesian path tracking in a physics-based
 Simulink/Simscape environment with integrated safety monitoring. Since a  quantitative and qualitative comparison of these methods is currently missing in the on-orbit servicing realm, we benchmark six Reinforcement Learning agents, i.e., TRPO, TD3, SAC, PPO,
 Policy Gradient, and DDPG. We use each of them to track the same path of the end-effector and evaluate their performance using a unified set
-of key performance indexes related to the training duration and stability, tracking accuracy, base attitude disturbance, motion smoothness, energy consumption, and collision risks. 
+of key performance indexes related to e.g. the training duration and stability, tracking accuracy, base attitude disturbance, motion smoothness, energy consumption, and collision risks. 
 We observe that PPO achieves the best overall
 trade-off between tracking accuracy, minimization of the base disturbance, as well as training stability and efficiency.
-Building on this result, we quantify the effect of systematic PPO tuning (neural network architecture and key hyperparameters) on both a circular and ramp-shaped Cartesian path of the end-effector.
+Building on this result, we quantify the effect of a systematic tuning of neural network architecture and key hyperparameters of PPO for tracking both a circular and ramp-shaped Cartesian path of the end-effector.
 Compared to a default PPO configuration, the optimized PPO improves the mean episodic return magnitude by 80.7\%,
 reduces the mean squared end-effector tracking error by 84.9\% and the maximum tracking error by 70.3\%, and stabilizes
 the base orientation (72.2\% reduction in orientation error). Moreover, the optimized PPO eliminates collisions and joint-limit
