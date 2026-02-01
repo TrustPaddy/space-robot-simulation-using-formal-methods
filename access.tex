@@ -195,7 +195,10 @@ of design-scenarios that reveal emerging properties useful for flexible verifica
 \begin{figure*}[!t]
 	\centering
 	\includegraphics[width=1\linewidth]{Figures/Spacerobot_slx.png}
-	\caption{Overview of the Simulink model \texttt{SpaceRobot.slx}}
+	\caption{Overview of the Simulink model \texttt{SpaceRobot.slx} \\
+  This figure shows the Simulink-based closed-loop simulation framework for the free-floating space robot. The model integrates the robot dynamics, 
+  reference generation, observation assembly, reward computation, and a PPO-based reinforcement learning agent that outputs joint torques. The reward and 
+  termination logic evaluate end-effector tracking performance, base motion disturbance, and control effort to guide policy learning.}
 	\label{fig:spacerobot_slx}
 \end{figure*}
 
@@ -219,7 +222,10 @@ configuration ensures that momentum is conserved, motions of the arm can lead to
 \begin{figure*}[!t]
 	\centering
 	\includegraphics[width=1\linewidth]{Figures/spacerobot_slx_robot.png}
-	\caption{Overview of the Robot Subsystem in the -simulink Model \texttt{SpaceRobot.slx}}
+	\caption{Overview of the Robot Subsystem in the -simulink Model \texttt{SpaceRobot.slx} \\
+  This figure depicts the Simulink/Simscape Multibody model of the free-floating space robot, consisting of a floating base 
+  and a serial 4-DOF manipulator. Joint torque commands are applied to the revolute joints, while joint positions and velocities 
+  are measured and fed back as state variables. The base orientation is represented as a normalized quaternion and compared to a reference to compute the base attitude error.}
 	\label{fig:spacerobot_slx_robot}
 \end{figure*}
 
@@ -267,7 +273,10 @@ violation is detected (see  \cref{formal} for details) \cite{b31,b22,b23}.
 \begin{figure*}[!t]
 	\centering
 	\includegraphics[width=\linewidth]{Figures/spacerobot_slx_reference.png}
-	\caption{Overview of the Reference Subsystem in the Simulink Model \texttt{SpaceRobot.slx}}            
+	\caption{Overview of the Reference Subsystem in the Simulink Model \texttt{SpaceRobot.slx}\\
+  This figure shows the computation of end-effector position and velocity tracking errors with respect to the reference trajectory. 
+  The measured end-effector states are compared to the reference signals to generate position and velocity error vectors used for observation 
+  and reward calculation. In addition, the base linear and angular velocities are extracted to capture base motion induced by manipulator actuation.}            
 	\label{fig:spacerobot_slx_reference}
 \end{figure*}
 
@@ -347,7 +356,9 @@ consistent with the simulation’s fixed step to maintain alignment.
 \begin{figure}[b]
     \centering   
     \includegraphics[width=\linewidth]{Figures/spacerobot_slx_redardfcn.png}
-    \caption{Overview of the Reward Subsystem in the Simulink Model \texttt{SpaceRobot.slx}}
+    \caption{Overview of the Reward Subsystem in the Simulink Model \texttt{SpaceRobot.slx} \\
+    This figure illustrates the reward and termination logic implemented as a MATLAB function block. The reward is computed 
+    from end-effector position and velocity errors, base linear and angular velocities, control effort, and torque smoothness.}
     \label{fig:reward_fcn}
 \end{figure}
 \noindent
@@ -497,7 +508,11 @@ safety components were developed and integrated \cite{b7,b22}.
 \begin{figure*}[!t]
 \centering
    \includegraphics[width=1\linewidth]{Figures/impuls_monitor.png}
-    \caption{Overview of the Impuls Monitor Subsystem in the Simulink Model \texttt{SpaceRobot.slx}}
+    \caption{Overview of the Impuls Monitor Subsystem in the Simulink Model \texttt{SpaceRobot.slx} \\
+    This figure shows the computation of the total linear and angular momentum of the free-floating space robot. 
+    The velocities and orientations of the base and all manipulator links are measured and aggregated within a 
+    MATLAB function to obtain the system momentum. This monitor is used to analyze momentum conservation and 
+    quantify base–manipulator dynamic coupling effects.}
     \label{fig:impuls_monitor}
 \end{figure*}
 \begin{figure}[b]
@@ -523,7 +538,11 @@ Newton’s laws and the agent interacts with a physical correct process. This le
 
 \begin{figure*}[!t]
     \centering    \includegraphics[width=1\linewidth]{Figures/spacerobot_slx_colissionmonitor.png}
-    \caption{Overview of the Collision Monitor Subsystem in the Simulink Model \texttt{SpaceRobot.slx}}
+    \caption{Overview of the Collision Monitor Subsystem in the Simulink Model \texttt{SpaceRobot.slx} \\
+    This figure illustrates the collision monitoring logic used to ensure safe robot operation during training and 
+    evaluation. Joint and link configurations are processed to compute the minimum distance to obstacles, which is 
+    compared against a predefined safety threshold. A collision flag is generated and used for episode termination 
+    or safety-related penalties.}
     \label{fig:spacerobot_slx_colissionmonitor}
 \end{figure*}
 
@@ -605,7 +624,10 @@ additional confidence in safety beyond empirical testing.
 \begin{figure}[!b]
 	\centering    
 	\includegraphics[width=\linewidth]{Figures/verify_tau_slx.png}
-	\caption{Verification model with Simulink Design Verifier \texttt{Verify\_tau.slx}}
+	\caption{Verification model with Simulink Design Verifier \texttt{Verify\_tau.slx} \\
+  This figure depicts the Simulink property model used to formally verify the joint torque constraints. 
+  The absolute joint torques are compared against predefined maximum limits using a relational operator. 
+  The property is proven to hold for all reachable system states, ensuring bounded control actions.}
 	\label{fig:verify_tau}
 \end{figure}
 
@@ -630,7 +652,10 @@ conditions.
 \begin{figure}[!b]
 	\centering
 	\includegraphics[width=\linewidth]{Figures/verify_tau_reslult.png}
-	\caption{Result of the Simulink Design Verifier}
+	\caption{Result of the Simulink Design Verifier \\ 
+  This figure shows the result of a formal property verification performed on the torque constraint model. 
+  The verification confirms that the specified safety property is satisfied for all analyzed execution paths. 
+  This analysis provides formal guarantees on control torque limits beyond empirical simulation-based validation.}
 	\label{fig:verify_tau_result}
 \end{figure}
 
@@ -902,7 +927,11 @@ optimization of PPO, involving both network architecture modifications and hyper
 		\caption{PPO (Optimized)}
 		\label{fig:training_ppo_opt}
 	\end{subfigure}
-	\caption{Comparison of episodic rewards for default and optimized PPO agents.}
+	\caption{Comparison of episodic rewards for default and optimized PPO agents. \\
+  (a) Episode reward evolution during training using the default PPO hyperparameters. 
+  (b) Episode reward evolution using the optimized PPO configuration.
+ The optimized configuration exhibits faster convergence and higher average episode rewards, 
+ indicating improved learning efficiency and policy performance.}
 	\label{fig:training_ppo_compare}
 \end{figure*}
 \noindent
@@ -962,7 +991,8 @@ The default PPO agent’s learning curve initially rose, but then plateaued at a
 negative reward value (\textasciitilde-2 per episode) and exhibited high variance even after many episodes. This
 plateau suggested it reached a suboptimal policy and struggled to improve further. In contrast, the
 optimized PPO agent’s learning curve kept rising steadily and converged to a much higher average
-reward (less negative, closer to zero) with significantly reduced variance. Specifically, where the
+reward (less negative, closer to zero) with significantly reduced variance. Table~\ref{tab:ppo_optimization_kpi} reports the KPI averages 
+over $N_{eval}=30$ evaluation episodes for PPO with the default configuration and the optimized configuration. Specifically, where the
 default PPO leveled off around -2.0 cumulative reward, the optimized PPO approached -0.4 on average,
 a dramatic improvement. The variability (shaded region in the reward plot) shrank, indicating the
 agent’s behavior became consistently optimal across training episodes. Quantitatively, the
@@ -1004,7 +1034,31 @@ only improved its average performance but did so reliably without frequent failu
     \caption{Course of basic orientation (quaternion components) during a test episode.}
     \label{fig:basis_orientation_compare}
 \end{figure*}
-\noindent
+
+\begin{table}[b]
+	\centering
+	\renewcommand{\arraystretch}{1.35}
+	\setlength{\tabcolsep}{5pt}
+	\begin{tabular}{lcc}
+		\hline
+		\textbf{Metric (KPI)} & \textbf{PPO (Default)} & \textbf{PPO (Optimized)} \\
+		\hline
+		Mean Episodic Reward (K1)        & -2.23  & -0.43 \\
+		Mean EE Tracking Error (K2)      & 0.055  & \textbf{0.0083} \\
+		Max EE Tracking Error (K3)       & 0.91   & \textbf{0.27} \\
+		Mean Base Orientation Error (K4) & 0.079  & \textbf{0.022} \\
+		Collision Rate (K5)             & 0.067 (6.7\%) & 0 \\
+		Joint Limit Violation Rate (K6) & 0.092 (9.2\%) & 0 \\
+		Torque Smoothness (K7, jerk)     & 0.459  & \textbf{0.351} \\
+		Energy Consumption (K9)          & 6.325  & \textbf{5.314} \\
+		\hline
+	\end{tabular}
+	\caption{Performance of PPO agent before and after optimization. The optimized PPO shows substantial
+		improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more
+		efficient control).}
+    \label{tab:ppo_optimization_kpi}
+\end{table}
+
 Beyond reward, we examine how the optimizations translated to actual task performance:
 \begin{itemize}
   \item Trajectory Tracking: The optimized PPO achieves near-perfect tracking of the end-effector
@@ -1154,33 +1208,11 @@ The reference is sampled at $T_s=0.01\,\mathrm{s}$, while the PPO policy is upda
     \caption{Course of basic orientation (quaternion components) during a test episode with ramp trajectory.}
     \label{fig:r_basis_orientation_compare}
 \end{figure*}
-
-\begin{table}[b]
-	\centering
-	\renewcommand{\arraystretch}{1.35}
-	\setlength{\tabcolsep}{5pt}
-	\begin{tabular}{lcc}
-		\hline
-		\textbf{Metric (KPI)} & \textbf{PPO (Default)} & \textbf{PPO (Optimized)} \\
-		\hline
-		Mean Episodic Reward (K1)        & -2.23  & -0.43 \\
-		Mean EE Tracking Error (K2)      & 0.055  & \textbf{0.0083} \\
-		Max EE Tracking Error (K3)       & 0.91   & \textbf{0.27} \\
-		Mean Base Orientation Error (K4) & 0.079  & \textbf{0.022} \\
-		Collision Rate (K5)             & 0.067 (6.7\%) & 0 \\
-		Joint Limit Violation Rate (K6) & 0.092 (9.2\%) & 0 \\
-		Torque Smoothness (K7, jerk)     & 0.459  & \textbf{0.351} \\
-		Energy Consumption (K9)          & 6.325  & \textbf{5.314} \\
-		\hline
-	\end{tabular}
-	\caption{Performance of PPO agent before and after optimization. The optimized PPO shows substantial
-		improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more
-		efficient control).}
-\end{table}
 \noindent
 Results: Table~\ref{tab:ppo_linear_kpi} reports the KPI averages over $N_{eval}=30$ evaluation episodes for PPO with the default configuration and the optimized configuration, now tested on the piecewise-linear reference.
-The optimized PPO improves overall task success (K1 increases from $-0.4464$ to $-0.3653$), reduces base attitude disturbance (K4 decreases by $\approx 35\%$) (see Fig.~\ref{fig:r_basis_orientation_compare}), lowers residual base angular velocity (K8 decreases by $\approx 29\%$), and significantly reduces energy consumption (K9 decreases by $\approx 31\%$).
-However, the mean and peak tracking errors (K2 and K3) slightly increase on this linear trajectory (see~\autoref{fig:r_trajektorie_xy_compare}), and the control smoothness metric (K7) becomes worse than the default PPO.
+The optimized PPO improves overall task success (K1 increases from $-0.4565$ to $-0.2977$), reduces base attitude disturbance (K4 decreases by $\approx 44\%$) (see ~\autoref{fig:r_basis_orientation_compare}), lowers residual base angular velocity (K8 decreases by $\approx 15\%$), and significantly reduces energy consumption (K9 decreases by $\approx 35\%$).
+The mean and peak end-effector tracking errors (K2 and K3) remain almost unchanged, with a slight improvement in the mean error (see ~\autoref{fig:r_trajektorie_xy_compare}).
+However, the control smoothness metric (K7) becomes worse than the default PPO.
 This suggests that the hyperparameter optimization (highly beneficial for circular tracking) does not fully transfer to piecewise-linear motion profiles.
 A straightforward mitigation is to include a mixture of reference types (circular, linear segments, and hybrid trajectories) during training (or during hyperparameter search) to explicitly optimize for trajectory generalization.
 
@@ -1192,15 +1224,15 @@ A straightforward mitigation is to include a mixture of reference types (circula
 \hline
 \textbf{Metric (KPI)} & \textbf{PPO (Default)} & \textbf{PPO (Optimized)} \\
 \hline
-Mean Episodic Reward (K1)            & -0.4464 & \textbf{-0.3653} \\
-Mean Squared EE Position Error (K2)  & \textbf{0.0072} & 0.0085 \\
-Max EE Position Error (K3)           & \textbf{0.1347} & 0.1479 \\
-Mean Base Orientation Error (K4)     & 0.0440 & \textbf{0.0284} \\
+Mean Episodic Reward (K1)            & -0.4565 & \textbf{-0.2977} \\
+Mean Squared EE Position Error (K2)  & 0.0078 & \textbf{0.0070} \\
+Max EE Position Error (K3)           & 0.2037 & \textbf{0.2036} \\
+Mean Base Orientation Error (K4)     & 0.0412 & \textbf{0.0231} \\
 Collision Rate (K5)                 & 0 & 0 \\
 Joint Limit Violation Rate (K6)     & 0 & 0 \\
-Control Smoothness (K7, jerk)       & \textbf{0.5711} & 0.6684 \\
-Mean Base Angular Velocity (K8)      & 0.0459 & \textbf{0.0324} \\
-Energy Consumption (K9)              & 7.8367 & \textbf{5.3739} \\
+Control Smoothness (K7, jerk)       & \textbf{0.5520} & 0.6839 \\
+Mean Base Angular Velocity (K8)      & 0.0399 & \textbf{0.0339} \\
+Energy Consumption (K9)              & 7.7144 & \textbf{5.0341} \\
 \hline
 \end{tabular}
 \caption{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}
@@ -1498,37 +1530,24 @@ in \emph{Proc. IEEE/RSJ Int. Conf. Intelligent Robots and Systems (IROS)}, 2017,
 J. Achiam, D. Held, A. Tamar, and P. Abbeel, ``Constrained policy optimization,''
 in \emph{Proc. Int. Conf. Machine Learning (ICML)}, 2017.
 
-
-
-
-
 \end{thebibliography}
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{a1.png}}]{First A. Author} (M'76--SM'81--F'87) and all authors may include 
-biographies. Biographies are often not included in conference-related
-papers. This author became a Member (M) of IEEE in 1976, a Senior
-Member (SM) in 1981, and a Fellow (F) in 1987. The first paragraph may
-contain a place and/or date of birth (list place, then date). Next,
-the author's educational background is listed. The degrees should be
-listed with type of degree in what field, which institution, city,
-state, and country, and year the degree was earned. The author's major
-field of study should be lower-cased. 
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{Figures/Bewerbungsfoto_Ermisch.jpg}}]{Patrick S. Ermisch}
+Patrick S. Ermisch was born in Frankfurt am Main, Germany, on December 18, 2002. He received the Abitur degree and 
+is currently pursuing the B.Eng. degree in mechatronics at Frankfurt University of Applied Sciences, Frankfurt, 
+Germany, with an expected graduation in 2026. His major field of study is mechatronics.
 
-The second paragraph uses the pronoun of the person (he or she) and not the 
-author's last name. It lists military and work experience, including summer 
-and fellowship jobs. Job titles are capitalized. The current job must have a 
-location; previous positions may be listed 
-without one. Information concerning previous publications may be included. 
-Try not to list more than three books or published articles. The format for 
-listing publishers of a book within the biography is: title of book 
-(publisher name, year) similar to a reference. Current and previous research 
-interests end the paragraph. The third paragraph begins with the author's 
-title and last name (e.g., Dr.\ Smith, Prof.\ Jones, Mr.\ Kajor, Ms.\ Hunter). 
-List any memberships in professional societies other than the IEEE. Finally, 
-list any awards and work for IEEE committees and publications. If a 
-photograph is provided, it should be of good quality, and 
-professional-looking. Following are two examples of an author's biography.
+He has gained practical experience through an internship at SEW-EURODRIVE, where he contributed to the further 
+development of a mobile application for the manual control of logistics robots. In addition, he worked as a tutor 
+for Physics~I and Physics~II and as a student research assistant, supporting research on particle simulation and 
+the development of an application for visualization and simulation purposes. His research interests include 
+reinforcement learning for robotics, space robotic systems, and simulation-based control methods.
+
+Mr.\ Ermisch has been listed on the Dean’s List of Frankfurt University of Applied Sciences multiple times in 
+recognition of his academic performance.
 \end{IEEEbiography}
+
+
 
 \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{a2.png}}]{Second B. Author} was born in Greenwich Village, New York, NY, USA in 
 1977. He received the B.S. and M.S. degrees in aerospace engineering from 
