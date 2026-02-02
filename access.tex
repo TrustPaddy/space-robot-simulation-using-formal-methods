@@ -117,11 +117,11 @@ success in complex control tasks, but applying RL to space robots is still relat
 
 The work presented in this paper investigates the use of continuous-action deep RL for the tracking of a desired Cartesian motion of the end-effector of a free-floating space
 manipulator. It differs from previous contributions in three ways. First, it focuses on a systematic comparison 
-and explores the respective performance of different RL algorithms beyond those mentioned e.g. in \cref{tab:sample}, thereby quantitatively and qualitatively contributing to filling in a current gap in space robotics. Second,  constraints, such as collision avoidance, are monitored
+and explores the respective performance of different RL algorithms beyond those mentioned e.g. in \Cref{tab:sample}, thereby quantitatively and qualitatively contributing to filling in a current gap in space robotics. Second,  constraints, such as collision avoidance, are monitored
 through formal methods applied from a software-enabled and practical perspective.  Finally, this work takes into 
-account the minimization of the base attitude omitted in most recent contributions, as highlighted in the fourth column of \cref{tab:sample}. We are not aware of any previous work that compares DL algorithms 
+account the minimization of the base attitude omitted in most recent contributions, as highlighted in the fourth column of \Cref{tab:sample}. We are not aware of any previous work that compares DL algorithms 
 for the Cartesian path tracking of free-floating space robots while considering the base attitude minimization and unifying 
-constrain monitoring through formal methods, to the best of our knowledge (see, also \cref{tab:sample}). 
+constrain monitoring through formal methods, to the best of our knowledge (see, also \autoref{tab:sample}). 
 
 The key 
 contributions and novelties of this work include:
@@ -326,9 +326,7 @@ captures any ongoing rotation of the base. %The base’s translational velocity 
 \end{itemize}
 \noindent
 Combining these components, the overall observation vector has dimension $3 (e_{p}) + 3
-(e_{v}) + 4 (q) + 4 (\dot q) + 3 (ori_{base}) + 3 (\omega_{base}) = 20$ dimensions (in
-our implementation, a few additional state features like a boolean flag for terminal state can bring it to
-23, but the core physical state is 20-dimensional). This rich state description provides the agent with all
+(e_{v}) + 4 (q) + 4 (\dot q) + 3 (ori_{base}) + 3 (\omega_{base}) + 3 (v_{base}) = 23$ dimensions. This rich state description provides the agent with all
 necessary information: how far the end-effector is from target, how the arm is configured/moving, and
 how the base is reacting.
 \\ \\
