@@ -140,7 +140,7 @@ why.
 we incorporate formal methods into the learning loop \cite{b5, b6, b22, b23}. A collision monitoring, momentum
 conservation check, and formal verification of joint torque limits are embedded in the simulation. This integration ensures the RL agent cannot violate fundamental safety properties (like avoiding collisions or exceeding actuator limits) during training or execution.
  \item A high-fidelity simulation environment: We develop a high-fidelity MATLAB/Simulink simulation
-of a free-floating space robot, using a URDF-based multibody model and the Simscape physics engine. The robot, a cube-shaped base with a 4-DOF robotic arm, is modeled with realistic kinematics, dynamics, and sensor/actuator parameters and features. A dedicated reinforcement learning environment provides the agent with observations and rewards, including a specially designed reward function that incentivizes accurate end-effector trajectory tracking while penalizing base movement, large joint velocities, and excessive control effort (energy).
+of a free-floating space robot, using a URDF-based multibody model and the Simscape physics engine. The robot, a cube-shaped base with a 4-Degree of Freedom (DOF) robotic arm, is modeled with realistic kinematics, dynamics, and sensor/actuator parameters and features. A dedicated reinforcement learning environment provides the agent with observations and rewards, including a specially designed reward function that incentivizes accurate end-effector trajectory tracking while penalizing base movement, large joint velocities, and excessive control effort (energy).
 Through reward shaping and carefully chosen reset conditions, the agent learns to accomplish the task without causing excessive base disturbance or safety violations \cite{b25,b26,b27,b28,b7}.
  \item The optimization of the PPO agent : Based on the comparative results, we identify PPO as the top-
 performing algorithm and further refine it for this task. We adjust the neural network
@@ -776,7 +776,7 @@ highlighting the differences between agents:
 \hline
 \textbf{KPI (unit)} & \textbf{TRPO} & \textbf{TD3} & \textbf{SAC} & \textbf{PPO} & \textbf{PG} & \textbf{DDPG} \\
 \hline
-\makecell[l]{\textbf{K2:} Mean EE\\position error} &
+\makecell[l]{\textbf{K2:} Mean End Effector (EE)\\position error} &
 0.0680 & 0.1914 & 0.1908 & \textbf{0.0257} & 0.1638 & 0.0937 \\
 \hline
 \makecell[l]{\textbf{K3:} Max EE error\\} &
