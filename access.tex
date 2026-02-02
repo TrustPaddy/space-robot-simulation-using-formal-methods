@@ -319,7 +319,7 @@ These inform the agent about the manipulator’s configuration and motion state 
 be normalized or wrapped as needed, in our implementation they are provided in radians along
 with known joint limits.)
   \item Base Motion: The free-floating base’s orientation and angular velocity. We parameterize the
-base’s orientation using a using quaternions. The quaternion \( q_{base} \in \mathbb{R}^4 \) describes the orientation of the base, capturing its attitude 
+base’s orientation using quaternions. The quaternion \( q_{base} \in \mathbb{R}^4 \) describes the orientation of the base, capturing its attitude 
 error from a reference orientation. Since the base is expected to maintain its initial attitude, the 
 orientation error is ideally kept near zero through the agent’s actions. The base’s angular velocity $\omega_{base} \in \mathbb{R}^3$ is also included, as it
 captures any ongoing rotation of the base. %The base’s translational velocity could also be considered, however, in a free-floating scenario with no external forces and zero initial momentum, the center-of-mass linear velocity remains constant. In our case the base’s linear momentum is initially zero and remains near zero, so base translational motion is minimal by design. Thus, base linear velocity is not a major factor and can be omitted or included for completeness, our state focuses on rotational movement of the base.)
@@ -487,7 +487,7 @@ agents. These KPIs include:
 % better if achieved without sacrificing performance.
 % \end{itemize}
 \begin{itemize}
-  \item K1: Average Episodic Return, the mean cumulative reward per episode (lower is better, this reflects overall success in the task).\\
+  \item K1: Average Episodic Return, the mean cumulative reward per episode (higher is better, this reflects overall success in the task).\\
   $R_i=\sum_{k=1}^{T_i} r_i[k], \\ \qquad K1=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}} R_i.$
 
   \item K2: Mean Squared End-Effector Position Error, averaged over the episode (lower is better, measures tracking accuracy).\\
@@ -496,7 +496,7 @@ agents. These KPIs include:
   \item K3: Maximum End-Effector Position Error, worst-case deviation during the episode (lower is better).\\
   $K3=\max_{i}\max_{k}\|e_{p,i}[k]\|_2.$
 
-  \item K4: Mean Base Orientation Error, e.g., average quaternion error magnitude (in radians) indicating how far the base drifted in attitude (lower is better).\\
+  \item K4: Mean Base Orientation Error, e.g., average quaternion error magnitude indicating how far the base drifted in attitude (lower is better).\\
   $K4=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}}\frac{1}{T_i}\sum_{k=1}^{T_i}\|e_{R,i}[k]\|_2.$
 
   \item K5: Collision Rate, the fraction of episodes in which a collision occurred (0 means no collisions, we expect this to be zero if the agent behaves safely).\\
@@ -776,7 +776,7 @@ highlighting the differences between agents:
 \hline
 \textbf{KPI (unit)} & \textbf{TRPO} & \textbf{TD3} & \textbf{SAC} & \textbf{PPO} & \textbf{PG} & \textbf{DDPG} \\
 \hline
-\makecell[l]{\textbf{K2:} Mean End Effector (EE)\\position error} &
+\makecell[l]{\textbf{K2:} Mean Squared End Effector (EE)\\position error} &
 0.0680 & 0.1914 & 0.1908 & \textbf{0.0257} & 0.1638 & 0.0937 \\
 \hline
 \makecell[l]{\textbf{K3:} Max EE error\\} &
@@ -1076,7 +1076,7 @@ only improved its average performance but did so reliably without frequent failu
 		\textbf{Metric (KPI)} & \textbf{PPO (Default)} & \textbf{PPO (Optimized)} \\
 		\hline
 		Mean Episodic Reward (K1)        & -2.23  & -0.43 \\
-		Mean EE Tracking Error (K2)      & 0.055  & \textbf{0.0083} \\
+		Mean Squared EE Tracking Error (K2)      & 0.055  & \textbf{0.0083} \\
 		Max EE Tracking Error (K3)       & 0.91   & \textbf{0.27} \\
 		Mean Base Orientation Error (K4) & 0.079  & \textbf{0.022} \\
 		Collision Rate (K5)             & 0.067 (6.7\%) & 0 \\
