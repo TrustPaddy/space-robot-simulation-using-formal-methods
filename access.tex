@@ -40,8 +40,8 @@
 %\tfootnote{This paragraph of the first footnote will contain support  information, including sponsor and financial support acknowledgment. For example, ``This work was supported in part by the U.S. Department of Commerce under Grant BS123456.''}
 
 \markboth
-{Author \headeretal: Preparation of Papers for IEEE TRANSACTIONS and JOURNALS}
-{Author \headeretal: Preparation of Papers for IEEE TRANSACTIONS and JOURNALS}
+{P. S. Ermisch and E. G. Kaigom: Safe RL for Free-Floating Space Robot Manipulators}
+{P. S. Ermisch and E. G. Kaigom: Safe RL for Free-Floating Space Robot Manipulators}
 
 \corresp{Corresponding author: Eric Guiffo Kaigom (e-mail: kaigom@fra-uas.de).}
 
@@ -83,7 +83,7 @@ An expensive consumption of fuel, such as hydrazine ($N_2H_4$),  and  excitation
 frequencies of the pulse width modulation related to thruster control can be avoided \cite{b11}.
 \\ \\
 However, a free-floating base complicates the achievement of robotized manipulations. 
-Indeed, the end-effector of the arm may fail to reach the desired target point if standard motion planning approaches dedicated to robots with a fixed base are simply applied. Further constrains, such as communication latency 
+Indeed, the end-effector of the arm may fail to reach the desired target point if standard motion planning approaches dedicated to robots with a fixed base are simply applied. Further constraints, such as communication latency 
 and limited onboard computational resources, make more intricate the continuous real-time control and stabilization of the base \cite{b1,b32}. In fact, traditional control
 approaches that assume an accurate model of the robot dynamics (e.g. reactionless planning or precise attitude control) 
 can struggle to adapt to uncertainties and unmodeled dynamics. Data-driven approaches, on the other hand, hardly apply. 
@@ -105,7 +105,6 @@ explore learning-based control methods that can autonomously adapt to complex an
 		(\cite{al2024path},~2024)  & DDPG   & Path planning &  No$\slash$No \\ \hline
 		(\cite{hu2025deep},~2025) & PPO   & Trajectory planning &  No$\slash$No \\ \hline
 		(\cite{zhang2025learning},~2025) & LSAC & Trajectory post-processing  &  No$\slash$No \\ \hline
-			(\cite{hu2025deep},~2025) & PPO   & Trajectory planning &  No$\slash$No \\ \hline
 		(\cite{wei2025trajectory},~2025) & DDPG & Trajectory planning  &  No$\slash$Yes \\ \hline
 	\end{tabular}
 	\caption{Recent advances in Deep RL-based motion management for free-floating space robots.}
@@ -117,8 +116,8 @@ learn control policies through trial-and-error interactions with entities, envir
 success in complex control tasks, but applying RL to space robots is still relatively novel \cite{wu2020reinforcement,al2024path,hu2025deep,zhang2025learning,huang2023obstacle}.  
 
 The work presented in this paper investigates the use of continuous-action deep RL for the tracking of a desired Cartesian motion of the end-effector of a free-floating space
-manipulator. It differs from previous contribution in three ways. First, it focuses on a systematical comparison 
-and explores the respective performance of different RL algorithms beyond those mentioned e.g. in \cref{tab:sample}, thereby quantitatively and qualitatively contributing to filling in a current gap in space robotics. Second,  constrains, such as collision avoidance, are monitored
+manipulator. It differs from previous contributions in three ways. First, it focuses on a systematic comparison 
+and explores the respective performance of different RL algorithms beyond those mentioned e.g. in \cref{tab:sample}, thereby quantitatively and qualitatively contributing to filling in a current gap in space robotics. Second,  constraints, such as collision avoidance, are monitored
 through formal methods applied from a software-enabled and practical perspective.  Finally, this work takes into 
 account the minimization of the base attitude omitted in most recent contributions, as highlighted in the fourth column of \cref{tab:sample}. We are not aware of any previous work that compares DL algorithms 
 for the Cartesian path tracking of free-floating space robots while considering the base attitude minimization and unifying 
@@ -222,7 +221,7 @@ configuration ensures that momentum is conserved, motions of the arm can lead to
 \begin{figure*}[!t]
 	\centering
 	\includegraphics[width=1\linewidth]{Figures/spacerobot_slx_robot.png}
-	\caption{Overview of the Robot Subsystem in the -simulink Model \texttt{SpaceRobot.slx} \\
+	\caption{Overview of the Robot Subsystem in the Simulink Model \texttt{SpaceRobot.slx} \\
   This figure depicts the Simulink/Simscape Multibody model of the free-floating space robot, consisting of a floating base 
   and a serial 4-DOF manipulator. Joint torque commands are applied to the revolute joints, while joint positions and velocities 
   are measured and fed back as state variables. The base orientation is represented as a normalized quaternion and compared to a reference to compute the base attitude error.}
@@ -320,15 +319,14 @@ These inform the agent about the manipulator’s configuration and motion state 
 be normalized or wrapped as needed, in our implementation they are provided in radians along
 with known joint limits.)
   \item Base Motion: The free-floating base’s orientation and angular velocity. We parameterize the
-base’s orientation using a three-parameter representation of the rotation (e.g., Euler angles). $ori_{base} \in \mathbb{R}^3$ represents the
-attitude error of the base from the reference. Since the base
-is expected to preserve its initial attitude, the orientation error is ideally kept near zero by the
-agent’s actions. The base’s angular velocity $\omega_{base} \in \mathbb{R}^3$ is also included, as it
+base’s orientation using a using quaternions. The quaternion \( q_{base} \in \mathbb{R}^4 \) describes the orientation of the base, capturing its attitude 
+error from a reference orientation. Since the base is expected to maintain its initial attitude, the 
+orientation error is ideally kept near zero through the agent’s actions. The base’s angular velocity $\omega_{base} \in \mathbb{R}^3$ is also included, as it
 captures any ongoing rotation of the base. %The base’s translational velocity could also be considered, however, in a free-floating scenario with no external forces and zero initial momentum, the center-of-mass linear velocity remains constant. In our case the base’s linear momentum is initially zero and remains near zero, so base translational motion is minimal by design. Thus, base linear velocity is not a major factor and can be omitted or included for completeness, our state focuses on rotational movement of the base.)
 \end{itemize}
 \noindent
 Combining these components, the overall observation vector has dimension $3 (e_{p}) + 3
-(e_{v}) + 4 (q) + 4 (\dot q) + 3 (ori_{base}) + 3 (\omega_{base}) = 20 dimensions$ (in
+(e_{v}) + 4 (q) + 4 (\dot q) + 3 (ori_{base}) + 3 (\omega_{base}) = 20$ dimensions (in
 our implementation, a few additional state features like a boolean flag for terminal state can bring it to
 23, but the core physical state is 20-dimensional). This rich state description provides the agent with all
 necessary information: how far the end-effector is from target, how the arm is configured/moving, and
@@ -338,7 +336,7 @@ Action Space: The agent’s action is a vector of continuous joint torque comman
 manipulator’s joints. At each decision step, the agent outputs $a = [\tau_{1}~ \tau_{2}~
 \tau_{3}~ \tau_{4}]^T$, corresponding to the torque to apply at each of the 4 revolute joints
 of the arm \cite{b2,b7}. These actions are real-valued and are constrained by the actuator capabilities. We enforce
-symmetric torque limits: each $|\tau_{i}| \leq \tau_{\max} \text{(for i = 1..4)}$. In the simulation, this
+symmetric torque limits: each $|\tau_{i}| \leq \tau_{\max}$ \text{(for i = 1..4)}. In the simulation, this
 is implemented using saturation blocks that clip the commanded torque to the range $[-\tau_{\max},
 +\tau_{\max}]$. The value of $\tau_{\max}$ is set based on the robot’s design (for example,
 $\tau_{\max} = 25 Nm$ for all joints, though the exact value is not critical as long as it is sufficient to
@@ -365,7 +363,7 @@ consistent with the simulation’s fixed step to maintain alignment.
 Reward Function Design: A crucial aspect of the RL formulation is the reward signal, which guides the
 agent toward the desired behavior. We define the reward $r_{t}$ at each time step t to reflect
 the dual objectives of accurate trajectory tracking and minimal base disturbance, along with
-penalties for unsafe actions. This reward function is initalised inside a Matlabfunction of the Reward Subsystem (see~\autoref{fig:reward_fcn}). The reward is essentially the negative of a weighted cost function that
+penalties for unsafe actions. This reward function is initialized inside a MATLAB function of the Reward Subsystem (see~\autoref{fig:reward_fcn}). The reward is essentially the negative of a weighted cost function that
 includes several terms \cite{b7}:
 \begin{itemize}
   \item End-Effector Tracking Error: We assign a high cost to penalize deviations from the reference trajectory.
@@ -466,28 +464,61 @@ Evaluation and Metrics: After training, we evaluated each agent’s performance 
 = 30$ independent episodes (with various initial conditions) to gather statistics. Over these
 evaluation runs, we compute a set of Key Performance Indicators (KPIs) to quantitatively compare the
 agents. These KPIs include: 
+% \begin{itemize}
+%   \item K1: Average Episodic Return, the mean cumulative reward per episode (higher is better, this
+% reflects overall success in the task).
+%   \item K2: Mean Squared End-Effector Position Error, averaged over the episode (lower is better,
+% measures tracking accuracy).
+%   \item K3: Maximum End-Effector Position Error, worst-case deviation during the episode (lower is
+% better).
+%   \item K4: Mean Base Orientation Error, e.g., average quaternion error magnitude
+% indicating how far the base drifted in attitude (lower is better).
+%   \item K5: Collision Rate, the fraction of episodes in which a collision occurred (0 means no collisions,
+% we expect this to be zero if the agent behaves safely).
+%   \item K6: Joint Limit Violation Rate, fraction of episodes where any joint exceeded its range (again, 0
+% is ideal).
+%   \item K7: Control Smoothness (Jerk), a measure of actuation smoothness, computed as the
+% normalized jerk (time-derivative of acceleration) or second difference of joint torques. Lower
+% K7 indicates smoother control inputs which is desirable for mechanical wear and for not exciting
+% base motion.
+%  \item K8: Mean Base Angular Velocity, a measure of residual base rotation (deg/s or rad/s) during
+% the task (lower is better, ideally zero).
+%   \item K9: Energy Consumption, approximate average energy expended by the joints ($\int(\tau \cdot \omega) dt$). Lower energy usage is
+% better if achieved without sacrificing performance.
+% \end{itemize}
 \begin{itemize}
-  \item K1: Average Episodic Return, the mean cumulative reward per episode (higher is better, this
-reflects overall success in the task).
-  \item K2: Mean Squared End-Effector Position Error, averaged over the episode (lower is better,
-measures tracking accuracy).
-  \item K3: Maximum End-Effector Position Error, worst-case deviation during the episode (lower is
-better).
-  \item K4: Mean Base Orientation Error, e.g., average quaternion error magnitude (in radians)
-indicating how far the base drifted in attitude (lower is better).
-  \item K5: Collision Rate, the fraction of episodes in which a collision occurred (0 means no collisions,
-we expect this to be zero if the agent behaves safely).
-  \item K6: Joint Limit Violation Rate, fraction of episodes where any joint exceeded its range (again, 0
-is ideal).
-  \item K7: Control Smoothness (Jerk), a measure of actuation smoothness, computed as the
-normalized jerk (time-derivative of acceleration) or second difference of joint torques. Lower
-K7 indicates s
- \item K8: Mean Base Angular Velocity, a measure of residual base rotation (deg/s or rad/s) during
-the task (lower is better, ideally zero).
-  \item K9: Energy Consumption, approximate average energy expended by the joints (e.g., $\int(\tau \cdot \omega) dt$,
-in some units) or a proxy like sum of squared torques over time. Lower energy usage is
-better if achieved without sacrificing performance.
+  \item K1: Average Episodic Return, the mean cumulative reward per episode (lower is better, this reflects overall success in the task).\\
+  $R_i=\sum_{k=1}^{T_i} r_i[k], \\ \qquad K1=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}} R_i.$
+
+  \item K2: Mean Squared End-Effector Position Error, averaged over the episode (lower is better, measures tracking accuracy).\\
+  $K2=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}}\frac{1}{T_i}\sum_{k=1}^{T_i}\|e_{p,i}[k]\|_2^2.$
+
+  \item K3: Maximum End-Effector Position Error, worst-case deviation during the episode (lower is better).\\
+  $K3=\max_{i}\max_{k}\|e_{p,i}[k]\|_2.$
+
+  \item K4: Mean Base Orientation Error, e.g., average quaternion error magnitude (in radians) indicating how far the base drifted in attitude (lower is better).\\
+  $K4=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}}\frac{1}{T_i}\sum_{k=1}^{T_i}\|e_{R,i}[k]\|_2.$
+
+  \item K5: Collision Rate, the fraction of episodes in which a collision occurred (0 means no collisions, we expect this to be zero if the agent behaves safely).\\
+  $C_i=\mathbb{I}(\exists k:\,c_i[k]>0.5), \\ \qquad K5=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}} C_i.$
+
+  \item K6: Joint Limit Violation Rate (0 is ideal).\\
+  $K6=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}}\frac{1}{T_i n_J}\sum_{k=1}^{T_i}\sum_{j=1}^{n_J}
+  \mathbb{I}\!\big(q_{i,j}[k]\notin[q_j^{\min},q_j^{\max}]\big).$
+
+  \item K7: Control Smoothness (Jerk), a measure of actuation smoothness, computed as the second difference of joint torques. Lower values indicate smoother control.\\
+  $\Delta^2\tau_i[k]=\tau_i[k+2]-2\tau_i[k+1]+\tau_i[k], \\\qquad
+  K7=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}}\frac{1}{T_i-2}\sum_{k=1}^{T_i-2}\|\Delta^2\tau_i[k]\|_2.$
+
+  \item K8: Mean Base Angular Velocity, a measure of residual base rotation (rad/s) during the task (lower is better, ideally zero).\\
+  $K8=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}}\frac{1}{T_i}\sum_{k=1}^{T_i}\|\omega_{b,i}[k]\|_2.$
+
+  \item K9: Energy Consumption, approximate average energy expended by the joints (e.g., $\int(\tau \cdot \dot q) dt$ using an absolute-power proxy). Lower energy usage is better if achieved without sacrificing performance.\\
+  $E_i=\int\sum_{j=1}^{n_J}\big|\tau_{i,j}(t)\dot q_{i,j}(t)\big|\,dt, \\\qquad
+  K9=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}} E_i.$
 \end{itemize}
+
+
 \noindent
 Additionally, we consider training-related metrics for comparison: T1: variance of the episodic reward
 in the later stage of training (indicating training stability), T2: variance of the value function or
@@ -508,7 +539,7 @@ safety components were developed and integrated \cite{b7,b22}.
 \begin{figure*}[!t]
 \centering
    \includegraphics[width=1\linewidth]{Figures/impuls_monitor.png}
-    \caption{Overview of the Impuls Monitor Subsystem in the Simulink Model \texttt{SpaceRobot.slx} \\
+    \caption{Overview of the Impuls Monitor Subsystem (Momentum Observer) in the Simulink Model \texttt{SpaceRobot.slx} \\
     This figure shows the computation of the total linear and angular momentum of the free-floating space robot. 
     The velocities and orientations of the base and all manipulator links are measured and aggregated within a 
     MATLAB function to obtain the system momentum. This monitor is used to analyze momentum conservation and 
@@ -618,7 +649,7 @@ on the full Simscape model was not feasible, the nonlinear dynamics are too comp
 automated theorem proving. To circumvent this, we extracted the relevant part of the model (the
 control law and saturation logic) into a separate simplified model (Verify\_tau.slx) where
 the plant was replaced by a worst-case abstraction (essentially, we just needed to check the
-policy output block). This exemplifies how formal methods can complement simulationbased learning: by verifying critical properties on an abstract model of the agent, we gain
+policy output block). This exemplifies how formal methods can complement simulation-based learning: by verifying critical properties on an abstract model of the agent, we gain
 additional confidence in safety beyond empirical testing.
 
 \begin{figure}[!b]
@@ -735,7 +766,7 @@ further, but for the main comparison, PPO uses a default configuration as well. 
 run of 1000 episodes yielded a final policy which we then evaluated.
 \\ \\
 Performance Metrics: We evaluated the agents on the KPIs described earlier (tracking error, base
-stability, etc.) by running 30 test episodes for each. Table 1 below summarizes a subset of these metrics,
+stability, etc.) by running 30 test episodes for each.~\autoref{tab:kpi_comp} below summarizes a subset of these metrics,
 highlighting the differences between agents:
 \begin{table}[H]
 \centering
@@ -745,10 +776,10 @@ highlighting the differences between agents:
 \hline
 \textbf{KPI (unit)} & \textbf{TRPO} & \textbf{TD3} & \textbf{SAC} & \textbf{PPO} & \textbf{PG} & \textbf{DDPG} \\
 \hline
-\makecell[l]{\textbf{K2:} Mean EE\\position error ($\mathrm{m}^2$)} &
+\makecell[l]{\textbf{K2:} Mean EE\\position error} &
 0.0680 & 0.1914 & 0.1908 & \textbf{0.0257} & 0.1638 & 0.0937 \\
 \hline
-\makecell[l]{\textbf{K3:} Max EE error\\($\mathrm{m}^2$)} &
+\makecell[l]{\textbf{K3:} Max EE error\\} &
 0.6783 & 0.5341 & 0.7766 & 0.4833 & 1.0654 & \textbf{0.4758} \\
 \hline
 \makecell[l]{\textbf{K4:} Mean base\\orientation error\\($-$)} &
@@ -783,6 +814,7 @@ categories, achieving the lowest tracking errors (K2, K3), best base stability (
 training time. Off-policy methods (TD3, SAC, DDPG) show larger errors or instabilities (e.g., high T1 for 
 DDPG) despite some strengths (DDPG’s low max error K3). (KPI data from evaluation of 30 episodes per
 agent.)}
+\label{tab:kpi_comp}
 \end{table}
 \noindent
 From these results, several observations can be made:
@@ -1031,7 +1063,7 @@ only improved its average performance but did so reliably without frequent failu
         \caption{PPO (Optimized)}
         \label{fig:basis_opt}
     \end{subfigure}
-    \caption{Course of basic orientation (quaternion components) during a test episode.}
+    \caption{Course of base orientation (quaternion components) during a test episode.}
     \label{fig:basis_orientation_compare}
 \end{figure*}
 
@@ -1104,7 +1136,7 @@ because one might expect that forcing the base to be extra stable could cost mor
 energy. It implies a more efficient control strategy overall, likely finding “sweet spots” of arm
 motion that don’t excite the base and thus require less counter-motion or damping.
 \end{itemize}
-To summarize these improvements, Table 2 compares the default vs optimized PPO on key metrics:
+To summarize these improvements,~\autoref{tab:ppo_optimization_kpi} compares the default vs optimized PPO on key metrics:
 
 \noindent
 The optimized PPO agent’s performance essentially fulfills the objectives of the task: it follows the endeffector trajectory with high precision, minimizes base movement, and operates without any
@@ -1149,7 +1181,7 @@ scenarios (perhaps via domain randomization \cite{b8}).
 Practical Implications: The success of PPO (and TRPO) in this domain suggests that policy gradient
 methods are well-suited for complex, continuous control tasks with coupled dynamics and safety
 constraints. In particular, PPO’s ability to handle continuous action spaces and its stable update rule
-(clipped surrogate objective) made it robust in the face of the highly nonlinear dynamics of the freefloating robot. The integrated safety components (collision avoidance, etc.) effectively acted as a form of
+(clipped surrogate objective) made it robust in the face of the highly nonlinear dynamics of the free-floating robot. The integrated safety components (collision avoidance, etc.) effectively acted as a form of
 “shielding” during training, they prevented the agent from exploring disastrously unsafe actions by
 cutting those episodes short \cite{b15,b23,b22}. This, combined with the penalty-driven learning, means the final
 policy inherently respects those constraints (since it learned quickly that violating them yields no
@@ -1205,7 +1237,7 @@ The reference is sampled at $T_s=0.01\,\mathrm{s}$, while the PPO policy is upda
         \caption{PPO (Optimized)}
         \label{fig:r_basis_opt}
     \end{subfigure}
-    \caption{Course of basic orientation (quaternion components) during a test episode with ramp trajectory.}
+    \caption{Course of base orientation (quaternion components) during a test episode with ramp trajectory.}
     \label{fig:r_basis_orientation_compare}
 \end{figure*}
 \noindent
