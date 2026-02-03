@@ -817,9 +817,9 @@ summarized succinctly in the report:
 	\item Finally, PG and DDPG were less robust both in training and in achieved performance, showing
 	the largest fluctuations and poorest metrics.
 \end{itemize}
-These findings validate our initial hypothesis that PPO/
-TRPO would be top candidates for this task, and specifically highlight PPO as the preferred
-algorithm moving forward.
+These findings validate our hypothesis that on-policy methods with 
+robust update rules are best suited for this highly coupled, safety-critical control problem. 
+Based on these results, we selected PPO for further optimization.
 
 Based on these results, we selected PPO as the reference agent for further development and
 optimization. The next section discusses how we improved PPO’s performance even further through
