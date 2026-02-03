@@ -14,8 +14,19 @@
 \usepackage{xcolor}
 \hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black}
 
-\setlength{\textfloatsep}{5pt}
-\setlength{\intextsep}{5pt}
+% Improved float placement settings
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{10pt plus 2pt minus 2pt}
+
+% Allow more floats per page
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.8}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{3}
+\setcounter{totalnumber}{5}
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -55,6 +66,7 @@ Compared to a default PPO configuration, the optimized PPO improves the mean epi
 reduces the mean squared end-effector tracking error by 67.7\% and the maximum tracking error by 44.1\%, and stabilizes
 the base orientation (67.0\% reduction in orientation error). Moreover, the optimized PPO eliminates collisions and joint-limit
 violations in evaluation while slightly reducing energy consumption (15.98\%).
+
 \end{abstract}
 
 \begin{keywords}
@@ -88,22 +100,24 @@ demonstrated long before the physical robot system is assembled and deployed \ci
 These challenges motivate the development and simulation of AI-empowered digital twins under desired operational conditions to
 explore learning-based control methods that can autonomously adapt to complex and unknown dynamics  even in the case of data scarcity.
 
-\begin{table*}[h]
+\begin{table*}[!t]
 	\centering
-	\begin{tabular}{|c|c|c|c|}
-		\hline
-		Contribution & RL algorithm &  Task objective & \makecell{Formal verification$\slash$ \\ Base disturbance minimization} \\ \hline\hline
-		(\cite{huang2023obstacle},~2023) & SAC & Obstacle avoidance & No$\slash$No \\ \hline
-		(\cite{al2024reinforcement},~2024) & DDPG & Collision avoidance &  No$\slash$No \\ \hline
-		(\cite{d2024failure},~2024) & PPO & Adaptation to  joint failure &  No$\slash$No \\ \hline
-		(\cite{al2024path},~2024)  & DDPG   & Path planning &  No$\slash$No \\ \hline
-		(\cite{hu2025deep},~2025) & PPO   & Trajectory planning &  No$\slash$No \\ \hline
-		(\cite{zhang2025learning},~2025) & LSAC & Trajectory post-processing  &  No$\slash$No \\ \hline
-		(\cite{wei2025trajectory},~2025) & DDPG & Trajectory planning  &  No$\slash$Yes \\ \hline
-	\end{tabular}
 	\caption{Recent advances in Deep RL-based motion management for free-floating space robots.}
 	\label{tab:sample}
-\end{table*} % wei2025trajectory
+	\begin{tabular}{lccc}
+		\toprule
+		\textbf{Contribution} & \textbf{RL Algorithm} & \textbf{Task Objective} & \makecell{\textbf{Formal Verification/} \\ \textbf{Base Disturbance Min.}} \\
+		\midrule
+		\cite{huang2023obstacle}, 2023 & SAC & Obstacle avoidance & No/No \\
+		\cite{al2024reinforcement}, 2024 & DDPG & Collision avoidance & No/No \\
+		\cite{d2024failure}, 2024 & PPO & Adaptation to joint failure & No/No \\
+		\cite{al2024path}, 2024 & DDPG & Path planning & No/No \\
+		\cite{hu2025deep}, 2025 & PPO & Trajectory planning & No/No \\
+		\cite{zhang2025learning}, 2025 & LSAC & Trajectory post-processing & No/No \\
+		\cite{wei2025trajectory}, 2025 & DDPG & Trajectory planning & No/Yes \\
+		\bottomrule
+	\end{tabular}
+\end{table*}
 
 Reinforcement Learning (RL) has emerged as a promising approach for robotics, enabling agents to
 learn control policies through trial-and-error interactions with entities, environments, and processes. Recent advances in deep RL have shown
@@ -181,23 +195,24 @@ space robot control are lacking. Most prior works focus on single algorithms and
 omit base attitude minimization or formal safety verification (see Table~\ref{tab:sample}).
 
 \section{System Modeling and Simulation Environment}
-\begin{figure*}[t]
+\begin{figure*}[!t]
     \centering
-    \begin{subfigure}{0.99\columnwidth}
+    \begin{subfigure}{0.48\textwidth}
         \centering
-        \includegraphics[width=0.99\columnwidth]{Figures/ref_kreisbahn_1.png}
+        \includegraphics[width=\linewidth]{Figures/ref_kreisbahn_1.png}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.99\columnwidth}
+    \begin{subfigure}{0.48\textwidth}
         \centering
-        \includegraphics[width=0.99\columnwidth]{Figures/ref_kreisbahn_2.png}
+        \includegraphics[width=\linewidth]{Figures/ref_kreisbahn_2.png}
     \end{subfigure}
-    \hfill
-    \begin{subfigure}{1.\columnwidth}
+    
+    \vspace{0.5em}
+    \begin{subfigure}{0.7\textwidth}
         \centering
-        \includegraphics[width=1.2\columnwidth]{Figures/ref_kreisbahn_3.png}
+        \includegraphics[width=\linewidth]{Figures/ref_kreisbahn_3.png}
     \end{subfigure}
-    \caption{Tracking the desired end-effector circular path using inverse kinematics}
+    \caption{Tracking the desired end-effector circular path using inverse kinematics.}
     \label{fig:ref_kreis_gesamt}
 \end{figure*}
 \noindent
@@ -385,12 +400,14 @@ the episode is immediately terminated and a terminal reward of $-1$ is assigned.
 
 All reward components were implemented in a MATLAB Function block within the Simulink environment. The weights were tuned empirically to provide informative gradients while maintaining stable learning behavior.
 
-\begin{table}[b]
+\begin{table}[!b]
 \centering
-\begin{tabular}{l c c}
-\hline
+\caption{Reward function weights used in all experiments.}
+\label{tab:reward_weights}
+\begin{tabular}{lcc}
+\toprule
 \textbf{Term} & \textbf{Symbol} & \textbf{Value} \\
-\hline
+\midrule
 End-effector position error      & $W_p$              & 150   \\
 End-effector velocity error      & $W_v$              & 25    \\
 Base orientation error           & $W_{\text{ori}}$   & 200   \\
@@ -402,10 +419,8 @@ Progress scaling factor          & $k_p$              & 10    \\
 Proximity bonus scaling          & $k_b$              & 0.05  \\
 Proximity width                  & $\sigma$           & 0.02  \\
 Reward normalization constant    & $C$                & 500   \\
-\hline
+\bottomrule
 \end{tabular}
-\caption{Reward function weights used in all experiments.}
-\label{tab:reward_weights}
 \end{table}
 
 Training Procedure: We adopt an episodic training approach. Each episode corresponds to a
@@ -511,10 +526,10 @@ learning, shape the agent's behavior toward safe operation~\cite{b7,b22}.
     quantify base–manipulator dynamic coupling effects.}
     \label{fig:impuls_monitor}
 \end{figure*}
-\begin{figure}[b]
+\begin{figure}[!b]
   \centering
-  \includegraphics[width=1\linewidth]{Figures/impulserhaltung_scope.png}
-  \caption{Dynamics of the total momentum of the robot}
+  \includegraphics[width=0.95\linewidth]{Figures/impulserhaltung_scope.png}
+  \caption{Dynamics of the total momentum of the robot.}
   \label{fig:impulserhaltung_scope}
 \end{figure}
 \noindent
@@ -543,22 +558,22 @@ Monitor also serves as a diagnostic tool because any momentum drift would pause 
     \label{fig:spacerobot_slx_colissionmonitor}
 \end{figure*}
 
-\begin{figure*}[t] 
+\begin{figure*}[!t] 
     \centering
-    \begin{subfigure}[b]{0.99\columnwidth}
+    \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=0.99\columnwidth]{Figures/warning_collision.png}
+        \includegraphics[width=\linewidth]{Figures/warning_collision.png}
         \caption{Automatically triggered collision warning}
         \label{fig:collision_warning}
     \end{subfigure}
-    \vspace{0.5cm}
-    \begin{subfigure}[b]{0.99\columnwidth}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=0.99\columnwidth]{Figures/tau_collision.png}
+        \includegraphics[width=\linewidth]{Figures/tau_collision.png}
         \caption{Scope of torque inputs in the event of a collision}
         \label{fig:collision_scope}
     \end{subfigure}
-    \caption{Representation of collision detection and the associated torque curves}
+    \caption{Representation of collision detection and the associated torque curves.}
     \label{fig:collision_combined}
 \end{figure*}
 \noindent
@@ -697,22 +712,22 @@ stability issues given the complex dynamics and safety constraints. Indeed, DDPG
 expected to be the least reliable due to known tendencies for instability without additional
 regularization.
 
-\begin{table}[H]
+\begin{table}[!t]
 \centering
+\caption{Classification of the evaluated reinforcement learning algorithms.}
+\label{tab:on_off_policy}
 \begin{tabular}{ll}
-\hline
+\toprule
 \textbf{Algorithm} & \textbf{Policy Type} \\
-\hline
+\midrule
 Policy Gradient (PG) & On-policy \\
 Proximal Policy Optimization (PPO) & On-policy  \\
 Trust Region Policy Optimization (TRPO) & On-policy  \\
 Deep Deterministic Policy Gradient (DDPG) & Off-policy  \\
 Twin Delayed DDPG (TD3) & Off-policy  \\
 Soft Actor-Critic (SAC) & Off-policy  \\
-\hline
+\bottomrule
 \end{tabular}
-\caption{Classification of the evaluated reinforcement learning algorithms}
-\label{tab:on_off_policy}
 \end{table}
 On-policy methods (PG, PPO, TRPO) update their policies using only data from the current policy, leading to 
 stable but less sample-efficient learning. Off-policy methods (DDPG, TD3, SAC) reuse experience from a replay buffer, 
@@ -731,56 +746,41 @@ further, but for the main comparison, PPO uses a default configuration as well. 
 run of 1000 episodes yielded a final policy which we then evaluated.
 
 Performance Metrics: We evaluated the agents on the KPIs described earlier (tracking error, base
-stability, etc.) by running 30 test episodes for each.~\autoref{tab:kpi_comp} below summarizes a subset of these metrics,
-highlighting the differences between agents:
-\begin{table}[H]
+stability, etc.) by running 30 test episodes for each.~\autoref{tab:kpi_comp} summarizes a subset of these metrics,
+highlighting the differences between agents.
+
+\begin{table*}[!t]
 \centering
-\renewcommand{\arraystretch}{1.8}
-\setlength{\tabcolsep}{2pt}
-\begin{tabular}{lcccccc}
-\hline
-\textbf{KPI (unit)} & \textbf{TRPO} & \textbf{TD3} & \textbf{SAC} & \textbf{PPO} & \textbf{PG} & \textbf{DDPG} \\
-\hline
-\makecell[l]{\textbf{K2:} Mean Squared End Effector (EE)\\position error} &
-0.0680 & 0.1914 & 0.1908 & \textbf{0.0257} & 0.1638 & 0.0937 \\
-\hline
-\makecell[l]{\textbf{K3:} Max EE error\\} &
-0.6783 & 0.5341 & 0.7766 & 0.4833 & 1.0654 & \textbf{0.4758} \\
-\hline
-\makecell[l]{\textbf{K4:} Mean base\\orientation error\\($-$)} &
-0.0694 & 0.0868 & 0.1687 & \textbf{0.0667} & 0.1302 & 0.2682 \\
-\hline
-\makecell[l]{\textbf{K6:} Joint limit\\violation rate} &
-\makecell{0.0214\\(2.1\%)} &
-0 &
-0 &
-\makecell{0.0505\\(5.1\%)} &
-0 &
-0 \\
-\hline
-\makecell[l]{\textbf{K7:} Torque\\smoothness\\(norm.\ jerk)} &
-0.7498 & 0.9981 & 0.7536 & \textbf{0.6812} & 0.7125 & 0.8118 \\
-\hline
-\makecell[l]{\textbf{T1:} Reward std.\\(late training)} &
-\textbf{0.6144} & 8.5168 & 9.6907 & 1.7756 & 13.1970 & 64.4764 \\
-\hline
-\makecell[l]{\textbf{T3:} Training time\\(1000 eps)} &
-\textasciitilde 13 min &
-\textasciitilde 38 min &
-\textasciitilde 35 min &
-\textbf{\textasciitilde 8 min} &
-\textasciitilde 8 min &
-\textasciitilde 24 min \\
-\hline
-\end{tabular}
 \caption{Selected performance metrics for each RL agent (best values in bold). PPO excels in most
 categories, achieving the lowest tracking errors (K2, K3), best base stability (K4), and smoothest control
 (K7), while maintaining short training time. TRPO is a close second in many metrics but requires more
 training time. Off-policy methods (TD3, SAC, DDPG) show larger errors or instabilities (e.g., high T1 for 
-DDPG) despite some strengths (DDPG’s low max error K3). (KPI data from evaluation of 30 episodes per
-agent.)}
+DDPG) despite some strengths (DDPG's low max error K3). KPI data from evaluation of 30 episodes per agent.}
 \label{tab:kpi_comp}
-\end{table}
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{KPI (unit)} & \textbf{TRPO} & \textbf{TD3} & \textbf{SAC} & \textbf{PPO} & \textbf{PG} & \textbf{DDPG} \\
+\midrule
+\textbf{K2:} Mean Squared EE position error &
+0.0680 & 0.1914 & 0.1908 & \textbf{0.0257} & 0.1638 & 0.0937 \\
+\textbf{K3:} Max EE error &
+0.6783 & 0.5341 & 0.7766 & 0.4833 & 1.0654 & \textbf{0.4758} \\
+\textbf{K4:} Mean base orientation error &
+0.0694 & 0.0868 & 0.1687 & \textbf{0.0667} & 0.1302 & 0.2682 \\
+\textbf{K6:} Joint limit violation rate &
+0.0214 (2.1\%) & 0 & 0 & 0.0505 (5.1\%) & 0 & 0 \\
+\textbf{K7:} Torque smoothness (norm.\ jerk) &
+0.7498 & 0.9981 & 0.7536 & \textbf{0.6812} & 0.7125 & 0.8118 \\
+\textbf{T1:} Reward std.\ (late training) &
+\textbf{0.6144} & 8.5168 & 9.6907 & 1.7756 & 13.1970 & 64.4764 \\
+\textbf{T3:} Training time (1000 eps) &
+$\sim$13\,min & $\sim$38\,min & $\sim$35\,min & \textbf{$\sim$8\,min} & $\sim$8\,min & $\sim$24\,min \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
 \noindent
 The results in \autoref{tab:kpi_comp} reveal clear patterns across the six agents. Regarding \emph{training stability}, 
 TRPO and PPO exhibited the most stable learning (T1 values of 0.61 and 1.78, respectively), whereas DDPG showed highly 
@@ -835,20 +835,20 @@ optimization of PPO, involving both network architecture modifications and hyper
 
 
 
-\begin{figure*}[t]
+\begin{figure*}[!t]
 	\centering
-	\begin{subfigure}{1.\columnwidth}
-		\includegraphics[width=0.99\columnwidth]{Figures/rainingsverlauf_ppo_default.png}
+	\begin{subfigure}{0.48\textwidth}
+		\includegraphics[width=\linewidth]{Figures/rainingsverlauf_ppo_default.png}
 		\caption{PPO (Default)}
 		\label{fig:training_ppo_default}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}{1.\columnwidth}
-		\includegraphics[width=0.99\columnwidth]{Figures/trainingsverlauf_ppo_optimized.png}
+	\begin{subfigure}{0.48\textwidth}
+		\includegraphics[width=\linewidth]{Figures/trainingsverlauf_ppo_optimized.png}
 		\caption{PPO (Optimized)}
 		\label{fig:training_ppo_opt}
 	\end{subfigure}
-	\caption{Comparison of episodic rewards for default and optimized PPO agents. \\
+	\caption{Comparison of episodic rewards for default and optimized PPO agents.
   (a) Episode reward evolution during training using the default PPO hyperparameters. 
   (b) Episode reward evolution using the optimized PPO configuration.
  The optimized configuration exhibits faster convergence and higher average episode rewards, 
@@ -924,16 +924,16 @@ roughly fivefold increase in reward corresponds to the agent accomplishing much 
 (since zero would be perfect tracking with no penalties). The lower variance also hints that the agent not
 only improved its average performance but did so reliably without frequent failures.
 
-\begin{figure*}[t]
+\begin{figure*}[!t]
     \centering
-    \begin{subfigure}{0.9\columnwidth}
-        \includegraphics[width=0.9\columnwidth]{Figures/soll_vs_ist_kreisbahn.png}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/soll_vs_ist_kreisbahn.png}
         \caption{PPO (Default)}
         \label{fig:traj_default}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.9\columnwidth}
-        \includegraphics[width=0.9\columnwidth]{Figures/soll_vs_ist_kreisbahn_opt.png}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/soll_vs_ist_kreisbahn_opt.png}
         \caption{PPO (Optimized)}
         \label{fig:traj_opt}
     \end{subfigure}
@@ -941,16 +941,16 @@ only improved its average performance but did so reliably without frequent failu
     \label{fig:trajektorie_xy_compare}
 \end{figure*}
 
-\begin{figure*}[t]
+\begin{figure*}[!t]
     \centering
-    \begin{subfigure}{0.9\columnwidth}
-        \includegraphics[width=0.9\columnwidth]{Figures/basis_orientaion_ppo.png}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/basis_orientaion_ppo.png}
         \caption{PPO (Default)}
         \label{fig:basis_default}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.9\columnwidth}
-        \includegraphics[width=0.9\columnwidth]{Figures/basis_orientation_ppo_optimized.png}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/basis_orientation_ppo_optimized.png}
         \caption{PPO (Optimized)}
         \label{fig:basis_opt}
     \end{subfigure}
@@ -958,28 +958,28 @@ only improved its average performance but did so reliably without frequent failu
     \label{fig:basis_orientation_compare}
 \end{figure*}
 
-\begin{table}[b]
+\begin{table}[!b]
 	\centering
-	\renewcommand{\arraystretch}{1.35}
-	\setlength{\tabcolsep}{5pt}
-	\begin{tabular}{lcc}
-		\hline
-		\textbf{Metric (KPI)} & \textbf{PPO (Default)} & \textbf{PPO (Optimized)} \\
-		\hline
-		Mean Episodic Reward (K1)        & -2.23  & -0.43 \\
-		Mean Squared EE Tracking Error (K2)      & 0.0257  & \textbf{0.0083} \\
-		Max EE Tracking Error (K3)       & 0.4833   & \textbf{0.27} \\
-		Mean Base Orientation Error (K4) & 0.0667  & \textbf{0.022} \\
-		Collision Rate (K5)             & 0 & 0 \\
-		Joint Limit Violation Rate (K6) & 0.0505 (5.1\%) & 0 \\
-		Torque Smoothness (K7, jerk)     & 0.6812  & \textbf{0.351} \\
-		Energy Consumption (K9)          & 6.325  & \textbf{5.314} \\
-		\hline
-	\end{tabular}
 	\caption{Performance of PPO agent before and after optimization. The optimized PPO shows substantial
 		improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more
 		efficient control).}
     \label{tab:ppo_optimization_kpi}
+	\renewcommand{\arraystretch}{1.2}
+	\setlength{\tabcolsep}{3pt}
+	\begin{tabular}{lcc}
+		\toprule
+		\textbf{Metric (KPI)} & \textbf{PPO (Default)} & \textbf{PPO (Optimized)} \\
+		\midrule
+		Mean Episodic Reward (K1)        & $-2.23$  & $\mathbf{-0.43}$ \\
+		Mean Squared EE Tracking Error (K2)      & 0.0257  & \textbf{0.0083} \\
+		Max EE Tracking Error (K3)       & 0.4833   & \textbf{0.27} \\
+		Mean Base Orientation Error (K4) & 0.0667  & \textbf{0.022} \\
+		Collision Rate (K5)             & 0 & 0 \\
+		Joint Limit Violation Rate (K6) & 0.0505 (5.1\%) & \textbf{0} \\
+		Torque Smoothness (K7, jerk)     & 0.6812  & \textbf{0.351} \\
+		Energy Consumption (K9)          & 6.325  & \textbf{5.314} \\
+		\bottomrule
+	\end{tabular}
 \end{table}
 
 Beyond the reward improvement, the optimizations translate directly to task performance. \autoref{fig:trajektorie_xy_compare} 
@@ -1019,16 +1019,16 @@ P_1 + \frac{t-t_1}{T-t_1}\left(P_2-P_1\right), & t_1 < t \leq T.
 The reference is sampled at $T_s=0.01\,\mathrm{s}$, while the PPO policy is updated at 
 $T_{s,\mathrm{agent}}=0.1\,\mathrm{s}$ (same as in the other experiments).
 
-\begin{figure*}[t]
+\begin{figure*}[!t]
     \centering
-    \begin{subfigure}{0.9\columnwidth}
-        \includegraphics[width=0.9\columnwidth]{Figures/rampe_1.png}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/rampe_1.png}
         \caption{PPO (Default)}
         \label{fig:r_traj_default}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.9\columnwidth}
-        \includegraphics[width=0.9\columnwidth]{Figures/rampe_opt_1.png}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/rampe_opt_1.png}
         \caption{PPO (Optimized)}
         \label{fig:r_traj_opt}
     \end{subfigure}
@@ -1036,16 +1036,16 @@ $T_{s,\mathrm{agent}}=0.1\,\mathrm{s}$ (same as in the other experiments).
     \label{fig:r_trajektorie_xy_compare}
 \end{figure*}
 
-\begin{figure*}[t]
+\begin{figure*}[!t]
     \centering
-    \begin{subfigure}{0.9\columnwidth}
-        \includegraphics[width=0.9\columnwidth]{Figures/basis_ori_1.png}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/basis_ori_1.png}
         \caption{PPO (Default)}
         \label{fig:r_basis_default}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.9\columnwidth}
-        \includegraphics[width=0.9\columnwidth]{Figures/basis_ori_opt_1.png}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/basis_ori_opt_1.png}
         \caption{PPO (Optimized)}
         \label{fig:r_basis_opt}
     \end{subfigure}
@@ -1066,15 +1066,18 @@ does not fully transfer to piecewise-linear motion profiles.
 A straightforward mitigation is to include a mixture of reference types (circular, linear segments, and hybrid 
 trajectories) during training (or during hyperparameter search) to explicitly optimize for trajectory generalization.
 
-\begin{table}[b]
+\begin{table}[!b]
 \centering
-\renewcommand{\arraystretch}{1.35}
-\setlength{\tabcolsep}{5pt}
+\caption{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are 
+averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}
+\label{tab:ppo_linear_kpi}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{3pt}
 \begin{tabular}{lcc}
-\hline
+\toprule
 \textbf{Metric (KPI)} & \textbf{PPO (Default)} & \textbf{PPO (Optimized)} \\
-\hline
-Mean Episodic Reward (K1)            & -0.4565 & \textbf{-0.2977} \\
+\midrule
+Mean Episodic Reward (K1)            & $-0.4565$ & $\mathbf{-0.2977}$ \\
 Mean Squared EE Position Error (K2)  & 0.0078 & \textbf{0.0070} \\
 Max EE Position Error (K3)           & 0.2037 & \textbf{0.2036} \\
 Mean Base Orientation Error (K4)     & 0.0412 & \textbf{0.0231} \\
@@ -1083,11 +1086,8 @@ Joint Limit Violation Rate (K6)     & 0 & 0 \\
 Control Smoothness (K7, jerk)       & \textbf{0.5520} & 0.6839 \\
 Mean Base Angular Velocity (K8)      & 0.0399 & \textbf{0.0339} \\
 Energy Consumption (K9)              & 7.7144 & \textbf{5.0341} \\
-\hline
+\bottomrule
 \end{tabular}
-\caption{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are 
-averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}
-\label{tab:ppo_linear_kpi}
 \end{table}
 
 
@@ -1135,98 +1135,6 @@ reward). For real missions, this is very promising: it implies we can embed safe
 simulator and reasonably expect the trained policy to abide by them when deployed (assuming the real
 system is within the simulator’s fidelity) \cite{b22,b24}.
 
-% \textbf{Evaluation on Piecewise-Linear End-Effector Trajectories:}
-% While the previous evaluations focused on tracking a smooth circular end-effector (EE) reference, we 
-% additionally tested how well the controller generalizes to \emph{linear} trajectories.
-% This is relevant for practical on-orbit manipulation tasks, where approach and retreat motions are frequently 
-% planned as straight-line segments rather than continuous curves.
-
-% \noindent
-% Trajectory definition: the linear reference is constructed from the same circle parameters (center and radius) used 
-% for the circular benchmark, but the EE is commanded to move along two straight segments connecting three points on that circle:
-% $P_0=[c_x+r,\;c_y,\;c_z]$, $P_1=[c_x,\;c_y+r,\;c_z]$, and $P_2=[c_x-r,\;c_y,\;c_z]$.
-% Using a period $T$ and a switching time $t_1=T/2$, the piecewise-linear reference position $p_{\mathrm{ref}}(t)$ is
-% \begin{equation}
-% p_{\mathrm{ref}}(t)=
-% \begin{cases}
-% P_0 + \frac{t}{t_1}\left(P_1-P_0\right), & 0\leq t\leq t_1,\\[2mm]
-% P_1 + \frac{t-t_1}{T-t_1}\left(P_2-P_1\right), & t_1 < t \leq T.
-% \end{cases}
-% \label{eq:linear_traj}
-% \end{equation}
-% The reference is sampled at $T_s=0.01\,\mathrm{s}$, while the PPO policy is updated at 
-% $T_{s,\mathrm{agent}}=0.1\,\mathrm{s}$ (same as in the other experiments).
-
-% \begin{figure*}[t]
-%     \centering
-%     \begin{subfigure}{0.9\columnwidth}
-%         \includegraphics[width=0.9\columnwidth]{Figures/rampe_1.png}
-%         \caption{PPO (Default)}
-%         \label{fig:r_traj_default}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}{0.9\columnwidth}
-%         \includegraphics[width=0.9\columnwidth]{Figures/rampe_opt_1.png}
-%         \caption{PPO (Optimized)}
-%         \label{fig:r_traj_opt}
-%     \end{subfigure}
-%     \caption{Target/actual comparison of the ramp end-effector trajectory in the XY plane.}
-%     \label{fig:r_trajektorie_xy_compare}
-% \end{figure*}
-
-% \begin{figure*}[t]
-%     \centering
-%     \begin{subfigure}{0.9\columnwidth}
-%         \includegraphics[width=0.9\columnwidth]{Figures/basis_ori_1.png}
-%         \caption{PPO (Default)}
-%         \label{fig:r_basis_default}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}{0.9\columnwidth}
-%         \includegraphics[width=0.9\columnwidth]{Figures/basis_ori_opt_1.png}
-%         \caption{PPO (Optimized)}
-%         \label{fig:r_basis_opt}
-%     \end{subfigure}
-%     \caption{Course of base orientation (quaternion components) during a test episode with ramp trajectory.}
-%     \label{fig:r_basis_orientation_compare}
-% \end{figure*}
-% \noindent
-% Results: Table~\ref{tab:ppo_linear_kpi} reports the KPI averages over $N_{eval}=30$ evaluation episodes for PPO 
-% with the default configuration and the optimized configuration, now tested on the piecewise-linear reference.
-% The optimized PPO improves overall task success (K1 increases from $-0.4565$ to $-0.2977$), reduces base attitude 
-% disturbance (K4 decreases by $\approx 44\%$) (see ~\autoref{fig:r_basis_orientation_compare}), lowers residual 
-% base angular velocity (K8 decreases by $\approx 15\%$), and significantly reduces energy consumption (K9 decreases by $\approx 35\%$).
-% The mean and peak end-effector tracking errors (K2 and K3) remain almost unchanged, with a slight improvement 
-% in the mean error (see ~\autoref{fig:r_trajektorie_xy_compare}).
-% However, the control smoothness metric (K7) becomes worse than the default PPO.
-% This suggests that the hyperparameter optimization (highly beneficial for circular tracking) 
-% does not fully transfer to piecewise-linear motion profiles.
-% A straightforward mitigation is to include a mixture of reference types (circular, linear segments, and hybrid 
-% trajectories) during training (or during hyperparameter search) to explicitly optimize for trajectory generalization.
-
-% \begin{table}[b]
-% \centering
-% \renewcommand{\arraystretch}{1.35}
-% \setlength{\tabcolsep}{5pt}
-% \begin{tabular}{lcc}
-% \hline
-% \textbf{Metric (KPI)} & \textbf{PPO (Default)} & \textbf{PPO (Optimized)} \\
-% \hline
-% Mean Episodic Reward (K1)            & -0.4565 & \textbf{-0.2977} \\
-% Mean Squared EE Position Error (K2)  & 0.0078 & \textbf{0.0070} \\
-% Max EE Position Error (K3)           & 0.2037 & \textbf{0.2036} \\
-% Mean Base Orientation Error (K4)     & 0.0412 & \textbf{0.0231} \\
-% Collision Rate (K5)                 & 0 & 0 \\
-% Joint Limit Violation Rate (K6)     & 0 & 0 \\
-% Control Smoothness (K7, jerk)       & \textbf{0.5520} & 0.6839 \\
-% Mean Base Angular Velocity (K8)      & 0.0399 & \textbf{0.0339} \\
-% Energy Consumption (K9)              & 7.7144 & \textbf{5.0341} \\
-% \hline
-% \end{tabular}
-% \caption{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are 
-% averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}
-% \label{tab:ppo_linear_kpi}
-% \end{table}
 
 \textbf{Limitations and Future Work:}
 Several limitations should be acknowledged. First, a \emph{sim-to-real gap} remains: unmodeled effects such as flexible dynamics, 
