@@ -7,7 +7,6 @@
 \citation{b11}
 \citation{b1,b32}
 \citation{muhlbauer2025software,rybus2024robotic,maurenbrecher2024robograv}
-\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction and Background}{1}{section.1}\protected@file@percent }
 \citation{huang2023obstacle}
 \citation{al2024reinforcement}
 \citation{d2024failure}
@@ -15,6 +14,7 @@
 \citation{hu2025deep}
 \citation{zhang2025learning}
 \citation{wei2025trajectory}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction and Background}{1}{section.1}\protected@file@percent }
 \citation{wu2020reinforcement,al2024path,hu2025deep,zhang2025learning,huang2023obstacle}
 \citation{b14}
 \citation{b17}
@@ -35,6 +35,7 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Reinforcement Learning for Robotic Control}{2}{subsection.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Control of Free-Floating Space Robots}{2}{subsection.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Safe Reinforcement Learning}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Research Gap}{2}{subsection.2.4}\protected@file@percent }
 \citation{leutert2024ai,muhlbauer2025towards}
 \citation{maqbool2025systems}
 \citation{b9}
@@ -50,17 +51,16 @@
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Recent advances in Deep RL-based motion management for free-floating space robots.}}{3}{table.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{tab:sample}{{1}{3}{Recent advances in Deep RL-based motion management for free-floating space robots}{table.caption.1}{}}
-\newlabel{tab:sample@cref}{{[table][1][]1}{[1][2][]3}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Research Gap}{3}{subsection.2.4}\protected@file@percent }
+\newlabel{tab:sample@cref}{{[table][1][]1}{[1][1][]3}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {III}System Modeling and Simulation Environment}{3}{section.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Advantages of AI-Endowed Digital Twin Technology in On-Orbit Servicing}{3}{subsection.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Robot Model}{3}{subsection.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Dynamic Simulation in MATLAB/Simulink}{3}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Reference Trajectory and Desired Task}{3}{subsection.3.4}\protected@file@percent }
 \citation{b7}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Tracking the desired end-effector circular path using inverse kinematics.}}{4}{figure.caption.2}\protected@file@percent }
 \newlabel{fig:ref_kreis_gesamt}{{1}{4}{Tracking the desired end-effector circular path using inverse kinematics}{figure.caption.2}{}}
-\newlabel{fig:ref_kreis_gesamt@cref}{{[figure][1][]1}{[1][3][]4}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Reference Trajectory and Desired Task}{4}{subsection.3.4}\protected@file@percent }
+\newlabel{fig:ref_kreis_gesamt@cref}{{[figure][1][]1}{[1][2][]4}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Reinforcement Learning Framework}{4}{section.4}\protected@file@percent }
 \newlabel{RL}{{IV}{4}{Reinforcement Learning Framework}{section.4}{}}
 \newlabel{RL@cref}{{[section][4][]IV}{[1][4][]4}{}{}{}}
@@ -89,14 +89,15 @@
 \newlabel{formal}{{V}{8}{Safety Monitoring and Constraint Enforcement}{section.5}{}}
 \newlabel{formal@cref}{{[section][5][]V}{[1][8][]8}{}{}{}}
 \citation{b5}
+\citation{b23}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Overview of the Impuls Monitor Subsystem (Momentum Observer) in the Simulink Model \texttt  {SpaceRobot.slx}   This figure shows the computation of the total linear and angular momentum of the free-floating space robot. The velocities and orientations of the base and all manipulator links are measured and aggregated within a MATLAB function to obtain the system momentum. This monitor is used to analyze momentum conservation and quantify base–manipulator dynamic coupling effects.}}{9}{figure.caption.7}\protected@file@percent }
 \newlabel{fig:impuls_monitor}{{5}{9}{Overview of the Impuls Monitor Subsystem (Momentum Observer) in the Simulink Model \texttt {SpaceRobot.slx} \\ This figure shows the computation of the total linear and angular momentum of the free-floating space robot. The velocities and orientations of the base and all manipulator links are measured and aggregated within a MATLAB function to obtain the system momentum. This monitor is used to analyze momentum conservation and quantify base–manipulator dynamic coupling effects}{figure.caption.7}{}}
 \newlabel{fig:impuls_monitor@cref}{{[figure][5][]5}{[1][8][]9}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Dynamics of the total momentum of the robot.}}{9}{figure.caption.8}\protected@file@percent }
 \newlabel{fig:impulserhaltung_scope}{{6}{9}{Dynamics of the total momentum of the robot}{figure.caption.8}{}}
 \newlabel{fig:impulserhaltung_scope@cref}{{[figure][6][]6}{[1][8][]9}{}{}{}}
-\citation{b23}
 \citation{b2,b7}
+\citation{b7,b21}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Overview of the Collision Monitor Subsystem in the Simulink Model \texttt  {SpaceRobot.slx}   This figure illustrates the collision monitoring logic used to ensure safe robot operation during training and evaluation. Joint and link configurations are processed to compute the minimum distance to obstacles, which is compared against a predefined safety threshold. A collision flag is generated and used for episode termination or safety-related penalties.}}{10}{figure.caption.9}\protected@file@percent }
 \newlabel{fig:spacerobot_slx_colissionmonitor}{{7}{10}{Overview of the Collision Monitor Subsystem in the Simulink Model \texttt {SpaceRobot.slx} \\ This figure illustrates the collision monitoring logic used to ensure safe robot operation during training and evaluation. Joint and link configurations are processed to compute the minimum distance to obstacles, which is compared against a predefined safety threshold. A collision flag is generated and used for episode termination or safety-related penalties}{figure.caption.9}{}}
 \newlabel{fig:spacerobot_slx_colissionmonitor@cref}{{[figure][7][]7}{[1][8][]10}{}{}{}}
@@ -111,19 +112,18 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Representation of collision detection and the associated torque curves.}}{10}{figure.caption.10}\protected@file@percent }
 \newlabel{fig:collision_combined}{{8}{10}{Representation of collision detection and the associated torque curves}{figure.caption.10}{}}
 \newlabel{fig:collision_combined@cref}{{[figure][8][]8}{[1][8][]10}{}{}{}}
-\citation{b7,b21}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Comparison of Continuous RL Agents}{10}{section.6}\protected@file@percent }
+\newlabel{comparison}{{VI}{10}{Comparison of Continuous RL Agents}{section.6}{}}
+\newlabel{comparison@cref}{{[section][6][]VI}{[1][10][]10}{}{}{}}
 \citation{b15}
 \citation{b14}
 \citation{b16}
 \citation{b17}
 \citation{b18}
 \citation{b2,b7}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Comparison of Continuous RL Agents}{11}{section.6}\protected@file@percent }
-\newlabel{comparison}{{VI}{11}{Comparison of Continuous RL Agents}{section.6}{}}
-\newlabel{comparison@cref}{{[section][6][]VI}{[1][10][]11}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Verification model with Simulink Design Verifier \texttt  {Verify\_tau.slx}   This figure depicts the Simulink property model used to formally verify the joint torque constraints. The absolute joint torques are compared against predefined maximum limits using a relational operator. The property is proven to hold for all reachable system states, ensuring bounded control actions.}}{11}{figure.caption.11}\protected@file@percent }
 \newlabel{fig:verify_tau}{{9}{11}{Verification model with Simulink Design Verifier \texttt {Verify\_tau.slx} \\ This figure depicts the Simulink property model used to formally verify the joint torque constraints. The absolute joint torques are compared against predefined maximum limits using a relational operator. The property is proven to hold for all reachable system states, ensuring bounded control actions}{figure.caption.11}{}}
-\newlabel{fig:verify_tau@cref}{{[figure][9][]9}{[1][10][]11}{}{}{}}
+\newlabel{fig:verify_tau@cref}{{[figure][9][]9}{[1][9][]11}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Result of the Simulink Design Verifier   This figure shows the result of a formal property verification performed on the torque constraint model. The verification confirms that the specified safety property is satisfied for all analyzed execution paths. This analysis provides formal guarantees on control torque limits beyond empirical simulation-based validation.}}{11}{figure.caption.12}\protected@file@percent }
 \newlabel{fig:verify_tau_result}{{10}{11}{Result of the Simulink Design Verifier \\ This figure shows the result of a formal property verification performed on the torque constraint model. The verification confirms that the specified safety property is satisfied for all analyzed execution paths. This analysis provides formal guarantees on control torque limits beyond empirical simulation-based validation}{figure.caption.12}{}}
 \newlabel{fig:verify_tau_result@cref}{{[figure][10][]10}{[1][10][]11}{}{}{}}
@@ -151,10 +151,11 @@
 \newlabel{fig:training_ppo_compare@cref}{{[figure][11][]11}{[1][12][]13}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-A}}Circular Trajectory}{14}{subsection.7.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-B}}Piecewise-Linear Trajectory}{14}{subsection.7.2}\protected@file@percent }
+\newlabel{eq:linear_traj}{{5}{14}{Piecewise-Linear Trajectory}{equation.5}{}}
+\newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][14][]14}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control).}}{14}{table.caption.18}\protected@file@percent }
 \newlabel{tab:ppo_optimization_kpi}{{5}{14}{Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control)}{table.caption.18}{}}
 \newlabel{tab:ppo_optimization_kpi@cref}{{[table][5][]5}{[1][14][]14}{}{}{}}
-\citation{b1,b7}
 \newlabel{fig:traj_default}{{12a}{15}{PPO (Default)}{figure.caption.16}{}}
 \newlabel{fig:traj_default@cref}{{[subfigure][1][12]12a}{[1][14][]15}{}{}{}}
 \newlabel{sub@fig:traj_default}{{a}{15}{PPO (Default)}{figure.caption.16}{}}
@@ -177,35 +178,34 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Course of base orientation (quaternion components) during a test episode.}}{15}{figure.caption.17}\protected@file@percent }
 \newlabel{fig:basis_orientation_compare}{{13}{15}{Course of base orientation (quaternion components) during a test episode}{figure.caption.17}{}}
 \newlabel{fig:basis_orientation_compare@cref}{{[figure][13][]13}{[1][14][]15}{}{}{}}
-\newlabel{eq:linear_traj}{{5}{15}{Piecewise-Linear Trajectory}{equation.5}{}}
-\newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][14][]15}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{15}{section.8}\protected@file@percent }
+\newlabel{fig:r_traj_default}{{14a}{15}{PPO (Default)}{figure.caption.19}{}}
+\newlabel{fig:r_traj_default@cref}{{[subfigure][1][14]14a}{[1][14][]15}{}{}{}}
+\newlabel{sub@fig:r_traj_default}{{a}{15}{PPO (Default)}{figure.caption.19}{}}
+\newlabel{sub@fig:r_traj_default@cref}{{[subfigure][1][14]14a}{[1][14][]15}{}{}{}}
+\newlabel{fig:r_traj_opt}{{14b}{15}{PPO (Optimized)}{figure.caption.19}{}}
+\newlabel{fig:r_traj_opt@cref}{{[subfigure][2][14]14b}{[1][14][]15}{}{}{}}
+\newlabel{sub@fig:r_traj_opt}{{b}{15}{PPO (Optimized)}{figure.caption.19}{}}
+\newlabel{sub@fig:r_traj_opt@cref}{{[subfigure][2][14]14b}{[1][14][]15}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Target/actual comparison of the ramp end-effector trajectory in the XY plane.}}{15}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:r_trajektorie_xy_compare}{{14}{15}{Target/actual comparison of the ramp end-effector trajectory in the XY plane}{figure.caption.19}{}}
+\newlabel{fig:r_trajektorie_xy_compare@cref}{{[figure][14][]14}{[1][14][]15}{}{}{}}
+\citation{b1,b7}
 \citation{b8}
-\newlabel{fig:r_traj_default}{{14a}{16}{PPO (Default)}{figure.caption.19}{}}
-\newlabel{fig:r_traj_default@cref}{{[subfigure][1][14]14a}{[1][15][]16}{}{}{}}
-\newlabel{sub@fig:r_traj_default}{{a}{16}{PPO (Default)}{figure.caption.19}{}}
-\newlabel{sub@fig:r_traj_default@cref}{{[subfigure][1][14]14a}{[1][15][]16}{}{}{}}
-\newlabel{fig:r_traj_opt}{{14b}{16}{PPO (Optimized)}{figure.caption.19}{}}
-\newlabel{fig:r_traj_opt@cref}{{[subfigure][2][14]14b}{[1][15][]16}{}{}{}}
-\newlabel{sub@fig:r_traj_opt}{{b}{16}{PPO (Optimized)}{figure.caption.19}{}}
-\newlabel{sub@fig:r_traj_opt@cref}{{[subfigure][2][14]14b}{[1][15][]16}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Target/actual comparison of the ramp end-effector trajectory in the XY plane.}}{16}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:r_trajektorie_xy_compare}{{14}{16}{Target/actual comparison of the ramp end-effector trajectory in the XY plane}{figure.caption.19}{}}
-\newlabel{fig:r_trajektorie_xy_compare@cref}{{[figure][14][]14}{[1][15][]16}{}{}{}}
 \newlabel{fig:r_basis_default}{{15a}{16}{PPO (Default)}{figure.caption.20}{}}
-\newlabel{fig:r_basis_default@cref}{{[subfigure][1][15]15a}{[1][15][]16}{}{}{}}
+\newlabel{fig:r_basis_default@cref}{{[subfigure][1][15]15a}{[1][14][]16}{}{}{}}
 \newlabel{sub@fig:r_basis_default}{{a}{16}{PPO (Default)}{figure.caption.20}{}}
-\newlabel{sub@fig:r_basis_default@cref}{{[subfigure][1][15]15a}{[1][15][]16}{}{}{}}
+\newlabel{sub@fig:r_basis_default@cref}{{[subfigure][1][15]15a}{[1][14][]16}{}{}{}}
 \newlabel{fig:r_basis_opt}{{15b}{16}{PPO (Optimized)}{figure.caption.20}{}}
-\newlabel{fig:r_basis_opt@cref}{{[subfigure][2][15]15b}{[1][15][]16}{}{}{}}
+\newlabel{fig:r_basis_opt@cref}{{[subfigure][2][15]15b}{[1][14][]16}{}{}{}}
 \newlabel{sub@fig:r_basis_opt}{{b}{16}{PPO (Optimized)}{figure.caption.20}{}}
-\newlabel{sub@fig:r_basis_opt@cref}{{[subfigure][2][15]15b}{[1][15][]16}{}{}{}}
+\newlabel{sub@fig:r_basis_opt@cref}{{[subfigure][2][15]15b}{[1][14][]16}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Course of base orientation (quaternion components) during a test episode with ramp trajectory.}}{16}{figure.caption.20}\protected@file@percent }
 \newlabel{fig:r_basis_orientation_compare}{{15}{16}{Course of base orientation (quaternion components) during a test episode with ramp trajectory}{figure.caption.20}{}}
-\newlabel{fig:r_basis_orientation_compare@cref}{{[figure][15][]15}{[1][15][]16}{}{}{}}
+\newlabel{fig:r_basis_orientation_compare@cref}{{[figure][15][]15}{[1][14][]16}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}}{16}{table.caption.21}\protected@file@percent }
 \newlabel{tab:ppo_linear_kpi}{{6}{16}{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better)}{table.caption.21}{}}
-\newlabel{tab:ppo_linear_kpi@cref}{{[table][6][]6}{[1][15][]16}{}{}{}}
+\newlabel{tab:ppo_linear_kpi@cref}{{[table][6][]6}{[1][16][]16}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{16}{section.8}\protected@file@percent }
 \citation{b15,b23,b22}
 \citation{b22,b24}
 \citation{b8,b22}
@@ -218,45 +218,45 @@
 \bibcite{b11}{3}
 \bibcite{b32}{4}
 \bibcite{muhlbauer2025software}{5}
-\@writefile{toc}{\contentsline {section}{REFERENCES}{17}{section*.22}\protected@file@percent }
 \bibcite{rybus2024robotic}{6}
 \bibcite{maurenbrecher2024robograv}{7}
-\bibcite{wu2020reinforcement}{8}
-\bibcite{al2024path}{9}
-\bibcite{hu2025deep}{10}
-\bibcite{zhang2025learning}{11}
-\bibcite{wei2025trajectory}{12}
-\bibcite{huang2023obstacle}{13}
-\bibcite{b14}{14}
-\bibcite{b17}{15}
-\bibcite{b18}{16}
-\bibcite{b15}{17}
-\bibcite{b21}{18}
-\bibcite{b7}{19}
-\bibcite{b22}{20}
-\bibcite{b5}{21}
-\bibcite{b23}{22}
-\bibcite{b25}{23}
-\bibcite{b26}{24}
-\bibcite{b27}{25}
-\bibcite{b28}{26}
-\bibcite{al2024reinforcement}{27}
-\bibcite{d2024failure}{28}
-\bibcite{leutert2024ai}{29}
-\bibcite{muhlbauer2025towards}{30}
-\bibcite{maqbool2025systems}{31}
-\bibcite{b9}{32}
-\bibcite{b12}{33}
-\bibcite{b3}{34}
-\bibcite{b34}{35}
-\bibcite{b31}{36}
-\bibcite{b29}{37}
-\bibcite{b30}{38}
-\bibcite{b2}{39}
-\bibcite{b16}{40}
+\bibcite{huang2023obstacle}{8}
+\bibcite{al2024reinforcement}{9}
+\@writefile{toc}{\contentsline {section}{REFERENCES}{17}{section*.22}\protected@file@percent }
+\bibcite{d2024failure}{10}
+\bibcite{al2024path}{11}
+\bibcite{hu2025deep}{12}
+\bibcite{zhang2025learning}{13}
+\bibcite{wei2025trajectory}{14}
+\bibcite{wu2020reinforcement}{15}
+\bibcite{b14}{16}
+\bibcite{b17}{17}
+\bibcite{b18}{18}
+\bibcite{b15}{19}
+\bibcite{b21}{20}
+\bibcite{b7}{21}
+\bibcite{b5}{22}
+\bibcite{b22}{23}
+\bibcite{b23}{24}
+\bibcite{b25}{25}
+\bibcite{b26}{26}
+\bibcite{b27}{27}
+\bibcite{b28}{28}
+\bibcite{b2}{29}
+\bibcite{b24}{30}
+\bibcite{b34}{31}
+\bibcite{leutert2024ai}{32}
+\bibcite{muhlbauer2025towards}{33}
+\bibcite{maqbool2025systems}{34}
+\bibcite{b9}{35}
+\bibcite{b12}{36}
+\bibcite{b3}{37}
+\bibcite{b31}{38}
+\bibcite{b29}{39}
+\bibcite{b30}{40}
 \bibcite{b4}{41}
-\bibcite{b8}{42}
-\bibcite{b24}{43}
+\bibcite{b16}{42}
+\bibcite{b8}{43}
 \@writefile{toc}{\contentsline {subsection}{Patrick S. Ermisch}{18}{section*.23}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{Second B. Author}{19}{section*.23}\protected@file@percent }
 \gdef \@abspage@last{19}

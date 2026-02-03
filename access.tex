@@ -50,27 +50,24 @@
 \corresp{Corresponding author: Eric Guiffo Kaigom (e-mail: kaigom@fra-uas.de).}
 
 \begin{abstract}
-Free-floating space robots can exhibit a strong dynamic coupling between the manipulator motion and the  base attitude disturbance. 
-This complicates the usage of these robots to track a desired Cartesian path of the end-effector. 
-Adopting data-driven approaches to this end is challenging because the quantity and quality of data are rather hard to acquire in the space sector.
-This paper therefore explores the performance of  trial-and-error learning techniques employed for Cartesian path tracking in a physics-based
-Simulink/Simscape environment with integrated safety monitoring. Since a  quantitative and qualitative comparison of these methods is currently 
-missing in the on-orbit servicing realm, we benchmark six Reinforcement Learning agents, i.e., TRPO, TD3, SAC, PPO,
-Policy Gradient, and DDPG. We use each of them to track the same path of the end-effector and evaluate their performance using a unified set
-of key performance indexes related to e.g. the training duration and stability, tracking accuracy, base attitude disturbance, motion smoothness, energy consumption, and collision risks. 
-We observe that PPO achieves the best overall
-trade-off between tracking accuracy, minimization of the base disturbance, as well as training stability and efficiency.
-Building on this result, we quantify the effect of a systematic tuning of neural network architecture and key hyperparameters of PPO for tracking 
-both a circular and ramp-shaped Cartesian path of the end-effector.
-Compared to a default PPO configuration, the optimized PPO improves the mean episodic return magnitude by 80.7\%,
-reduces the mean squared end-effector tracking error by 67.7\% and the maximum tracking error by 44.1\%, and stabilizes
-the base orientation (67.0\% reduction in orientation error). Moreover, the optimized PPO eliminates collisions and joint-limit
-violations in evaluation while slightly reducing energy consumption (15.98\%).
-
+Free-floating space robots exhibit strong dynamic coupling between manipulator motion and base attitude disturbance, 
+complicating Cartesian path tracking of the end-effector. 
+Adopting data-driven approaches is challenging due to limited data availability in the space sector.
+This paper explores trial-and-error learning techniques for Cartesian path tracking in a physics-based
+Simulink/Simscape environment with integrated safety monitoring. Since quantitative and qualitative comparison of these methods is currently 
+missing in on-orbit servicing, we benchmark six Reinforcement Learning agents: TRPO, TD3, SAC, PPO,
+Policy Gradient, and DDPG. We evaluate their performance using unified key performance indexes including training duration and stability, tracking accuracy, base attitude disturbance, motion smoothness, energy consumption, and collision risks. 
+PPO achieves the best overall trade-off between tracking accuracy, base disturbance minimization, and training stability.
+Building on this, we quantify the effect of systematic tuning of neural network architecture and key hyperparameters of PPO for tracking 
+both circular and ramp-shaped Cartesian paths.
+Compared to default PPO configuration, the optimized version improves mean episodic return by 80.7\%,
+reduces mean squared tracking error by 67.7\% and maximum tracking error by 44.1\%, and stabilizes
+base orientation (67.0\% reduction). Moreover, optimized PPO eliminates collisions and joint-limit
+violations while reducing energy consumption by 15.98\%.
 \end{abstract}
 
 \begin{keywords}
-space robotics, free-floating manipulation, reinforcement learning, PPO, safe simulation, trajectory tracking
+free-floating manipulation, Proximal Policy Optimization (PPO), reinforcement learning, safe simulation, space robotics,  trajectory tracking
 \end{keywords}
 
 \titlepgskip=-15pt
@@ -1188,131 +1185,217 @@ systems.
 \bibitem{b1}
 A. Flores-Abad, O. Ma, K. Pham, and S. Ulrich, ``A review of space robotics technologies for on-orbit servicing,'' \emph{Prog. Aerosp. Sci.}, vol.~68, pp. 1--26, 2014, doi: 10.1016/j.paerosci.2014.03.002.
 
+
+
 \bibitem{b6}
 K. Nanos and E. G. Papadopoulos, ``On the dynamics and control of free-floating space manipulator systems in the presence of angular momentum,'' \emph{Front. Robot. AI}, vol.~4, p.~26, 2017, doi: 10.3389/frobt.2017.00026.
+
+
 
 \bibitem{b11}
 E. Papadopoulos, I. Kaliakatsos, and D. Psarros, ``Minimum fuel techniques for a space robot simulator with a reaction wheel and PWM thrusters,'' in \emph{Proc. Eur. Control Conf. (ECC)}, 2007, pp. 3391--3398.
 
+
+
 \bibitem{b32}
 E. Papadopoulos and A. Abu-Abed, ``Design and motion planning for a zero-reaction manipulator,'' in \emph{Proc. IEEE Int. Conf. Robot. Autom. (ICRA)}, 1994, pp. 1554--1559, doi: 10.1109/ROBOT.1994.351367.
+
+
 
 \bibitem{muhlbauer2025software}
 M. M{\"u}hlbauer, M. Chalon, M. Ulmer, and A. Albu-Sch{\"a}ffer, ``Software for the SpaceDREAM robotic arm,'' in \emph{Proc. IEEE Aerosp. Conf.}, 2025, pp. 1--10.
 
+
+
 \bibitem{rybus2024robotic}
 T. Rybus, ``Robotic manipulators for in-orbit servicing and active debris removal: Review and comparison,'' \emph{Prog. Aerosp. Sci.}, vol.~151, p.~101055, 2024.
+
+
 
 \bibitem{maurenbrecher2024robograv}
 H. Maurenbrecher \emph{et al.}, ``RoboGrav---Towards force sensitive space manipulators,'' in \emph{Proc. I-SAIRAS}, 2024.
 
-\bibitem{wu2020reinforcement}
-Y. Wu, Z. Yu, C. Li, M. He, B. Hua, and Z. Chen, ``Reinforcement learning in dual-arm trajectory planning for a free-floating space robot,'' \emph{Aerosp. Sci. Technol.}, vol.~98, p.~105657, 2020.
 
-\bibitem{al2024path}
-A. Al Ali, J. Shi, and Z. Zhu, ``Path planning of 6-DOF free-floating space robotic manipulators using reinforcement learning,'' \emph{Acta Astronaut.}, vol.~224, pp. 367--378, 2024.
-
-\bibitem{hu2025deep}
-Y. Hu, D. Zhou, W. Yao, X. Shao, and G. Sun, ``Deep reinforcement learning-based trajectory planning with continuous pose representation for 6-DoF free-floating space robot,'' \emph{Aerosp. Sci. Technol.}, p.~110540, 2025.
-
-\bibitem{zhang2025learning}
-O. Zhang, Z. Liu, X. Shao, W. Yao, L. Wu, and J. Liu, ``Learning-based task space trajectory planning framework with pre-planning and post-processing for uncertain free-floating space robots,'' \emph{IEEE Trans. Aerosp. Electron. Syst.}, early access, 2025.
-
-\bibitem{wei2025trajectory}
-Y. Wei, X. Bai, and H. Lu, ``Trajectory planning of free-floating space robot for non-cooperative tumbling target capture based on deep reinforcement learning,'' \emph{Robotica}, vol.~43, pp. 2674--2692, 2025.
 
 \bibitem{huang2023obstacle}
 Z. Huang, G. Chen, Y. Shen, R. Wang, C. Liu, and L. Zhang, ``An obstacle-avoidance motion planning method for redundant space robot via reinforcement learning,'' \emph{Actuators}, vol.~12, no.~2, p.~69, 2023.
 
-\bibitem{b14}
-J. Schulman, S. Levine, P. Abbeel, M. Jordan, and P. Moritz, ``Trust region policy optimization,'' in \emph{Proc. Int. Conf. Mach. Learn. (ICML)}, 2015, pp. 1889--1897.
 
-\bibitem{b17}
-S. Fujimoto, H. van Hoof, and D. Meger, ``Addressing function approximation error in actor-critic methods,'' in \emph{Proc. Int. Conf. Mach. Learn. (ICML)}, 2018, pp. 1587--1596.
-
-\bibitem{b18}
-T. Haarnoja, A. Zhou, P. Abbeel, and S. Levine, ``Soft actor-critic: Off-policy maximum entropy deep reinforcement learning with a stochastic actor,'' in \emph{Proc. Int. Conf. Mach. Learn. (ICML)}, 2018, pp. 1861--1870.
-
-\bibitem{b15}
-J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov, ``Proximal policy optimization algorithms,'' arXiv:1707.06347, 2017.
-
-\bibitem{b21}
-R. J. Williams, ``Simple statistical gradient-following algorithms for connectionist reinforcement learning,'' \emph{Mach. Learn.}, vol.~8, pp. 229--256, 1992.
-
-\bibitem{b7}
-R. S. Sutton and A. G. Barto, \emph{Reinforcement Learning: An Introduction}, 2nd~ed. Cambridge, MA, USA: MIT Press, 2018.
-
-\bibitem{b22}
-J. Garc{\'\i}a and F. Fern{\'a}ndez, ``A comprehensive survey on safe reinforcement learning,'' \emph{J. Mach. Learn. Res.}, vol.~16, pp. 1437--1480, 2015.
-
-\bibitem{b5}
-MathWorks, ``Simulink Design Verifier,'' The MathWorks, Inc., Natick, MA, USA, 2024. [Online]. Available: \url{https://www.mathworks.com/help/sldv/}
-
-\bibitem{b23}
-M. Alshiekh, R. Bloem, R. Ehlers, B. K{\"o}nighofer, S. Niekum, and U. Topcu, ``Safe reinforcement learning via shielding,'' in \emph{Proc. AAAI Conf. Artif. Intell.}, 2018, pp. 2669--2678.
-
-\bibitem{b25}
-Open Robotics, ``URDF (Unified Robot Description Format),'' ROS~2 Documentation, 2024. [Online]. Available: \url{https://docs.ros.org/en/rolling/Tutorials/Intermediate/URDF/URDF-Main.html}
-
-\bibitem{b26}
-MathWorks, ``Import URDF models,'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/sm/ug/urdf-import.html}
-
-\bibitem{b27}
-MathWorks, ``smimport---Import a CAD, URDF, or Robotics System Toolbox model,'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/sm/ref/smimport.html}
-
-\bibitem{b28}
-MathWorks, ``Mechanism Configuration,'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/sm/ref/mechanismconfiguration.html}
 
 \bibitem{al2024reinforcement}
 A. Al Ali and Z. Zhu, ``Reinforcement learning for path planning of free-floating space robotic manipulator with collision avoidance and observation noise,'' \emph{Front. Control Eng.}, vol.~5, p.~1394668, 2024.
 
+
+
 \bibitem{d2024failure}
 M. D'Ambrosio, L. Capra, A. Brandonisio, and M. Lavagna, ``Failure management via deep reinforcement learning for robotic in-orbit servicing,'' in \emph{Proc. SPAICE---1st Joint ESA/IAA Conf. AI Space}, 2024, pp. 335--339.
 
-\bibitem{leutert2024ai}
-F. Leutert \emph{et al.}, ``AI-enabled cyber--physical in-orbit factory---AI approaches based on digital twin technology for robotic small satellite production,'' \emph{Acta Astronaut.}, vol.~217, pp. 1--17, 2024.
 
-\bibitem{muhlbauer2025towards}
-M. M{\"u}hlbauer \emph{et al.}, ``Towards an in-orbit cubesat factory,'' in \emph{Proc. 76th Int. Astronaut. Congr. (IAC)}, 2025.
 
-\bibitem{maqbool2025systems}
-O. Maqbool and J. Ro{\ss}mann, ``Systems aware scenario engineering for life cycle-spanning verification and validation of complex CPS,'' \emph{Authorea Preprints}, 2025.
+\bibitem{al2024path}
+A. Al Ali, J. Shi, and Z. Zhu, ``Path planning of 6-DOF free-floating space robotic manipulators using reinforcement learning,'' \emph{Acta Astronaut.}, vol.~224, pp. 367--378, 2024.
 
-\bibitem{b9}
-J. Virgili-Llop, ``SPART: Spacecraft Robotics Toolkit,'' 2017. [Online]. Available: \url{https://github.com/NPS-SRL/SPART}
 
-\bibitem{b12}
-E. Ribeiro, R. Mendes, M. Terra, and V. Grassi, ``Dynamic parameter identification of a 7-DoF lightweight robot manipulator using probabilistic differential optimization,'' in \emph{Proc. IEEE Int. Conf. Syst., Man, Cybern. (SMC)}, 2022, pp. 1917--1923.
 
-\bibitem{b3}
-MathWorks, ``6-DOF Joint (Simscape Multibody),'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/sm/ref/6dofjoint.html}
+\bibitem{hu2025deep}
+Y. Hu, D. Zhou, W. Yao, X. Shao, and G. Sun, ``Deep reinforcement learning-based trajectory planning with continuous pose representation for 6-DoF free-floating space robot,'' \emph{Aerosp. Sci. Technol.}, p.~110540, 2025.
 
-\bibitem{b34}
-A. D. Ames, S. Coogan, M. Egerstedt, G. Notomista, K. Sreenath, and P. Tabuada, ``Control barrier functions: Theory and applications,'' in \emph{Proc. Eur. Control Conf. (ECC)}, 2019, pp. 3420--3431.
 
-\bibitem{b31}
-MathWorks, ``Spatial Contact Force,'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/sm/ref/spatialcontactforce.html}
 
-\bibitem{b29}
-MathWorks, ``Solver Configuration,'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/simscape/ref/solverconfiguration.html}
+\bibitem{zhang2025learning}
+O. Zhang, Z. Liu, X. Shao, W. Yao, L. Wu, and J. Liu, ``Learning-based task space trajectory planning framework with pre-planning and post-processing for uncertain free-floating space robots,'' \emph{IEEE Trans. Aerosp. Electron. Syst.}, early access, 2025.
 
-\bibitem{b30}
-MathWorks, ``Fixed-step size (fundamental sample time),'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/simulink/gui/fixedstepsizefundamentalsampletime.html}
+
+
+\bibitem{wei2025trajectory}
+Y. Wei, X. Bai, and H. Lu, ``Trajectory planning of free-floating space robot for non-cooperative tumbling target capture based on deep reinforcement learning,'' \emph{Robotica}, vol.~43, pp. 2674--2692, 2025.
+
+
+
+\bibitem{wu2020reinforcement}
+Y. Wu, Z. Yu, C. Li, M. He, B. Hua, and Z. Chen, ``Reinforcement learning in dual-arm trajectory planning for a free-floating space robot,'' \emph{Aerosp. Sci. Technol.}, vol.~98, p.~105657, 2020.
+
+
+
+\bibitem{b14}
+J. Schulman, S. Levine, P. Abbeel, M. Jordan, and P. Moritz, ``Trust region policy optimization,'' in \emph{Proc. Int. Conf. Mach. Learn. (ICML)}, 2015, pp. 1889--1897.
+
+
+
+\bibitem{b17}
+S. Fujimoto, H. van Hoof, and D. Meger, ``Addressing function approximation error in actor-critic methods,'' in \emph{Proc. Int. Conf. Mach. Learn. (ICML)}, 2018, pp. 1587--1596.
+
+
+
+\bibitem{b18}
+T. Haarnoja, A. Zhou, P. Abbeel, and S. Levine, ``Soft actor-critic: Off-policy maximum entropy deep reinforcement learning with a stochastic actor,'' in \emph{Proc. Int. Conf. Mach. Learn. (ICML)}, 2018, pp. 1861--1870.
+
+
+
+\bibitem{b15}
+J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov, ``Proximal policy optimization algorithms,'' arXiv:1707.06347, 2017.
+
+
+
+\bibitem{b21}
+R. J. Williams, ``Simple statistical gradient-following algorithms for connectionist reinforcement learning,'' \emph{Mach. Learn.}, vol.~8, pp. 229--256, 1992.
+
+
+
+\bibitem{b7}
+R. S. Sutton and A. G. Barto, \emph{Reinforcement Learning: An Introduction}, 2nd~ed. Cambridge, MA, USA: MIT Press, 2018.
+
+
+
+\bibitem{b5}
+MathWorks, ``Simulink Design Verifier,'' The MathWorks, Inc., Natick, MA, USA, 2024. [Online]. Available: \url{https://www.mathworks.com/help/sldv/}
+
+
+
+\bibitem{b22}
+J. Garc{\'\i}a and F. Fern{\'a}ndez, ``A comprehensive survey on safe reinforcement learning,'' \emph{J. Mach. Learn. Res.}, vol.~16, pp. 1437--1480, 2015.
+
+
+
+\bibitem{b23}
+M. Alshiekh, R. Bloem, R. Ehlers, B. K{\"o}nighofer, S. Niekum, and U. Topcu, ``Safe reinforcement learning via shielding,'' in \emph{Proc. AAAI Conf. Artif. Intell.}, 2018, pp. 2669--2678.
+
+
+
+\bibitem{b25}
+Open Robotics, ``URDF (Unified Robot Description Format),'' ROS~2 Documentation, 2024. [Online]. Available: \url{https://docs.ros.org/en/rolling/Tutorials/Intermediate/URDF/URDF-Main.html}
+
+
+
+\bibitem{b26}
+MathWorks, ``Import URDF models,'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/sm/ug/urdf-import.html}
+
+
+
+\bibitem{b27}
+MathWorks, ``smimport---Import a CAD, URDF, or Robotics System Toolbox model,'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/sm/ref/smimport.html}
+
+
+
+\bibitem{b28}
+MathWorks, ``Mechanism Configuration,'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/sm/ref/mechanismconfiguration.html}
+
+
 
 \bibitem{b2}
 J. Kober, J. A. Bagnell, and J. Peters, ``Reinforcement learning in robotics: A survey,'' \emph{Int. J. Robot. Res.}, vol.~32, no.~11, pp. 1238--1274, 2013.
 
-\bibitem{b16}
-T. P. Lillicrap \emph{et al.}, ``Continuous control with deep reinforcement learning,'' in \emph{Proc. Int. Conf. Learn. Represent. (ICLR)}, 2016.
+
+
+\bibitem{b24}
+J. Achiam, D. Held, A. Tamar, and P. Abbeel, ``Constrained policy optimization,'' in \emph{Proc. Int. Conf. Mach. Learn. (ICML)}, 2017, pp. 22--31.
+
+
+
+\bibitem{b34}
+A. D. Ames, S. Coogan, M. Egerstedt, G. Notomista, K. Sreenath, and P. Tabuada, ``Control barrier functions: Theory and applications,'' in \emph{Proc. Eur. Control Conf. (ECC)}, 2019, pp. 3420--3431.
+
+
+
+\bibitem{leutert2024ai}
+F. Leutert \emph{et al.}, ``AI-enabled cyber--physical in-orbit factory---AI approaches based on digital twin technology for robotic small satellite production,'' \emph{Acta Astronaut.}, vol.~217, pp. 1--17, 2024.
+
+
+
+\bibitem{muhlbauer2025towards}
+M. M{\"u}hlbauer \emph{et al.}, ``Towards an in-orbit cubesat factory,'' in \emph{Proc. 76th Int. Astronaut. Congr. (IAC)}, 2025.
+
+
+
+\bibitem{maqbool2025systems}
+O. Maqbool and J. Ro{\ss}mann, ``Systems aware scenario engineering for life cycle-spanning verification and validation of complex CPS,'' \emph{Authorea Preprints}, 2025.
+
+
+
+\bibitem{b9}
+J. Virgili-Llop, ``SPART: Spacecraft Robotics Toolkit,'' 2017. [Online]. Available: \url{https://github.com/NPS-SRL/SPART}
+
+
+
+\bibitem{b12}
+E. Ribeiro, R. Mendes, M. Terra, and V. Grassi, ``Dynamic parameter identification of a 7-DoF lightweight robot manipulator using probabilistic differential optimization,'' in \emph{Proc. IEEE Int. Conf. Syst., Man, Cybern. (SMC)}, 2022, pp. 1917--1923.
+
+
+
+\bibitem{b3}
+MathWorks, ``6-DOF Joint (Simscape Multibody),'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/sm/ref/6dofjoint.html}
+
+
+
+\bibitem{b31}
+MathWorks, ``Spatial Contact Force,'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/sm/ref/spatialcontactforce.html}
+
+
+
+\bibitem{b29}
+MathWorks, ``Solver Configuration,'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/simscape/ref/solverconfiguration.html}
+
+
+
+\bibitem{b30}
+MathWorks, ``Fixed-step size (fundamental sample time),'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/simulink/gui/fixedstepsizefundamentalsampletime.html}
+
+
 
 \bibitem{b4}
 MathWorks, ``Reinforcement Learning Toolbox---rlPPOAgent,'' MATLAB \& Simulink Documentation, 2024. [Online]. Available: \url{https://www.mathworks.com/help/reinforcement-learning/ref/rl.agent.rlppoagent.html}
 
+
+
+\bibitem{b16}
+T. P. Lillicrap \emph{et al.}, ``Continuous control with deep reinforcement learning,'' in \emph{Proc. Int. Conf. Learn. Represent. (ICLR)}, 2016.
+
+
+
 \bibitem{b8}
 J. Tobin, R. Fong, A. Ray, J. Schneider, W. Zaremba, and P. Abbeel, ``Domain randomization for transferring deep neural networks from simulation to the real world,'' in \emph{Proc. IEEE/RSJ Int. Conf. Intell. Robots Syst. (IROS)}, 2017, pp. 23--30.
 
-\bibitem{b24}
-J. Achiam, D. Held, A. Tamar, and P. Abbeel, ``Constrained policy optimization,'' in \emph{Proc. Int. Conf. Mach. Learn. (ICML)}, 2017, pp. 22--31.
+
 
 \end{thebibliography}
 
