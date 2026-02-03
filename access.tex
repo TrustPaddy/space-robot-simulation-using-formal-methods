@@ -719,7 +719,8 @@ stable but less sample-efficient learning. Off-policy methods (DDPG, TD3, SAC) r
 improving sample efficiency at the cost of higher sensitivity to hyperparameters~\cite{b2,b7}. For free-floating space 
 robot control, where strong nonlinear coupling and safety constraints demand reliable convergence, on-policy methods are expected to be advantageous.
 
-Training Setup: Each agent was trained under identical conditions for fairness. We used the same
+Training Setup: All experiments were conducted on a workstation equipped with an AMD Ryzen 7 7700 processor 
+and 32 GB of RAM, using MATLAB R2025b with the Reinforcement Learning Toolbox and Simscape Multibody. We used the same
 network architecture (initially two hidden layers of 128 units each for policy and for value function,
 where applicable) and same reward structure for all. Hyperparameters (learning rate, discount
 factor $\gamma = 0.99$, etc.) were initially set to default reasonable values and kept consistent across agents as
