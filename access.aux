@@ -98,6 +98,8 @@
 \newlabel{fig:impulserhaltung_scope@cref}{{[figure][6][]6}{[1][8][]9}{}{}{}}
 \citation{b2,b7}
 \citation{b7,b21}
+\citation{b15}
+\citation{b14}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Overview of the Collision Monitor Subsystem in the Simulink Model \texttt  {SpaceRobot.slx}   This figure illustrates the collision monitoring logic used to ensure safe robot operation during training and evaluation. Joint and link configurations are processed to compute the minimum distance to obstacles, which is compared against a predefined safety threshold. A collision flag is generated and used for episode termination or safety-related penalties.}}{10}{figure.caption.9}\protected@file@percent }
 \newlabel{fig:spacerobot_slx_colissionmonitor}{{7}{10}{Overview of the Collision Monitor Subsystem in the Simulink Model \texttt {SpaceRobot.slx} \\ This figure illustrates the collision monitoring logic used to ensure safe robot operation during training and evaluation. Joint and link configurations are processed to compute the minimum distance to obstacles, which is compared against a predefined safety threshold. A collision flag is generated and used for episode termination or safety-related penalties}{figure.caption.9}{}}
 \newlabel{fig:spacerobot_slx_colissionmonitor@cref}{{[figure][7][]7}{[1][8][]10}{}{}{}}
@@ -115,8 +117,6 @@
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Comparison of Continuous RL Agents}{10}{section.6}\protected@file@percent }
 \newlabel{comparison}{{VI}{10}{Comparison of Continuous RL Agents}{section.6}{}}
 \newlabel{comparison@cref}{{[section][6][]VI}{[1][10][]10}{}{}{}}
-\citation{b15}
-\citation{b14}
 \citation{b16}
 \citation{b17}
 \citation{b18}
@@ -150,12 +150,12 @@
 \newlabel{fig:training_ppo_compare}{{11}{13}{Comparison of episodic rewards for default and optimized PPO agents. (a) Episode reward evolution during training using the default PPO hyperparameters. (b) Episode reward evolution using the optimized PPO configuration. The optimized configuration exhibits faster convergence and higher average episode rewards, indicating improved learning efficiency and policy performance}{figure.caption.15}{}}
 \newlabel{fig:training_ppo_compare@cref}{{[figure][11][]11}{[1][12][]13}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-A}}Circular Trajectory}{14}{subsection.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-B}}Piecewise-Linear Trajectory}{14}{subsection.7.2}\protected@file@percent }
-\newlabel{eq:linear_traj}{{5}{14}{Piecewise-Linear Trajectory}{equation.5}{}}
-\newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][14][]14}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control).}}{14}{table.caption.18}\protected@file@percent }
 \newlabel{tab:ppo_optimization_kpi}{{5}{14}{Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control)}{table.caption.18}{}}
 \newlabel{tab:ppo_optimization_kpi@cref}{{[table][5][]5}{[1][14][]14}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-B}}Piecewise-Linear Trajectory}{14}{subsection.7.2}\protected@file@percent }
+\newlabel{eq:linear_traj}{{5}{14}{Piecewise-Linear Trajectory}{equation.5}{}}
+\newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][14][]14}{}{}{}}
 \newlabel{fig:traj_default}{{12a}{15}{PPO (Default)}{figure.caption.16}{}}
 \newlabel{fig:traj_default@cref}{{[subfigure][1][12]12a}{[1][14][]15}{}{}{}}
 \newlabel{sub@fig:traj_default}{{a}{15}{PPO (Default)}{figure.caption.16}{}}
@@ -191,6 +191,8 @@
 \newlabel{fig:r_trajektorie_xy_compare@cref}{{[figure][14][]14}{[1][14][]15}{}{}{}}
 \citation{b1,b7}
 \citation{b8}
+\citation{b15,b23,b22}
+\citation{b22,b24}
 \newlabel{fig:r_basis_default}{{15a}{16}{PPO (Default)}{figure.caption.20}{}}
 \newlabel{fig:r_basis_default@cref}{{[subfigure][1][15]15a}{[1][14][]16}{}{}{}}
 \newlabel{sub@fig:r_basis_default}{{a}{16}{PPO (Default)}{figure.caption.20}{}}
@@ -202,12 +204,10 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Course of base orientation (quaternion components) during a test episode with ramp trajectory.}}{16}{figure.caption.20}\protected@file@percent }
 \newlabel{fig:r_basis_orientation_compare}{{15}{16}{Course of base orientation (quaternion components) during a test episode with ramp trajectory}{figure.caption.20}{}}
 \newlabel{fig:r_basis_orientation_compare@cref}{{[figure][15][]15}{[1][14][]16}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{16}{section.8}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}}{16}{table.caption.21}\protected@file@percent }
 \newlabel{tab:ppo_linear_kpi}{{6}{16}{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better)}{table.caption.21}{}}
-\newlabel{tab:ppo_linear_kpi@cref}{{[table][6][]6}{[1][16][]16}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{16}{section.8}\protected@file@percent }
-\citation{b15,b23,b22}
-\citation{b22,b24}
+\newlabel{tab:ppo_linear_kpi@cref}{{[table][6][]6}{[1][15][]16}{}{}{}}
 \citation{b8,b22}
 \citation{b5,b22}
 \citation{b8}
@@ -222,11 +222,11 @@
 \bibcite{maurenbrecher2024robograv}{7}
 \bibcite{huang2023obstacle}{8}
 \bibcite{al2024reinforcement}{9}
-\@writefile{toc}{\contentsline {section}{REFERENCES}{17}{section*.22}\protected@file@percent }
 \bibcite{d2024failure}{10}
 \bibcite{al2024path}{11}
 \bibcite{hu2025deep}{12}
 \bibcite{zhang2025learning}{13}
+\@writefile{toc}{\contentsline {section}{REFERENCES}{17}{section*.22}\protected@file@percent }
 \bibcite{wei2025trajectory}{14}
 \bibcite{wu2020reinforcement}{15}
 \bibcite{b14}{16}
@@ -258,5 +258,5 @@
 \bibcite{b16}{42}
 \bibcite{b8}{43}
 \@writefile{toc}{\contentsline {subsection}{Patrick S. Ermisch}{18}{section*.23}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{Second B. Author}{19}{section*.23}\protected@file@percent }
-\gdef \@abspage@last{19}
+\@writefile{toc}{\contentsline {subsection}{Second B. Author}{18}{section*.23}\protected@file@percent }
+\gdef \@abspage@last{18}
