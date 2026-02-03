@@ -907,6 +907,8 @@ is tailored to this specific task and reward function, for example, the entropy 
 point where it encourages trying different arm motions, but not so high that the agent keeps thrashing
 the arm aimlessly.
 
+\subsection{Circular Trajectory}
+
 Training Outcome: The effects of these optimizations were evident in the training learning curves (see~\autoref{fig:training_ppo_compare}). 
 The default PPO agent’s learning curve initially rose, but then plateaued at a fairly
 negative reward value (\textasciitilde-2 per episode) and exhibited high variance even after many episodes. This
@@ -995,47 +997,7 @@ and energy efficiency were all achieved simultaneously, indicating a fundamental
 The optimized PPO agent fulfills all task objectives simultaneously: precise trajectory tracking, minimal base disturbance, zero safety violations, 
 smooth actuation, and reduced energy consumption. This validates the approach of systematic hyperparameter tuning and network tailoring for safety-critical space robot control.
 
-In the next section, we will discuss the broader implications of these results, limitations, and future
-avenues to bring this work closer to deployment on physical space robot hardware.
-
-\section{Discussion and Conclusion}
-This work has presented a comprehensive study on applying continuous deep reinforcement learning
-to the control of a free-floating space robotic arm, with an emphasis on safety and performance. The
-results demonstrate that an RL-based controller can successfully handle the challenging
-manipulation task in a space environment, achieving high trajectory tracking accuracy while keeping
-the spacecraft base disturbance to a minimum. The learned agent (especially the optimized
-PPO policy) was able to coordinate the arm motions in such a way that the end-effector closely followed
-the desired path and the base’s unintended motions were small and within acceptable bounds, a key
-requirement for on-orbit operations. The training process exhibited the typical behavior of RL: an
-initial exploration phase where performance was poor (and the agent occasionally triggered safety
-mechanisms), followed by steady improvement as the agent learned from experience, and finally a
-convergence to a stable policy indicated by decreasing variance in returns. The decreasing
-variability of the episodic reward and error metrics suggests that the agent’s behavior became reliably
-repeatable and less stochastic as it honed in on an optimal strategy \cite{b1,b7}.
-
-One notable achievement is that the agent can generalize to different initial conditions (within the
-distribution it was trained on). We tested the final PPO agent on various starting arm configurations and
-positions along the trajectory. It consistently managed to guide the end-effector to the circle and then
-track it, as long as those initial states were within the training range. This indicates that the policy is
-not simply memorizing a sequence of actions, but truly learning a feedback control law that is robust to
-moderate variations in the initial state. However, this generalization only holds within the space of
-states it experienced. Drastic changes (like a completely different trajectory or a very different initial
-base orientation) were not tested and would require either retraining or additional training with such
-scenarios (perhaps via domain randomization \cite{b8}).
-
-Practical Implications: The success of PPO (and TRPO) in this domain suggests that policy gradient
-methods are well-suited for complex, continuous control tasks with coupled dynamics and safety
-constraints. In particular, PPO’s ability to handle continuous action spaces and its stable update rule
-(clipped surrogate objective) made it robust in the face of the highly nonlinear dynamics of the free-floating robot. 
-The integrated safety components (collision avoidance, etc.) effectively acted as a form of
-“shielding” during training, they prevented the agent from exploring disastrously unsafe actions by
-cutting those episodes short \cite{b15,b23,b22}. This, combined with the penalty-driven learning, means the final
-policy inherently respects those constraints (since it learned quickly that violating them yields no
-reward). For real missions, this is very promising: it implies we can embed safety checks in the training
-simulator and reasonably expect the trained policy to abide by them when deployed (assuming the real
-system is within the simulator’s fidelity) \cite{b22,b24}.
-
-\textbf{Evaluation on Piecewise-Linear End-Effector Trajectories:}
+\subsection{Piecewise-Linear Trajectory}
 While the previous evaluations focused on tracking a smooth circular end-effector (EE) reference, we 
 additionally tested how well the controller generalizes to \emph{linear} trajectories.
 This is relevant for practical on-orbit manipulation tasks, where approach and retreat motions are frequently 
@@ -1127,6 +1089,144 @@ Energy Consumption (K9)              & 7.7144 & \textbf{5.0341} \\
 averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}
 \label{tab:ppo_linear_kpi}
 \end{table}
+
+
+Both the circular and piecewise-linear evaluations validate the approach of systematic hyperparameter tuning 
+and network tailoring for safety-critical space robot control, while also revealing that trajectory-specific 
+optimization may be needed for optimal generalization.
+
+In the next section, we will discuss the broader implications of these results, limitations, and future
+avenues to bring this work closer to deployment on physical space robot hardware.
+
+\section{Discussion and Conclusion}
+This work has presented a comprehensive study on applying continuous deep reinforcement learning
+to the control of a free-floating space robotic arm, with an emphasis on safety and performance. The
+results demonstrate that an RL-based controller can successfully handle the challenging
+manipulation task in a space environment, achieving high trajectory tracking accuracy while keeping
+the spacecraft base disturbance to a minimum. The learned agent (especially the optimized
+PPO policy) was able to coordinate the arm motions in such a way that the end-effector closely followed
+the desired path and the base’s unintended motions were small and within acceptable bounds, a key
+requirement for on-orbit operations. The training process exhibited the typical behavior of RL: an
+initial exploration phase where performance was poor (and the agent occasionally triggered safety
+mechanisms), followed by steady improvement as the agent learned from experience, and finally a
+convergence to a stable policy indicated by decreasing variance in returns. The decreasing
+variability of the episodic reward and error metrics suggests that the agent’s behavior became reliably
+repeatable and less stochastic as it honed in on an optimal strategy \cite{b1,b7}.
+
+One notable achievement is that the agent can generalize to different initial conditions (within the
+distribution it was trained on). We tested the final PPO agent on various starting arm configurations and
+positions along the trajectory. It consistently managed to guide the end-effector to the circle and then
+track it, as long as those initial states were within the training range. This indicates that the policy is
+not simply memorizing a sequence of actions, but truly learning a feedback control law that is robust to
+moderate variations in the initial state. However, this generalization only holds within the space of
+states it experienced. Drastic changes (like a completely different trajectory or a very different initial
+base orientation) were not tested and would require either retraining or additional training with such
+scenarios (perhaps via domain randomization \cite{b8}).
+
+Practical Implications: The success of PPO (and TRPO) in this domain suggests that policy gradient
+methods are well-suited for complex, continuous control tasks with coupled dynamics and safety
+constraints. In particular, PPO’s ability to handle continuous action spaces and its stable update rule
+(clipped surrogate objective) made it robust in the face of the highly nonlinear dynamics of the free-floating robot. 
+The integrated safety components (collision avoidance, etc.) effectively acted as a form of
+“shielding” during training, they prevented the agent from exploring disastrously unsafe actions by
+cutting those episodes short \cite{b15,b23,b22}. This, combined with the penalty-driven learning, means the final
+policy inherently respects those constraints (since it learned quickly that violating them yields no
+reward). For real missions, this is very promising: it implies we can embed safety checks in the training
+simulator and reasonably expect the trained policy to abide by them when deployed (assuming the real
+system is within the simulator’s fidelity) \cite{b22,b24}.
+
+% \textbf{Evaluation on Piecewise-Linear End-Effector Trajectories:}
+% While the previous evaluations focused on tracking a smooth circular end-effector (EE) reference, we 
+% additionally tested how well the controller generalizes to \emph{linear} trajectories.
+% This is relevant for practical on-orbit manipulation tasks, where approach and retreat motions are frequently 
+% planned as straight-line segments rather than continuous curves.
+
+% \noindent
+% Trajectory definition: the linear reference is constructed from the same circle parameters (center and radius) used 
+% for the circular benchmark, but the EE is commanded to move along two straight segments connecting three points on that circle:
+% $P_0=[c_x+r,\;c_y,\;c_z]$, $P_1=[c_x,\;c_y+r,\;c_z]$, and $P_2=[c_x-r,\;c_y,\;c_z]$.
+% Using a period $T$ and a switching time $t_1=T/2$, the piecewise-linear reference position $p_{\mathrm{ref}}(t)$ is
+% \begin{equation}
+% p_{\mathrm{ref}}(t)=
+% \begin{cases}
+% P_0 + \frac{t}{t_1}\left(P_1-P_0\right), & 0\leq t\leq t_1,\\[2mm]
+% P_1 + \frac{t-t_1}{T-t_1}\left(P_2-P_1\right), & t_1 < t \leq T.
+% \end{cases}
+% \label{eq:linear_traj}
+% \end{equation}
+% The reference is sampled at $T_s=0.01\,\mathrm{s}$, while the PPO policy is updated at 
+% $T_{s,\mathrm{agent}}=0.1\,\mathrm{s}$ (same as in the other experiments).
+
+% \begin{figure*}[t]
+%     \centering
+%     \begin{subfigure}{0.9\columnwidth}
+%         \includegraphics[width=0.9\columnwidth]{Figures/rampe_1.png}
+%         \caption{PPO (Default)}
+%         \label{fig:r_traj_default}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}{0.9\columnwidth}
+%         \includegraphics[width=0.9\columnwidth]{Figures/rampe_opt_1.png}
+%         \caption{PPO (Optimized)}
+%         \label{fig:r_traj_opt}
+%     \end{subfigure}
+%     \caption{Target/actual comparison of the ramp end-effector trajectory in the XY plane.}
+%     \label{fig:r_trajektorie_xy_compare}
+% \end{figure*}
+
+% \begin{figure*}[t]
+%     \centering
+%     \begin{subfigure}{0.9\columnwidth}
+%         \includegraphics[width=0.9\columnwidth]{Figures/basis_ori_1.png}
+%         \caption{PPO (Default)}
+%         \label{fig:r_basis_default}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}{0.9\columnwidth}
+%         \includegraphics[width=0.9\columnwidth]{Figures/basis_ori_opt_1.png}
+%         \caption{PPO (Optimized)}
+%         \label{fig:r_basis_opt}
+%     \end{subfigure}
+%     \caption{Course of base orientation (quaternion components) during a test episode with ramp trajectory.}
+%     \label{fig:r_basis_orientation_compare}
+% \end{figure*}
+% \noindent
+% Results: Table~\ref{tab:ppo_linear_kpi} reports the KPI averages over $N_{eval}=30$ evaluation episodes for PPO 
+% with the default configuration and the optimized configuration, now tested on the piecewise-linear reference.
+% The optimized PPO improves overall task success (K1 increases from $-0.4565$ to $-0.2977$), reduces base attitude 
+% disturbance (K4 decreases by $\approx 44\%$) (see ~\autoref{fig:r_basis_orientation_compare}), lowers residual 
+% base angular velocity (K8 decreases by $\approx 15\%$), and significantly reduces energy consumption (K9 decreases by $\approx 35\%$).
+% The mean and peak end-effector tracking errors (K2 and K3) remain almost unchanged, with a slight improvement 
+% in the mean error (see ~\autoref{fig:r_trajektorie_xy_compare}).
+% However, the control smoothness metric (K7) becomes worse than the default PPO.
+% This suggests that the hyperparameter optimization (highly beneficial for circular tracking) 
+% does not fully transfer to piecewise-linear motion profiles.
+% A straightforward mitigation is to include a mixture of reference types (circular, linear segments, and hybrid 
+% trajectories) during training (or during hyperparameter search) to explicitly optimize for trajectory generalization.
+
+% \begin{table}[b]
+% \centering
+% \renewcommand{\arraystretch}{1.35}
+% \setlength{\tabcolsep}{5pt}
+% \begin{tabular}{lcc}
+% \hline
+% \textbf{Metric (KPI)} & \textbf{PPO (Default)} & \textbf{PPO (Optimized)} \\
+% \hline
+% Mean Episodic Reward (K1)            & -0.4565 & \textbf{-0.2977} \\
+% Mean Squared EE Position Error (K2)  & 0.0078 & \textbf{0.0070} \\
+% Max EE Position Error (K3)           & 0.2037 & \textbf{0.2036} \\
+% Mean Base Orientation Error (K4)     & 0.0412 & \textbf{0.0231} \\
+% Collision Rate (K5)                 & 0 & 0 \\
+% Joint Limit Violation Rate (K6)     & 0 & 0 \\
+% Control Smoothness (K7, jerk)       & \textbf{0.5520} & 0.6839 \\
+% Mean Base Angular Velocity (K8)      & 0.0399 & \textbf{0.0339} \\
+% Energy Consumption (K9)              & 7.7144 & \textbf{5.0341} \\
+% \hline
+% \end{tabular}
+% \caption{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are 
+% averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}
+% \label{tab:ppo_linear_kpi}
+% \end{table}
 
 \textbf{Limitations and Future Work:}
 Several limitations should be acknowledged. First, a \emph{sim-to-real gap} remains: unmodeled effects such as flexible dynamics, 

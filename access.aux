@@ -138,7 +138,7 @@
 \citation{b15}
 \citation{b4,b15}
 \@writefile{toc}{\contentsline {section}{\numberline {VII}Optimization of the PPO Agent}{13}{section.7}\protected@file@percent }
-\citation{b1,b7}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-A}}Circular Trajectory}{13}{subsection.7.1}\protected@file@percent }
 \newlabel{fig:training_ppo_default}{{11a}{14}{PPO (Default)}{figure.caption.15}{}}
 \newlabel{fig:training_ppo_default@cref}{{[subfigure][1][11]11a}{[1][13][]14}{}{}{}}
 \newlabel{sub@fig:training_ppo_default}{{a}{14}{PPO (Default)}{figure.caption.15}{}}
@@ -150,46 +150,70 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Comparison of episodic rewards for default and optimized PPO agents.   (a) Episode reward evolution during training using the default PPO hyperparameters. (b) Episode reward evolution using the optimized PPO configuration. The optimized configuration exhibits faster convergence and higher average episode rewards, indicating improved learning efficiency and policy performance.}}{14}{figure.caption.15}\protected@file@percent }
 \newlabel{fig:training_ppo_compare}{{11}{14}{Comparison of episodic rewards for default and optimized PPO agents. \\ (a) Episode reward evolution during training using the default PPO hyperparameters. (b) Episode reward evolution using the optimized PPO configuration. The optimized configuration exhibits faster convergence and higher average episode rewards, indicating improved learning efficiency and policy performance}{figure.caption.15}{}}
 \newlabel{fig:training_ppo_compare@cref}{{[figure][11][]11}{[1][13][]14}{}{}{}}
-\newlabel{fig:traj_default}{{12a}{14}{PPO (Default)}{figure.caption.16}{}}
-\newlabel{fig:traj_default@cref}{{[subfigure][1][12]12a}{[1][13][]14}{}{}{}}
-\newlabel{sub@fig:traj_default}{{a}{14}{PPO (Default)}{figure.caption.16}{}}
-\newlabel{sub@fig:traj_default@cref}{{[subfigure][1][12]12a}{[1][13][]14}{}{}{}}
-\newlabel{fig:traj_opt}{{12b}{14}{PPO (Optimized)}{figure.caption.16}{}}
-\newlabel{fig:traj_opt@cref}{{[subfigure][2][12]12b}{[1][13][]14}{}{}{}}
-\newlabel{sub@fig:traj_opt}{{b}{14}{PPO (Optimized)}{figure.caption.16}{}}
-\newlabel{sub@fig:traj_opt@cref}{{[subfigure][2][12]12b}{[1][13][]14}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Target/actual comparison of the end-effector trajectory in the XY plane.}}{14}{figure.caption.16}\protected@file@percent }
-\newlabel{fig:trajektorie_xy_compare}{{12}{14}{Target/actual comparison of the end-effector trajectory in the XY plane}{figure.caption.16}{}}
-\newlabel{fig:trajektorie_xy_compare@cref}{{[figure][12][]12}{[1][13][]14}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{14}{section.8}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control).}}{14}{table.caption.18}\protected@file@percent }
+\newlabel{tab:ppo_optimization_kpi}{{5}{14}{Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control)}{table.caption.18}{}}
+\newlabel{tab:ppo_optimization_kpi@cref}{{[table][5][]5}{[1][14][]14}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-B}}Piecewise-Linear Trajectory}{14}{subsection.7.2}\protected@file@percent }
+\newlabel{eq:linear_traj}{{5}{14}{Piecewise-Linear Trajectory}{equation.5}{}}
+\newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][14][]14}{}{}{}}
+\newlabel{fig:traj_default}{{12a}{15}{PPO (Default)}{figure.caption.16}{}}
+\newlabel{fig:traj_default@cref}{{[subfigure][1][12]12a}{[1][13][]15}{}{}{}}
+\newlabel{sub@fig:traj_default}{{a}{15}{PPO (Default)}{figure.caption.16}{}}
+\newlabel{sub@fig:traj_default@cref}{{[subfigure][1][12]12a}{[1][13][]15}{}{}{}}
+\newlabel{fig:traj_opt}{{12b}{15}{PPO (Optimized)}{figure.caption.16}{}}
+\newlabel{fig:traj_opt@cref}{{[subfigure][2][12]12b}{[1][13][]15}{}{}{}}
+\newlabel{sub@fig:traj_opt}{{b}{15}{PPO (Optimized)}{figure.caption.16}{}}
+\newlabel{sub@fig:traj_opt@cref}{{[subfigure][2][12]12b}{[1][13][]15}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Target/actual comparison of the end-effector trajectory in the XY plane.}}{15}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:trajektorie_xy_compare}{{12}{15}{Target/actual comparison of the end-effector trajectory in the XY plane}{figure.caption.16}{}}
+\newlabel{fig:trajektorie_xy_compare@cref}{{[figure][12][]12}{[1][13][]15}{}{}{}}
+\newlabel{fig:basis_default}{{13a}{15}{PPO (Default)}{figure.caption.17}{}}
+\newlabel{fig:basis_default@cref}{{[subfigure][1][13]13a}{[1][14][]15}{}{}{}}
+\newlabel{sub@fig:basis_default}{{a}{15}{PPO (Default)}{figure.caption.17}{}}
+\newlabel{sub@fig:basis_default@cref}{{[subfigure][1][13]13a}{[1][14][]15}{}{}{}}
+\newlabel{fig:basis_opt}{{13b}{15}{PPO (Optimized)}{figure.caption.17}{}}
+\newlabel{fig:basis_opt@cref}{{[subfigure][2][13]13b}{[1][14][]15}{}{}{}}
+\newlabel{sub@fig:basis_opt}{{b}{15}{PPO (Optimized)}{figure.caption.17}{}}
+\newlabel{sub@fig:basis_opt@cref}{{[subfigure][2][13]13b}{[1][14][]15}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Course of base orientation (quaternion components) during a test episode.}}{15}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:basis_orientation_compare}{{13}{15}{Course of base orientation (quaternion components) during a test episode}{figure.caption.17}{}}
+\newlabel{fig:basis_orientation_compare@cref}{{[figure][13][]13}{[1][14][]15}{}{}{}}
+\newlabel{fig:r_traj_default}{{14a}{15}{PPO (Default)}{figure.caption.19}{}}
+\newlabel{fig:r_traj_default@cref}{{[subfigure][1][14]14a}{[1][14][]15}{}{}{}}
+\newlabel{sub@fig:r_traj_default}{{a}{15}{PPO (Default)}{figure.caption.19}{}}
+\newlabel{sub@fig:r_traj_default@cref}{{[subfigure][1][14]14a}{[1][14][]15}{}{}{}}
+\newlabel{fig:r_traj_opt}{{14b}{15}{PPO (Optimized)}{figure.caption.19}{}}
+\newlabel{fig:r_traj_opt@cref}{{[subfigure][2][14]14b}{[1][14][]15}{}{}{}}
+\newlabel{sub@fig:r_traj_opt}{{b}{15}{PPO (Optimized)}{figure.caption.19}{}}
+\newlabel{sub@fig:r_traj_opt@cref}{{[subfigure][2][14]14b}{[1][14][]15}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Target/actual comparison of the ramp end-effector trajectory in the XY plane.}}{15}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:r_trajektorie_xy_compare}{{14}{15}{Target/actual comparison of the ramp end-effector trajectory in the XY plane}{figure.caption.19}{}}
+\newlabel{fig:r_trajektorie_xy_compare@cref}{{[figure][14][]14}{[1][14][]15}{}{}{}}
+\citation{b1,b7}
 \citation{b8}
 \citation{b15,b23,b22}
 \citation{b22,b24}
-\newlabel{fig:basis_default}{{13a}{15}{PPO (Default)}{figure.caption.17}{}}
-\newlabel{fig:basis_default@cref}{{[subfigure][1][13]13a}{[1][13][]15}{}{}{}}
-\newlabel{sub@fig:basis_default}{{a}{15}{PPO (Default)}{figure.caption.17}{}}
-\newlabel{sub@fig:basis_default@cref}{{[subfigure][1][13]13a}{[1][13][]15}{}{}{}}
-\newlabel{fig:basis_opt}{{13b}{15}{PPO (Optimized)}{figure.caption.17}{}}
-\newlabel{fig:basis_opt@cref}{{[subfigure][2][13]13b}{[1][13][]15}{}{}{}}
-\newlabel{sub@fig:basis_opt}{{b}{15}{PPO (Optimized)}{figure.caption.17}{}}
-\newlabel{sub@fig:basis_opt@cref}{{[subfigure][2][13]13b}{[1][13][]15}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Course of base orientation (quaternion components) during a test episode.}}{15}{figure.caption.17}\protected@file@percent }
-\newlabel{fig:basis_orientation_compare}{{13}{15}{Course of base orientation (quaternion components) during a test episode}{figure.caption.17}{}}
-\newlabel{fig:basis_orientation_compare@cref}{{[figure][13][]13}{[1][13][]15}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control).}}{15}{table.caption.18}\protected@file@percent }
-\newlabel{tab:ppo_optimization_kpi}{{5}{15}{Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control)}{table.caption.18}{}}
-\newlabel{tab:ppo_optimization_kpi@cref}{{[table][5][]5}{[1][13][]15}{}{}{}}
-\newlabel{eq:linear_traj}{{5}{15}{Discussion and Conclusion}{equation.5}{}}
-\newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][15][]15}{}{}{}}
 \citation{b8,b22}
 \citation{b5,b22}
+\newlabel{fig:r_basis_default}{{15a}{16}{PPO (Default)}{figure.caption.20}{}}
+\newlabel{fig:r_basis_default@cref}{{[subfigure][1][15]15a}{[1][14][]16}{}{}{}}
+\newlabel{sub@fig:r_basis_default}{{a}{16}{PPO (Default)}{figure.caption.20}{}}
+\newlabel{sub@fig:r_basis_default@cref}{{[subfigure][1][15]15a}{[1][14][]16}{}{}{}}
+\newlabel{fig:r_basis_opt}{{15b}{16}{PPO (Optimized)}{figure.caption.20}{}}
+\newlabel{fig:r_basis_opt@cref}{{[subfigure][2][15]15b}{[1][14][]16}{}{}{}}
+\newlabel{sub@fig:r_basis_opt}{{b}{16}{PPO (Optimized)}{figure.caption.20}{}}
+\newlabel{sub@fig:r_basis_opt@cref}{{[subfigure][2][15]15b}{[1][14][]16}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Course of base orientation (quaternion components) during a test episode with ramp trajectory.}}{16}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:r_basis_orientation_compare}{{15}{16}{Course of base orientation (quaternion components) during a test episode with ramp trajectory}{figure.caption.20}{}}
+\newlabel{fig:r_basis_orientation_compare@cref}{{[figure][15][]15}{[1][14][]16}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{16}{section.8}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}}{16}{table.caption.21}\protected@file@percent }
+\newlabel{tab:ppo_linear_kpi}{{6}{16}{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better)}{table.caption.21}{}}
+\newlabel{tab:ppo_linear_kpi@cref}{{[table][6][]6}{[1][15][]16}{}{}{}}
 \citation{b8}
 \citation{b22,b24,b23,b34}
 \citation{b1,b23}
 \bibcite{b1}{1}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}}{16}{table.caption.21}\protected@file@percent }
-\newlabel{tab:ppo_linear_kpi}{{6}{16}{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better)}{table.caption.21}{}}
-\newlabel{tab:ppo_linear_kpi@cref}{{[table][6][]6}{[1][16][]16}{}{}{}}
 \bibcite{b6}{2}
 \bibcite{b11}{3}
 \bibcite{b32}{4}
@@ -208,34 +232,12 @@
 \bibcite{b15}{17}
 \bibcite{b21}{18}
 \bibcite{b7}{19}
+\@writefile{toc}{\contentsline {section}{REFERENCES}{17}{section*.22}\protected@file@percent }
 \bibcite{b22}{20}
 \bibcite{b5}{21}
 \bibcite{b23}{22}
 \bibcite{b25}{23}
 \bibcite{b26}{24}
-\newlabel{fig:r_traj_default}{{14a}{17}{PPO (Default)}{figure.caption.19}{}}
-\newlabel{fig:r_traj_default@cref}{{[subfigure][1][14]14a}{[1][15][]17}{}{}{}}
-\newlabel{sub@fig:r_traj_default}{{a}{17}{PPO (Default)}{figure.caption.19}{}}
-\newlabel{sub@fig:r_traj_default@cref}{{[subfigure][1][14]14a}{[1][15][]17}{}{}{}}
-\newlabel{fig:r_traj_opt}{{14b}{17}{PPO (Optimized)}{figure.caption.19}{}}
-\newlabel{fig:r_traj_opt@cref}{{[subfigure][2][14]14b}{[1][15][]17}{}{}{}}
-\newlabel{sub@fig:r_traj_opt}{{b}{17}{PPO (Optimized)}{figure.caption.19}{}}
-\newlabel{sub@fig:r_traj_opt@cref}{{[subfigure][2][14]14b}{[1][15][]17}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Target/actual comparison of the ramp end-effector trajectory in the XY plane.}}{17}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:r_trajektorie_xy_compare}{{14}{17}{Target/actual comparison of the ramp end-effector trajectory in the XY plane}{figure.caption.19}{}}
-\newlabel{fig:r_trajektorie_xy_compare@cref}{{[figure][14][]14}{[1][15][]17}{}{}{}}
-\newlabel{fig:r_basis_default}{{15a}{17}{PPO (Default)}{figure.caption.20}{}}
-\newlabel{fig:r_basis_default@cref}{{[subfigure][1][15]15a}{[1][16][]17}{}{}{}}
-\newlabel{sub@fig:r_basis_default}{{a}{17}{PPO (Default)}{figure.caption.20}{}}
-\newlabel{sub@fig:r_basis_default@cref}{{[subfigure][1][15]15a}{[1][16][]17}{}{}{}}
-\newlabel{fig:r_basis_opt}{{15b}{17}{PPO (Optimized)}{figure.caption.20}{}}
-\newlabel{fig:r_basis_opt@cref}{{[subfigure][2][15]15b}{[1][16][]17}{}{}{}}
-\newlabel{sub@fig:r_basis_opt}{{b}{17}{PPO (Optimized)}{figure.caption.20}{}}
-\newlabel{sub@fig:r_basis_opt@cref}{{[subfigure][2][15]15b}{[1][16][]17}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Course of base orientation (quaternion components) during a test episode with ramp trajectory.}}{17}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:r_basis_orientation_compare}{{15}{17}{Course of base orientation (quaternion components) during a test episode with ramp trajectory}{figure.caption.20}{}}
-\newlabel{fig:r_basis_orientation_compare@cref}{{[figure][15][]15}{[1][16][]17}{}{}{}}
-\@writefile{toc}{\contentsline {section}{REFERENCES}{17}{section*.22}\protected@file@percent }
 \bibcite{b27}{25}
 \bibcite{b28}{26}
 \bibcite{al2024reinforcement}{27}
