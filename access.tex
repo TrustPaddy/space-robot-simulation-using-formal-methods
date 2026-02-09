@@ -52,7 +52,7 @@
 \begin{abstract}
 Free-floating space robots exhibit a strong dynamic coupling between the manipulator motion and base attitude disturbance, 
 complicating the Cartesian path tracking of the end-effector. 
-Adopting data-driven approaches is challenging due to limited data availability in the space sector.
+Supervised data-driven approaches are challenging due to limited labeled data availability in space operations
 This paper therefore explores trial-and-error learning techniques for Cartesian path tracking in a physics-based
 Simulink/Simscape environment with integrated safety monitoring. Since a quantitative and qualitative comparison of these methods is currently 
 missing in the sector of on-orbit servicing, we benchmark six Reinforcement Learning agents: TRPO, TD3, SAC, PPO,
@@ -89,7 +89,7 @@ Indeed, the end-effector of the arm may fail to reach the desired target point i
 fixed base are simply applied. Further constraints, such as communication latency 
 and limited onboard computational resources, make more intricate the continuous real-time control and stabilization of the base \cite{b1,b32}. In fact, traditional control
 approaches that assume an accurate model of the robot dynamics (e.g. reactionless planning or precise attitude control) 
-can struggle to adapt to uncertainties and unmodeled dynamics. Data-driven approaches, on the other hand, hardly apply. 
+can struggle to adapt to uncertainties and unmodeled dynamics. Supervised data-driven approaches, on the other hand, are difficult to apply. 
 Usually, the required amount and quality of data are rather unavailable in the space sector. 
 In many cases, robotized tracking capabilities under a free-floating behavior of the arm's base need to be 
 demonstrated long before the physical robot system is assembled and deployed \cite{muhlbauer2025software,rybus2024robotic,kaigom2011optimal}.  
@@ -470,7 +470,7 @@ agents. These KPIs include:
   \item K4: Mean Base Orientation Error, e.g., average quaternion error magnitude indicating how far the base drifted in attitude (lower is better).\\
   $K4=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}}\frac{1}{T_i}\sum_{k=1}^{T_i}\|e_{R,i}[k]\|_2.$
 
-  \item K5: Collision Rate, the fraction of episodes in which a collision occurred (0 means no collisions, we expect this to be zero if the agent behaves safely).\\
+  \item K5: Collision Rate, the fraction of episodes in which at least one collision occurred (0 means no collisions, we expect this to be zero if the agent behaves safely).\\
   $C_i=\mathbb{I}(\exists k:\,c_i[k]>0.5), \\ \qquad K5=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}} C_i.$
 
   \item K6: Joint Limit Violation Rate (0 is ideal).\\
@@ -895,7 +895,7 @@ policy updates didn’t diverge. We monitored the KL and it remained within acce
 Through a grid search over these parameters (one at a time and some combined), we converged on a
 set that provided a more stable and higher-performing PPO agent. Notably, the optimized agent
 is tailored to this specific task and reward function, for example, the entropy bonus was chosen to the
-point where it encourages trying different arm motions, but not so high that the agent keeps thrashing
+point where it encourages exploration of different arm motions, but not so high that the agent keeps thrashing
 the arm aimlessly.
 
 \subsection{Circular Trajectory}
@@ -1181,6 +1181,9 @@ and safeguards, “autonomous learning-based control” can be a powerful paradi
 robotic missions. The results encourage continued research at the intersection of robotics,
 reinforcement learning, and formal methods to further unlock the potential of intelligent space
 systems.
+
+\section*{Acknowledgment}
+The authors gratefully acknowledge the assistance of DeepL and ChatGPT in improving the English language presentation of this manuscript.
 
 \begin{thebibliography}{00}
 
