@@ -441,8 +441,10 @@ The proximity bonus parameters $k_b = 0.05$ and $\sigma = 0.02$ are small by des
 Finally, the normalization constant $C = 500$ scales the total reward to a range of approximately $[-1,\, 0]$ under typical operating conditions, which stabilizes value function learning across all tested algorithms.
 \end{rtwohl}
 
-At each step, all inputs to the reward function are checked for numerical validity. If any NaN or Inf values are detected, or if the end-effector error exceeds a predefined bound, 
-the episode is immediately terminated and a terminal reward of $-1$ is assigned. This mechanism prevents the agent from exploiting invalid states and ensures numerical robustness during training. All reward components were implemented in a MATLAB Function block within the Simulink environment. The weights were tuned empirically to provide informative gradients while maintaining stable learning behavior.
+\begin{rtwohl}
+\hltwo{[R2.7]} At each step, all inputs to the reward function are checked for numerical validity. If any NaN or Inf values are detected, or if the end-effector error exceeds a predefined bound, the episode is immediately terminated and a terminal penalty of $r_{\text{fail}} = -1$ is assigned. The choice of this value is deliberate and calibrated to the reward scale: as noted above, the normalization constant $C = 500$ compresses step rewards to approximately $[-1,\,0]$ under normal operating conditions, meaning $r_{\text{fail}} = -1$ equals the lower bound of a single step reward. This makes the terminal penalty equivalent to receiving a maximally bad step — large enough to strongly discourage unsafe exploration, yet not so extreme as to dominate the cumulative return over an entire episode or destabilize gradient estimates. A much smaller penalty (e.g., $-0.1$) would be insufficient to deter the agent from entering invalid states, while a much larger penalty (e.g., $-100$) would cause the failure signal to overshadow all other reward information, potentially leading to overly conservative policies or value function divergence. By anchoring the failure penalty to the step-reward scale, the policy learns a balanced trade-off: failures are clearly undesirable, but the agent is not driven to paralysis by catastrophic gradient magnitudes.
+\end{rtwohl}
+All reward components were implemented in a MATLAB Function block within the Simulink environment.
 
 \begin{table}[!b]
 \centering
