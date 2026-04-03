@@ -139,8 +139,6 @@
 \citation{b4}
 \citation{b4}
 \@writefile{toc}{\contentsline {section}{\numberline {VII}Optimization of the PPO Agent}{13}{section.7}\protected@file@percent }
-\citation{b15}
-\citation{b4,b15}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Selected performance metrics for each RL agent (best values in bold). PPO excels in most categories, achieving the lowest tracking errors (K2, K3), best base stability (K4), and smoothest control (K7), while maintaining short training time. TRPO is a close second in many metrics but requires more training time. Off-policy methods (TD3, SAC, DDPG) show larger errors or instabilities (e.g., high T1 for DDPG) despite some strengths (DDPG's low max error K3). KPI data from evaluation of 30 episodes per agent.}}{14}{table.caption.14}\protected@file@percent }
 \newlabel{tab:kpi_comp}{{4}{14}{Selected performance metrics for each RL agent (best values in bold). PPO excels in most categories, achieving the lowest tracking errors (K2, K3), best base stability (K4), and smoothest control (K7), while maintaining short training time. TRPO is a close second in many metrics but requires more training time. Off-policy methods (TD3, SAC, DDPG) show larger errors or instabilities (e.g., high T1 for DDPG) despite some strengths (DDPG's low max error K3). KPI data from evaluation of 30 episodes per agent}{table.caption.14}{}}
 \newlabel{tab:kpi_comp@cref}{{[table][4][]4}{[1][13][]14}{}{}{}}
@@ -156,12 +154,12 @@
 \newlabel{fig:training_ppo_compare}{{11}{14}{Comparison of episodic rewards for default and optimized PPO agents. (a) Episode reward evolution during training using the default PPO hyperparameters. (b) Episode reward evolution using the optimized PPO configuration. The optimized configuration exhibits faster convergence and higher average episode rewards, indicating improved learning efficiency and policy performance}{figure.caption.15}{}}
 \newlabel{fig:training_ppo_compare@cref}{{[figure][11][]11}{[1][13][]14}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-A}}Circular Trajectory}{15}{subsection.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-B}}Piecewise-Linear Trajectory}{15}{subsection.7.2}\protected@file@percent }
-\newlabel{eq:linear_traj}{{5}{15}{Piecewise-Linear Trajectory}{equation.5}{}}
-\newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][15][]15}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control).}}{15}{table.caption.18}\protected@file@percent }
 \newlabel{tab:ppo_optimization_kpi}{{5}{15}{Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control)}{table.caption.18}{}}
 \newlabel{tab:ppo_optimization_kpi@cref}{{[table][5][]5}{[1][15][]15}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-B}}Piecewise-Linear Trajectory}{15}{subsection.7.2}\protected@file@percent }
+\newlabel{eq:linear_traj}{{5}{15}{Piecewise-Linear Trajectory}{equation.5}{}}
+\newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][15][]15}{}{}{}}
 \newlabel{fig:traj_default}{{12a}{16}{PPO (Default)}{figure.caption.16}{}}
 \newlabel{fig:traj_default@cref}{{[subfigure][1][12]12a}{[1][15][]16}{}{}{}}
 \newlabel{sub@fig:traj_default}{{a}{16}{PPO (Default)}{figure.caption.16}{}}
@@ -210,10 +208,10 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Course of base orientation (quaternion components) during a test episode with ramp trajectory.}}{17}{figure.caption.20}\protected@file@percent }
 \newlabel{fig:r_basis_orientation_compare}{{15}{17}{Course of base orientation (quaternion components) during a test episode with ramp trajectory}{figure.caption.20}{}}
 \newlabel{fig:r_basis_orientation_compare@cref}{{[figure][15][]15}{[1][15][]17}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{17}{section.8}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}}{17}{table.caption.21}\protected@file@percent }
 \newlabel{tab:ppo_linear_kpi}{{6}{17}{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better)}{table.caption.21}{}}
-\newlabel{tab:ppo_linear_kpi@cref}{{[table][6][]6}{[1][17][]17}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{17}{section.8}\protected@file@percent }
+\newlabel{tab:ppo_linear_kpi@cref}{{[table][6][]6}{[1][16][]17}{}{}{}}
 \citation{b8,b22}
 \citation{b5,b22}
 \citation{b8}
@@ -221,12 +219,13 @@
 \citation{b1,b23}
 \citation{deeplTr,deeplWr}
 \citation{openai_chatgpt}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Our testbed for In-Space Robotized Services.}}{18}{figure.caption.22}\protected@file@percent }
-\newlabel{fig:physicaltestbed}{{16}{18}{Our testbed for In-Space Robotized Services}{figure.caption.22}{}}
-\newlabel{fig:physicaltestbed@cref}{{[figure][16][]16}{[1][18][]18}{}{}{}}
 \bibcite{b1}{1}
 \bibcite{b6}{2}
 \bibcite{b11}{3}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Our testbed for In-Space Robotized Services.}}{18}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:physicaltestbed}{{16}{18}{Our testbed for In-Space Robotized Services}{figure.caption.22}{}}
+\newlabel{fig:physicaltestbed@cref}{{[figure][16][]16}{[1][18][]18}{}{}{}}
+\@writefile{toc}{\contentsline {section}{REFERENCES}{18}{section*.24}\protected@file@percent }
 \bibcite{b32}{4}
 \bibcite{muhlbauer2025software}{5}
 \bibcite{rybus2024robotic}{6}
@@ -271,7 +270,6 @@
 \bibcite{deeplTr}{45}
 \bibcite{deeplWr}{46}
 \bibcite{openai_chatgpt}{47}
-\@writefile{toc}{\contentsline {section}{REFERENCES}{19}{section*.24}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{Patrick S. Ermisch}{20}{section*.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Patrick S. Ermisch}{19}{section*.25}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{Eric Guiffo Kaigom}{20}{section*.25}\protected@file@percent }
 \gdef \@abspage@last{20}

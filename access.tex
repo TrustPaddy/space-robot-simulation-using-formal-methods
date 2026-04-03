@@ -902,7 +902,8 @@ optimization of PPO, involving both network architecture modifications and hyper
 \end{figure*}
 \noindent
 
-Network Architecture Improvements: By default, the PPO agent used two hidden layers of 128
+\begin{rtwohl}
+\hltwo{[R2.10]} \textbf{Network Architecture Improvements:} By default, the PPO agent used two hidden layers of 128
 neurons each (with ReLU activations) for both the policy and value function networks. We
 experimented with deeper and wider networks, as well as alternative activation functions, to better
 capture the dynamics of the problem. Our optimized architecture ultimately used 3 hidden layers for
@@ -916,41 +917,17 @@ explicitly defining the neural network layers instead of using the auto-generate
 In summary, the optimized policy network was larger and potentially more expressive, which we believe
 allowed PPO to find a control strategy which is better tuned.
 
-Hyperparameter Tuning: We systematically varied key PPO hyperparameters and evaluated their
-impact on training curves (learning speed and stability):
+\textbf{Hyperparameter Tuning:} The optimization followed a coordinate-wise grid search: each hyperparameter was swept across a discrete set of candidate values while all others were held at their current best, and the configuration yielding the highest mean episodic reward over the final 50 training episodes (out of $N_{\text{train}}=1000$) was selected. In total, 16 training runs of 1000 episodes each were conducted during this tuning phase. The swept parameters, their candidate values, and the selected values are as follows:
 \begin{itemize}
-  \item The learning rate was tuned: the default was 1e-3. We found that a slightly lower learning rate
-(e.g. 5e-4) improved stability (preventing overshooting in policy updates) without  slowing
-convergence.
-  \item The mini-batch size for stochastic gradient descent updates was increased. By default, PPO
-might use a batch of 64 from each trajectory. We increased this to 256 to provide more stable
-gradient estimates per update, which helped reduce the variance in training.
-  \item The clip ratio ($\epsilon$) for PPO’s surrogate objective was adjusted. The default clip value 0.2 worked,
-but we tried slightly tighter (0.15) and looser (0.3) clips \cite{b15}. A tighter clip ($\epsilon$ = 0.1–0.15) made updates
-more conservative. This reduced occasional policy overshoots at the cost of slower improvement.
-We settled on $\epsilon\approx0.2$ as it was already near-optimal, but this process confirmed that too high a
-clip would harm stability. The clip factor $\epsilon$ in PPO limits the magnitude of policy updates by constraining 
-the probability ratio between the new and the old policy. This prevents excessively large policy updates that could 
-destabilize training, particularly in highly nonlinear control tasks. In safety-critical scenarios such as free-floating 
-space robot control, clipping contributes significantly to stable and reliable convergence \cite{b4,b15}.
-  \item Entropy regularization weight was tuned. PPO can include an entropy term to encourage
-exploration. We increased the entropy coefficient modestly (from 0 to 0.01) to avoid premature
-convergence to a suboptimal deterministic policy. This indeed improved the exploration in early
-training, helping the agent discover better strategies (like moving joints in opposite directions to
-cancel base momentum).
-  \item Discount factor ($\gamma$) and GAE (Generalized Advantage Estimation) parameter ($\lambda$) were left at
-standard values ($\gamma = 0.99$, $\lambda = 0.95$) after confirming that they already provided a good bias-variance trade-off for advantage estimation
-  \item We also adjusted the target KL-divergence for PPO’s stopping criteria (if used) to ensure the
-policy updates didn’t diverge. We monitored the KL and it remained within acceptable
-{range with our chosen settings.}
+  \item \textbf{Actor learning rate} — candidates: $\{1\!\times\!10^{-3},\;5\!\times\!10^{-4}\}$; selected: $5\!\times\!10^{-4}$. The lower rate reduced overshooting in policy gradient updates, improving convergence stability.
+  \item \textbf{Critic learning rate} — candidates: $\{1\!\times\!10^{-3},\;5\!\times\!10^{-4}\}$; selected: $1\!\times\!10^{-3}$. A higher critic learning rate allowed the value function to track the evolving policy more closely, providing more accurate advantage estimates.
+  \item \textbf{Entropy loss weight} — candidates: $\{1\!\times\!10^{-2},\;1\!\times\!10^{-3}\}$; selected: $1\!\times\!10^{-3}$. A small entropy bonus discouraged premature convergence to a suboptimal deterministic policy and encouraged the agent to discover strategies such as coordinated joint motions that cancel base momentum, without causing aimless exploration.
+  \item \textbf{Experience horizon} — candidates: $\{512,\;1024,\;2048\}$; selected: $1024$. A moderate rollout horizon provided sufficient trajectory information per update while keeping memory requirements and update latency manageable.
+  \item \textbf{Mini-batch size} — candidates: $\{128,\;256\}$; selected: $256$. Larger batches provided more stable gradient estimates per update, reducing training variance.
 \end{itemize}
 
-
-Through a grid search over these parameters (one at a time and some combined), we converged on a
-set that provided a more stable and higher-performing PPO agent. Notably, the optimized agent
-is tailored to this specific task and reward function, for example, the entropy bonus was chosen to the
-point where it encourages exploration of different arm motions, but not so high that the agent keeps thrashing
-the arm aimlessly.
+Through this process we converged on a configuration that provided a more stable and higher-performing PPO agent. Notably, the asymmetric learning rates --- a slower actor ($5\!\times\!10^{-4}$) paired with a faster critic ($1\!\times\!10^{-3}$) --- reflect the different roles of the two networks: the value function must adapt quickly to policy changes, while conservative actor updates prevent destabilizing the learned control strategy.
+\end{rtwohl}
 
 \subsection{Circular Trajectory}
 
