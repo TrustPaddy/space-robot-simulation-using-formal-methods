@@ -105,19 +105,23 @@ explore learning-based control methods that can autonomously adapt to complex an
 
 \begin{table*}[!t]
 	\centering
-	\caption{Recent advances in Deep RL-based motion management for free-floating space robots.}
+	\caption{\hltwo{[R2.3]} Recent advances in Deep RL-based motion management for free-floating space robots. N/R\,=\,not reported.}
 	\label{tab:sample}
-	\begin{tabular}{lccc}
+	\scriptsize
+	\renewcommand{\arraystretch}{1.25}
+	\begin{tabular}{lcccccccc}
 		\toprule
-		\textbf{Contribution} & \textbf{RL Algorithm} & \textbf{Task Objective} & \makecell{\textbf{Formal Verification/} \\ \textbf{Base Disturbance Min.}} \\
+		\textbf{Contribution} & \makecell{\textbf{RL}\\\textbf{Alg.}} & \textbf{Task Objective} & \textbf{DOF} & \textbf{Simulator} & \makecell{\textbf{Obs./Act.}\\\textbf{Dim.}} & \makecell{\textbf{Safety}\\\textbf{Limits}} & \makecell{\textbf{Eval.}\\\textbf{Metrics}} & \makecell{\textbf{Formal Ver./}\\\textbf{Base Dist. Min.}} \\
 		\midrule
-		\cite{huang2023obstacle}, 2023 & SAC & Obstacle avoidance & No/No \\
-		\cite{al2024reinforcement}, 2024 & DDPG & Collision avoidance & No/No \\
-		\cite{d2024failure}, 2024 & PPO & Adaptation to joint failure & No/No \\
-		\cite{al2024path}, 2024 & DDPG & Path planning & No/No \\
-		\cite{hu2025deep}, 2025 & PPO & Trajectory planning & No/No \\
-		\cite{zhang2025learning}, 2025 & LSAC & Trajectory post-processing & No/No \\
-		\cite{wei2025trajectory}, 2025 & DDPG & Trajectory planning & No/Yes \\
+		\cite{huang2023obstacle}, 2023 & SAC & Obstacle avoidance & 7 & OpenAI Gym & 14\,/\,7D vel. & Reward-based & Success rate & No/No \\
+		\cite{al2024reinforcement}, 2024 & DDPG & Collision avoidance & 6 & Custom & N/R\,/\,6D vel. & Reward-based & Success rate & No/No \\
+		\cite{d2024failure}, 2024 & PPO & \makecell{Joint failure\\adaptation} & 7 & \makecell{MATLAB\\Simscape + SPART} & 32\,/\,7D rates & \makecell{Pos./att.\\threshold} & \makecell{Per-joint\\success rate} & No/No \\
+		\cite{al2024path}, 2024 & DDPG & Path planning & 6 & Custom & 32\,/\,6D vel. & Reward-based & \makecell{Convergence,\\task completion} & No/No \\
+		\cite{hu2025deep}, 2025 & PPO & Trajectory planning & 6 & PyBullet & N/R\,/\,6D & Joint limits & \makecell{Success rate,\\pos./ori. error} & No/No \\
+		\cite{zhang2025learning}, 2025 & LSAC & \makecell{Trajectory\\post-processing} & N/R & \makecell{Custom +\\air-bearing} & N/R\,/\,N/R & \makecell{Uncertainty\\bounds} & Tracking error & No/No \\
+		\cite{wei2025trajectory}, 2025 & DDPG & Trajectory planning & N/R & Custom & N/R\,/\,N/R & \makecell{Base dist.\\(soft)} & \makecell{Reward,\\base dist. red.} & No/Yes \\
+		\midrule
+		\textbf{Ours} & \textbf{PPO} & \makecell{\textbf{Cartesian EE}\\\textbf{tracking}} & \textbf{4} & \makecell{\textbf{MATLAB/Simulink}\\\textbf{+ Simscape}} & \textbf{23\,/\,4D} $\boldsymbol{\tau}$ & \makecell{$d_\text{safe}$, $\tau_\text{max}$,\\joint limits} & K1--K9 & \textbf{Yes/Yes} \\
 		\bottomrule
 	\end{tabular}
 \end{table*}

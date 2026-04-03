@@ -41,9 +41,9 @@
 \citation{b34}
 \citation{leutert2024ai,muhlbauer2025towards}
 \citation{maqbool2025systems}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Recent advances in Deep RL-based motion management for free-floating space robots.}}{3}{table.caption.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rtwo}}\texthl  {[R2.3]}} Recent advances in Deep RL-based motion management for free-floating space robots. N/R\,=\,not reported.}}{3}{table.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab:sample}{{1}{3}{Recent advances in Deep RL-based motion management for free-floating space robots}{table.caption.1}{}}
+\newlabel{tab:sample}{{1}{3}{\hltwo {[R2.3]} Recent advances in Deep RL-based motion management for free-floating space robots. N/R\,=\,not reported}{table.caption.1}{}}
 \newlabel{tab:sample@cref}{{[table][1][]1}{[1][2][]3}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Hybrid Safety-Aware Control Systems}{3}{subsection.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Benchmarking Studies}{3}{subsection.2.4}\protected@file@percent }
@@ -64,22 +64,22 @@
 \newlabel{fig:ref_kreis_gesamt@cref}{{[figure][1][]1}{[1][3][]4}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Robot Model}{4}{subsection.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Dynamic Simulation in MATLAB/Simulink}{4}{subsection.3.3}\protected@file@percent }
-\citation{b29,b30}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Overview of the Simulink model \texttt  {SpaceRobot.slx}   This figure shows the Simulink-based closed-loop simulation framework for the free-floating space robot. The model integrates the robot dynamics, reference generation, observation assembly, reward computation, and a PPO-based reinforcement learning agent that outputs joint torques. The reward and termination logic evaluate end-effector tracking performance, base motion disturbance, and control effort to guide policy learning.}}{5}{figure.caption.3}\protected@file@percent }
 \newlabel{fig:spacerobot_slx}{{2}{5}{Overview of the Simulink model \texttt {SpaceRobot.slx} \\ This figure shows the Simulink-based closed-loop simulation framework for the free-floating space robot. The model integrates the robot dynamics, reference generation, observation assembly, reward computation, and a PPO-based reinforcement learning agent that outputs joint torques. The reward and termination logic evaluate end-effector tracking performance, base motion disturbance, and control effort to guide policy learning}{figure.caption.3}{}}
-\newlabel{fig:spacerobot_slx@cref}{{[figure][2][]2}{[1][3][]5}{}{}{}}
+\newlabel{fig:spacerobot_slx@cref}{{[figure][2][]2}{[1][4][]5}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Overview of the Robot Subsystem in the Simulink Model \texttt  {SpaceRobot.slx}   This figure depicts the Simulink/Simscape Multibody model of the free-floating space robot, consisting of a floating base and a serial 4-DOF manipulator. Joint torque commands are applied to the revolute joints, while joint positions and velocities are measured and fed back as state variables. The base orientation is represented as a normalized quaternion and compared to a reference to compute the base attitude error.}}{5}{figure.caption.4}\protected@file@percent }
 \newlabel{fig:spacerobot_slx_robot}{{3}{5}{Overview of the Robot Subsystem in the Simulink Model \texttt {SpaceRobot.slx} \\ This figure depicts the Simulink/Simscape Multibody model of the free-floating space robot, consisting of a floating base and a serial 4-DOF manipulator. Joint torque commands are applied to the revolute joints, while joint positions and velocities are measured and fed back as state variables. The base orientation is represented as a normalized quaternion and compared to a reference to compute the base attitude error}{figure.caption.4}{}}
 \newlabel{fig:spacerobot_slx_robot@cref}{{[figure][3][]3}{[1][4][]5}{}{}{}}
+\citation{b29,b30}
 \citation{b7}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Overview of the Reference Subsystem in the Simulink Model \texttt  {SpaceRobot.slx}  This figure shows the computation of end-effector position and velocity tracking errors with respect to the reference trajectory. The measured end-effector states are compared to the reference signals to generate position and velocity error vectors used for observation and reward calculation. In addition, the base linear and angular velocities are extracted to capture base motion induced by manipulator actuation.}}{6}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:spacerobot_slx_reference}{{4}{6}{Overview of the Reference Subsystem in the Simulink Model \texttt {SpaceRobot.slx}\\ This figure shows the computation of end-effector position and velocity tracking errors with respect to the reference trajectory. The measured end-effector states are compared to the reference signals to generate position and velocity error vectors used for observation and reward calculation. In addition, the base linear and angular velocities are extracted to capture base motion induced by manipulator actuation}{figure.caption.5}{}}
-\newlabel{fig:spacerobot_slx_reference@cref}{{[figure][4][]4}{[1][5][]6}{}{}{}}
+\citation{b2,b7}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Reference Trajectory and Desired Task}{6}{subsection.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Reinforcement Learning Framework}{6}{section.4}\protected@file@percent }
 \newlabel{RL}{{IV}{6}{Reinforcement Learning Framework}{section.4}{}}
 \newlabel{RL@cref}{{[section][4][]IV}{[1][6][]6}{}{}{}}
-\citation{b2,b7}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Overview of the Reference Subsystem in the Simulink Model \texttt  {SpaceRobot.slx}  This figure shows the computation of end-effector position and velocity tracking errors with respect to the reference trajectory. The measured end-effector states are compared to the reference signals to generate position and velocity error vectors used for observation and reward calculation. In addition, the base linear and angular velocities are extracted to capture base motion induced by manipulator actuation.}}{7}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:spacerobot_slx_reference}{{4}{7}{Overview of the Reference Subsystem in the Simulink Model \texttt {SpaceRobot.slx}\\ This figure shows the computation of end-effector position and velocity tracking errors with respect to the reference trajectory. The measured end-effector states are compared to the reference signals to generate position and velocity error vectors used for observation and reward calculation. In addition, the base linear and angular velocities are extracted to capture base motion induced by manipulator actuation}{figure.caption.5}{}}
+\newlabel{fig:spacerobot_slx_reference@cref}{{[figure][4][]4}{[1][6][]7}{}{}{}}
 \newlabel{eq:reward}{{1}{7}{Reinforcement Learning Framework}{equation.1}{}}
 \newlabel{eq:reward@cref}{{[equation][1][]1}{[1][7][]7}{}{}{}}
 \citation{b7}
@@ -102,9 +102,6 @@
 \newlabel{fig:impulserhaltung_scope}{{6}{10}{Dynamics of the total momentum of the robot}{figure.caption.8}{}}
 \newlabel{fig:impulserhaltung_scope@cref}{{[figure][6][]6}{[1][9][]10}{}{}{}}
 \citation{b23}
-\citation{b2,b7}
-\citation{b7,b21}
-\citation{b15}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Overview of the Collision Monitor Subsystem in the Simulink Model \texttt  {SpaceRobot.slx}   This figure illustrates the collision monitoring logic used to ensure safe robot operation during training and evaluation. Joint and link configurations are processed to compute the minimum distance to obstacles, which is compared against a predefined safety threshold. A collision flag is generated and used for episode termination or safety-related penalties.}}{11}{figure.caption.9}\protected@file@percent }
 \newlabel{fig:spacerobot_slx_colissionmonitor}{{7}{11}{Overview of the Collision Monitor Subsystem in the Simulink Model \texttt {SpaceRobot.slx} \\ This figure illustrates the collision monitoring logic used to ensure safe robot operation during training and evaluation. Joint and link configurations are processed to compute the minimum distance to obstacles, which is compared against a predefined safety threshold. A collision flag is generated and used for episode termination or safety-related penalties}{figure.caption.9}{}}
 \newlabel{fig:spacerobot_slx_colissionmonitor@cref}{{[figure][7][]7}{[1][9][]11}{}{}{}}
@@ -119,14 +116,17 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Representation of collision detection and the associated torque curves.}}{11}{figure.caption.10}\protected@file@percent }
 \newlabel{fig:collision_combined}{{8}{11}{Representation of collision detection and the associated torque curves}{figure.caption.10}{}}
 \newlabel{fig:collision_combined@cref}{{[figure][8][]8}{[1][9][]11}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Comparison of Continuous RL Agents}{11}{section.6}\protected@file@percent }
-\newlabel{comparison}{{VI}{11}{Comparison of Continuous RL Agents}{section.6}{}}
-\newlabel{comparison@cref}{{[section][6][]VI}{[1][11][]11}{}{}{}}
+\citation{b2,b7}
+\citation{b7,b21}
+\citation{b15}
 \citation{b14}
 \citation{b16}
 \citation{b17}
 \citation{b18}
 \citation{b2,b7}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Comparison of Continuous RL Agents}{12}{section.6}\protected@file@percent }
+\newlabel{comparison}{{VI}{12}{Comparison of Continuous RL Agents}{section.6}{}}
+\newlabel{comparison@cref}{{[section][6][]VI}{[1][12][]12}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Verification model with Simulink Design Verifier \texttt  {Verify\_tau.slx}   This figure depicts the Simulink property model used to formally verify the joint torque constraints. The absolute joint torques are compared against predefined maximum limits using a relational operator. The property is proven to hold for all reachable system states, ensuring bounded control actions.}}{12}{figure.caption.11}\protected@file@percent }
 \newlabel{fig:verify_tau}{{9}{12}{Verification model with Simulink Design Verifier \texttt {Verify\_tau.slx} \\ This figure depicts the Simulink property model used to formally verify the joint torque constraints. The absolute joint torques are compared against predefined maximum limits using a relational operator. The property is proven to hold for all reachable system states, ensuring bounded control actions}{figure.caption.11}{}}
 \newlabel{fig:verify_tau@cref}{{[figure][9][]9}{[1][11][]12}{}{}{}}
@@ -154,12 +154,12 @@
 \newlabel{fig:training_ppo_compare}{{11}{14}{Comparison of episodic rewards for default and optimized PPO agents. (a) Episode reward evolution during training using the default PPO hyperparameters. (b) Episode reward evolution using the optimized PPO configuration. The optimized configuration exhibits faster convergence and higher average episode rewards, indicating improved learning efficiency and policy performance}{figure.caption.15}{}}
 \newlabel{fig:training_ppo_compare@cref}{{[figure][11][]11}{[1][13][]14}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-A}}Circular Trajectory}{15}{subsection.7.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control).}}{15}{table.caption.18}\protected@file@percent }
-\newlabel{tab:ppo_optimization_kpi}{{5}{15}{Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control)}{table.caption.18}{}}
-\newlabel{tab:ppo_optimization_kpi@cref}{{[table][5][]5}{[1][15][]15}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-B}}Piecewise-Linear Trajectory}{15}{subsection.7.2}\protected@file@percent }
 \newlabel{eq:linear_traj}{{5}{15}{Piecewise-Linear Trajectory}{equation.5}{}}
 \newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][15][]15}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control).}}{15}{table.caption.18}\protected@file@percent }
+\newlabel{tab:ppo_optimization_kpi}{{5}{15}{Performance of PPO agent before and after optimization. The optimized PPO shows substantial improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more efficient control)}{table.caption.18}{}}
+\newlabel{tab:ppo_optimization_kpi@cref}{{[table][5][]5}{[1][15][]15}{}{}{}}
 \newlabel{fig:traj_default}{{12a}{16}{PPO (Default)}{figure.caption.16}{}}
 \newlabel{fig:traj_default@cref}{{[subfigure][1][12]12a}{[1][15][]16}{}{}{}}
 \newlabel{sub@fig:traj_default}{{a}{16}{PPO (Default)}{figure.caption.16}{}}
@@ -208,10 +208,10 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Course of base orientation (quaternion components) during a test episode with ramp trajectory.}}{17}{figure.caption.20}\protected@file@percent }
 \newlabel{fig:r_basis_orientation_compare}{{15}{17}{Course of base orientation (quaternion components) during a test episode with ramp trajectory}{figure.caption.20}{}}
 \newlabel{fig:r_basis_orientation_compare@cref}{{[figure][15][]15}{[1][15][]17}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{17}{section.8}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}}{17}{table.caption.21}\protected@file@percent }
 \newlabel{tab:ppo_linear_kpi}{{6}{17}{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better)}{table.caption.21}{}}
-\newlabel{tab:ppo_linear_kpi@cref}{{[table][6][]6}{[1][16][]17}{}{}{}}
+\newlabel{tab:ppo_linear_kpi@cref}{{[table][6][]6}{[1][17][]17}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{17}{section.8}\protected@file@percent }
 \citation{b8,b22}
 \citation{b5,b22}
 \citation{b8}
@@ -219,13 +219,12 @@
 \citation{b1,b23}
 \citation{deeplTr,deeplWr}
 \citation{openai_chatgpt}
-\bibcite{b1}{1}
-\bibcite{b6}{2}
-\bibcite{b11}{3}
 \@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Our testbed for In-Space Robotized Services.}}{18}{figure.caption.22}\protected@file@percent }
 \newlabel{fig:physicaltestbed}{{16}{18}{Our testbed for In-Space Robotized Services}{figure.caption.22}{}}
 \newlabel{fig:physicaltestbed@cref}{{[figure][16][]16}{[1][18][]18}{}{}{}}
-\@writefile{toc}{\contentsline {section}{REFERENCES}{18}{section*.24}\protected@file@percent }
+\bibcite{b1}{1}
+\bibcite{b6}{2}
+\bibcite{b11}{3}
 \bibcite{b32}{4}
 \bibcite{muhlbauer2025software}{5}
 \bibcite{rybus2024robotic}{6}
@@ -270,6 +269,7 @@
 \bibcite{deeplTr}{45}
 \bibcite{deeplWr}{46}
 \bibcite{openai_chatgpt}{47}
-\@writefile{toc}{\contentsline {subsection}{Patrick S. Ermisch}{19}{section*.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{REFERENCES}{19}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Patrick S. Ermisch}{20}{section*.25}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{Eric Guiffo Kaigom}{20}{section*.25}\protected@file@percent }
 \gdef \@abspage@last{20}
