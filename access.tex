@@ -530,39 +530,60 @@ go to zero as training progresses.
 \textbf{Evaluation and Metrics:} After training, we evaluated each agent’s performance on $N_{eval}
 = 30$ independent episodes from a fixed initial configuration to gather statistics. Over these
 evaluation runs, we compute a set of Key Performance Indicators (KPIs) to quantitatively compare the
-agents. These KPIs include: 
+agents.
+
+\begin{rthreehl}
+\hlthree{[R3.10]} The nine KPIs are organized into three groups to aid interpretation: \emph{tracking accuracy} (K2, K3 measure how closely the end-effector follows the reference path), \emph{base stability and safety} (K4 measures spacecraft attitude drift; K5 and K6 capture constraint violations), and \emph{efficiency} (K7 quantifies control smoothness; K8 measures residual base rotation; K9 measures energy consumption). K1 serves as an overall scalar summary of the agent’s performance across all objectives, since it is the cumulative reward that jointly penalizes all undesired behaviors.
+\end{rthreehl}
 
 \begin{itemize}
-  \item K1: Average Episodic Return, the mean cumulative reward per episode (higher is better, this reflects overall success in the task).\\
-  $R_i=\sum_{k=1}^{T_i} r_i[k], \\ \qquad K1=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}} R_i.$
+  \item \textbf{K1} --- \emph{Average Episodic Return}: mean cumulative reward per episode; higher is better and reflects overall task success.
+  \begin{equation*}
+  R_i=\sum_{k=1}^{T_i} r_i[k], \qquad K1=\frac{1}{N_{\text{eval}}}\sum_{i=1}^{N_{\text{eval}}} R_i.
+  \end{equation*}
 
-  \item K2: Mean Squared End-Effector Position Error, averaged over the episode (lower is better, measures tracking accuracy).\\
-  $K2=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}}\frac{1}{T_i}\sum_{k=1}^{T_i}\|e_{p,i}[k]\|_2^2.$
+  \item \textbf{K2} --- \emph{Mean Squared EE Position Error}: average squared tracking error per episode; lower is better.
+  \begin{equation*}
+  K2=\frac{1}{N_{\text{eval}}}\sum_{i=1}^{N_{\text{eval}}}\frac{1}{T_i}\sum_{k=1}^{T_i}\|e_{p,i}[k]\|_2^2.
+  \end{equation*}
 
-  \item K3: Maximum End-Effector Position Error, worst-case deviation during the episode (lower is better).\\
-  $K3=\max_{i}\max_{k}\|e_{p,i}[k]\|_2.$
+  \item \textbf{K3} --- \emph{Maximum EE Position Error}: worst-case tracking deviation; lower is better.
+  \begin{equation*}
+  K3=\max_{i}\max_{k}\|e_{p,i}[k]\|_2.
+  \end{equation*}
 
-  \item K4: Mean Base Orientation Error, e.g., average quaternion error magnitude indicating how far the base drifted in attitude (lower is better).\\
-  $K4=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}}\frac{1}{T_i}\sum_{k=1}^{T_i}\|e_{R,i}[k]\|_2.$
+  \item \textbf{K4} --- \emph{Mean Base Orientation Error}: average attitude drift of the spacecraft base (quaternion error magnitude); lower is better.
+  \begin{equation*}
+  K4=\frac{1}{N_{\text{eval}}}\sum_{i=1}^{N_{\text{eval}}}\frac{1}{T_i}\sum_{k=1}^{T_i}\|e_{R,i}[k]\|_2.
+  \end{equation*}
 
-  \item K5: Collision Rate, the fraction of episodes in which at least one collision occurred (0 means no collisions, we expect this to be zero if the agent behaves safely).\\
-  $C_i=\mathbb{I}(\exists k:\,c_i[k]>0.5), \\ \qquad K5=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}} C_i.$
+  \item \textbf{K5} --- \emph{Collision Rate}: fraction of episodes with at least one collision; zero is ideal.
+  \begin{equation*}
+  C_i=\mathbb{I}(\exists k:\,c_i[k]>0.5), \qquad K5=\frac{1}{N_{\text{eval}}}\sum_{i=1}^{N_{\text{eval}}} C_i.
+  \end{equation*}
 
-  \item K6: Joint Limit Violation Rate (0 is ideal).\\
-  $K6=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}}\frac{1}{T_i n_J}\sum_{k=1}^{T_i}\sum_{j=1}^{n_J}
-  \mathbb{I}\!\big(q_{i,j}[k]\notin[q_j^{\min},q_j^{\max}]\big).$
+  \item \textbf{K6} --- \emph{Joint Limit Violation Rate}: fraction of time steps across episodes where any joint exceeds its mechanical limit; zero is ideal.
+  \begin{equation*}
+  K6=\frac{1}{N_{\text{eval}}}\sum_{i=1}^{N_{\text{eval}}}\frac{1}{T_i n_J}\sum_{k=1}^{T_i}\sum_{j=1}^{n_J}
+  \mathbb{I}\!\big(q_{i,j}[k]\notin[q_j^{\min},q_j^{\max}]\big).
+  \end{equation*}
 
-  \item K7: Control Smoothness (Jerk), a measure of actuation smoothness, computed as the second difference of joint torques. Lower values indicate smoother control.\\
-  $\Delta^2\tau_i[k]=\tau_i[k+2]-2\tau_i[k+1]+\tau_i[k], \\\qquad
-  K7=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}}\frac{1}{T_i-2}\sum_{k=1}^{T_i-2}\|\Delta^2\tau_i[k]\|_2.$
+  \item \textbf{K7} --- \emph{Control Smoothness (Jerk)}: second difference of joint torques; lower values indicate smoother, less chattering actuation.
+  \begin{equation*}
+  \Delta^2\tau_i[k]=\tau_i[k+2]-2\tau_i[k+1]+\tau_i[k], \quad
+  K7=\frac{1}{N_{\text{eval}}}\sum_{i=1}^{N_{\text{eval}}}\frac{1}{T_i-2}\sum_{k=1}^{T_i-2}\|\Delta^2\tau_i[k]\|_2.
+  \end{equation*}
 
-  \item K8: Mean Base Angular Velocity, a measure of residual base rotation (rad/s) during the task (lower is better, ideally zero).\\
-  $K8=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}}\frac{1}{T_i}\sum_{k=1}^{T_i}\|\omega_{b,i}[k]\|_2.$
+  \item \textbf{K8} --- \emph{Mean Base Angular Velocity}: residual spacecraft rotation rate during the task (rad/s); lower is better, ideally zero.
+  \begin{equation*}
+  K8=\frac{1}{N_{\text{eval}}}\sum_{i=1}^{N_{\text{eval}}}\frac{1}{T_i}\sum_{k=1}^{T_i}\|\omega_{b,i}[k]\|_2.
+  \end{equation*}
 
-  \item K9: Energy Consumption, approximate average energy expended by the joints (e.g., $\int(\tau \cdot \dot q) dt$ using an absolute-power proxy). Lower energy usage 
-  is better if achieved without sacrificing performance.\\
-  $E_i=\int\sum_{j=1}^{n_J}\big|\tau_{i,j}(t)\dot q_{i,j}(t)\big|\,dt, \\\qquad
-  K9=\frac{1}{N_{eval}}\sum_{i=1}^{N_{eval}} E_i.$
+  \item \textbf{K9} --- \emph{Energy Consumption}: average absolute mechanical power integrated over each episode; lower is better when not at the expense of tracking quality.
+  \begin{equation*}
+  E_i=\int\sum_{j=1}^{n_J}\big|\tau_{i,j}(t)\,\dot q_{i,j}(t)\big|\,dt, \qquad
+  K9=\frac{1}{N_{\text{eval}}}\sum_{i=1}^{N_{\text{eval}}} E_i.
+  \end{equation*}
 \end{itemize}
 
 
