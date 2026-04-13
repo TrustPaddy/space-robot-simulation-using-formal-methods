@@ -587,6 +587,10 @@ agents.
 \end{itemize}
 
 
+\begin{rthreehl}
+\hlthree{[R3.6]} Two KPIs deserve explicit justification in the space mission context. \textbf{K7 (Control Smoothness)} captures high-frequency torque oscillations (chattering): in space, such oscillations cause accelerated mechanical wear on actuators that cannot be serviced or replaced on orbit, excite structural vibrations that degrade the pointing accuracy of sensitive instruments such as cameras or star trackers, and dissipate energy through rapid back-and-forth motion. Minimizing K7 therefore directly prolongs hardware lifetime and protects mission-critical payloads. \textbf{K9 (Energy Consumption)} reflects the mechanical work performed by the joints, approximated as $\int |\tau \cdot \dot{q}|\,dt$. Onboard power is strictly limited by solar panel area and battery capacity; every joule spent on control actuation reduces the budget available for communication, thermal management, and payload operation. Reducing K9 without sacrificing tracking accuracy therefore has direct operational value, extending mission lifetime and lowering the thermal load on electronic components.
+\end{rthreehl}
+
 \noindent
 Additionally, we consider training-related metrics for comparison: T1: variance of the episodic reward
 in the later stage of training (indicating training stability), T2: variance of the value function or
@@ -752,6 +756,11 @@ learns with a form of built-in “safety shield.” This approach demonstrates a
 RL in safety-critical domains like space robotics, where pure trial-and-error without safeguards would be
 unacceptable. We next analyze the performance outcomes of the various RL agents under these
 conditions.
+
+\begin{rthreehl}
+\hlthree{[R3.5]} \textbf{Computational Overhead and Scalability:} The three safety monitors --- momentum observer, collision distance checker, and joint-limit assertion --- each consist of simple algebraic operations over the robot's link states, scaling as $\mathcal{O}(n_{\text{links}})$ per time step. For the 4-DOF arm considered here, this overhead is negligible compared to the physics simulation itself. End-to-end training times, including the full safety stack, are reported as metric T3 in \autoref{tab:kpi_comp}: they range from approximately 8 minutes (PG, PPO) to 38 minutes (TD3) for 1000 episodes on a standard workstation (AMD Ryzen 7 7700, 32 GB RAM). For onboard deployment, only the learned policy network needs to execute in the control loop: the two hidden-layer network (128 units per layer, $\approx$\,17\,000 parameters) requires only a small number of matrix multiplications and can comfortably run at 10 Hz on modern space-qualified embedded processors (e.g., ARM Cortex-A series). The safety monitors can be retained as lightweight parallel watchdog processes, or reduced to the most safety-critical checks (torque saturation, joint-limit assertion) with minimal additional compute. This modular architecture makes the approach scalable to resource-constrained onboard systems.
+\end{rthreehl}
+
 \begin{figure}[!b]
 	\centering
 	\includegraphics[width=\linewidth]{Figures/verify_tau_reslult.png}

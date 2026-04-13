@@ -48,8 +48,8 @@
 | R3.2 | Simulationsannahmen explizit nennen und begründen (ideal sensing, kein Rauschen, perfekte Simulation) | ✅ |
 | R3.3 | Vergleich mit anderen Simulationsplattformen (Gazebo, MuJoCo) — Vor-/Nachteile von MATLAB/Simulink | ⬜ |
 | R3.4 | Sensitivitätsanalyse der Reward-Gewichte (= R2.5) | 🔬 |
-| R3.5 | Skalierbarkeit der Safety-Mechanismen für Onboard-Systeme diskutieren (Computational Overhead) | ⬜ |
-| R3.6 | Energie- und Smoothness-KPIs im Kontext von Weltraummissionen besser begründen | ⬜ |
+| R3.5 | Skalierbarkeit der Safety-Mechanismen für Onboard-Systeme diskutieren (Computational Overhead) | ✅ |
+| R3.6 | Energie- und Smoothness-KPIs im Kontext von Weltraummissionen besser begründen | ✅ |
 | R3.7 | Statistische Signifikanztests (Konfidenzintervalle, Hypothesentests) für Leistungsvergleiche | 📊 |
 | R3.8 | Systematische Hyperparameter-Suche beschreiben (Grid Search, Bayesian Opt.) | ✅ (grün, überschneidet R2.10) |
 | R3.9 | Sim-to-Real Transfer: Domain Shift, Onboard Compute, Hardware Constraints diskutieren | ✅ |
