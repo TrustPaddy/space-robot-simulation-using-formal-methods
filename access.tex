@@ -1073,11 +1073,13 @@ smooth actuation, and reduced energy consumption. This validates the approach of
 \subsection{Ablation Study of Reward Components}\label{sec:reward_ablation}
 \begin{rtwohl}
 \hltwo{[R2.6]} To quantify the contribution of each individual term in the composite reward function defined in~\autoref{eq:reward},
-we performed an ablation study in which the optimized PPO agent was retrained on the circular trajectory with each weight in turn
-set to zero while keeping all remaining weights at their baseline values ($W_p=150$, $W_v=25$, $W_{\mathrm{ori}}=200$, $W_{wb}=8$,
-$W_{vb}=2$, $W_u=0.02$, $W_d=0.06$). All other aspects of the training and evaluation pipeline (hyperparameters, random seeds,
-episode horizon, and the $N_{eval}=30$ evaluation protocol) were held identical to the baseline configuration.
-The resulting KPIs are summarized in~\autoref{tab:reward_ablation}.
+we performed an ablation study in which the optimized PPO agent was retrained on the circular trajectory with one reward component
+disabled at a time. Each of the seven weights in the cost term $c_t$ was set to zero in turn while keeping the remaining six at
+their baseline values ($W_p=150$, $W_v=25$, $W_{\mathrm{ori}}=200$, $W_{wb}=8$, $W_{vb}=2$, $W_u=0.02$, $W_d=0.06$). In addition,
+we separately disabled the two positive reward terms by setting $r_{\text{prog}}=0$ and $r_{\text{bonus}}=0$, respectively,
+to isolate the contribution of the progress signal and the proximity bonus. All other aspects of the training and evaluation
+pipeline (hyperparameters, random seeds, episode horizon, and the $N_{eval}=30$ evaluation protocol) were held identical to
+the baseline configuration. The resulting KPIs are summarized in~\autoref{tab:reward_ablation}.
 \end{rtwohl}
 
 \begin{table}[!t]
@@ -1099,6 +1101,8 @@ The resulting KPIs are summarized in~\autoref{tab:reward_ablation}.
         $W_{vb} = 0$        & $-1.31$            & $0.039$           & $0.054$          & $0.0004$          & $0.670$          & 3.192 \\
         $W_u = 0$           & $-1.32$            & $0.037$           & $0.060$          & $0$               & $0.618$          & 3.856 \\
         $W_d = 0$           & $-1.10$            & $0.029$           & $0.057$          & $0.0003$          & $0.632$          & 3.724 \\
+        $r_{\text{prog}} = 0$   & $-3.65$        & $0.075$           & $0.049$          & $0.0173$          & $0.618$          & 3.365 \\
+        $r_{\text{bonus}} = 0$  & $-3.96$        & $0.076$           & $0.057$          & $3.8\mathrm{e}{-5}$ & $0.627$        & 4.078 \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -1121,16 +1125,27 @@ individually load-bearing for task completion.
 increases tracking error (K2) and roughly doubles the jerk metric K7, while K1 remains around $-1.3$. This confirms that these
 terms primarily shape actuation smoothness rather than task completion.
 
+\noindent\textbf{Positive reward terms ($r_{\text{prog}}$, $r_{\text{bonus}}$).} Removing either of the two positive reward terms
+causes a pronounced performance drop, with K1 falling to $-3.65$ and $-3.96$, respectively, and the tracking error K2 increasing
+by roughly an order of magnitude (from $0.0083$ to $\approx 0.075$). Without $r_{\text{prog}}$, the agent loses the dense
+directional signal that rewards incremental reduction of the position error, and the joint-limit violation rate K6 rises to
+$1.73\%$ — indicating that the agent tends to execute more aggressive motions when deprived of step-wise progress feedback.
+Without $r_{\text{bonus}}$, the agent lacks the local attractor near the reference trajectory and fails to refine tracking
+in the terminal phase. Both terms are therefore not merely cosmetic shaping; they are essential for training-time convergence
+and for the final tracking accuracy of the policy.
+
 \noindent\textbf{Note on the energy metric K9.} K9 appears \emph{lower} in every ablation variant than in the baseline ($5.314$).
 This does not indicate improved energy efficiency; rather, it is an artifact of earlier episode termination when the agent fails
 (e.g., collision or excessive orientation error), which truncates the integration window. K9 should therefore only be interpreted
 jointly with K1, K2, and K4.
 
-\noindent\textbf{Summary.} The ablation confirms that $W_{\mathrm{ori}}$ and $W_p$ are the two dominant components of the composite
-reward, while the remaining five weights contribute refinements in motion quality, base velocity damping, and actuation smoothness.
-Removing any single secondary weight still yields a functioning, if degraded, policy, whereas removing $W_{\mathrm{ori}}$ breaks
-the free-floating controller entirely. This supports the reward design choices reported in~\autoref{RL} and shows that the
-benchmark conclusions do not rely on fine balancing of low-weight terms.
+\noindent\textbf{Summary.} The ablation confirms that $W_{\mathrm{ori}}$ and $W_p$ are the two dominant cost components of the
+composite reward, while the remaining five cost weights contribute refinements in motion quality, base velocity damping, and
+actuation smoothness. Both positive reward terms ($r_{\text{prog}}$ and $r_{\text{bonus}}$) are additionally shown to be load-bearing
+for training-time convergence and final tracking accuracy. Removing any single secondary cost weight still yields a functioning,
+if degraded, policy, whereas removing $W_{\mathrm{ori}}$, $W_p$, or either of the positive reward terms leads to a clearly
+degraded controller. This supports the reward design choices reported in~\autoref{RL} and shows that the benchmark conclusions
+do not rely on fine balancing of low-weight terms.
 \end{rtwohl}
 
 \subsection{Piecewise-Linear Trajectory}
