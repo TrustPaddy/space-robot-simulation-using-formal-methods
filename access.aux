@@ -187,39 +187,45 @@
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rtwo}}\texthl  {[R2.6]}} Ablation study of the reward components. Each row corresponds to a separately retrained optimized PPO agent with one reward weight set to zero. KPIs are averaged over $N_{eval}=30$ evaluation episodes on the circular trajectory.}}{17}{table.caption.19}\protected@file@percent }
 \newlabel{tab:reward_ablation}{{6}{17}{\hltwo {[R2.6]} Ablation study of the reward components. Each row corresponds to a separately retrained optimized PPO agent with one reward weight set to zero. KPIs are averaged over $N_{eval}=30$ evaluation episodes on the circular trajectory}{table.caption.19}{}}
 \newlabel{tab:reward_ablation@cref}{{[table][6][]6}{[1][17][]17}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-C}}Piecewise-Linear Trajectory}{18}{subsection.7.3}\protected@file@percent }
-\newlabel{eq:linear_traj}{{5}{18}{Piecewise-Linear Trajectory}{equation.5}{}}
-\newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][18][]18}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}}{18}{table.caption.22}\protected@file@percent }
-\newlabel{tab:ppo_linear_kpi}{{7}{18}{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better)}{table.caption.22}{}}
-\newlabel{tab:ppo_linear_kpi@cref}{{[table][7][]7}{[1][18][]18}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-C}}Sensitivity Analysis of Reward Weights}{18}{subsection.7.3}\protected@file@percent }
+\newlabel{sec:reward_sensitivity}{{\mbox  {VII-C}}{18}{Sensitivity Analysis of Reward Weights}{subsection.7.3}{}}
+\newlabel{sec:reward_sensitivity@cref}{{[subsection][3][7]\mbox  {VII-C}}{[1][18][]18}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces {\def \textcolor {yellow}{\textcolor {roverlap}}\texthl  {[R2.5/R3.4]}} One-at-a-time sensitivity analysis of the four dominant reward weights. Each row corresponds to a separately retrained optimized PPO agent with one weight multiplied by $\times 2$ or $\times 0.5$ around its baseline value, all other weights and training settings held constant. KPIs are averaged over $N_{eval}=30$ evaluation episodes on the circular trajectory.}}{18}{table.caption.20}\protected@file@percent }
+\newlabel{tab:reward_sensitivity}{{7}{18}{\hloverlap {[R2.5/R3.4]} One-at-a-time sensitivity analysis of the four dominant reward weights. Each row corresponds to a separately retrained optimized PPO agent with one weight multiplied by $\times 2$ or $\times 0.5$ around its baseline value, all other weights and training settings held constant. KPIs are averaged over $N_{eval}=30$ evaluation episodes on the circular trajectory}{table.caption.20}{}}
+\newlabel{tab:reward_sensitivity@cref}{{[table][7][]7}{[1][18][]18}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-D}}Piecewise-Linear Trajectory}{19}{subsection.7.4}\protected@file@percent }
+\newlabel{eq:linear_traj}{{5}{19}{Piecewise-Linear Trajectory}{equation.5}{}}
+\newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][19][]19}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}}{19}{table.caption.23}\protected@file@percent }
+\newlabel{tab:ppo_linear_kpi}{{8}{19}{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better)}{table.caption.23}{}}
+\newlabel{tab:ppo_linear_kpi@cref}{{[table][8][]8}{[1][19][]19}{}{}{}}
 \citation{b1,b7}
 \citation{b8}
 \citation{b15,b23,b22}
 \citation{b22,b24}
-\newlabel{fig:r_traj_default}{{14a}{19}{PPO (Default)}{figure.caption.20}{}}
-\newlabel{fig:r_traj_default@cref}{{[subfigure][1][14]14a}{[1][18][]19}{}{}{}}
-\newlabel{sub@fig:r_traj_default}{{a}{19}{PPO (Default)}{figure.caption.20}{}}
-\newlabel{sub@fig:r_traj_default@cref}{{[subfigure][1][14]14a}{[1][18][]19}{}{}{}}
-\newlabel{fig:r_traj_opt}{{14b}{19}{PPO (Optimized)}{figure.caption.20}{}}
-\newlabel{fig:r_traj_opt@cref}{{[subfigure][2][14]14b}{[1][18][]19}{}{}{}}
-\newlabel{sub@fig:r_traj_opt}{{b}{19}{PPO (Optimized)}{figure.caption.20}{}}
-\newlabel{sub@fig:r_traj_opt@cref}{{[subfigure][2][14]14b}{[1][18][]19}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Target/actual comparison of the ramp end-effector trajectory in the XY plane.}}{19}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:r_trajektorie_xy_compare}{{14}{19}{Target/actual comparison of the ramp end-effector trajectory in the XY plane}{figure.caption.20}{}}
-\newlabel{fig:r_trajektorie_xy_compare@cref}{{[figure][14][]14}{[1][18][]19}{}{}{}}
-\newlabel{fig:r_basis_default}{{15a}{19}{PPO (Default)}{figure.caption.21}{}}
-\newlabel{fig:r_basis_default@cref}{{[subfigure][1][15]15a}{[1][18][]19}{}{}{}}
-\newlabel{sub@fig:r_basis_default}{{a}{19}{PPO (Default)}{figure.caption.21}{}}
-\newlabel{sub@fig:r_basis_default@cref}{{[subfigure][1][15]15a}{[1][18][]19}{}{}{}}
-\newlabel{fig:r_basis_opt}{{15b}{19}{PPO (Optimized)}{figure.caption.21}{}}
-\newlabel{fig:r_basis_opt@cref}{{[subfigure][2][15]15b}{[1][18][]19}{}{}{}}
-\newlabel{sub@fig:r_basis_opt}{{b}{19}{PPO (Optimized)}{figure.caption.21}{}}
-\newlabel{sub@fig:r_basis_opt@cref}{{[subfigure][2][15]15b}{[1][18][]19}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Course of base orientation (quaternion components) during a test episode with ramp trajectory.}}{19}{figure.caption.21}\protected@file@percent }
-\newlabel{fig:r_basis_orientation_compare}{{15}{19}{Course of base orientation (quaternion components) during a test episode with ramp trajectory}{figure.caption.21}{}}
-\newlabel{fig:r_basis_orientation_compare@cref}{{[figure][15][]15}{[1][18][]19}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{19}{section.8}\protected@file@percent }
+\newlabel{fig:r_traj_default}{{14a}{20}{PPO (Default)}{figure.caption.21}{}}
+\newlabel{fig:r_traj_default@cref}{{[subfigure][1][14]14a}{[1][19][]20}{}{}{}}
+\newlabel{sub@fig:r_traj_default}{{a}{20}{PPO (Default)}{figure.caption.21}{}}
+\newlabel{sub@fig:r_traj_default@cref}{{[subfigure][1][14]14a}{[1][19][]20}{}{}{}}
+\newlabel{fig:r_traj_opt}{{14b}{20}{PPO (Optimized)}{figure.caption.21}{}}
+\newlabel{fig:r_traj_opt@cref}{{[subfigure][2][14]14b}{[1][19][]20}{}{}{}}
+\newlabel{sub@fig:r_traj_opt}{{b}{20}{PPO (Optimized)}{figure.caption.21}{}}
+\newlabel{sub@fig:r_traj_opt@cref}{{[subfigure][2][14]14b}{[1][19][]20}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Target/actual comparison of the ramp end-effector trajectory in the XY plane.}}{20}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:r_trajektorie_xy_compare}{{14}{20}{Target/actual comparison of the ramp end-effector trajectory in the XY plane}{figure.caption.21}{}}
+\newlabel{fig:r_trajektorie_xy_compare@cref}{{[figure][14][]14}{[1][19][]20}{}{}{}}
+\newlabel{fig:r_basis_default}{{15a}{20}{PPO (Default)}{figure.caption.22}{}}
+\newlabel{fig:r_basis_default@cref}{{[subfigure][1][15]15a}{[1][19][]20}{}{}{}}
+\newlabel{sub@fig:r_basis_default}{{a}{20}{PPO (Default)}{figure.caption.22}{}}
+\newlabel{sub@fig:r_basis_default@cref}{{[subfigure][1][15]15a}{[1][19][]20}{}{}{}}
+\newlabel{fig:r_basis_opt}{{15b}{20}{PPO (Optimized)}{figure.caption.22}{}}
+\newlabel{fig:r_basis_opt@cref}{{[subfigure][2][15]15b}{[1][19][]20}{}{}{}}
+\newlabel{sub@fig:r_basis_opt}{{b}{20}{PPO (Optimized)}{figure.caption.22}{}}
+\newlabel{sub@fig:r_basis_opt@cref}{{[subfigure][2][15]15b}{[1][19][]20}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Course of base orientation (quaternion components) during a test episode with ramp trajectory.}}{20}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:r_basis_orientation_compare}{{15}{20}{Course of base orientation (quaternion components) during a test episode with ramp trajectory}{figure.caption.22}{}}
+\newlabel{fig:r_basis_orientation_compare@cref}{{[figure][15][]15}{[1][19][]20}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{20}{section.8}\protected@file@percent }
 \citation{b8,b22}
 \citation{b5,b22}
 \citation{b8}
@@ -269,15 +275,15 @@
 \bibcite{b29}{40}
 \bibcite{b30}{41}
 \bibcite{b4}{42}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Our testbed for In-Space Robotized Services.}}{22}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:physicaltestbed}{{16}{22}{Our testbed for In-Space Robotized Services}{figure.caption.24}{}}
+\newlabel{fig:physicaltestbed@cref}{{[figure][16][]16}{[1][21][]22}{}{}{}}
+\@writefile{toc}{\contentsline {section}{REFERENCES}{22}{section*.26}\protected@file@percent }
 \bibcite{b16}{43}
 \bibcite{b8}{44}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Our testbed for In-Space Robotized Services.}}{21}{figure.caption.23}\protected@file@percent }
-\newlabel{fig:physicaltestbed}{{16}{21}{Our testbed for In-Space Robotized Services}{figure.caption.23}{}}
-\newlabel{fig:physicaltestbed@cref}{{[figure][16][]16}{[1][20][]21}{}{}{}}
-\@writefile{toc}{\contentsline {section}{REFERENCES}{21}{section*.25}\protected@file@percent }
 \bibcite{deeplTr}{45}
 \bibcite{deeplWr}{46}
 \bibcite{openai_chatgpt}{47}
-\@writefile{toc}{\contentsline {subsection}{Patrick S. Ermisch}{22}{section*.26}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{Eric Guiffo Kaigom}{22}{section*.26}\protected@file@percent }
-\gdef \@abspage@last{22}
+\@writefile{toc}{\contentsline {subsection}{Patrick S. Ermisch}{23}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Eric Guiffo Kaigom}{23}{section*.27}\protected@file@percent }
+\gdef \@abspage@last{23}

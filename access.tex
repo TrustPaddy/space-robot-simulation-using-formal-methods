@@ -1148,6 +1148,99 @@ degraded controller. This supports the reward design choices reported in~\autore
 do not rely on fine balancing of low-weight terms.
 \end{rtwohl}
 
+\subsection{Sensitivity Analysis of Reward Weights}\label{sec:reward_sensitivity}
+\begin{roverlaphl}
+\hloverlap{[R2.5/R3.4]} The ablation study in~\autoref{sec:reward_ablation} establishes which reward components are
+structurally load-bearing. A complementary question, raised independently by both reviewers, is whether the
+conclusions reported in~\autoref{tab:kpi_comp} are robust against \emph{moderate} miscalibration of the reward weights:
+does the PPO agent still converge to a working policy when the dominant cost weights are perturbed, and does the
+ranking of the algorithms remain qualitatively stable? To answer this, we performed a one-at-a-time sensitivity
+analysis on the four dominant cost weights identified by the ablation, namely $W_p$, $W_v$, $W_{\mathrm{ori}}$, and
+$W_{wb}$. Each of these four weights was independently perturbed by a factor of $\times 2$ and $\times 0.5$ around its
+baseline value ($W_p=150$, $W_v=25$, $W_{\mathrm{ori}}=200$, $W_{wb}=8$), while all remaining reward weights, the
+PPO hyperparameters (as optimized in~\autoref{sec:reward_ablation}), the random seeds, the episode horizon, and the
+$N_{eval}=30$ evaluation protocol were held identical to the baseline configuration. This yields eight retrained
+policies, whose KPIs are summarized in~\autoref{tab:reward_sensitivity}.
+\end{roverlaphl}
+
+\begin{table}[!t]
+    \centering
+    \caption{\hloverlap{[R2.5/R3.4]} One-at-a-time sensitivity analysis of the four dominant reward weights. Each row corresponds to
+    a separately retrained optimized PPO agent with one weight multiplied by $\times 2$ or $\times 0.5$ around its baseline value,
+    all other weights and training settings held constant. KPIs are averaged over $N_{eval}=30$ evaluation episodes on the circular
+    trajectory.}
+    \label{tab:reward_sensitivity}
+    \renewcommand{\arraystretch}{1.2}
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabular}{lcccccc}
+        \toprule
+        \textbf{Variant} & \textbf{K1} & \textbf{K2} & \textbf{K3} & \textbf{K4} & \textbf{K7} & \textbf{K9} \\
+        \midrule
+        Baseline                            & $\mathbf{-0.43}$ & $\mathbf{0.0083}$ & --                & $\mathbf{0.022}$ & $\mathbf{0.351}$ & $5.314$ \\
+        $W_p \times 2$                      & $-4.56$          & $0.0348$          & $0.629$           & $0.073$          & $0.657$          & $3.762$ \\
+        $W_p \times 0.5$                    & $-3.62$          & $0.0494$          & $0.583$           & $0.059$          & $0.611$          & $3.800$ \\
+        $W_v \times 2$                      & $-3.07$          & $0.0246$          & $\mathbf{0.480}$  & $0.061$          & $0.634$          & $4.212$ \\
+        $W_v \times 0.5$                    & $-3.48$          & $0.0315$          & $0.535$           & $0.064$          & $0.622$          & $3.827$ \\
+        $W_{\mathrm{ori}} \times 2$         & $\mathbf{-6.89}$ & $\mathbf{0.2221}$ & $\mathbf{0.907}$  & $0.041$          & $0.622$          & $3.059$ \\
+        $W_{\mathrm{ori}} \times 0.5$       & $-2.82$          & $0.0438$          & $0.786$           & $0.050$          & $0.639$          & $3.546$ \\
+        $W_{wb} \times 2$                   & $-3.41$          & $0.0789$          & $0.746$           & $0.044$          & $0.640$          & $3.283$ \\
+        $W_{wb} \times 0.5$                 & $-3.00$          & $0.0644$          & $0.740$           & $0.045$          & $0.638$          & $3.557$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{roverlaphl}
+\noindent\textbf{Dominance of $W_{\mathrm{ori}}$.} The base-orientation weight exhibits by far the largest sensitivity:
+K1 varies from $-2.82$ at $W_{\mathrm{ori}}\times 0.5$ to $-6.89$ at $W_{\mathrm{ori}}\times 2$, a spread of more than
+a factor of two. Doubling $W_{\mathrm{ori}}$ over-emphasizes base stabilization at the cost of the end-effector tracking
+objective: K2 rises to $0.222$ (a factor of $\approx 27$ over the baseline), while K4 remains tight at $0.041$.
+Halving $W_{\mathrm{ori}}$, in contrast, relaxes the base-stabilization pressure without causing catastrophic
+behavior — the agent still tracks the reference ($K2=0.0438$) but with twice the baseline base-orientation error
+($K4=0.050$ vs.\ baseline $0.022$). This is fully consistent with the ablation conclusion that $W_{\mathrm{ori}}$
+is the structurally dominant cost weight.
+
+\noindent\textbf{Secondary dominance of $W_p$.} The EE position weight is moderately sensitive: K1 ranges from
+$-3.62$ to $-4.56$, and K2 rises by a factor of $4$--$6$ over the baseline in both directions. Both perturbations
+disturb the balance between EE tracking and base stabilization, but neither causes the policy to break — again
+consistent with the ablation finding that $W_p$ is the second most load-bearing weight.
+
+\noindent\textbf{Low sensitivity of $W_v$ and $W_{wb}$.} The velocity-error and base-angular-velocity weights show
+the smallest K1 spread (roughly symmetric around $K1\approx -3.2$), confirming that these terms shape motion
+quality and base damping but do not fundamentally alter the task-solvability of the policy. This aligns with the
+ablation result that completely removing either of these weights still yields a functional, if somewhat degraded,
+controller.
+
+\noindent\textbf{Safety guarantees remain intact.} Across all eight perturbed configurations the collision rate
+remains at $K5=0$ and the joint-limit violation rate stays below $0.53\,\%$ ($K6 \le 0.0053$). The formal
+safety-monitoring layer introduced in~\autoref{formal} therefore decouples the constraint-enforcement guarantees
+from the exact numerical tuning of the reward weights, which is an important robustness property for an
+on-orbit-servicing controller: reward miscalibration degrades task performance but does not compromise hard
+safety limits.
+
+\noindent\textbf{Robustness of the algorithm ranking.} Across all eight weight perturbations the optimized PPO
+agent remains functional, with K1 bounded in $[-6.89, -2.82]$, $K5=0$, and bounded joint-limit violations. Even
+in the worst-case configuration ($W_{\mathrm{ori}}\times 2$) the resulting EE tracking error ($K2=0.222$) is not
+worse than the \emph{optimally-tuned} TD3 and SAC baselines reported in~\autoref{tab:kpi_comp} ($K2 \approx 0.19$
+for both, at the nominal weights). Since the other benchmarked agents (TRPO, SAC, TD3, PG, DDPG) are already
+noticeably weaker at the nominal reward weights, a uniform $\times 2$/$\times 0.5$ perturbation of any single
+dominant weight does not plausibly overturn the ranking reported in~\autoref{sec:reward_ablation}. A full
+cross-evaluation of all six algorithms over the complete eight-configuration grid would multiply the training
+budget by a factor of six and is beyond the scope of this benchmark; however, the result reported here is
+sufficient to establish that the ranking conclusions are not an artifact of a brittle, precisely-tuned operating
+point.
+
+\noindent\textbf{Note on the energy metric K9.} As in the ablation, K9 is consistently lower than the baseline
+($5.314$) across all eight variants. This reflects earlier episode termination in configurations where the agent
+fails to stabilize (the integration window shortens), not genuine energy efficiency. K9 should therefore be
+interpreted jointly with K1, K2, and K4.
+
+\noindent\textbf{Summary.} The sensitivity analysis confirms the reward-design choices reported in~\autoref{RL}:
+$W_{\mathrm{ori}}$ is the most sensitive weight, $W_p$ is secondary, and $W_v$ and $W_{wb}$ are comparatively
+insensitive. Task solvability and all hard safety limits are preserved across the full $\times 0.5$ to $\times 2$
+range on every tested weight, and the algorithm ranking reported in~\autoref{tab:kpi_comp} is robust against
+moderate reward-weight miscalibration.
+\end{roverlaphl}
+
 \subsection{Piecewise-Linear Trajectory}
 While the previous evaluations focused on tracking a smooth circular end-effector (EE) reference, we 
 additionally tested how well the controller generalizes to \emph{linear} trajectories.

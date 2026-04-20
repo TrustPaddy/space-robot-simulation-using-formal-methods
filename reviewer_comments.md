@@ -25,7 +25,7 @@
 | R2.2 | Related Work in 4 Kategorien gliedern: Classical Control, RL-based, Hybrid Safety-Aware, Benchmarking — jeweils mit Vor-/Nachteilen | ✅ |
 | R2.3 | Tabelle um Spalten erweitern: DOF, Simulator, Obs./Act.-Dim., Safety Limits, Eval. Metriken | ✅ |
 | R2.4 | Reward-Funktion mit konkreten Gewichtswerten definieren + physikalische Intuition erklären | ✅ |
-| R2.5 | Sensitivitätsanalyse der Reward-Gewichte (Stabilität der Algorithmen-Reihenfolge prüfen) | 🔬 |
+| R2.5 | Sensitivitätsanalyse der Reward-Gewichte (Stabilität der Algorithmen-Reihenfolge prüfen) | ✅ (grün, überschneidet R3.4) |
 | R2.6 | Ablation Study: Einfluss jeder Reward-Komponente auf das Ergebnis | ✅ |
 | R2.7 | Failure Penalty im Verhältnis zur Reward-Skala begründen + Einfluss auf Policy-Lernen erklären | ✅ |
 | R2.8 | Anzahl Trainingsläufe, Seed-Werte und Policy-Selection-Prozedur klar beschreiben | ✅ |
@@ -47,7 +47,7 @@
 | R3.1 | Novelty gegenüber bestehenden Arbeiten expliziter hervorheben, klare Abgrenzung zu Tab. 1 | ✅ |
 | R3.2 | Simulationsannahmen explizit nennen und begründen (ideal sensing, kein Rauschen, perfekte Simulation) | ✅ |
 | R3.3 | Vergleich mit anderen Simulationsplattformen (Gazebo, MuJoCo) — Vor-/Nachteile von MATLAB/Simulink | ⬜ |
-| R3.4 | Sensitivitätsanalyse der Reward-Gewichte (= R2.5) | 🔬 |
+| R3.4 | Sensitivitätsanalyse der Reward-Gewichte (= R2.5) | ✅ (grün, überschneidet R2.5) |
 | R3.5 | Skalierbarkeit der Safety-Mechanismen für Onboard-Systeme diskutieren (Computational Overhead) | ✅ |
 | R3.6 | Energie- und Smoothness-KPIs im Kontext von Weltraummissionen besser begründen | ✅ |
 | R3.7 | Statistische Signifikanztests (Konfidenzintervalle, Hypothesentests) für Leistungsvergleiche | 📊 |
