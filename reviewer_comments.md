@@ -26,7 +26,7 @@
 | R2.3 | Tabelle um Spalten erweitern: DOF, Simulator, Obs./Act.-Dim., Safety Limits, Eval. Metriken | ✅ |
 | R2.4 | Reward-Funktion mit konkreten Gewichtswerten definieren + physikalische Intuition erklären | ✅ |
 | R2.5 | Sensitivitätsanalyse der Reward-Gewichte (Stabilität der Algorithmen-Reihenfolge prüfen) | 🔬 |
-| R2.6 | Ablation Study: Einfluss jeder Reward-Komponente auf das Ergebnis | 🔬 |
+| R2.6 | Ablation Study: Einfluss jeder Reward-Komponente auf das Ergebnis | ✅ |
 | R2.7 | Failure Penalty im Verhältnis zur Reward-Skala begründen + Einfluss auf Policy-Lernen erklären | ✅ |
 | R2.8 | Anzahl Trainingsläufe, Seed-Werte und Policy-Selection-Prozedur klar beschreiben | ✅ |
 | R2.9 | Gleichwertige Hyperparameter-Optimierung für alle RL-Algorithmen (nicht nur PPO) | 🔬 |

@@ -1067,8 +1067,71 @@ The optimized PPO also eliminated all safety violations (K5\,=\,K6\,=\,0 over 30
 improved torque smoothness (K7: 0.6812$\to$0.351), and reduced energy consumption by 16\% (K9: 6.325$\to$5.314). Notably, better tracking, base stability, safety, 
 and energy efficiency were all achieved in parallel, indicating a fundamentally more efficient control strategy.
 
-The optimized PPO agent fulfills all task objectives simultaneously: precise trajectory tracking, minimal base disturbance, zero safety violations, 
+The optimized PPO agent fulfills all task objectives simultaneously: precise trajectory tracking, minimal base disturbance, zero safety violations,
 smooth actuation, and reduced energy consumption. This validates the approach of systematic hyperparameter tuning and network tailoring for safety-critical space robot control.
+
+\subsection{Ablation Study of Reward Components}\label{sec:reward_ablation}
+\begin{rtwohl}
+\hltwo{[R2.6]} To quantify the contribution of each individual term in the composite reward function defined in~\autoref{eq:reward},
+we performed an ablation study in which the optimized PPO agent was retrained on the circular trajectory with each weight in turn
+set to zero while keeping all remaining weights at their baseline values ($W_p=150$, $W_v=25$, $W_{\mathrm{ori}}=200$, $W_{wb}=8$,
+$W_{vb}=2$, $W_u=0.02$, $W_d=0.06$). All other aspects of the training and evaluation pipeline (hyperparameters, random seeds,
+episode horizon, and the $N_{eval}=30$ evaluation protocol) were held identical to the baseline configuration.
+The resulting KPIs are summarized in~\autoref{tab:reward_ablation}.
+\end{rtwohl}
+
+\begin{table}[!t]
+    \centering
+    \caption{\hltwo{[R2.6]} Ablation study of the reward components. Each row corresponds to a separately retrained optimized PPO
+    agent with one reward weight set to zero. KPIs are averaged over $N_{eval}=30$ evaluation episodes on the circular trajectory.}
+    \label{tab:reward_ablation}
+    \renewcommand{\arraystretch}{1.2}
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabular}{lcccccc}
+        \toprule
+        \textbf{Variant} & \textbf{K1} & \textbf{K2} & \textbf{K4} & \textbf{K6} & \textbf{K7} & \textbf{K9} \\
+        \midrule
+        Baseline            & $\mathbf{-0.43}$   & $\mathbf{0.0083}$ & $\mathbf{0.022}$ & $\mathbf{0}$      & $\mathbf{0.351}$ & 5.314 \\
+        $W_p = 0$           & $-6.48$            & $0.238$           & $0.046$          & $0$               & $0.626$          & 2.868 \\
+        $W_v = 0$           & $-0.85$            & $0.022$           & $0.049$          & $0.0015$          & $0.655$          & 3.561 \\
+        $W_{\mathrm{ori}}=0$& $\mathbf{-23.65}$  & $0.017$           & $\mathbf{0.668}$ & $0.047$           & $0.588$          & 4.363 \\
+        $W_{wb} = 0$        & $-1.17$            & $0.032$           & $0.059$          & $0.0022$          & $0.657$          & 3.554 \\
+        $W_{vb} = 0$        & $-1.31$            & $0.039$           & $0.054$          & $0.0004$          & $0.670$          & 3.192 \\
+        $W_u = 0$           & $-1.32$            & $0.037$           & $0.060$          & $0$               & $0.618$          & 3.856 \\
+        $W_d = 0$           & $-1.10$            & $0.029$           & $0.057$          & $0.0003$          & $0.632$          & 3.724 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{rtwohl}
+\noindent\textbf{Dominant weights ($W_{\mathrm{ori}}$, $W_p$).} Removing the base-orientation penalty is catastrophic: the mean
+episodic reward K1 collapses from $-0.43$ to $-23.65$, and the mean base-orientation error K4 rises by more than an order of
+magnitude (from $0.022$ to $0.668$). Interestingly, the end-effector tracking error K2 even decreases slightly, which reveals that
+without $W_{\mathrm{ori}}$ the agent optimizes EE tracking at the expense of completely losing base stabilization. Because base
+stability is the primary challenge in free-floating manipulation, this confirms that $W_{\mathrm{ori}}$ is structurally essential
+rather than merely fine-tuning the behavior. Removing $W_p$ degrades EE tracking severely (K2 rises by a factor of $\approx 29$
+and K3 increases approximately $3.5\times$, not shown in the table), driving K1 to $-6.48$.
+
+\noindent\textbf{Secondary weights ($W_v$, $W_{wb}$, $W_{vb}$).} These terms individually have a small but measurable impact:
+K1 lies in the range $[-1.31, -0.85]$ compared to the baseline $-0.43$, and tracking accuracy and smoothness are noticeably worse
+(K2 rises by a factor of $2$–$5$, K7 roughly doubles). They shape the motion quality and the base velocity damping, but are not
+individually load-bearing for task completion.
+
+\noindent\textbf{Control-effort weights ($W_u$, $W_d$).} Disabling the penalties on torque magnitude and torque change modestly
+increases tracking error (K2) and roughly doubles the jerk metric K7, while K1 remains around $-1.3$. This confirms that these
+terms primarily shape actuation smoothness rather than task completion.
+
+\noindent\textbf{Note on the energy metric K9.} K9 appears \emph{lower} in every ablation variant than in the baseline ($5.314$).
+This does not indicate improved energy efficiency; rather, it is an artifact of earlier episode termination when the agent fails
+(e.g., collision or excessive orientation error), which truncates the integration window. K9 should therefore only be interpreted
+jointly with K1, K2, and K4.
+
+\noindent\textbf{Summary.} The ablation confirms that $W_{\mathrm{ori}}$ and $W_p$ are the two dominant components of the composite
+reward, while the remaining five weights contribute refinements in motion quality, base velocity damping, and actuation smoothness.
+Removing any single secondary weight still yields a functioning, if degraded, policy, whereas removing $W_{\mathrm{ori}}$ breaks
+the free-floating controller entirely. This supports the reward design choices reported in~\autoref{RL} and shows that the
+benchmark conclusions do not rely on fine balancing of low-weight terms.
+\end{rtwohl}
 
 \subsection{Piecewise-Linear Trajectory}
 While the previous evaluations focused on tracking a smooth circular end-effector (EE) reference, we 
