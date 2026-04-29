@@ -67,11 +67,9 @@
 \corresp{Corresponding author: Eric Guiffo Kaigom (e-mail: kaigom@fra-uas.de).}
 
 \begin{abstract}
-Free-floating space robots exhibit a strong dynamic coupling between the manipulator motion and base attitude disturbance, 
+Free-floating space robots exhibit a strong dynamic coupling between their manipulator motion and base attitude disturbance, 
 complicating the Cartesian path tracking of the end-effector. 
-Supervised data-driven approaches are challenging due to limited labeled data availability in space operations.
-This paper therefore explores trial-and-error learning techniques for Cartesian path tracking in a physics-based
-Simulink/Simscape environment with integrated safety monitoring. Since a quantitative and qualitative comparison of these methods is currently 
+Supervised data-driven motion control approaches are challenging due to limited  availability of labeled data from space operations. This paper therefore explores trial-and-error learning techniques for Cartesian path tracking of free-floating space robots in a physics-based Simulink/Simscape environment with integrated safety monitoring. Since a quantitative and qualitative comparison of these methods is currently 
 missing in the sector of on-orbit servicing, we benchmark six Reinforcement Learning agents: TRPO, TD3, SAC, PPO,
 Policy Gradient, and DDPG. We evaluate their performance using unified key performance indexes. These include training duration and stability, tracking accuracy, base attitude disturbance, motion smoothness, energy consumption, and collision risks. We observe that PPO achieves the best overall trade-off between tracking accuracy, base disturbance minimization, and training stability.
 Building on this insight, we quantify the effect of a systematic tuning of the neural network architecture and key hyperparameters of PPO for tracking 
@@ -92,6 +90,16 @@ Free-floating on-orbit servicing, Proximal Policy Optimization (PPO), reinforcem
 
 \section{Introduction and Background}
 
+\begin{figure}[!t]
+	\centering
+	\begin{subfigure}{0.99\columnwidth}
+		\centering
+		\includegraphics[width=\linewidth]{Figures/oos0.png}
+	\end{subfigure}
+	\caption{Virtual testbeds that leverage AI-driven digital twins are useful for the safe, flexible, and accelerate development of learning-based control methods that support  in-space operations under realistic yet controllable conditions.}
+	\label{fig:oos0}
+\end{figure}
+
 Free-floating robot manipulators operating in the space environment to inspect, capture, or de-orbit  satellites are expected to
 introduce unique control challenges when compared to terrestrial robots \cite{b1}. 
 In micro-gravity, the robot’s base (typically a spacecraft) is not fixed and thrusters are turned off. 
@@ -99,7 +107,8 @@ Manipulator motions can give rise to a change of the position and orientation of
 which in turn modifies the final pose of the end-effector. This reaction is due to the conservation of 
 the linear and angular momentum \cite{b6}. The free-floating dynamics of space robots has many benefits. 
 An expensive consumption of fuel, such as hydrazine ($N_2H_4$),  and  an excitation of the robot dynamics for some activation 
-frequencies of the pulse width modulation related to thruster control can be avoided \cite{b11}. This has the potential to extend the lifetime of space robots and enhance the mission success.
+frequencies of the pulse width modulation related to thruster control can be avoided \cite{b11}. This measure has the potential to extend the lifetime of space robots and enhance the mission success.
+
 
 However, a free-floating base complicates the achievement of robotized manipulations. 
 Indeed, the end-effector of the arm may fail to reach the desired target point if standard motion planning approaches dedicated to robots with a 
@@ -110,12 +119,15 @@ can struggle to adapt to uncertainties and unmodeled dynamics. Supervised data-d
 Usually, the required amount and quality of data are rather unavailable in the space sector. 
 In many cases, robotized tracking capabilities under a free-floating behavior of the arm's base need to be 
 demonstrated long before the physical robot system is assembled and deployed \cite{muhlbauer2025software,rybus2024robotic,kaigom2011optimal}.  
-These challenges motivate the development and simulation of AI-empowered digital twins \cite{kaigom2025deep} under desired operational conditions to
-explore learning-based control methods that can autonomously adapt to complex and unknown dynamics  even in the case of data scarcity.
+
+
+\textcolor{magenta}{These challenges motivate the development and simulation of AI-empowered digital twins (DTs) \cite{kaigom2025deep}, as illustrated in \cref{fig:oos0}. Unlike standard DTs driven by sensed real-time data from their physical counterparts, such DTs are designed to infer and contextualize system states, reason, and evolve under representative distributions of operational conditions. These include uncertain dynamics, disturbances, faults, and contact-rich interactions associated with satellite capture in the space environment. By enabling accelerated experimentation through faster-than-real-time simulation and systematic ablation studies, DTs can improve decision making and help reduce the simulation-to-reality gap. They provide a framework to explore and design robust learning-based control methods that support safe exploration, robust policy optimization, and domain randomization for sim-to-real generalization, thereby enabling autonomous adaptation to complex and unknown dynamics even under severe data scarcity. This is particularly valuable for space robotics, where limited flight data, safety-critical constraints, and costly on-orbit experimentation make AI-driven DTs an essential tool for training, validation, and policy transfer.}
+
+
 
 \begin{table*}[!t]
 	\centering
-	\caption{\hltwo{[R2.3]} Recent advances in Deep RL-based motion management for free-floating space robots. N/R\,=\,not reported.}
+	\caption{\hltwo{[R2.3]} Recent advances in Deep RL-based motion management for free-floating space robots. N/R\,=\,not reported. ,\textcolor{red}{Eine Bescheibung der Abkürzungen fehlt.}}
 	\label{tab:sample}
 	\scriptsize
 	\renewcommand{\arraystretch}{1.25}
@@ -140,18 +152,16 @@ Reinforcement Learning (RL) has emerged as a promising approach for robotics, en
 learn control policies through trial-and-error interactions with entities, environments, and processes. Recent advances in deep RL have shown
 success in complex control tasks, but applying RL to space robots is still relatively novel \cite{wu2020reinforcement,al2024path,hu2025deep,zhang2025learning,huang2023obstacle}.  
 
-The work presented in this paper investigates the use of continuous-action deep RL for the tracking of a Cartesian motion of the end-effector of a free-floating space
+This paper investigates the use of continuous-action deep RL for the tracking of a Cartesian motion of the end-effector of a free-floating space
 manipulator. It  differs from previous contributions in three ways. First, it focuses on a systematic comparison 
-and explores the respective performance of six different RL algorithms beyond those mentioned e.g. in \Cref{tab:sample}, thereby 
-quantitatively and qualitatively contributing to filling in a current gap in space robotics. Second, several constraints, such as collision avoidance, are monitored
-through formal methods applied from a software-enabled and practical perspective.  Finally, this work investigates the minimization of the 
-base attitude in conjunction with constraint monitoring previously mentioned. Recall that the induced base disturbance is omitted in most recent contributions, 
+and explores the respective performance of six different RL algorithms (see \cref{comparison}) by conducting ablation studies (see \cref{sec:reward_ablation}) beyond the scope of related work mentioned in \Cref{tab:sample}. It thereby  quantitatively and qualitatively contributes to filling in a current gap in space robotics. Second, several constraints, such as collision avoidance, are monitored
+through formal methods applied from a software-enabled and practical perspective (see, \cref{formal}).  Finally, this work investigates the minimization of the base attitude during arm motions in conjunction with constraint monitoring previously mentioned. Recall that the induced base disturbance is omitted in most recent contributions, 
 as highlighted in \Cref{tab:sample}. We are not aware of any comprehensive work that compares  RL algorithms 
 for the Cartesian path tracking of free-floating space robots while considering the base attitude minimization and unifying 
 constraint monitoring by leveraging formal methods, to the best of our knowledge (see, also \autoref{tab:sample}). 
 
 \begin{rthreehl}
-\hlthree{[R3.1]} As evident from \autoref{tab:sample}, every prior contribution evaluates only a single RL algorithm on a specific subtask, making it impossible to draw conclusions about the relative merits of different learning paradigms for free-floating space robot control. Furthermore, no existing work simultaneously addresses three compounding challenges: (i)~a multi-algorithm benchmark under strictly unified conditions, (ii)~explicit minimization of base attitude disturbance as a co-equal control objective alongside end-effector tracking, and (iii)~integration of formal safety verification directly into the RL training loop. The present work is, to the best of our knowledge, the first to close all three gaps at once, providing a reproducible and safety-aware comparison framework that goes substantially beyond the individual studies listed in \autoref{tab:sample}.
+\hlthree{[R3.1]} As shown in \autoref{tab:sample}, every prior contribution evaluates only a single RL algorithm on a specific subtask, making it impossible to draw conclusions about the relative merits of different learning paradigms for free-floating space robot control. Furthermore, no existing work simultaneously addresses three compounding challenges: (i)~a multi-algorithm benchmark under strictly unified conditions, (ii)~explicit minimization of base attitude disturbance as a co-equal control objective alongside end-effector tracking, and (iii)~integration of formal safety verification directly into the RL training loop. The present work is, to the best of our knowledge, the first to close all three gaps at once, providing a reproducible and safety-aware comparison framework that goes substantially beyond the individual studies listed in \autoref{tab:sample}.
 \end{rthreehl}
 
 The key contributions and novelties of this work include:
@@ -167,18 +177,16 @@ This side-by-side comparison under unified
 conditions reveals which algorithm is likely to deliver the best possible performance when it comes to motion tracking of a free-floating space robot and
 why.
   \item An integration of formal safety measures: To meet safety-critical space operation requirements,
-we incorporate formal methods into the learning loop \cite{b5, b6, b22, b23}. A collision monitoring, momentum
+we incorporate formal methods into the learning loop \cite{b5, b6, b22, b23}. Collision monitoring, momentum
 conservation check, and formal verification of joint torque limits are embedded in the simulation. This integration 
 ensures the RL agent cannot violate fundamental and critical safety properties (like avoiding collisions or exceeding actuator limits) during training and testing.
- \item A high-fidelity simulation environment: We develop a high-fidelity MATLAB/Simulink simulation
-of a free-floating space robot, using a URDF-based multibody model and the Simscape physics engine. The robot, a 
-cube-shaped base with a 4-Degree of Freedom (DOF) robotic arm, is modeled with realistic kinematics, dynamics, and sensor/actuator 
+ \item A versatile simulation environment for multi-criteria optimization in in-space servicing: We develop a flexible MATLAB/Simulink simulation framework for a free-floating space robot, based on a URDF-derived multibody model and the Simscape physics engine. The robot, a  cube-shaped base with a 4-Degree of Freedom (DOF) robotic arm, is modeled with realistic kinematics, dynamics, and sensor/actuator 
 parameters and features. A dedicated reinforcement learning environment provides the agent with observations and rewards, including 
 a specially designed reward function that encourages accurate end-effector trajectory tracking while penalizing base movement, 
 large joint velocities, and excessive control effort (energy).
 Through reward shaping and carefully chosen reset conditions, the agent learns to accomplish the task without causing 
 excessive base disturbance or safety violations \cite{b25,b26,b27,b28,b7}.
- \item The optimization of the PPO agent : Based on the comparative results, we identify PPO as the top-
+ \item The optimization of the PPO agent : Based on  comparative results, we identify PPO as the top-
 performing algorithm and further refine it for path tracking tasks. We adjust the neural network
 architecture and tune hyperparameters (e.g., learning rate, batch size, clipping ratio, entropy
 regularization, etc.) to improve training stability and policy performance. The optimized
@@ -186,23 +194,18 @@ PPO agent achieves significantly better tracking accuracy, smoother control inpu
 safety violations, outperforming the default configuration on all key metrics.
 \end{itemize}
 %\newpage
-Overall, our study shows that a combination of multiple-body simulation, deep RL, and formal
-verification can yield a robust and safe control policy for a free-floating space robot. In the
-following, we first describe the system modeling and RL framework, then detail the formal safety
-components, present a comparative analysis of the RL agents, and finally discuss the optimized PPO
-agent’s performance, before concluding with broader insights and future directions.
+Our investigation shows that the integration of multibody simulation, deep reinforcement learning, and formal verification can yield robust and safe control policies for free-floating space robots. In the following, we first describe the system modeling and reinforcement learning framework, then detail the formal safety components, present a comparative analysis of the reinforcement learning agents, and finally discuss the performance of the optimized PPO agent before concluding with broader insights and future research directions.
 
 \section{Related Work}
 
 \subsection{Classical Control Techniques for Space Robots}
 \begin{rtwohl}
-\hltwo{[R2.2]} Model-based approaches have historically dominated space robot control. Computed torque control and resolved-motion rate
-methods leverage accurate dynamic models to achieve precise end-effector positioning \cite{b1}. Reactionless path planning explicitly
-minimizes base disturbance by exploiting the robot's redundancy, while attitude regulation methods use reaction wheels or thrusters
+\hltwo{[R2.2]} Model-based approaches have historically dominated space robot control. Computed torque control and resolved-motion rate methods leverage accurate dynamic models to achieve precise end-effector positioning \cite{b1}. Reactionless path planning explicitly
+minimizes base disturbance by exploiting the robot's redundancy and a dynamics-related null-space to design joint velocities, while attitude regulation methods use reaction wheels or thrusters
 to counteract momentum transfer \cite{b6,kaigom2011optimal}. These approaches offer strong performance guarantees and
 interpretability when the system model is accurate. However, they are sensitive to model uncertainties and unmodeled
 dynamics, require significant engineering effort for model identification, and are ill-suited to the data-scarce,
-uncertainty-rich conditions of on-orbit operations.
+hazardous conditions of on-orbit operations.
 \end{rtwohl}
 
 \subsection{Reinforcement Learning-Based Control Techniques}
@@ -212,9 +215,9 @@ have been widely applied to continuous control problems \cite{b14,b15,b17,b18,b2
 \begin{rtwohl}
 \hltwo{[R2.2]} Applied to free-floating space robots, RL-based methods have been explored for path planning \cite{wu2020reinforcement,al2024path},
 obstacle avoidance \cite{huang2023obstacle}, trajectory tracking \cite{hu2025deep}, and failure management \cite{d2024failure}.
-The key advantage of RL is its ability to synthesize controllers without explicit dynamic models, making it attractive when system
+The key advantage of RL is its ability to synthesize controllers without explicit dynamic models and requiring flight data, making it attractive when system
 parameters are uncertain or unavailable. Nevertheless, current RL-based approaches share important limitations: most studies
-evaluate only a single algorithm, omit base attitude minimization as a control objective, and lack systematic benchmarking across comparable conditions.
+evaluate only a single algorithm, focus on an objective, omit base attitude minimization as a control objective, and lack systematic benchmarking across comparable conditions.
 \end{rtwohl}
 
 \subsection{Hybrid Safety-Aware Control Systems}
@@ -228,23 +231,21 @@ and collision avoidance are never violated. However, their application to free-f
 existing works rarely integrate formal verification directly into the RL training loop or combine it with base attitude minimization objectives.
 \end{rtwohl}
 
-\subsection{Benchmarking Studies}
+\subsection{Need for Benchmark Studies}
 \begin{rtwohl}
 \hltwo{[R2.2]} Comparative evaluations of RL algorithms for space robot control are scarce. Table~\ref{tab:sample} surveys recent deep RL
 contributions to free-floating space robot motion management. As shown, all surveyed works address only individual
-tasks with a single algorithm, and none simultaneously combines multi-algorithm benchmarking, base disturbance minimization,
+goals with a single algorithm. None simultaneously combines multi-algorithm and multi-criteria benchmarking, base disturbance minimization,
 and formal safety verification. This absence of unified evaluation makes it difficult to draw conclusions about relative
 algorithm performance and to guide algorithm selection for future missions.
 \end{rtwohl}
 
 \subsection{Research Gap}
 \begin{rtwohl}
-\hltwo{[R2.1]} The survey above reveals three compounding gaps in the existing literature. First, no prior work systematically
-compares multiple RL algorithms under identical conditions for Cartesian end-effector tracking of free-floating space robots.
-Second, base attitude minimization---a safety-critical requirement in on-orbit operations---is neglected in most RL-based
+\hltwo{[R2.1]} The preceding survey reveals three mutually reinforcing gaps in the existing literature. First, no prior work systematically compares multiple RL algorithms under identical conditions for Cartesian end-effector tracking of free-floating space robots. Second, base attitude minimization---a safety-critical requirement in on-orbit operations---is omitted in most RL-based
 contributions (see Table~\ref{tab:sample}). Third, the integration of formal safety verification directly into the RL
 training and evaluation loop has not been demonstrated for this class of systems. The present work addresses all
-three gaps simultaneously: we benchmark six state-of-the-art RL algorithms under unified conditions, incorporate base
+three gaps simultaneously. It benchmarks six state-of-the-art RL algorithms under unified conditions, incorporate base
 attitude minimization as an explicit control objective, and embed formal verification of safety constraints throughout
 training and testing.
 \end{rtwohl}
@@ -252,33 +253,31 @@ training and testing.
 \section{System Modeling and Simulation Environment}
 \begin{figure*}[!t]
     \centering
-    \begin{subfigure}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{Figures/ref_kreisbahn_1.png}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.48\textwidth}
+  %  \begin{subfigure}{0.48\textwidth}
+  %      \centering
+  %      %\includegraphics[width=\linewidth]{Figures/ref_kreisbahn_1.png%}
+   % \end{subfigure}
+ %   \hfill
+    \begin{subfigure}{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{Figures/ref_kreisbahn_2.png}
     \end{subfigure}
-    
     \vspace{0.5em}
-    \begin{subfigure}{0.5\textwidth}
+    \begin{subfigure}{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{Figures/ref_kreisbahn_3.png}
     \end{subfigure}
-    \caption{Tracking the desired end-effector circular path using inverse kinematics.}
+    \caption{Tracking the desired end-effector circular path using inverse kinematics. \textcolor{blue}{Das Bild oben links zeigt einen Manipulator in einer singulären Lage. Ich würde nur  die Bilder oben rechts und unten nehmen und nebeneinander platzieren.}}
     \label{fig:ref_kreis_gesamt}
 \end{figure*}
 \noindent
 \subsection{Advantages of AI-Endowed Digital Twin Technology in On-Orbit Servicing}
-Recent advances in AI-driven digital twinning have demonstrated considerable benefits for on-orbit servicing, ranging from automated 
-lifecycle management of satellites to the orchestration of skillful agents that autonomously carry out complex assembly, integration, 
-and testing tasks \cite{leutert2024ai,muhlbauer2025towards}. By combining contextualized real-time sensor data with AI that accommodates 
-uncertainties, digital twins bridge the physical and digital world with accelerated simulation-driven analysis under desired operational conditions and at low costs. Verification 
-and validation also benefit from this paradigm, as changes in system design or operational scenarios can be described in scenario spaces and 
-integrated with digital twins for flexible verification \cite{maqbool2025systems}.
-\hl{[R1.1] In this work, the Simulink-based simulation constitutes the digital twin, and the AI component is embodied by the deep reinforcement learning agent---specifically PPO---that is trained and evaluated within it. This distinguishes the approach from classical simulation: rather than relying on pre-specified controllers, the digital twin hosts a learning-based agent that autonomously synthesizes control strategies from interaction, accommodating complex and partially unknown dynamics without requiring explicit model knowledge.}
+
+Recent advances in AI-driven DTs have demonstrated considerable benefits for on-orbit servicing, ranging from automated lifecycle management of satellites to the orchestration of skillful agents that autonomously carry out complex assembly, integration, and testing tasks \cite{leutert2024ai,muhlbauer2025towards}. By combining contextualized real-time sensor data with AI methods that account for uncertainty, DTs bridge the physical and digital domains and enable simulation-driven analysis under diverse operational conditions at reduced cost. Verification and validation also benefit from this paradigm, as changes in system design or operational scenarios can be described in scenario spaces and integrated with DTs for flexible verification \cite{maqbool2025systems}.
+
+\hl{[R1.1] In this work,  the information model of the DTs associated with the target satellite and the chaser space robot provides a structured and interoperable description of the satellite and robotic systems, including their kinematics, inertial properties, joint configurations, and physical constraints. The AI capability is embodied by a deep reinforcement learning agent, specifically PPO, which is trained and evaluated through interaction with the corresponding DTs and additional DTs involved in representative in-space operation scenarios. This distinguishes the proposed approach from classical simulation: rather than relying on pre-specified controllers, the robotics-related DT hosts a learning-based agent that autonomously synthesizes control strategies from experience. In this way, the DTs are not limited to reproducing predefined system behavior, but serve as adaptive training and validation environments that support the evolution of control strategies under varying operational conditions. During training, scenarios and constraints are sampled from bounded uniform distributions, allowing the agent to explore a broad range of admissible operating conditions. This improves robustness to modeling errors, disturbances, and partially unknown dynamics without requiring explicit model knowledge.}
+
+
 
 \begin{figure*}[!t]
 	\centering
@@ -346,7 +345,7 @@ step equal to the agent’s decision interval ($\Delta t$), instead of the defau
 synchronization between the physics simulation and the RL decision-making cycle. Rate
 transition blocks handle any rate differences, avoiding aliasing and ensuring that state observations
 and action commands align appropriately between the continuous plant and the discrete agent loop \cite{b29,b30}.
-Additionally, Simulink’s unit consistency checks are enabled to catch any modeling errors (e.g.
+Additionally,  consistency checks of Simulink’s units are enabled to catch any modeling errors (e.g.
 mismatched units) early in development.
 
 \subsection{Reference Trajectory and Desired Task} The target task for the robot is to follow a periodic end-effector
@@ -455,8 +454,7 @@ The weights used in all experiments are summarized in~\autoref{tab:reward_weight
 The end-effector position error weight $W_p = 150$ is large because trajectory tracking is the primary task objective; a high penalty ensures the agent prioritizes reducing the position error above all other considerations.
 The velocity error weight $W_v = 25$ is lower than $W_p$ to avoid over-penalizing transient dynamics during fast arm motion, while still discouraging persistent velocity offsets.
 The base orientation weight $W_{\text{ori}} = 200$ is the largest in the cost function, reflecting that base attitude disturbance is safety-critical in on-orbit operations: any uncontrolled rotation of the spacecraft base can jeopardize mission success independently of tracking performance.
-The base angular velocity weight $W_{\omega_b} = 8$ provides a damping-like penalty on ongoing base rotation, while the linear velocity weight $W_{v_b} = 2$ is kept small because, in a free-floating system with zero initial linear momentum, base translational motion remains negligible by design.
-The torque magnitude weight $W_u = 0.02$ and torque-rate weight $W_d = 0.06$ are intentionally small to leave the agent sufficient freedom to explore diverse control actions; the torque-rate penalty is slightly larger to specifically discourage high-frequency chattering in the control signal.
+The base angular velocity weight $W_{\omega_b} = 8$ provides a damping-like penalty on ongoing base rotation, while the linear velocity weight $W_{v_b} = 2$ is kept small because, in a free-floating system initialized with zero total linear momentum, base translation is momentum-coupled to the manipulator motion and is expected to remain limited for the considered task configuration. Recall that manipulator motion can induce base translation because the total system center of mass is conserved. The torque magnitude weight $W_u = 0.02$ and torque-rate weight $W_d = 0.06$ are intentionally small to leave the agent sufficient freedom to explore diverse control actions; the torque-rate penalty is slightly larger to specifically discourage high-frequency chattering in the control signal.
 The progress scaling factor $k_p = 10$ is chosen so that the progress reward is of comparable magnitude to the cost terms at typical error levels, preventing it from being dominated.
 The proximity bonus parameters $k_b = 0.05$ and $\sigma = 0.02$ are small by design: they provide a weak local guidance signal near the trajectory without creating a strong local attractor that could trap the policy.
 Finally, the normalization constant $C = 500$ scales the total reward to a range of approximately $[-1,\, 0]$ under typical operating conditions, which stabilizes value function learning across all tested algorithms.
@@ -1391,9 +1389,9 @@ might improve performance under partial observability. Fourth, the \emph{safety 
 exhaustive formal verification of the full mission~\cite{b5,b22}. Finally, \emph{no hardware testing} was performed; real-time computation limits,
 communication delays, and physical interactions remain to be validated on physical testbeds.
 
-Future work should address these gaps through: (i)~domain randomization over simulation parameters and latency injection to improve sim-to-real robustness~\cite{b8}; (ii)~extension to more complex tasks such as dual-arm coordination, on-orbit assembly, or active debris removal; (iii)~advanced
+Future work should address these gaps through: (i)~domain randomization over simulation parameters and latency injection to improve sim-to-real robustness~\cite{b8} (see \cref{fig:oos}); (ii)~extension to more complex tasks such as dual-arm coordination, on-orbit assembly, or active debris removal; (iii)~advanced
 RL architectures (recurrent policies, attention mechanisms) and safe RL algorithms with explicit constraint handling via Lagrange multipliers
-or barrier functions~\cite{b22,b24,b23,b34}; and (iv)~hardware-in-the-loop validation on our testbed for In-Space Robotized Services (IROS) with virtually simulated microgravity and predicted energy consumption (see \cref{fig:physicaltestbed}).
+or barrier functions~\cite{b22,b24,b23,b34}; and (iv)~hardware-in-the-loop validation on our testbed for In-Space Robotized Services (IROS) with virtually simulated microgravity and predicted energy consumption (see \cref{fig:oos}).
 \end{rthreehl}
 
 
@@ -1429,14 +1427,24 @@ actions (though, ideally, the policy has learned not to propose such actions in 
 an approach could provide the flexibility and efficiency of learned behaviors with the trust and
 guarantee of model-based safety, a combination well-suited to the unforgiving environment of space \cite{b1,b23}.
 
+%\begin{figure}[!t]
+%	\centering
+%	\includegraphics[width=0.8\linewidth]{Figures/testbed.png}
+%	\caption{Our testbed for In-Space Robotized Services.}
+%	\label{fig:physicaltestbed}
+%\end{figure}
+
 \begin{figure}[!t]
 	\centering
-	\includegraphics[width=0.8\linewidth]{Figures/testbed.png}
-	\caption{Our testbed for In-Space Robotized Services.}
-	\label{fig:physicaltestbed}
+	\begin{subfigure}{0.99\columnwidth}
+		\centering
+		\includegraphics[width=\linewidth]{Figures/oos1.png}
+	\end{subfigure}
+	\caption{Gradual hybrid testbeds integrate AI-driven digital twins on the left with physical robotic systems on the right, providing a versatile framework for exploring robust policy optimization and domain randomization strategies for sim-to-real generalization.}
+	\label{fig:oos}
 \end{figure}
 
-Ultimately, our work demonstrates a step in that direction, confirming that with the right algorithms
+Ultimately, our work demonstrates a step in that direction, emphasizing that with the right algorithms
 and safeguards, “autonomous learning-based control” can be a powerful paradigm for future space
 robotic missions. The results encourage continued research at the intersection of robotics,
 reinforcement learning, and formal methods to further unlock the potential of intelligent space
