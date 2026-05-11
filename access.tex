@@ -568,8 +568,11 @@ agents.
 
   \item \textbf{K7} --- \emph{Control Smoothness (Jerk)}: second difference of joint torques; lower values indicate smoother, less chattering actuation.
   \begin{equation*}
-  \Delta^2\tau_i[k]=\tau_i[k+2]-2\tau_i[k+1]+\tau_i[k], \quad
-  K7=\frac{1}{N_{\text{eval}}}\sum_{i=1}^{N_{\text{eval}}}\frac{1}{T_i-2}\sum_{k=1}^{T_i-2}\|\Delta^2\tau_i[k]\|_2.
+  \begin{aligned}
+  \Delta^2\tau_i[k] &= \tau_i[k+2]-2\tau_i[k+1]+\tau_i[k],\\
+  J_i &= \frac{1}{T_i-2}\sum_{k=1}^{T_i-2}\|\Delta^2\tau_i[k]\|_2,\\
+  K7 &= \frac{1}{N_{\text{eval}}}\sum_{i=1}^{N_{\text{eval}}}J_i.
+  \end{aligned}
   \end{equation*}
 
   \item \textbf{K8} --- \emph{Mean Base Angular Velocity}: residual spacecraft rotation rate during the task (rad/s); lower is better, ideally zero.
@@ -918,6 +921,155 @@ Based on these results, we selected PPO for further optimization.
 Based on these results, we selected PPO as the reference agent for further development and
 optimization. The next section discusses how we improved PPO’s performance even further through
 targeted optimizations.
+
+\begin{table*}[!t]
+\centering
+\caption{Pairwise Wilcoxon signed-rank tests: each agent vs.\ PPO (baseline), Holm-corrected.
+  Each cell shows $\Delta\tilde{x}$ (median difference, agent$-$PPO) with significance superscript:
+  ${}^{***}p<0.001$, ${}^{**}p<0.01$, ${}^{*}p<0.05$, ${}^{\mathrm{n.s.}}p\geq0.05$.
+  For K1, positive $\Delta\tilde{x}$ means the agent achieves a higher (better) return.
+  For K2--K4, K6--K8, negative $\Delta\tilde{x}$ means lower (better) error/violation/jerk.
+  K5 is a binary collision flag (1\,=\,safe); K9 lower means more energy-efficient.}
+\label{tab:significance}
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{5pt}
+\footnotesize
+\begin{tabular}{l *{9}{r}}
+\toprule
+\textbf{Agent} & \textbf{K1} & \textbf{K2} & \textbf{K3} & \textbf{K4} & \textbf{K5} & \textbf{K6} & \textbf{K7} & \textbf{K8} & \textbf{K9} \\
+\midrule
+TRPO & $+7.55^{*}$    & $-0.277^{***}$ & $-0.526^{***}$ & $+0.003^{\mathrm{n.s.}}$ & $-1^{***}$    & $-0.137^{***}$ & $+0.362^{***}$ & $-0.041^{***}$ & $-9.38^{***}$  \\
+TD3  & $+8.90^{***}$  & $+0.047^{\mathrm{n.s.}}$ & $-0.276^{***}$ & $-0.097^{***}$ & $-1^{***}$    & $-0.156^{***}$ & $+0.731^{***}$ & $-0.095^{***}$ & $-12.91^{***}$ \\
+SAC  & $-33.79^{***}$ & $+0.908^{***}$ & $+0.981^{***}$ & $+0.093^{**}$  & $0^{\mathrm{n.s.}}$   & $-0.059^{***}$ & $+0.404^{***}$ & $+0.032^{***}$ & $+2.44^{*}$    \\
+PG   & $-24.46^{*}$   & $-0.051^{\mathrm{n.s.}}$ & $-0.132^{\mathrm{n.s.}}$ & $+0.158^{**}$  & $-1^{***}$    & $-0.156^{***}$ & $+0.199^{***}$ & $0.000^{\mathrm{n.s.}}$  & $-4.05^{***}$  \\
+DDPG & $-102.02^{***}$& $+0.060^{\mathrm{n.s.}}$ & $-0.095^{\mathrm{n.s.}}$ & $+0.331^{***}$ & $0^{\mathrm{n.s.}}$   & $-0.153^{***}$ & $+0.724^{***}$ & $-0.006^{\mathrm{n.s.}}$ & $-12.17^{***}$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{rthreehl}
+\hlthree{[R3.7]} \textbf{Statistical Significance of Agent Comparisons:}
+To substantiate the qualitative ranking above with rigorous statistical evidence, we applied
+non-parametric hypothesis tests to the 30 evaluation episodes per agent.
+First, a Friedman test confirmed that at least one agent differs significantly from the others for
+every KPI (all $p < 10^{-17}$), justifying pairwise comparisons.
+Subsequently, pairwise Wilcoxon signed-rank tests were conducted between PPO (baseline) and each
+competing agent, with Holm correction applied to control the family-wise error rate across
+multiple comparisons.
+\autoref{tab:significance} reports the Holm-corrected $p$-values and the median differences % chktex 24
+(positive values indicate PPO is superior for a minimisation objective, negative for a
+maximisation objective).
+
+The statistical analysis confirms and refines the conclusions drawn from the summary metrics.
+For \emph{episodic return} (K1), TRPO and TD3 achieve marginally higher returns than PPO
+($\Delta\tilde{x}=+7.55$ and $+8.90$, respectively), yet both converge to a highly
+conservative strategy: TD3 in particular yields K7\,$\approx$\,0.998 and K9\,$<$\,1,
+indicating near-zero actuation rather than effective tracking, which is reflected in its
+substantially larger tracking errors (K3, K4 significantly worse).
+SAC, PG, and DDPG produce significantly lower returns than PPO ($p<0.001$ each), with DDPG
+showing the largest deficit ($\Delta\tilde{x}=-102$).
+
+For \emph{tracking accuracy} (K2, K3), PPO is statistically superior to TRPO, TD3, and SAC
+(all $p<0.001$), while differences versus PG and DDPG do not reach significance at the
+$\alpha=0.05$ level after Holm correction — a consequence of high variability in those agents.
+The effect size for SAC is particularly pronounced (K2: $\Delta\tilde{x}=+0.908$), confirming
+that SAC’s oscillatory behaviour causes consistently large position errors.
+
+Regarding \emph{base stability and safety} (K4--K6), PPO significantly outperforms TD3, SAC,
+PG, and DDPG in base orientation error (K4, all $p<0.01$), while the difference against TRPO
+is not significant ($p=0.926$), indicating comparable stability for on-policy methods.
+The collision-rate KPI (K5) is identically zero for TRPO, TD3, and PG, resulting in a
+statistically significant disadvantage compared to PPO ($p<0.001$, $\Delta\tilde{x}=-1$),
+which achieves K5\,=\,1 consistently due to its exploration of the workspace.
+No significant difference is found for DDPG and SAC (both also achieve K5\,=\,1), confirming
+that collision avoidance is maintained equally well across on-policy and off-policy stochastic
+methods.
+
+For \emph{control quality and efficiency} (K7--K9), PPO produces significantly smoother
+control signals than all competing agents (K7, all $p<0.001$), with DDPG and TD3 showing
+the largest jerk deficits ($\Delta\tilde{x}=+0.724$ and $+0.731$).
+Energy consumption (K9) is significantly lower for TRPO, TD3, and DDPG compared to PPO —
+however, as noted for K1, these low values reflect inadequate actuation rather than genuine
+efficiency, and must be interpreted alongside the accompanying tracking errors.
+
+Overall, the statistical tests corroborate that PPO offers the best \emph{balance} across all
+KPI dimensions: it outperforms the field on tracking accuracy and control smoothness, maintains
+competitive base stability, and does so with statistically verifiable consistency across 30
+independent evaluation episodes.
+The distribution of four key KPIs across all 30 evaluation episodes is visualised as boxplots
+in~\autoref{fig:boxplots} (R2.13), confirming the consistency of the reported medians and revealing
+the spread and outlier structure for each agent.
+\autoref{fig:ci_plots} (R2.12) shows the corresponding 95\% bootstrap confidence intervals,
+providing a quantitative measure of estimation uncertainty per agent and KPI.
+\end{rthreehl}
+
+\begin{figure*}[!t]
+  \centering
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=\linewidth]{Figures/boxplot_K2.png}
+    \caption{K2: Mean Squared EE Position Error}
+    \label{fig:boxplot_k2}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=\linewidth]{Figures/boxplot_K4.png}
+    \caption{K4: Mean Base Orientation Error}
+    \label{fig:boxplot_k4}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=\linewidth]{Figures/boxplot_K7.png}
+    \caption{K7: Control Smoothness (Norm.\ Jerk)}
+    \label{fig:boxplot_k7}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=\linewidth]{Figures/boxplot_K9.png}
+    \caption{K9: Energy Consumption}
+    \label{fig:boxplot_k9}
+  \end{subfigure}
+  \caption{\hltwo{[R2.13]} Boxplots of selected KPI distributions over 30 evaluation episodes per agent.
+    Each box spans the interquartile range (IQR); the centre line marks the median;
+    whiskers extend to 1.5\,$\times$\,IQR; circles denote outliers.
+    PPO consistently achieves low tracking error (K2) and smooth control (K7) with small spread,
+    while PG and SAC show high variability. The low K9 values for TD3 and DDPG reflect
+    insufficient actuation rather than energy efficiency.}
+  \label{fig:boxplots}
+\end{figure*}
+
+\begin{figure*}[!t]
+  \centering
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=\linewidth]{Figures/ci_K2.png}
+    \caption{K2: Mean Squared EE Position Error}
+    \label{fig:ci_k2}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=\linewidth]{Figures/ci_K4.png}
+    \caption{K4: Mean Base Orientation Error}
+    \label{fig:ci_k4}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=\linewidth]{Figures/ci_K7.png}
+    \caption{K7: Control Smoothness (Norm.\ Jerk)}
+    \label{fig:ci_k7}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=\linewidth]{Figures/ci_K9.png}
+    \caption{K9: Energy Consumption}
+    \label{fig:ci_k9}
+  \end{subfigure}
+  \caption{\hltwo{[R2.12]} 95\% bootstrap confidence intervals for selected KPIs across all agents
+    (30 evaluation episodes per agent).
+    Narrow intervals for TD3 and DDPG reflect near-constant behaviour (policy collapse),
+    whereas PPO's intervals are tight despite exploring the full workspace.
+    TRPO and PPO show overlapping intervals for K4 (base orientation), consistent with
+    the non-significant Wilcoxon result ($p=0.926$).}
+  \label{fig:ci_plots}
+\end{figure*}
 
 \section{Optimization of the PPO Agent}
 Having identified PPO as the most promising algorithm, we focused on enhancing its performance on path tracking task of 

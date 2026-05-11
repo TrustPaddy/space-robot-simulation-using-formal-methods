@@ -32,8 +32,8 @@
 | R2.9 | Gleichwertige Hyperparameter-Optimierung für alle RL-Algorithmen (nicht nur PPO) | 🔬 |
 | R2.10 | PPO-Optimierungsprozess beschreiben: Suchraum, Optimierungsmethode, Tuning | ✅ (grün, überschneidet R3.8) |
 | R2.11 | Robustheitsevaluation: Störungen, Sensorrauschen, Parameterunsicherheiten, Aktuatorsättigungen | 🔬 |
-| R2.12 | Lernkurven, Fehlerverteilungen und Vergleichs-Performance-Charts hinzufügen | 📊 |
-| R2.13 | Boxplots, Violin Plots, Konfidenzintervalle zur Darstellung der Performance-Variabilität | 📊 |
+| R2.12 | Lernkurven, Fehlerverteilungen und Vergleichs-Performance-Charts hinzufügen | ✅ |
+| R2.13 | Boxplots, Violin Plots, Konfidenzintervalle zur Darstellung der Performance-Variabilität | ✅ |
 | R2.14 | Fazit mit tatsächlichen experimentellen Ergebnissen abgleichen | ✅ |
 | R2.15 | Grammar, Satzstruktur und Klarheit durch sorgfältiges Proofreading verbessern | ⬜ |
 | R2.16 | Qualität aller Abbildungen verbessern | ⬜ |
@@ -50,7 +50,7 @@
 | R3.4 | Sensitivitätsanalyse der Reward-Gewichte (= R2.5) | ✅ (grün, überschneidet R2.5) |
 | R3.5 | Skalierbarkeit der Safety-Mechanismen für Onboard-Systeme diskutieren (Computational Overhead) | ✅ |
 | R3.6 | Energie- und Smoothness-KPIs im Kontext von Weltraummissionen besser begründen | ✅ |
-| R3.7 | Statistische Signifikanztests (Konfidenzintervalle, Hypothesentests) für Leistungsvergleiche | 📊 |
+| R3.7 | Statistische Signifikanztests (Konfidenzintervalle, Hypothesentests) für Leistungsvergleiche | ✅ |
 | R3.8 | Systematische Hyperparameter-Suche beschreiben (Grid Search, Bayesian Opt.) | ✅ (grün, überschneidet R2.10) |
 | R3.9 | Sim-to-Real Transfer: Domain Shift, Onboard Compute, Hardware Constraints diskutieren | ✅ |
 | R3.10 | Dichte Abschnitte (Reward-Gleichungen, KPI-Definitionen) leserfreundlicher gestalten | ✅ |
