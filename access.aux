@@ -237,44 +237,50 @@
 \@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces {\def \textcolor {yellow}{\textcolor {roverlap}}\texthl  {[R2.5/R3.4]}} One-at-a-time sensitivity analysis of the four dominant reward weights. Each row corresponds to a separately retrained optimized PPO agent with one weight multiplied by $\times 2$ or $\times 0.5$ around its baseline value, all other weights and training settings held constant. KPIs are averaged over $N_{eval}=30$ evaluation episodes on the circular trajectory.}}{21}{table.caption.24}\protected@file@percent }
 \newlabel{tab:reward_sensitivity}{{8}{21}{\hloverlap {[R2.5/R3.4]} One-at-a-time sensitivity analysis of the four dominant reward weights. Each row corresponds to a separately retrained optimized PPO agent with one weight multiplied by $\times 2$ or $\times 0.5$ around its baseline value, all other weights and training settings held constant. KPIs are averaged over $N_{eval}=30$ evaluation episodes on the circular trajectory}{table.caption.24}{}}
 \newlabel{tab:reward_sensitivity@cref}{{[table][8][]8}{[1][21][]21}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-D}}Piecewise-Linear Trajectory}{21}{subsection.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-D}}Robustness Evaluation under Non-Ideal Conditions}{21}{subsection.7.4}\protected@file@percent }
+\newlabel{sec:robustness_eval}{{\mbox  {VII-D}}{21}{Robustness Evaluation under Non-Ideal Conditions}{subsection.7.4}{}}
+\newlabel{sec:robustness_eval@cref}{{[subsection][4][7]\mbox  {VII-D}}{[1][21][]21}{}{}{}}
 \citation{b1,b7}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-E}}Piecewise-Linear Trajectory}{22}{subsection.7.5}\protected@file@percent }
+\newlabel{eq:linear_traj}{{5}{22}{Piecewise-Linear Trajectory}{equation.5}{}}
+\newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][22][]22}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{22}{section.8}\protected@file@percent }
 \citation{b8}
 \citation{b15,b23,b22}
 \citation{b22,b24}
-\newlabel{eq:linear_traj}{{5}{22}{Piecewise-Linear Trajectory}{equation.5}{}}
-\newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][22][]22}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}}{22}{table.caption.27}\protected@file@percent }
-\newlabel{tab:ppo_linear_kpi}{{9}{22}{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better)}{table.caption.27}{}}
-\newlabel{tab:ppo_linear_kpi@cref}{{[table][9][]9}{[1][22][]22}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{22}{section.8}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rtwo}}\texthl  {[R2.11]}} Robustness evaluation of the optimized PPO policy under non-ideal simulation conditions. The policy was evaluated without retraining over $N_{\mathrm  {eval}}=30$ episodes per condition on the circular trajectory. K1 is maximized, whereas K2--K9 are minimized.}}{23}{table.caption.25}\protected@file@percent }
+\newlabel{tab:robustness_eval}{{9}{23}{\hltwo {[R2.11]} Robustness evaluation of the optimized PPO policy under non-ideal simulation conditions. The policy was evaluated without retraining over $N_{\mathrm {eval}}=30$ episodes per condition on the circular trajectory. K1 is maximized, whereas K2--K9 are minimized}{table.caption.25}{}}
+\newlabel{tab:robustness_eval@cref}{{[table][9][]9}{[1][22][]23}{}{}{}}
+\newlabel{fig:r_traj_default}{{17a}{23}{PPO (Default)}{figure.caption.26}{}}
+\newlabel{fig:r_traj_default@cref}{{[subfigure][1][17]17a}{[1][22][]23}{}{}{}}
+\newlabel{sub@fig:r_traj_default}{{a}{23}{PPO (Default)}{figure.caption.26}{}}
+\newlabel{sub@fig:r_traj_default@cref}{{[subfigure][1][17]17a}{[1][22][]23}{}{}{}}
+\newlabel{fig:r_traj_opt}{{17b}{23}{PPO (Optimized)}{figure.caption.26}{}}
+\newlabel{fig:r_traj_opt@cref}{{[subfigure][2][17]17b}{[1][22][]23}{}{}{}}
+\newlabel{sub@fig:r_traj_opt}{{b}{23}{PPO (Optimized)}{figure.caption.26}{}}
+\newlabel{sub@fig:r_traj_opt@cref}{{[subfigure][2][17]17b}{[1][22][]23}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Target/actual comparison of the ramp end-effector trajectory in the XY plane.}}{23}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:r_trajektorie_xy_compare}{{17}{23}{Target/actual comparison of the ramp end-effector trajectory in the XY plane}{figure.caption.26}{}}
+\newlabel{fig:r_trajektorie_xy_compare@cref}{{[figure][17][]17}{[1][22][]23}{}{}{}}
+\newlabel{fig:r_basis_default}{{18a}{23}{PPO (Default)}{figure.caption.27}{}}
+\newlabel{fig:r_basis_default@cref}{{[subfigure][1][18]18a}{[1][22][]23}{}{}{}}
+\newlabel{sub@fig:r_basis_default}{{a}{23}{PPO (Default)}{figure.caption.27}{}}
+\newlabel{sub@fig:r_basis_default@cref}{{[subfigure][1][18]18a}{[1][22][]23}{}{}{}}
+\newlabel{fig:r_basis_opt}{{18b}{23}{PPO (Optimized)}{figure.caption.27}{}}
+\newlabel{fig:r_basis_opt@cref}{{[subfigure][2][18]18b}{[1][22][]23}{}{}{}}
+\newlabel{sub@fig:r_basis_opt}{{b}{23}{PPO (Optimized)}{figure.caption.27}{}}
+\newlabel{sub@fig:r_basis_opt@cref}{{[subfigure][2][18]18b}{[1][22][]23}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Course of base orientation (quaternion components) during a test episode with ramp trajectory.}}{23}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:r_basis_orientation_compare}{{18}{23}{Course of base orientation (quaternion components) during a test episode with ramp trajectory}{figure.caption.27}{}}
+\newlabel{fig:r_basis_orientation_compare@cref}{{[figure][18][]18}{[1][22][]23}{}{}{}}
 \citation{b8,b22}
 \citation{b5,b22}
 \citation{b8}
 \citation{b22,b24,b23,b34}
-\newlabel{fig:r_traj_default}{{17a}{23}{PPO (Default)}{figure.caption.25}{}}
-\newlabel{fig:r_traj_default@cref}{{[subfigure][1][17]17a}{[1][22][]23}{}{}{}}
-\newlabel{sub@fig:r_traj_default}{{a}{23}{PPO (Default)}{figure.caption.25}{}}
-\newlabel{sub@fig:r_traj_default@cref}{{[subfigure][1][17]17a}{[1][22][]23}{}{}{}}
-\newlabel{fig:r_traj_opt}{{17b}{23}{PPO (Optimized)}{figure.caption.25}{}}
-\newlabel{fig:r_traj_opt@cref}{{[subfigure][2][17]17b}{[1][22][]23}{}{}{}}
-\newlabel{sub@fig:r_traj_opt}{{b}{23}{PPO (Optimized)}{figure.caption.25}{}}
-\newlabel{sub@fig:r_traj_opt@cref}{{[subfigure][2][17]17b}{[1][22][]23}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Target/actual comparison of the ramp end-effector trajectory in the XY plane.}}{23}{figure.caption.25}\protected@file@percent }
-\newlabel{fig:r_trajektorie_xy_compare}{{17}{23}{Target/actual comparison of the ramp end-effector trajectory in the XY plane}{figure.caption.25}{}}
-\newlabel{fig:r_trajektorie_xy_compare@cref}{{[figure][17][]17}{[1][22][]23}{}{}{}}
-\newlabel{fig:r_basis_default}{{18a}{23}{PPO (Default)}{figure.caption.26}{}}
-\newlabel{fig:r_basis_default@cref}{{[subfigure][1][18]18a}{[1][22][]23}{}{}{}}
-\newlabel{sub@fig:r_basis_default}{{a}{23}{PPO (Default)}{figure.caption.26}{}}
-\newlabel{sub@fig:r_basis_default@cref}{{[subfigure][1][18]18a}{[1][22][]23}{}{}{}}
-\newlabel{fig:r_basis_opt}{{18b}{23}{PPO (Optimized)}{figure.caption.26}{}}
-\newlabel{fig:r_basis_opt@cref}{{[subfigure][2][18]18b}{[1][22][]23}{}{}{}}
-\newlabel{sub@fig:r_basis_opt}{{b}{23}{PPO (Optimized)}{figure.caption.26}{}}
-\newlabel{sub@fig:r_basis_opt@cref}{{[subfigure][2][18]18b}{[1][22][]23}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Course of base orientation (quaternion components) during a test episode with ramp trajectory.}}{23}{figure.caption.26}\protected@file@percent }
-\newlabel{fig:r_basis_orientation_compare}{{18}{23}{Course of base orientation (quaternion components) during a test episode with ramp trajectory}{figure.caption.26}{}}
-\newlabel{fig:r_basis_orientation_compare@cref}{{[figure][18][]18}{[1][22][]23}{}{}{}}
 \citation{b1,b23}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}}{24}{table.caption.28}\protected@file@percent }
+\newlabel{tab:ppo_linear_kpi}{{10}{24}{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better)}{table.caption.28}{}}
+\newlabel{tab:ppo_linear_kpi@cref}{{[table][10][]10}{[1][22][]24}{}{}{}}
 \citation{deeplTr,deeplWr}
 \citation{openai_chatgpt}
 \bibcite{b1}{1}
@@ -287,10 +293,6 @@
 \bibcite{kaigom2025deep}{8}
 \bibcite{huang2023obstacle}{9}
 \bibcite{al2024reinforcement}{10}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Gradual hybrid testbeds integrate AI-driven digital twins on the left with physical robotic systems on the right, providing a versatile framework for exploring robust policy optimization and domain randomization strategies for sim-to-real generalization.}}{24}{figure.caption.28}\protected@file@percent }
-\newlabel{fig:oos}{{19}{24}{Gradual hybrid testbeds integrate AI-driven digital twins on the left with physical robotic systems on the right, providing a versatile framework for exploring robust policy optimization and domain randomization strategies for sim-to-real generalization}{figure.caption.28}{}}
-\newlabel{fig:oos@cref}{{[figure][19][]19}{[1][24][]24}{}{}{}}
-\@writefile{toc}{\contentsline {section}{REFERENCES}{24}{section*.30}\protected@file@percent }
 \bibcite{d2024failure}{11}
 \bibcite{al2024path}{12}
 \bibcite{hu2025deep}{13}
@@ -309,6 +311,10 @@
 \bibcite{b25}{26}
 \bibcite{b26}{27}
 \bibcite{b27}{28}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Gradual hybrid testbeds integrate AI-driven digital twins on the left with physical robotic systems on the right, providing a versatile framework for exploring robust policy optimization and domain randomization strategies for sim-to-real generalization.}}{25}{figure.caption.29}\protected@file@percent }
+\newlabel{fig:oos}{{19}{25}{Gradual hybrid testbeds integrate AI-driven digital twins on the left with physical robotic systems on the right, providing a versatile framework for exploring robust policy optimization and domain randomization strategies for sim-to-real generalization}{figure.caption.29}{}}
+\newlabel{fig:oos@cref}{{[figure][19][]19}{[1][25][]25}{}{}{}}
+\@writefile{toc}{\contentsline {section}{REFERENCES}{25}{section*.31}\protected@file@percent }
 \bibcite{b28}{29}
 \bibcite{b2}{30}
 \bibcite{b24}{31}
@@ -328,6 +334,6 @@
 \bibcite{deeplTr}{45}
 \bibcite{deeplWr}{46}
 \bibcite{openai_chatgpt}{47}
-\@writefile{toc}{\contentsline {subsection}{Patrick S. Ermisch}{25}{section*.31}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{Eric Guiffo Kaigom}{26}{section*.31}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Patrick S. Ermisch}{26}{section*.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Eric Guiffo Kaigom}{26}{section*.32}\protected@file@percent }
 \gdef \@abspage@last{26}

@@ -1391,6 +1391,58 @@ range on every tested weight, and the algorithm ranking reported in~\autoref{tab
 moderate reward-weight miscalibration.
 \end{roverlaphl}
 
+\subsection{Robustness Evaluation under Non-Ideal Conditions}\label{sec:robustness_eval}
+\begin{rtwohl}
+\hltwo{[R2.11]} To evaluate the robustness of the optimized PPO policy beyond the nominal simulation assumptions,
+we performed an additional stress-test campaign on the circular trajectory. The already trained optimized PPO policy
+was evaluated without retraining over $N_{\mathrm{eval}}=30$ episodes for each condition. Five non-ideal cases were
+considered: sensor noise, reduced actuator authority, an external torque disturbance, parameter uncertainty, and a
+combined stress case. Sensor noise was injected directly between the observation vector and the RL agent using the
+MATLAB function $obs_{\mathrm{noisy}} = obs + 0.005\,\mathrm{randn}(\mathrm{size}(obs))$, while the underlying plant
+dynamics remained unchanged. Actuator saturation was tested by reducing all torque limits to $0.75\,\tau_{\max}$.
+The external disturbance was implemented as an additive joint torque after the torque-saturation block, with
+$\tau_{\mathrm{dist},1}=\tau_{\mathrm{dist},2}=2\,\mathrm{Nm}$ for $2.0 \leq t \leq 2.5\,\mathrm{s}$ and zero
+disturbance otherwise. Parameter uncertainty was modeled by multiplying all masses, inertias, and joint damping
+coefficients by a factor of $1.5$. The combined case applied all four perturbations simultaneously.
+\end{rtwohl}
+
+\begin{table*}[!t]
+    \centering
+    \caption{\hltwo{[R2.11]} Robustness evaluation of the optimized PPO policy under non-ideal simulation conditions.
+    The policy was evaluated without retraining over $N_{\mathrm{eval}}=30$ episodes per condition on the circular
+    trajectory. K1 is maximized, whereas K2--K9 are minimized.}
+    \label{tab:robustness_eval}
+    \small
+    \renewcommand{\arraystretch}{1.15}
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabular}{lccccccccc}
+        \toprule
+        \textbf{Condition} & \textbf{K1} & \textbf{K2} & \textbf{K3} & \textbf{K4} & \textbf{K5} & \textbf{K6} & \textbf{K7} & \textbf{K8} & \textbf{K9} \\
+        \midrule
+        Nominal optimized PPO & $-0.4300$ & $0.0083$ & $0.2700$ & $0.0220$ & $0$ & $0$ & $0.3510$ & $0.0500$ & $5.3140$ \\
+        Sensor noise & $-0.4557$ & $0.0030$ & $0.2164$ & $0.0227$ & $0$ & $0$ & $0.6677$ & $0.0398$ & $3.8498$ \\
+        Reduced saturation ($0.75\,\tau_{\max}$) & $-0.4300$ & $0.0028$ & $0.1982$ & $0.0226$ & $0$ & $0$ & $0.6912$ & $0.0373$ & $3.3913$ \\
+        External disturbance & $-0.5791$ & $0.0029$ & $0.2052$ & $0.0268$ & $0$ & $0$ & $0.6671$ & $0.0447$ & $3.7735$ \\
+        Parameter uncertainty ($\times 1.5$) & $-0.7728$ & $0.0067$ & $0.1775$ & $0.0300$ & $0$ & $0$ & $0.6786$ & $0.0343$ & $2.8879$ \\
+        Combined stress case & $-1.3432$ & $0.0078$ & $0.2269$ & $0.0447$ & $0$ & $0$ & $0.6925$ & $0.0402$ & $2.4867$ \\
+        \bottomrule
+    \end{tabular}
+\end{table*}
+
+\begin{rtwohl}
+\noindent\textbf{Robustness results.} The optimized PPO policy remained safe in all stress tests: no collisions
+or joint-limit violations occurred in any condition ($K5=K6=0$). The strongest degradation is observed for the
+combined stress case and for parameter uncertainty, as expected because both directly change the effective dynamics
+seen by the fixed policy. Even in the combined case, the controller remains stable, with the mean base-orientation
+error increasing to $K4=0.0447$ while the mean tracking error stays close to the nominal level ($K2=0.0078$).
+Across all non-ideal conditions, K7 increases substantially compared with the nominal optimized PPO result, showing
+that the policy compensates for perturbations through less smooth torque profiles. The lower K9 values under stress
+should therefore not be interpreted as genuine efficiency gains; they reflect the changed actuator limits, modified
+dynamics, and injected disturbances that alter the mechanical-work calculation. Overall, the experiment confirms
+that the optimized PPO policy degrades gracefully under sensor noise, disturbances, parameter uncertainty, and
+reduced actuator authority, while the formal safety layer preserves the hard safety constraints.
+\end{rtwohl}
+
 \subsection{Piecewise-Linear Trajectory}
 While the previous evaluations focused on tracking a smooth circular end-effector (EE) reference, we 
 additionally tested how well the controller generalizes to \emph{linear} trajectories.

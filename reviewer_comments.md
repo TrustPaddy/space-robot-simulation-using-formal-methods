@@ -31,7 +31,7 @@
 | R2.8 | Anzahl Trainingsläufe, Seed-Werte und Policy-Selection-Prozedur klar beschreiben | ✅ |
 | R2.9 | Gleichwertige Hyperparameter-Optimierung für alle RL-Algorithmen (nicht nur PPO) | 🔬 |
 | R2.10 | PPO-Optimierungsprozess beschreiben: Suchraum, Optimierungsmethode, Tuning | ✅ (grün, überschneidet R3.8) |
-| R2.11 | Robustheitsevaluation: Störungen, Sensorrauschen, Parameterunsicherheiten, Aktuatorsättigungen | 🔬 |
+| R2.11 | Robustheitsevaluation: Störungen, Sensorrauschen, Parameterunsicherheiten, Aktuatorsättigungen | ✅ |
 | R2.12 | Lernkurven, Fehlerverteilungen und Vergleichs-Performance-Charts hinzufügen | ✅ |
 | R2.13 | Boxplots, Violin Plots, Konfidenzintervalle zur Darstellung der Performance-Variabilität | ✅ |
 | R2.14 | Fazit mit tatsächlichen experimentellen Ergebnissen abgleichen | ✅ |
