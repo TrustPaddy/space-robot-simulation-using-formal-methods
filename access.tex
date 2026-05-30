@@ -67,21 +67,28 @@
 \corresp{Corresponding author: Eric Guiffo Kaigom (e-mail: kaigom@fra-uas.de).}
 
 \begin{abstract}
-Free-floating space robots exhibit a strong dynamic coupling between their manipulator motion and base attitude disturbance, 
-complicating the Cartesian path tracking of the end-effector. 
-Supervised data-driven motion control approaches are challenging due to limited  availability of labeled data from space operations. This paper therefore explores trial-and-error learning techniques for Cartesian path tracking of free-floating space robots in a physics-based Simulink/Simscape environment with integrated safety monitoring. Since a quantitative and qualitative comparison of these methods is currently 
-missing in the sector of on-orbit servicing, we benchmark six Reinforcement Learning agents: TRPO, TD3, SAC, PPO,
-Policy Gradient, and DDPG. We evaluate their performance using unified key performance indexes. These include training duration and stability, tracking accuracy, base attitude disturbance, motion smoothness, energy consumption, and collision risks. We observe that PPO achieves the best overall trade-off between tracking accuracy, base disturbance minimization, and training stability.
-Building on this insight, we quantify the effect of a systematic tuning of the neural network architecture and key hyperparameters of PPO for tracking 
-both circular and ramp-shaped Cartesian paths.
-Compared to default PPO configuration, the optimized version significantly improves the mean episodic return by 80.7\%,
-reduces the mean squared tracking error by 67.7\% and the maximum tracking error by 44.1\%, and stabilizes
-the base orientation (67.0\% reduction). Moreover, the optimized PPO eliminates collisions and joint-limit
-violations while reducing the energy consumption by 15.98\%.
+Free-floating space robots exhibit a strong dynamic coupling between manipulator motion and base attitude disturbance,
+which complicates Cartesian path tracking of the end-effector.
+Supervised data-driven motion control approaches are difficult to apply because labelled data from on-orbit 
+operations are scarce. This paper therefore investigates reinforcement learning for Cartesian path tracking 
+of free-floating space robots in a physics-based Simulink/Simscape environment with integrated safety monitoring. 
+Because a unified quantitative and qualitative comparison of these methods is currently lacking for on-orbit 
+servicing, six RL algorithms are benchmarked: TRPO, TD3, SAC, PPO, PG, and DDPG. Their performance is evaluated 
+using a unified set of key performance indicators covering training duration and stability, tracking 
+accuracy, base attitude disturbance, motion smoothness, energy consumption, and collision risk. Among the six 
+algorithms, PPO yields the best trade-off between tracking accuracy, base disturbance minimization, and training stability.
+The effect of a systematic tuning of the neural network architecture and the key hyperparameters of PPO is then 
+quantified for tracking both circular and piecewise-linear Cartesian paths.
+Compared with the default PPO configuration, the optimized version improves the mean episodic return 
+from $-2.23$ to $-0.43$, reduces the mean squared tracking error by 67.7\% and the maximum tracking error by 
+44.1\%, and reduces the base orientation error by 67.0\%. In the 30 evaluation episodes considered, no 
+collisions or joint-limit violations are observed for the optimized PPO agent, and the energy consumption is 
+reduced by 15.98\%.
 \end{abstract}
 
 \begin{keywords}
-Free-floating on-orbit servicing, Proximal Policy Optimization (PPO), reinforcement learning, safe simulation, space robotics,  trajectory tracking
+Free-floating on-orbit servicing, Proximal Policy Optimization (PPO), reinforcement learning, 
+safe simulation, space robotics,  trajectory tracking
 \end{keywords}
 
 \titlepgskip=-15pt
@@ -96,38 +103,58 @@ Free-floating on-orbit servicing, Proximal Policy Optimization (PPO), reinforcem
 		\centering
 		\includegraphics[width=\linewidth]{Figures/oos0.png}
 	\end{subfigure}
-	\caption{Virtual testbeds that leverage AI-driven digital twins are useful for the safe, flexible, and accelerate development of learning-based control methods that support  in-space operations under realistic yet controllable conditions.}
+	\caption{Virtual testbeds that leverage AI-driven digital twins support safe, flexible, and efficient 
+  development of learning-based control methods for in-space operations under realistic yet controllable 
+  conditions.}
 	\label{fig:oos0}
 \end{figure}
 
-Free-floating robot manipulators operating in the space environment to inspect, capture, or de-orbit  satellites are expected to
-introduce unique control challenges when compared to terrestrial robots \cite{b1}. 
-In micro-gravity, the robot’s base (typically a spacecraft) is not fixed and thrusters are turned off. 
-Manipulator motions can give rise to a change of the position and orientation of the base, 
-which in turn modifies the final pose of the end-effector. This reaction is due to the conservation of 
-the linear and angular momentum \cite{b6}. The free-floating dynamics of space robots has many benefits. 
-An expensive consumption of fuel, such as hydrazine ($N_2H_4$),  and  an excitation of the robot dynamics for some activation 
-frequencies of the pulse width modulation related to thruster control can be avoided \cite{b11}. This measure has the potential to extend the lifetime of space robots and enhance the mission success.
+Free-floating robot manipulators operating in space for satellite inspection, capture, or de-orbiting 
+introduce control challenges not encountered with terrestrial robots \cite{b1}.
+In micro-gravity, the robot's base (typically a spacecraft) is not fixed and the thrusters are inactive.
+Manipulator motions therefore change the position and orientation of the base, which in turn modifies the 
+pose of the end-effector. This reaction is a consequence of the conservation of
+linear and angular momentum \cite{b6}. Operating the manipulator under free-floating dynamics avoids the 
+consumption of propellant (e.g.\ hydrazine, $\mathrm{N_2H_4}$) and the excitation of structural modes by 
+the pulse-width modulation of thruster control at certain frequencies \cite{b11}. This extends the operational 
+lifetime of the spacecraft and supports mission success.
 
 
-However, a free-floating base complicates the achievement of robotized manipulations. 
-Indeed, the end-effector of the arm may fail to reach the desired target point if standard motion planning approaches dedicated to robots with a 
-fixed base are simply applied. Further constraints, such as communication latency 
-and limited onboard computational resources, make more intricate the continuous real-time control and stabilization of the base \cite{b1,b32}. In fact, traditional control
-approaches that assume an accurate model of the robot dynamics (e.g. reactionless planning or precise attitude control) 
-can struggle to adapt to uncertainties and unmodeled dynamics. Supervised data-driven approaches, on the other hand, are difficult to apply. 
-Usually, the required amount and quality of data are rather unavailable in the space sector. 
-In many cases, robotized tracking capabilities under a free-floating behavior of the arm's base need to be 
-demonstrated long before the physical robot system is assembled and deployed \cite{muhlbauer2025software,rybus2024robotic,kaigom2011optimal}.  
+However, a free-floating base complicates manipulator control.
+Standard motion-planning approaches developed for fixed-base robots can fail to drive the end-effector to 
+the desired target. Additional constraints, such as communication latency
+and limited onboard computational resources, further complicate continuous real-time control and base 
+stabilization \cite{b1,b32}. Model-based approaches that assume an accurate dynamic model (e.g.\ reactionless 
+planning or precise attitude control)
+are sensitive to model uncertainty and unmodelled dynamics. Supervised data-driven approaches are also 
+difficult to apply because
+labelled training data of sufficient amount and quality are typically unavailable in the space sector.
+In addition, tracking capability under a free-floating base often has to be
+demonstrated before the physical system is assembled and deployed 
+\cite{muhlbauer2025software,rybus2024robotic,kaigom2011optimal}.
 
 
-\textcolor{magenta}{These challenges motivate the development and simulation of AI-empowered digital twins (DTs) \cite{kaigom2025deep}, as illustrated in \cref{fig:oos0}. Unlike standard DTs driven by sensed real-time data from their physical counterparts, such DTs are designed to infer and contextualize system states, reason, and evolve under representative distributions of operational conditions. These include uncertain dynamics, disturbances, faults, and contact-rich interactions associated with satellite capture in the space environment. By enabling accelerated experimentation through faster-than-real-time simulation and systematic ablation studies, DTs can improve decision making and help reduce the simulation-to-reality gap. They provide a framework to explore and design robust learning-based control methods that support safe exploration, robust policy optimization, and domain randomization for sim-to-real generalization, thereby enabling autonomous adaptation to complex and unknown dynamics even under severe data scarcity. This is particularly valuable for space robotics, where limited flight data, safety-critical constraints, and costly on-orbit experimentation make AI-driven DTs an essential tool for training, validation, and policy transfer.}
+\textcolor{magenta}{These challenges motivate the development and simulation of AI-enabled digital twins 
+(DTs) \cite{kaigom2025deep}, as illustrated in \cref{fig:oos0}. Unlike standard DTs that primarily mirror 
+sensed real-time data from physical counterparts, the DTs considered here combine physics-based simulation 
+with learning components to contextualize system states and evaluate representative operating conditions. 
+These conditions include uncertain dynamics, disturbances, faults, and contact-rich interactions associated 
+with satellite capture. Faster-than-real-time simulation and systematic ablation studies can support 
+controller design and help assess sim-to-real effects. In this role, AI-enabled DTs provide a training 
+and validation environment for learning-based controllers that combine safe exploration, policy optimization, 
+and domain randomization under limited flight data and safety-critical constraints.}
 
 
 
 \begin{table*}[!t]
 	\centering
-	\caption{\hltwo{[R2.3]} Recent advances in Deep RL-based motion management for free-floating space robots. N/R\,=\,not reported. ,\textcolor{red}{Eine Bescheibung der Abkürzungen fehlt.}}
+	\caption{\hltwo{[R2.3]} Recent advances in Deep RL-based motion management for free-floating space robots.
+  Abbreviations: RL Alg.\,=\,reinforcement learning algorithm; DOF\,=\,degrees of freedom;
+  Obs./Act.\,Dim.\,=\,observation-/action-space dimension; vel.\,=\,joint velocities;
+  rates\,=\,joint rate commands; pos./att.\,=\,position/attitude; pos./ori.\,=\,position/orientation;
+  EE\,=\,end-effector; Formal Ver.\,=\,formal verification; Base Dist.\,Min.\,=\,base disturbance minimization;
+  $d_\text{safe}$\,=\,minimum admissible distance; $\tau_\text{max}$\,=\,torque bound;
+  K1--K9\,=\,evaluation KPIs (see Section~\ref{RL}); N/R\,=\,not reported.}
 	\label{tab:sample}
 	\scriptsize
 	\renewcommand{\arraystretch}{1.25}
@@ -148,53 +175,30 @@ demonstrated long before the physical robot system is assembled and deployed \ci
 	\end{tabular}
 \end{table*}
 
-Reinforcement Learning (RL) has emerged as a promising approach for robotics, enabling agents to
-learn control policies through trial-and-error interactions with entities, environments, and processes. Recent advances in deep RL have shown
-success in complex control tasks, but applying RL to space robots is still relatively novel \cite{wu2020reinforcement,al2024path,hu2025deep,zhang2025learning,huang2023obstacle}.  
+Reinforcement learning (RL) has been increasingly applied in robotics, enabling agents to
+synthesize control policies through trial-and-error interaction with their environment. Recent advances in deep RL have addressed a range of complex continuous-control tasks, although applications to space robots remain comparatively recent \cite{wu2020reinforcement,al2024path,hu2025deep,zhang2025learning,huang2023obstacle}.
 
-This paper investigates the use of continuous-action deep RL for the tracking of a Cartesian motion of the end-effector of a free-floating space
-manipulator. It  differs from previous contributions in three ways. First, it focuses on a systematic comparison 
-and explores the respective performance of six different RL algorithms (see \cref{comparison}) by conducting ablation studies (see \cref{sec:reward_ablation}) beyond the scope of related work mentioned in \Cref{tab:sample}. It thereby  quantitatively and qualitatively contributes to filling in a current gap in space robotics. Second, several constraints, such as collision avoidance, are monitored
-through formal methods applied from a software-enabled and practical perspective (see, \cref{formal}).  Finally, this work investigates the minimization of the base attitude during arm motions in conjunction with constraint monitoring previously mentioned. Recall that the induced base disturbance is omitted in most recent contributions, 
-as highlighted in \Cref{tab:sample}. We are not aware of any comprehensive work that compares  RL algorithms 
-for the Cartesian path tracking of free-floating space robots while considering the base attitude minimization and unifying 
-constraint monitoring by leveraging formal methods, to the best of our knowledge (see, also \autoref{tab:sample}). 
+This paper investigates continuous-action deep RL for Cartesian path tracking of the end-effector of a free-floating space
+manipulator. The contribution differs from prior work in three respects. First, six different RL algorithms are systematically compared (see \cref{comparison}) and complemented by ablation studies (see \cref{sec:reward_ablation}), addressing a gap left by the works listed in \Cref{tab:sample}. Second, constraints such as collision avoidance are monitored
+through formal methods integrated into the simulation toolchain (see \cref{formal}). Third, base attitude minimization during arm motion is treated as an explicit control objective in conjunction with the constraint monitoring above. The induced base disturbance is not addressed in most of the works listed in \Cref{tab:sample}. To the authors' knowledge, a unified comparison of RL algorithms
+for Cartesian path tracking of free-floating space robots that jointly considers base attitude minimization and formal-methods-based constraint monitoring remains unavailable.
 
 \begin{rthreehl}
-\hlthree{[R3.1]} As shown in \autoref{tab:sample}, every prior contribution evaluates only a single RL algorithm on a specific subtask, making it impossible to draw conclusions about the relative merits of different learning paradigms for free-floating space robot control. Furthermore, no existing work simultaneously addresses three compounding challenges: (i)~a multi-algorithm benchmark under strictly unified conditions, (ii)~explicit minimization of base attitude disturbance as a co-equal control objective alongside end-effector tracking, and (iii)~integration of formal safety verification directly into the RL training loop. The present work is, to the best of our knowledge, the first to close all three gaps at once, providing a reproducible and safety-aware comparison framework that goes substantially beyond the individual studies listed in \autoref{tab:sample}.
+\hlthree{[R3.1]} As shown in \autoref{tab:sample}, the surveyed prior contributions typically evaluate a single RL algorithm on a specific subtask, which limits conclusions about the relative merits of different learning paradigms for free-floating space robot control. Furthermore, the surveyed literature does not jointly address three compounding challenges: (i)~a multi-algorithm benchmark under strictly unified conditions, (ii)~explicit minimization of base attitude disturbance as a co-equal control objective alongside end-effector tracking, and (iii)~integration of formal safety verification directly into the RL training loop. The present work addresses these gaps jointly by providing a reproducible and safety-aware comparison framework that extends the individual studies listed in \autoref{tab:sample}.
 \end{rthreehl}
 
-The key contributions and novelties of this work include:
-
-
+The main contributions of this work are summarized as follows:
 
 \begin{itemize}
-  \item A comparative evaluation of RL Agents: We implement and evaluate six state-of-the-art
-continuous RL algorithms, Trust Region Policy Optimization (TRPO) \cite{b14}, Twin Delayed Deep
+  \item \textit{Comparative evaluation of RL agents:} Six continuous-action RL algorithms are implemented and evaluated on the same path-tracking task: Trust Region Policy Optimization (TRPO) \cite{b14}, Twin Delayed Deep
 Deterministic Policy Gradient (TD3) \cite{b17}, Soft Actor-Critic (SAC) \cite{b18}, Proximal Policy Optimization
-(PPO) \cite{b15}, vanilla Policy Gradient (PG)\cite{b21}, and Deep Deterministic Policy Gradient (DDPG) \cite{b7}, on the same path tracking task of a free-floating robot. 
-This side-by-side comparison under unified
-conditions reveals which algorithm is likely to deliver the best possible performance when it comes to motion tracking of a free-floating space robot and
-why.
-  \item An integration of formal safety measures: To meet safety-critical space operation requirements,
-we incorporate formal methods into the learning loop \cite{b5, b6, b22, b23}. Collision monitoring, momentum
-conservation check, and formal verification of joint torque limits are embedded in the simulation. This integration 
-ensures the RL agent cannot violate fundamental and critical safety properties (like avoiding collisions or exceeding actuator limits) during training and testing.
- \item A versatile simulation environment for multi-criteria optimization in in-space servicing: We develop a flexible MATLAB/Simulink simulation framework for a free-floating space robot, based on a URDF-derived multibody model and the Simscape physics engine. The robot, a  cube-shaped base with a 4-Degree of Freedom (DOF) robotic arm, is modeled with realistic kinematics, dynamics, and sensor/actuator 
-parameters and features. A dedicated reinforcement learning environment provides the agent with observations and rewards, including 
-a specially designed reward function that encourages accurate end-effector trajectory tracking while penalizing base movement, 
-large joint velocities, and excessive control effort (energy).
-Through reward shaping and carefully chosen reset conditions, the agent learns to accomplish the task without causing 
-excessive base disturbance or safety violations \cite{b25,b26,b27,b28,b7}.
- \item The optimization of the PPO agent : Based on  comparative results, we identify PPO as the top-
-performing algorithm and further refine it for path tracking tasks. We adjust the neural network
-architecture and tune hyperparameters (e.g., learning rate, batch size, clipping ratio, entropy
-regularization, etc.) to improve training stability and policy performance. The optimized
-PPO agent achieves significantly better tracking accuracy, smoother control inputs, and zero
-safety violations, outperforming the default configuration on all key metrics.
+(PPO) \cite{b15}, vanilla Policy Gradient (PG) \cite{b21}, and Deep Deterministic Policy Gradient (DDPG) \cite{b7}. The comparison is performed under unified conditions and identifies which algorithm offers the most favourable trade-off between tracking accuracy, base disturbance, and training stability.
+  \item \textit{Integration of formal safety mechanisms:} Formal methods are integrated into the learning loop \cite{b5, b6, b22, b23}. A collision monitor, a momentum-conservation check, and a formal verification of the joint-torque limits are embedded in the simulation. This integration monitors the targeted safety properties (collision avoidance and bounded actuator commands) during training and testing.
+ \item \textit{Simulation environment for multi-criteria evaluation in on-orbit servicing:} A MATLAB/Simulink simulation framework is developed for a free-floating space robot based on a URDF-derived multibody model and the Simscape physics engine. The robot consists of a cuboid base and a 4-degree-of-freedom (4-DOF) revolute arm, modelled with consistent kinematic, inertial, and sensor/actuator parameters. The associated RL environment provides observations and rewards through a composite reward function that penalizes end-effector tracking error, base motion, large joint velocities, and excessive control effort. Together with the reset conditions, this reward shaping allows the agent to learn the task while keeping base disturbance and safety violations bounded \cite{b25,b26,b27,b28,b7}.
+ \item \textit{Optimization of the PPO agent:} Based on the comparative results, PPO is selected for further tuning. The neural network architecture and key hyperparameters (learning rate, mini-batch size, clipping ratio, and entropy regularization) are adjusted to improve training stability and policy performance. The optimized PPO agent reduces tracking error, produces smoother control inputs, and shows no safety violations in the reported evaluation episodes relative to the default configuration on the tested KPIs.
 \end{itemize}
-%\newpage
-Our investigation shows that the integration of multibody simulation, deep reinforcement learning, and formal verification can yield robust and safe control policies for free-floating space robots. In the following, we first describe the system modeling and reinforcement learning framework, then detail the formal safety components, present a comparative analysis of the reinforcement learning agents, and finally discuss the performance of the optimized PPO agent before concluding with broader insights and future research directions.
+
+The integration of multibody simulation, deep reinforcement learning, and formal verification considered here yields control policies that respect the imposed safety constraints while reducing tracking error and base disturbance relative to the default configuration. The remainder of the paper is organized as follows. Section~\ref{sec:sim} describes the system model and the simulation environment. Section~\ref{RL} introduces the reinforcement learning framework. Section~\ref{formal} presents the safety monitors and formal-methods components. Section~\ref{comparison} reports the comparative evaluation of the six RL algorithms. The optimization of the PPO agent and its evaluation on circular and piecewise-linear references follow, before discussion and conclusion.
 
 \section{Related Work}
 
@@ -213,11 +217,10 @@ RL has demonstrated success in various robotic manipulation tasks \cite{b2,b7}.
 Policy gradient methods (PG, PPO, TRPO) and actor-critic algorithms (DDPG, TD3, SAC)
 have been widely applied to continuous control problems \cite{b14,b15,b17,b18,b21}.
 \begin{rtwohl}
-\hltwo{[R2.2]} Applied to free-floating space robots, RL-based methods have been explored for path planning \cite{wu2020reinforcement,al2024path},
+\hltwo{[R2.2]} Applied to free-floating space robots, RL-based methods have been investigated for path planning \cite{wu2020reinforcement,al2024path},
 obstacle avoidance \cite{huang2023obstacle}, trajectory tracking \cite{hu2025deep}, and failure management \cite{d2024failure}.
-The key advantage of RL is its ability to synthesize controllers without explicit dynamic models and requiring flight data, making it attractive when system
-parameters are uncertain or unavailable. Nevertheless, current RL-based approaches share important limitations: most studies
-evaluate only a single algorithm, focus on an objective, omit base attitude minimization as a control objective, and lack systematic benchmarking across comparable conditions.
+RL does not require an explicit dynamic model of the system, which is relevant when model parameters are uncertain or unavailable. However, current RL-based approaches share recurring limitations: most studies
+evaluate only a single algorithm, address a single objective, omit base attitude minimization, and do not provide systematic benchmarking under comparable conditions.
 \end{rtwohl}
 
 \subsection{Hybrid Safety-Aware Control Systems}
@@ -226,8 +229,8 @@ barrier functions, and constrained optimization \cite{b22,b23,b24,b34}.
 \begin{rtwohl}
 \hltwo{[R2.2]} Shielding approaches \cite{b23} intercept unsafe actions at runtime and substitute corrective commands,
 while control barrier functions (CBFs) \cite{b34} encode safety as a continuously enforced constraint on the policy's action set.
-These hybrid methods combine the adaptability of RL with formal guarantees, ensuring critical properties such as joint limit compliance
-and collision avoidance are never violated. However, their application to free-floating space robots remains largely unexplored:
+These hybrid methods combine the adaptability of RL with formally specified runtime constraints, helping to enforce critical properties such as joint limit compliance
+and collision avoidance. However, their application to free-floating space robots remains largely unexplored:
 existing works rarely integrate formal verification directly into the RL training loop or combine it with base attitude minimization objectives.
 \end{rtwohl}
 
@@ -245,8 +248,8 @@ algorithm performance and to guide algorithm selection for future missions.
 \hltwo{[R2.1]} The preceding survey reveals three mutually reinforcing gaps in the existing literature. First, no prior work systematically compares multiple RL algorithms under identical conditions for Cartesian end-effector tracking of free-floating space robots. Second, base attitude minimization---a safety-critical requirement in on-orbit operations---is omitted in most RL-based
 contributions (see Table~\ref{tab:sample}). Third, the integration of formal safety verification directly into the RL
 training and evaluation loop has not been demonstrated for this class of systems. The present work addresses all
-three gaps simultaneously. It benchmarks six state-of-the-art RL algorithms under unified conditions, incorporate base
-attitude minimization as an explicit control objective, and embed formal verification of safety constraints throughout
+three gaps simultaneously. It benchmarks six representative RL algorithms under unified conditions, incorporates base
+attitude minimization as an explicit control objective, and embeds formal verification of safety constraints throughout
 training and testing.
 \end{rtwohl}
 
@@ -267,7 +270,7 @@ training and testing.
         \centering
         \includegraphics[width=\linewidth]{Figures/ref_kreisbahn_3.png}
     \end{subfigure}
-    \caption{Tracking the desired end-effector circular path using inverse kinematics. \textcolor{blue}{Das Bild oben links zeigt einen Manipulator in einer singulären Lage. Ich würde nur  die Bilder oben rechts und unten nehmen und nebeneinander platzieren.}}
+    \caption{Tracking the desired end-effector circular path using inverse kinematics.}
     \label{fig:ref_kreis_gesamt}
 \end{figure*}
 \noindent
@@ -281,7 +284,7 @@ Recent advances in AI-driven DTs have demonstrated considerable benefits for on-
 
 \begin{figure*}[!t]
 	\centering
-	\includegraphics[width=0.98\linewidth]{Figures/Spacerobot_slx.png}
+	\includegraphics[width=0.98\linewidth]{Figures/Spacerobot_slx.pdf}
 	\caption{Overview of the Simulink model \texttt{SpaceRobot.slx} \\
   This figure shows the Simulink-based closed-loop simulation framework for the free-floating space robot. The model integrates the robot dynamics, 
   reference generation, observation assembly, reward computation, and a PPO-based reinforcement learning agent that outputs joint torques. The reward and 
@@ -289,29 +292,49 @@ Recent advances in AI-driven DTs have demonstrated considerable benefits for on-
 	\label{fig:spacerobot_slx}
 \end{figure*}
 
-\subsection{Robot Model} The virtual testbed for this research allows for the simulation of a free-floating space manipulator inspired by
+\subsection{Robot Model} The virtual testbed simulates a free-floating space manipulator derived from
 the Spacecraft Robotics Toolkit (SPART) example \cite{b9}. The robot consists of a cuboid base (serving as the
-spacecraft) with a 4-degree-of-freedom (4-DOF) serial manipulator arm mounted on it (see~\autoref{fig:ref_kreis_gesamt}). The arm
-has four revolute joints and four links, and its kinematic structure and inertial properties are defined in
-a Unified Robot Description Format (URDF) file (SpaceRobot.urdf) which is imported into Simulink’s
-multibody simulation environment \cite{b25,b26,b27}. Identified values (see, .e.g., \cite{b12}) were chosen for the geometry 
-and the inertial properties of links of the space arm considered in this work and stored in the URDF model. The result is a realistic
-multibody model with a floating base and an arm, capturing the strong dynamic coupling between
-them \cite{b6}.
+spacecraft) and a 4-degree-of-freedom (4-DOF) serial manipulator (see~\autoref{fig:ref_kreis_gesamt}). The arm
+has four revolute joints and four links; its kinematic structure and inertial properties are specified in
+a Unified Robot Description Format (URDF) file (\texttt{SpaceRobot.urdf}) imported into Simulink's
+multibody environment \cite{b25,b26,b27}. The geometry and the inertial properties of the links are taken from identified values reported in the literature (see, e.g., \cite{b12}) and stored in the URDF model. The resulting multibody model captures the dynamic coupling between the floating base and the arm \cite{b6}.
 
 \subsection{Dynamic Simulation in MATLAB/Simulink}\label{sec:sim} The simulation is implemented in Simulink using the
-Simscape Multibody physics engine. Gravity is turned off (set to $[0~0~0]^T$) to emulate the microgravity
-orbital environment. The base is connected to the inertial world frame through an unactuated 6-DoF joint \cite{b3}, allowing it to move freely translate and rotate. No external forces or torques act on
-the system. Thus, the base only moves in response to forces generated by the manipulator’s joints. This
-configuration ensures that momentum is conserved, motions of the arm can lead to a reaction of the base \cite{b3,b6,b28,b34,kaigom2011optimal}.
+Simscape Multibody physics engine. Gravity is set to $[0~0~0]^T$ to emulate the microgravity
+orbital environment. The base is connected to the inertial world frame through an unactuated 6-DoF joint \cite{b3}, allowing free translation and rotation. No external forces or torques act on
+the system, so the base moves only in response to the internal torques generated by the manipulator joints. Under this configuration, the total linear and angular momentum are conserved, and arm motions induce a reactive motion of the base \cite{b3,b6,b28,b34,kaigom2011optimal}.
 
 \begin{rthreehl}
 \hlthree{[R3.2]} The simulation operates under a set of idealizing assumptions that are standard in RL-based space robotics research and are explicitly acknowledged here to facilitate reproducibility and fair comparison. First, \emph{ideal sensing} is assumed: all state variables (joint angles, joint velocities, base orientation quaternion, and base angular velocity) are read directly from Simulink signal buses without sensor noise, quantization errors, or measurement bias. Second, \emph{zero communication latency} is assumed: the RL agent receives observations and issues torque commands within the same discrete time step, with no transmission delay between sensing and actuation. Third, the robot is modeled as a \emph{rigid multibody system}: flexible link dynamics, joint compliance, and thermal drift are not included. Fourth, \emph{no external disturbances} act on the spacecraft: gravity gradients, atmospheric drag, solar radiation pressure, and residual magnetic torques are all set to zero, consistent with the free-floating assumption in low-Earth orbit. These assumptions establish a clean, controlled benchmark environment in which performance differences can be attributed unambiguously to algorithmic choices rather than to environmental variability. Their impact on real-world deployment is discussed in the Limitations section.
 \end{rthreehl}
 
+\begin{rthreehl}
+\hlthree{[R3.3]} The choice of MATLAB/Simulink as the simulation backbone was made deliberately in view of the alternatives commonly used in robotics and reinforcement learning research, namely Gazebo~\cite{koenig2004gazebo} and MuJoCo~\cite{todorov2012mujoco}. MuJoCo offers a highly optimized contact and multibody solver and has become a de-facto standard for RL benchmarks in continuous control~\cite{korber2021comparing}; however, it lacks a native interface to Simulink, Stateflow, and the model-based formal verification ecosystem that this work relies on to express and analyze safety monitors. Gazebo provides mature ROS integration, plug-in-based sensor models, and is well suited for hardware-in-the-loop development~\cite{collins2021review}, but its general-purpose multibody back-ends are typically less convenient for free-floating spacecraft scenarios and likewise offer no native path to formal verification artifacts. Simscape Multibody, in contrast, delivers a validated multibody solver for the free-floating base--manipulator coupling and integrates seamlessly with Stateflow and the Simulink Design Verifier used to specify the runtime safety monitors that constitute a central contribution of this work; combined with the Reinforcement Learning Toolbox and a deterministic fixed-step solver, this yields a single, reproducible toolchain from physical model through learned policy to formally checked safety logic. \autoref{tab:sim_comparison} summarizes the trade-off: faster raw simulation throughput in MuJoCo and richer sensor and ROS tooling in Gazebo are exchanged here for tight coupling between the dynamics, the RL agent, and the formal-methods pipeline.
+\end{rthreehl}
+
+\begin{table}[!t]
+\centering
+\renewcommand{\arraystretch}{1.25}
+\caption{Comparison of simulation platforms relevant to free-floating space robotics with formal safety monitors.}
+\label{tab:sim_comparison}
+\begin{tabular}{p{2.4cm}p{1.8cm}p{1.5cm}p{1.5cm}}
+\toprule
+\textbf{Criterion} & \textbf{MATLAB/ Simulink} & \textbf{Gazebo} & \textbf{MuJoCo} \\
+\midrule
+Physics engine & Simscape Multibody & ODE, Bullet, DART & MuJoCo (native) \\
+Free-floating multibody fidelity & High & Medium & High \\
+Formal verification integration & Native (Stateflow, Design Verifier) & None & None \\
+RL framework & RL Toolbox & gym-gazebo, ROS bridges & Gymnasium, dm\_control \\
+Sensor and ROS integration & Limited (via add-ons) & Extensive & Limited \\
+Code generation / HIL path & Mature (Embedded Coder) & Via ROS 2 & Limited \\
+Licensing & Commercial & Open source & Open source \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \begin{figure*}[!t]
 	\centering
-	\includegraphics[width=0.98\linewidth]{Figures/spacerobot_slx_robot.png}
+	\includegraphics[width=0.98\linewidth]{Figures/spacerobot_slx_robot.pdf}
 	\caption{Overview of the Robot Subsystem in the Simulink Model \texttt{SpaceRobot.slx} \\
   This figure depicts the Simulink/Simscape Multibody model of the free-floating space robot, consisting of a floating base 
   and a serial 4-DOF manipulator. Joint torque commands are applied to the revolute joints, while joint positions and velocities 
@@ -319,19 +342,17 @@ configuration ensures that momentum is conserved, motions of the arm can lead to
 	\label{fig:spacerobot_slx_robot}
 \end{figure*}
 
-The Simulink model is composed of  subsystems, as illustrated in~\autoref{fig:spacerobot_slx}. The \emph{Robot Plant} subsystem computes 
-the full 6-DOF multibody dynamics of the free-floating robot at each time step (see~\autoref{fig:spacerobot_slx_robot}), taking joint torque inputs 
-and outputting the resulting robot states  by numerically integrating the equations of motion~\cite{b6}. The \emph{Controller} subsystem executes the learned RL policy, 
-applying joint torque commands that pass through saturation and safety verification blocks before reaching the plant. If the collision monitor signals an imminent 
-collision, this block issues an emergency stop and gradually overrides all torques to zero~\cite{b22,b23}. The \emph{Reference Trajectory Generator} provides the 
-desired end-effector trajectory and base attitude (see~\autoref{fig:spacerobot_slx_reference}), outputting the current target position and velocity at each time step. 
-Various \emph{sensors} measure the robot's state (joint angles, velocities, base orientation, base angular velocity), combining them into an observation signal for 
-the RL agent (detailed in \cref{RL}). Finally, \emph{safety monitors} enforce constraints. For instance, a Collision Monitor checks distances between robot components and triggers 
-a safety halt if any distance falls below a threshold $d_{safe}$, while a joint-limit monitor triggers an emergency stop if any joint exceeds its allowed range~\cite{b31,b22,b23}.
+The Simulink model is composed of several subsystems, as illustrated in~\autoref{fig:spacerobot_slx}. The \emph{Robot Plant} subsystem computes
+the multibody dynamics of the free-floating robot at each time step (see~\autoref{fig:spacerobot_slx_robot}) by numerically integrating the equations of motion for the applied joint torques~\cite{b6}. The \emph{Controller} subsystem executes the learned RL policy;
+the commanded joint torques pass through saturation and safety verification blocks before reaching the plant. When the collision monitor reports an imminent
+collision, the controller issues an emergency stop and overrides the torques to zero~\cite{b22,b23}. The \emph{Reference Trajectory Generator} provides the
+desired end-effector trajectory and base attitude (see~\autoref{fig:spacerobot_slx_reference}), outputting the current target position and velocity at each time step.
+A set of \emph{sensors} measures the robot state (joint angles, joint velocities, base orientation, and base angular velocity) and assembles the observation signal for
+the RL agent (detailed in \cref{RL}). Finally, \emph{safety monitors} enforce the operational constraints: a collision monitor compares the distance between selected robot components against a threshold $d_{\mathrm{safe}}$ and triggers a safety halt if the distance falls below this threshold, while a joint-limit monitor triggers an emergency stop if any joint exceeds its admissible range~\cite{b31,b22,b23}.
 
 \begin{figure*}[!t]
 	\centering
-	\includegraphics[width=0.97\linewidth]{Figures/spacerobot_slx_reference.png}
+	\includegraphics[width=0.97\linewidth]{Figures/spacerobot_slx_reference.pdf}
 	\caption{Overview of the Reference Subsystem in the Simulink Model \texttt{SpaceRobot.slx}\\
   This figure shows the computation of end-effector position and velocity tracking errors with respect to the reference trajectory. 
   The measured end-effector states are compared to the reference signals to generate position and velocity error vectors used for observation 
@@ -339,78 +360,45 @@ a safety halt if any distance falls below a threshold $d_{safe}$, while a joint-
 	\label{fig:spacerobot_slx_reference}
 \end{figure*}
 
-To accurately simulate the continuous dynamics while interfacing with the discrete-time RL agent, a
-consistent integration scheme is used. The Simscape solver is configured to operate with a fixed-time
-step equal to the agent’s decision interval ($\Delta t$), instead of the default variable-step, to ensure
-synchronization between the physics simulation and the RL decision-making cycle. Rate
-transition blocks handle any rate differences, avoiding aliasing and ensuring that state observations
-and action commands align appropriately between the continuous plant and the discrete agent loop \cite{b29,b30}.
-Additionally,  consistency checks of Simulink’s units are enabled to catch any modeling errors (e.g.
-mismatched units) early in development.
+To couple the continuous dynamics with the discrete-time RL agent, a
+consistent integration scheme is used. The Simscape solver is configured with a fixed-step size
+equal to the agent's decision interval ($\Delta t$) instead of the default variable-step solver, ensuring
+synchronization between the physics simulation and the RL decision cycle. Rate
+transition blocks handle the remaining rate differences and prevent aliasing between the continuous plant and the discrete agent loop \cite{b29,b30}.
+Simulink unit consistency checks are enabled to detect modelling errors such as
+mismatched units early in development.
 
-\subsection{Reference Trajectory and Desired Task} The target task for the robot is to follow a periodic end-effector
-trajectory while minimizing the base disturbance. As previously mentioned, the reference trajectory is chosen as a circular
-path (see~\autoref{fig:ref_kreis_gesamt}). Prior to training the RL agents, the trajectory is validated through inverse kinematics to ensure it is
-geometrically feasible for the manipulator (within joint limits and avoiding singularities). The inverse
-kinematics solution produced a consistent set of joint movements that achieve the desired end-effector
-motion, confirming that the circle can be tracked by the arm without requiring unrealistic motions from a kinematic viewpoint.
-This precaution guarantees that the task is achievable, at least by some controller, so if the RL agent
-fails to learn it, it is due to learning limitations rather than an unattainable desired Cartesian poses of the end-effector.  During simulation, the reference subsystem outputs  the desired end-effector position and velocity
-as time series $EE_{ref}(t)$ and $EE_{vref}(t)$ in the workspace at each time step. From
-these terms, the instantaneous tracking error signals are computed for the position and velocity of the end-effector. These error signals  are key components of the observation and are also
-used in the reward computation that penalizes large errors.%, as described later. %The trajectory parameters (e.g., circle radius, speed, etc.) can be adjusted to adjust the task’s difficulty. For the experiments reported here, we choose moderate values that challenge the controller but do not push the arm to its dynamic limits.
+\subsection{Reference Trajectory and Desired Task} The task is to follow a periodic end-effector
+trajectory while minimizing base disturbance. The reference trajectory is a circular
+path (see~\autoref{fig:ref_kreis_gesamt}). Prior to training, the trajectory was validated through inverse kinematics to confirm geometric feasibility for the manipulator (compliance with joint limits and absence of singularities). The inverse-kinematics solution yielded a consistent set of joint trajectories that realize the desired end-effector motion, confirming that the circular path is kinematically feasible.
+This precaution ensures that the task is achievable by at least one controller, so that any failure of the RL agent can be attributed to learning, not to a kinematically infeasible reference. During simulation, the reference subsystem outputs the desired end-effector position and velocity
+as time series $EE_{\mathrm{ref}}(t)$ and $EE_{v,\mathrm{ref}}(t)$ at each time step. The instantaneous position and velocity tracking errors are derived from these signals; they enter both the observation vector and the reward computation that penalizes large errors.
 
 %The simulation environment provides a flexible and challenging platform for learning, with a free-floating base, a non-trivial trajectory control task, and integrated mechanisms to measure performance and enforce safety. Next, we describe how the reinforcement learning problem is formulated in this environment.
 
 \section{Reinforcement Learning Framework}\label{RL}
-State (Observation) Space: The RL agent receives an observation capturing the
-system’s key state information relevant to control at each time step \cite{b7}. The state vector is composed of the following
-elements:
+\textbf{State (Observation) Space:} At each time step the RL agent receives an observation that summarizes the state variables relevant for control \cite{b7}. The state vector consists of the following components:
 \begin{itemize}
-  \item End-Effector Tracking Error: The position error $e_p \in \mathbb{R}^3$ between the end-effector’s current position and the reference target position (in Cartesian coordinates). If the
-end-effector is exactly on the desired trajectory point, $e_{p} = 0$. Additionally, the error
-in end-effector velocity $e_v \in \mathbb{R}^3$ (difference between current and target end-effector velocities) is included. Together, ($e_{p}$, $e_{v}$) provides the agent a
-direct indication of tracking performance. Specifically, it tells the agent how far off the trajectory the end-effector is and whether it is lagging or overshooting in velocity.
-  \item Arm Joint States: The positions and velocities of each of the 4 arm joints. We include the joint
-angles $q \in \mathbb{R}^4$ and joint angular velocities $\dot q \in \mathbb{R}^4$ in the observation.
-These inform the agent about the manipulator’s configuration and motion state (e.g., at rest or not). (Note: Joint angles can
-be normalized or wrapped as needed, in our implementation they are provided in radians along
-with known joint limits.)
-  \item Base Motion: The free-floating base’s orientation and angular velocity. We parameterize the
-base’s orientation using quaternions. The quaternion \( q_{base} \in \mathbb{R}^4 \) describes the orientation of the base, capturing its attitude 
-error from a reference orientation. Since the base is expected to maintain its initial attitude, the 
-orientation error is ideally kept near zero through the agent’s actions. The base’s angular velocity $\omega_{base} \in \mathbb{R}^3$ is also included, as it
-captures any ongoing rotation of the base. %The base’s translational velocity could also be considered, however, in a free-floating scenario with no external forces and zero initial momentum, the center-of-mass linear velocity remains constant. In our case the base’s linear momentum is initially zero and remains near zero, so base translational motion is minimal by design. Thus, base linear velocity is not a major factor and can be omitted or included for completeness, our state focuses on rotational movement of the base.)
+  \item \textit{End-effector tracking error:} the Cartesian position error $e_p \in \mathbb{R}^3$ between the current and reference end-effector positions, together with the velocity error $e_v \in \mathbb{R}^3$. When the
+end-effector is on the reference trajectory, $e_p = 0$. The pair $(e_p, e_v)$
+indicates both the spatial deviation from the reference and the velocity mismatch.
+  \item \textit{Arm joint states:} the joint angles $q \in \mathbb{R}^4$ and joint angular velocities $\dot{q} \in \mathbb{R}^4$. These describe the configuration and motion state of the manipulator. Joint angles are provided in radians together with the corresponding mechanical limits.
+  \item \textit{Base motion:} the orientation, angular velocity, and linear velocity of the free-floating base. The base attitude error is computed from the measured base quaternion $q_b$ and the reference quaternion $q_0$ as the relative quaternion $q_{\mathrm{err}} = q_0^{*} \otimes q_b$ (with sign convention enforcing a non-negative scalar part), and is then mapped to the axis--angle rotation vector $e_{\mathrm{ori}} = \theta\,\mathbf{u} \in \mathbb{R}^3$, where $\theta = 2\,\mathrm{atan2}(\|q_{\mathrm{err},v}\|,\,q_{\mathrm{err},w})$ and $\mathbf{u} = q_{\mathrm{err},v}/\|q_{\mathrm{err},v}\|$. This 3-dimensional minimal representation removes the redundancy of the unit-quaternion parameterization and is well-defined for $q_{\mathrm{err}} \neq \pm[1,0,0,0]^T$. Since the base is expected to maintain its initial attitude, $e_{\mathrm{ori}}$ is kept near zero through the agent's actions. The base angular velocity $\omega_{\mathrm{base}} \in \mathbb{R}^3$ and the base linear velocity $v_{\mathrm{base}} \in \mathbb{R}^3$ are additionally included to capture residual rotation and momentum-coupled translation of the base.
 \end{itemize}
-\noindent
-Combining these components, the overall observation vector has dimension $3 (e_{p}) + 3
-(e_{v}) + 4 (q) + 4 (\dot q) + 3 (ori_{base}) + 3 (\omega_{base}) + 3 (v_{base}) = 23$ dimensions. This rich state description provides the agent with all
-necessary information: how far the end-effector is from target, how the arm is configured/moving, and
-how the base is reacting.
 
-\textbf{Action Space:} The agent’s action is a vector of continuous joint torque commands for the
-manipulator’s joints. At each decision step, the agent outputs $a = [\tau_{1}~ \tau_{2}~
-\tau_{3}~ \tau_{4}]^T$, corresponding to the torque to apply at each of the 4 revolute joints
-of the arm \cite{b2,b7}. These actions are real-valued and are constrained by the actuator capabilities. We enforce
-symmetric torque limits: each $|\tau_{i}| \leq \tau_{\max}$ \text{(for i = 1..4)}. In the simulation, this
-is implemented using saturation blocks that clip the commanded torque to the range $[-\tau_{\max},
-+\tau_{\max}]$. The value of $\tau_{\max}$ is set based on the robot’s design (for example,
-$\tau_{\max} = 25 Nm$ for all joints, though the exact value is not critical as long as it is sufficient to
-follow the trajectory). These saturation limits not only model physical actuator limits but also serve as a
-safety measure to prevent excessive torques. The action space is thus continuous $\mathbb{R}^4$, making
-this a continuous control problem that suits policy gradient and actor-critic RL methods.
+The overall observation vector has dimension $3(e_p) + 3(e_v) + 4(q) + 4(\dot{q}) + 3(\mathrm{ori}_{\mathrm{base}}) + 3(\omega_{\mathrm{base}}) + 3(v_{\mathrm{base}}) = 23$. This state representation contains the variables required by the agent to assess tracking deviation, arm configuration, and base motion.
 
-The agent’s policy (the controller we are learning) is a mapping from the 23-dimensional state space to
-the 4-dimensional action space: $\pi: s \mapsto  a$. Internally, this policy is represented by a neural network
-whose parameters are adjusted during training to maximize cumulative reward. The
-control frequency (agent decision frequency) is chosen such that the agent outputs a new torque
-command at a fixed interval $\Delta t~$ (e.g., 0.1 s). This $\Delta t$ is the “agent sampling time” in Simulink and is
-consistent with the simulation’s fixed step to maintain alignment.
+\textbf{Action Space:} The action is a vector of continuous joint torque commands.
+At each decision step, the agent outputs $a = [\tau_{1},\, \tau_{2}, \tau_{3},\, \tau_{4}]^T$, with one component per revolute joint of the arm \cite{b2,b7}. The actions are real-valued and bounded by the actuator capabilities: symmetric torque limits $|\tau_{i}| \leq \tau_{\max}$ for $i = 1,\ldots,4$ are enforced through saturation blocks that clip the commanded torque to the interval $[-\tau_{\max}, +\tau_{\max}]$. The value of $\tau_{\max}$ is selected according to the robot design ($\tau_{\max} = 25\,\mathrm{Nm}$ in this work), provided it is large enough to follow the reference trajectory. The saturation enforces both the actuator limits and an upper bound on the applied torque for safety reasons. The action space is therefore $\mathbb{R}^4$, which is compatible with policy gradient and actor-critic methods.
+
+The policy is a mapping from the 23-dimensional state space to
+the 4-dimensional action space, $\pi: s \mapsto a$, parameterized by a neural network whose parameters are adjusted during training to maximize the expected cumulative reward.
+The agent issues a new torque command at a fixed interval $\Delta t = 0.1\,\mathrm{s}$, which coincides with the fixed simulation step size to ensure consistency between the discrete agent and the continuous plant.
 
 
 \noindent
-\textbf{Reward Function Design:} A crucial aspect of the reinforcement learning formulation is the reward signal, which guides the agent toward accurate trajectory tracking 
-while minimizing base disturbance and enforcing smooth, safe control actions.
+\textbf{Reward Function Design:} The reward signal guides the agent toward accurate trajectory tracking
+while minimizing base disturbance and enforcing smooth, bounded control actions.
 At each discrete time step $t$, the reward $r_t$ is computed as the sum of a progress term and a proximity bonus, minus a weighted cost function:
 \begin{equation}
 r_t = \frac{1}{C}\left( r_{\text{prog}} + r_{\text{bonus}} - c_t \right),
@@ -461,7 +449,7 @@ Finally, the normalization constant $C = 500$ scales the total reward to a range
 \end{rtwohl}
 
 \begin{rtwohl}
-\hltwo{[R2.7]} At each step, all inputs to the reward function are checked for numerical validity. If any NaN or Inf values are detected, or if the end-effector error exceeds a predefined bound, the episode is immediately terminated and a terminal penalty of $r_{\text{fail}} = -1$ is assigned. The choice of this value is deliberate and calibrated to the reward scale: as noted above, the normalization constant $C = 500$ compresses step rewards to approximately $[-1,\,0]$ under normal operating conditions, meaning $r_{\text{fail}} = -1$ equals the lower bound of a single step reward. This makes the terminal penalty equivalent to receiving a maximally bad step — large enough to strongly discourage unsafe exploration, yet not so extreme as to dominate the cumulative return over an entire episode or destabilize gradient estimates. A much smaller penalty (e.g., $-0.1$) would be insufficient to deter the agent from entering invalid states, while a much larger penalty (e.g., $-100$) would cause the failure signal to overshadow all other reward information, potentially leading to overly conservative policies or value function divergence. By anchoring the failure penalty to the step-reward scale, the policy learns a balanced trade-off: failures are clearly undesirable, but the agent is not driven to paralysis by catastrophic gradient magnitudes.
+\hltwo{[R2.7]} At each step, all inputs to the reward function are checked for numerical validity. If any NaN or Inf values are detected, or if the end-effector error exceeds a predefined bound, the episode is immediately terminated and a terminal penalty of $r_{\text{fail}} = -1$ is assigned. This value is matched to the reward scale: with the normalization constant $C = 500$, typical step rewards lie approximately in $[-1,\,0]$, so $r_{\text{fail}} = -1$ corresponds to the lower end of the one-step reward range. The penalty is therefore large enough to discourage invalid states without dominating the cumulative return over an entire episode. A much smaller penalty (e.g., $-0.1$) would provide a weak failure signal, whereas a much larger penalty (e.g., $-100$) could overshadow the remaining reward terms and destabilize value-function learning. Anchoring the failure penalty to the step-reward scale yields a balanced failure signal for policy optimization.
 \end{rtwohl}
 All reward components were implemented in a MATLAB Function block within the Simulink environment.
 
@@ -488,38 +476,18 @@ Reward normalization constant    & $C$                & 500   \\
 \end{tabular}
 \end{table}
 
-\textbf{Training Procedure:} We adopt an episodic training approach. Each episode corresponds to a
-simulation of fixed duration. A finite horizon of H seconds or a fixed number of time steps N. In our case,
-one episode lasts long enough for the end-effector to attempt following the circular trajectory (e.g., one
-or two loops of the circle). At the start of each episode, the system is reset to an initial condition by a
-custom reset function. The initial joint angles are set to a feasible configuration (e.g., the arm in a
-certain pose near the start of the trajectory) and the base is at a defined attitude (often the home
-orientation and at rest). All state variables, observer
-integrators, and logging signals are reset. We ensure the initial state is within safe bounds (no
-collisions or limit violations at t=0). The reset function can randomize the starting joint angles within a
-range or the phase of the trajectory to improve generalization, though within this study, we kept a
-consistent start pose for simplicity (with the end-effector at a specific point on the circle) \cite{b7}.
- 
-Once an episode begins, the agent receives observations at each step and outputs torque actions. The
-simulation runs until either the time horizon is reached (the episode length H) or a terminal condition
-occurs (task completed or safety violation). As described, reaching the end of the trajectory successfully
-or experiencing a failure condition will terminate the episode prematurely. In practice, an episode might end early
-if, for example, the agent causes a collision at 70\% of the trajectory, it will receive the penalty and the
-episode stops there.
+\textbf{Training Procedure:} An episodic training scheme is used. Each episode corresponds to a
+simulation of fixed duration --- either a horizon of $H$ seconds or a fixed number of time steps $N$ --- chosen such that
+one episode covers one or two laps of the circular reference. At the start of each episode, the system is reset to an admissible initial condition by a
+custom reset function: the initial joint angles are set to a feasible configuration close to the start of the trajectory and the base is set to a defined attitude (the home orientation, at rest). All state variables, integrator states, and logging signals are reset, and the initial state is verified to lie within the safe set (no collisions or limit violations at $t = 0$). The reset function supports randomization of the starting joint angles and the trajectory phase to improve generalization; in this study a fixed start pose is used, with the end-effector placed at a defined point on the circle \cite{b7}.
 
-We use a standard policy gradient training loop (as provided by MATLAB’s RL toolbox): after each
-episode (or after a set number of steps), the collected state, action, reward trajectories are used to
-update the agent’s policy (and value function, if applicable) via the chosen RL algorithm \cite{b4}. The particularities of
-each algorithm (PPO, DDPG, etc.) are handled by their respective implementation, we supply the
-experience and let the algorithm update the neural network \cite{b7}.
-All agents were trained for the same number of episodes to allow fair comparison. We chose
-$N_{train} = 1000$ episodes for each agent, which was sufficient for most algorithms to
-converge or reach a performance plateau. During training, we monitored metrics such as the
-cumulative reward per episode, the end-effector tracking error, and the base motion, averaged over
-each episode. A successful training run is characterized by the episode reward increasing (toward 0,
-since negative costs are used) and the tracking error and base movement decreasing over time. We
-also tracked the number of episodes that ended prematurely due to safety triggers, aiming for this to
-go to zero as training progresses.
+Within an episode, the agent receives an observation at each step and outputs a torque action. The
+simulation runs until the time horizon $H$ is reached or a terminal condition occurs (task completion or safety violation). An early termination is triggered, for example, when the agent causes a collision before completing the trajectory; the corresponding terminal penalty is applied and the episode ends at that instant.
+
+The training loop is the standard policy gradient procedure provided by MATLAB's Reinforcement Learning Toolbox: after each episode (or after a fixed number of steps) the collected state, action, and reward trajectories are used to
+update the policy (and the value function, where applicable) according to the chosen RL algorithm \cite{b4}. The algorithm-specific update rules of PPO, DDPG, and the remaining methods are handled by their respective toolbox implementations; this work supplies the experience and the reward signal \cite{b7}.
+All agents are trained for the same number of episodes, $N_{\mathrm{train}} = 1000$, which is sufficient for most algorithms to
+converge or reach a performance plateau. During training the cumulative episode reward, the mean end-effector tracking error, and the mean base motion are recorded per episode. A successful training run is characterized by an episode return that increases toward zero (negative costs are used) and by a decrease of the tracking error and base motion over time. The number of episodes terminated prematurely by the safety monitors is also tracked and expected to decrease to zero as training progresses.
 
 \begin{rtwohl}
 \hltwo{[R2.8]} To ensure reproducibility, all training runs were initialized using MATLAB's Mersenne Twister random number generator with a fixed seed of zero (\texttt{rng(0,`twister')}), applied prior to each training session. For each of the six algorithms, \textbf{three independent training runs} were performed under identical conditions---same environment, reward function, episode length, and initial state---resulting in 18 training runs in total. The policy selection procedure was as follows: after all three runs per algorithm completed, the policy checkpoint achieving the highest mean episodic reward over the final 50 training episodes was identified. This checkpoint was then used exclusively for all subsequent evaluation experiments. We found relatively consistent results across runs for the more stable algorithms (PPO, TRPO), whereas some runs of less stable methods (e.g.\ DDPG) would diverge, underscoring the importance of algorithmic stability in this setting.
@@ -550,9 +518,9 @@ agents.
   K3=\max_{i}\max_{k}\|e_{p,i}[k]\|_2.
   \end{equation*}
 
-  \item \textbf{K4} --- \emph{Mean Base Orientation Error}: average attitude drift of the spacecraft base (quaternion error magnitude); lower is better.
+  \item \textbf{K4} --- \emph{Mean Base Orientation Error}: average attitude drift of the spacecraft base, measured as the magnitude of the axis--angle rotation-vector error $e_{\mathrm{ori}}$ (in radians); lower is better.
   \begin{equation*}
-  K4=\frac{1}{N_{\text{eval}}}\sum_{i=1}^{N_{\text{eval}}}\frac{1}{T_i}\sum_{k=1}^{T_i}\|e_{R,i}[k]\|_2.
+  K4=\frac{1}{N_{\text{eval}}}\sum_{i=1}^{N_{\text{eval}}}\frac{1}{T_i}\sum_{k=1}^{T_i}\|e_{\mathrm{ori},i}[k]\|_2.
   \end{equation*}
 
   \item \textbf{K5} --- \emph{Collision Rate}: fraction of episodes with at least one collision; zero is ideal.
@@ -589,29 +557,20 @@ agents.
 
 
 \begin{rthreehl}
-\hlthree{[R3.6]} Two KPIs deserve explicit justification in the space mission context. \textbf{K7 (Control Smoothness)} captures high-frequency torque oscillations (chattering): in space, such oscillations cause accelerated mechanical wear on actuators that cannot be serviced or replaced on orbit, excite structural vibrations that degrade the pointing accuracy of sensitive instruments such as cameras or star trackers, and dissipate energy through rapid back-and-forth motion. Minimizing K7 therefore directly prolongs hardware lifetime and protects mission-critical payloads. \textbf{K9 (Energy Consumption)} reflects the mechanical work performed by the joints, approximated as $\int |\tau \cdot \dot{q}|\,dt$. Onboard power is strictly limited by solar panel area and battery capacity; every joule spent on control actuation reduces the budget available for communication, thermal management, and payload operation. Reducing K9 without sacrificing tracking accuracy therefore has direct operational value, extending mission lifetime and lowering the thermal load on electronic components.
+\hlthree{[R3.6]} Two KPIs deserve explicit justification in the space mission context. \textbf{K7 (Control Smoothness)} captures high-frequency torque oscillations (chattering): in space, such oscillations can accelerate actuator wear, excite structural vibrations that degrade the pointing accuracy of sensitive instruments such as cameras or star trackers, and dissipate energy through rapid back-and-forth motion. Minimizing K7 therefore supports hardware lifetime and payload pointing requirements. \textbf{K9 (Energy Consumption)} reflects the mechanical work performed by the joints, approximated as $\int |\tau \cdot \dot{q}|\,dt$. Onboard power is limited by solar panel area and battery capacity; energy spent on control actuation reduces the budget available for communication, thermal management, and payload operation. Reducing K9 without sacrificing tracking accuracy therefore has operational value for mission planning.
 \end{rthreehl}
 
-\noindent
-Additionally, we consider training-related metrics for comparison: T1: variance of the episodic reward
-in the later stage of training (indicating training stability), T2: variance of the value function or
-average reward (another stability metric), and T3: training time required to reach 1000 episodes
-(reflecting sample efficiency and computational load). These help evaluate how easily an
-algorithm learns in this environment.
- 
-By evaluating all agents on these common metrics, we obtain an objective comparison of their
-performance and characteristics. \Cref{comparison} presents and discusses these comparative results.
+In addition to the KPIs above, three training-related metrics are reported: T1, the variance of the episodic reward in the late stage of training (an indicator of training stability); T2, the variance of the value function or average reward (a second stability metric); and T3, the wall-clock training time required for 1000 episodes (an indicator of sample efficiency and computational load).
+
+Applying these metrics to all six agents yields a common basis for comparison. The comparative results are presented and discussed in \Cref{comparison}.
 
 \section{Safety Monitoring and Constraint Enforcement}\label{formal}
-Stability and safety are paramount in space robotics. A controller for autonomous space servicing must meet physical constraints and avoid hazardous behaviors, especially 
-when it builds on learned skills expected to handle uncertainties. In this work, we integrate runtime safety monitors and constraint enforcement mechanisms directly into the 
-RL training and execution environment. These mechanisms serve a dual purpose: they protect the simulation from unsafe states during exploration and, through penalty-driven 
-learning, shape the agent's behavior toward safe operation~\cite{b7,b22}.
+Stability and safety are central requirements in space robotics. A controller for autonomous on-orbit servicing must satisfy the physical constraints of the system and avoid hazardous states, in particular when the control policy is learned from data and must therefore handle uncertainty. In this work, runtime safety monitors and constraint-enforcement mechanisms are integrated directly into the RL training and execution environment. They serve two purposes: protecting the simulation from unsafe states during exploration, and shaping the agent's behaviour toward safe operation through penalty-driven learning~\cite{b7,b22}.
 
 \begin{figure*}[!t]
 \centering
-   \includegraphics[width=1\linewidth]{Figures/impuls_monitor.png}
-    \caption{Overview of the Impuls Monitor Subsystem (Momentum Observer) in the Simulink Model \texttt{SpaceRobot.slx} \\
+   \includegraphics[width=1\linewidth]{Figures/impuls_monitor.pdf}
+    \caption{Overview of the Momentum Monitor Subsystem (Momentum Observer) in the Simulink Model \texttt{SpaceRobot.slx} \\
     This figure shows the computation of the total linear and angular momentum of the free-floating space robot. 
     The velocities and orientations of the base and all manipulator links are measured and aggregated within a 
     MATLAB function to obtain the system momentum. This monitor is used to analyze momentum conservation and 
@@ -625,23 +584,11 @@ learning, shape the agent's behavior toward safe operation~\cite{b7,b22}.
   \label{fig:impulserhaltung_scope}
 \end{figure}
 \noindent
-Momentum Conservation Monitor: In a free-floating system without external forces, the total
-linear momentum of the robot (base + arm) should remain constant (and in our case, near zero
-since initial momentum is zero) \cite{b6}. We implemented a Momentum Observer that continuously
-computes the total linear momentum $p_{tot}$ of the system and checks for its
-conservation (see \Cref{fig:impuls_monitor}). This is done by attaching virtual sensors to each body (base and links) to
-measure their velocities and computing $p_{tot} = \sum_{i} m_{i} v_{i}$. In an ideal
-simulation, $p_{tot}$ stays roughly zero at all times (small numerical deviations on the order of
-$10^{-6}$ Ns may occur due to integration errors). If a significant, systematic change in
-$p_{tot}$ were detected, it would indicate an unintended external force or a modeling error
-(such as an unmodeled constraint or bug). During our experiments, $p_{tot}$ remained near
-$0$ (within $10^{-6}$ Ns) throughout each episode with the learned policy, confirming physical
-consistency (see~\autoref{fig:impulserhaltung_scope}). This momentum check provides confidence that the simulation adheres to
-Newton’s laws and the agent interacts with a physical correct process. This leverages the significance of the obtained policy. The Momentum Conservation 
-Monitor also serves as a diagnostic tool because any momentum drift would pause training for model inspection.
+\textbf{Momentum Conservation Monitor.} In a free-floating system without external forces, the total linear momentum of the robot (base and arm) is conserved; with zero initial momentum, it remains close to zero throughout the simulation \cite{b6}. A momentum observer continuously
+computes the total linear momentum $p_{\mathrm{tot}}$ and checks for its conservation (see \Cref{fig:impuls_monitor}). Virtual sensors attached to the base and to each link provide the body velocities, from which $p_{\mathrm{tot}} = \sum_{i} m_{i} v_{i}$ is computed. In an ideal simulation, $p_{\mathrm{tot}}$ remains close to zero throughout an episode; small numerical deviations on the order of $10^{-6}\,\mathrm{Ns}$ may arise from time-integration errors. A persistent, systematic drift of $p_{\mathrm{tot}}$ would indicate an unintended external force or a modelling error, such as an unmodelled constraint. In the reported experiments, $p_{\mathrm{tot}}$ remained within $10^{-6}\,\mathrm{Ns}$ of zero throughout each episode with the learned policy (see~\autoref{fig:impulserhaltung_scope}), which confirms the physical consistency of the simulation. The momentum observer also serves as a diagnostic tool, as any momentum drift would pause training for model inspection.
 
 \begin{figure*}[!t]
-    \centering    \includegraphics[width=0.75\linewidth]{Figures/spacerobot_slx_colissionmonitor.png}
+    \centering    \includegraphics[width=0.75\linewidth]{Figures/spacerobot_slx_colissionmonitor.pdf}
     \caption{Overview of the Collision Monitor Subsystem in the Simulink Model \texttt{SpaceRobot.slx} \\
     This figure illustrates the collision monitoring logic used to ensure safe robot operation during training and 
     evaluation. Joint and link configurations are processed to compute the minimum distance to obstacles, which is 
@@ -669,64 +616,14 @@ Monitor also serves as a diagnostic tool because any momentum drift would pause 
     \label{fig:collision_combined}
 \end{figure*}
 \noindent
-Collision Monitor and Avoidance: We define a minimum allowable distance between certain
-parts of the robot (for example, between the end-effector and the base structure). A Collision
-Monitor subsystem computes distances between predefined pairs of bodies each step (using the
-geometry from the URDF and Simscape’s collision detection capabilities). If any distance falls
-below the safe threshold $d_{safe}$ (indicating a potential collision or self-collision is
-imminent), the system triggers a collision event (see \Cref{fig:spacerobot_slx_colissionmonitor}) \cite{b31}. In our simulation, 
-we set, e.g., $d_{safe} = 5$ cm as the minimum clearance. When triggered, the following occurs: (1) a warning flag is
-raised and logged (for analysis), (2) a done signal is sent to terminate the episode
-immediately, and (3) all joint torque commands from the agent are overridden to zero to stop the robot motion. This mechanism 
-effectively acts as an emergency brake, preventing the agent from
-continuing once a collision is about to happen. The collision monitor was tested by deliberately
-commanding the arm toward the base. It reliably detected the violation of the safety distance and stopped
-the system (see~\autoref{fig:collision_combined}). During training of the RL agents, collisions occurred in early exploratory
-episodes for some agents, but the monitor caught them and ended those episodes with heavy
-penalties. As training progressed, all agents learned to avoid collisions altogether, indeed, in
-the final evaluation all agents achieved  episode without any collision ($K5 = 0$), confirming the efficacy of
-this safety measure.
+\textbf{Collision Monitor and Avoidance.} A minimum admissible distance is defined between selected
+parts of the robot (e.g.\ between the end-effector and the base structure). At every time step, a collision monitor computes the distances between the predefined body pairs using the URDF geometry and the Simscape collision-detection facilities. When any distance drops below the safety threshold $d_{\mathrm{safe}}$, a collision event is triggered (see \Cref{fig:spacerobot_slx_colissionmonitor}) \cite{b31}. A value of $d_{\mathrm{safe}} = 5\,\mathrm{cm}$ is used in this work. Upon activation, three actions are performed: (i)~a warning flag is raised and logged, (ii)~a \texttt{done} signal terminates the episode, and (iii)~all commanded joint torques are overridden to zero, stopping the robot. The monitor was verified by intentionally commanding the arm toward the base; it reliably detected the threshold violation and stopped the system (see~\autoref{fig:collision_combined}). During training, collisions occurred in early exploratory
+episodes for some agents, but were captured by the monitor and penalized through episode termination. By the end of training, all agents avoided collisions in the final evaluation ($K_5 = 0$ over all 30 evaluation episodes).
 
-Joint Limit Enforcement: The robot arm has joint angle limits (e.g., each revolute joint might be
-limited to ±180° or a smaller range based on mechanical constraints). Violating joint limits could
-damage a real robot and often indicates an unstable controller. We enforce joint limits at two
-levels. First, in the Simscape model, we include mechanical joint limits with penalty forces (a stiff
-barrier that resists further motion beyond the limit). Second, we add an Assertion block that
-monitors each joint angle. If any joint exceeds its predefined limit, the assertion triggers a
-violation event. Similarly to the collision case, we handle a joint limit violation by: terminating
-the episode, applying a large negative reward, and zeroing out all torques immediately. In
-fact, the Simulink model is configured such that when the assertion triggers, it directly sets the
-torque inputs $\tau$ to zero in that same time step as a protective measure. This ensures the
-robot doesn’t push further into the limit or oscillate. In our results, we observed very few limit
-violations once agents were trained. Among all algorithms, PPO and TRPO had a handful of
-episodes grazing the limits (K6 values of a few percent), whereas TD3, SAC, PG, and DDPG
-essentially never hit the limits ($K6 \approx 0$). Notably, PPO’s superior tracking performance came
-at the cost of occasionally using the full joint range (K6 = 0.0505, i.e.~\textasciitilde5\% of episodes, had minor
-limit violations). Thanks to the joint limit enforcement, these events did not lead to
-instability: the agent’s torques were cut off momentarily when a limit was reached, preventing
-any damaging behavior, and the episode was marked as failed. Over time, the agent learned to
-avoid this scenario as well, especially in the optimized PPO version (where K6 dropped to 0).
+\textbf{Joint Limit Enforcement.} Each revolute joint of the arm is subject to mechanical limits. Violating these limits could damage a real robot and typically indicates an unstable controller. The joint limits are enforced at two levels. First, the Simscape model includes mechanical joint limits with penalty forces, i.e.\ a stiff barrier that opposes further motion beyond the limit. Second, an assertion block monitors each joint angle; if any joint exceeds its admissible range, the assertion triggers a violation event that terminates the episode, applies a negative terminal reward, and sets all torques to zero within the same time step. This prevents further motion into the limit. After training, the joint-limit violation rate is low: PPO and TRPO reach the limits in a few percent of evaluation steps (5.1\% and 2.1\%, respectively), whereas TD3, SAC, PG, and DDPG remain within the admissible range ($K_6 \approx 0$). The higher $K_6$ value of PPO ($K_6 = 0.0505$) coincides with the lowest tracking error and indicates a more aggressive use of the workspace. In all cases, the enforcement mechanism stopped further simulated motion at the limit: the torques were set to zero in the offending step and the episode was marked as failed. For the optimized PPO agent (\autoref{sec:reward_ablation}), no such events are observed in the evaluation episodes ($K_6 = 0$).
 
-
-\noindent
-Formal Verification of Torque Constraints: In addition to enforcing torque saturation during
-simulation, we performed an offline formal verification to prove that the trained policy could
-not command out-of-bounds torques. Using MATLAB’s Simulink Design Verifier (SLDV) in property-proving mode, 
-we analyzed a simplified closed-loop model of the agent controlling the robot’s
-joints. The property to prove was that for all possible agent inputs (observations), each
-output torque $\tau_i$ remains within [$-\tau_{\max}$, $+\tau_{\max}$] (see \Cref{fig:verify_tau}). The
-verification succeeded: SLDV was able to prove that no counterexample exists and the torque
-limits are always respected by the policy network.~\autoref{fig:verify_tau_result} shows the SLDV result
-confirming the property (no violations found) \cite{b5}. This formal assurance is important because it
-considers all possible states, including ones not seen during simulation, and guarantees the
-policy cannot output a dangerous torque. It’s worth noting that directly running formal analysis
-on the full Simscape model was not feasible, the nonlinear dynamics are too complex for the
-automated theorem proving. To circumvent this, we extracted the relevant part of the model (the
-control law and saturation logic) into a separate simplified model (Verify\_tau.slx) where
-the plant was replaced by a worst-case abstraction (essentially, we just needed to check the
-policy output block). This exemplifies how formal methods can complement simulation-based learning: 
-by verifying critical properties on an abstract model of the agent, we gain
-additional confidence in safety beyond empirical testing.
+\textbf{Formal Verification of Torque Constraints.} In addition to runtime saturation, an offline formal verification was performed to check torque-bound compliance of the trained policy block. Using MATLAB Simulink Design Verifier (SLDV) in property-proving mode,
+a simplified closed-loop model of the agent and the joint torques was analyzed. The property to be checked is that, for any admissible observation input in the analyzed abstraction, each commanded torque $\tau_i$ satisfies $\tau_i \in [-\tau_{\max}, +\tau_{\max}]$ (see \Cref{fig:verify_tau}). SLDV found no counterexample for this property; the corresponding SLDV result is shown in \autoref{fig:verify_tau_result} \cite{b5}. This result applies to the simplified verification model, including admissible abstract states not visited during simulation. Note that the full Simscape model is not amenable to property proving because of the nonlinear dynamics; the verification was performed on a simplified model (\texttt{Verify\_tau.slx}) in which the plant was replaced by a worst-case abstraction, because only the policy output block is relevant for the considered property. This illustrates how formal methods can complement simulation-based learning by checking selected properties on an abstracted model of the agent.
 
 \begin{figure}[!b]
 	\centering    
@@ -734,32 +631,16 @@ additional confidence in safety beyond empirical testing.
 	\caption{Verification model with Simulink Design Verifier \texttt{Verify\_tau.slx} \\
   This figure depicts the Simulink property model used to formally verify the joint torque constraints. 
   The absolute joint torques are compared against predefined maximum limits using a relational operator. 
-  The property is proven to hold for all reachable system states, ensuring bounded control actions.}
+  The property is checked over the analyzed abstract state space, supporting bounded control actions in the verification model.}
 	\label{fig:verify_tau}
 \end{figure}
 
-Limitations of Formal Methods: While the above components significantly enhance safety, we
-observe that they cover a limited set of properties. They ensure zero collisions, no joint position overshot, 
-and bounded torques, and they monitor physical consistency (e.g., momentum). However,
-other aspects, such as guaranteeing task completion within a time or stability margins, were not
-formally verified. A complete formal specification of the entire mission (for instance, something like
-temporal logic specifications of “the robot shall accomplish X without Y happening”) would be far more
-complex. Our approach selectively targets the most critical safety concerns. In practice, this proved
-sufficient to train successful policies without a single catastrophic failure: episodes that would have
-been catastrophic were safely stopped by the monitors (and heavily penalized to teach the agent). As a
-result, by the end of training, the learned agent’s behavior was entirely meaningful within the safety envelope
-enforced by the formal constraints \cite{b23}.
+\textbf{Limitations of the Formal Methods Component.} The mechanisms above cover a defined set of monitored properties: collision events, joint-limit events, bounded torques, and physical consistency through the momentum check. Other properties, such as task completion within a time bound or formal stability margins, are not verified. A complete formal specification of the mission --- for example, temporal-logic specifications such as ``the robot shall accomplish $X$ without $Y$ happening'' --- would be substantially more complex. The present work targets the safety properties that are most relevant for the considered task. Within this scope, the runtime monitors terminated episodes that would have violated a monitored property and penalized the corresponding actions. By the end of training, the policy operated within the safety envelope defined by the monitored constraints in the reported evaluation episodes \cite{b23}.
 
-In summary, integrating these formal safety checks into the learning process was vital. It not only
-protected the simulation (and a potential future real system) from damage during the exploratory
-phase of learning, but it also shaped the agent’s behavior by penalizing unsafe actions. The agent thus
-learns with a form of built-in “safety shield.” This approach demonstrates a viable path to apply deep
-RL in safety-critical domains like space robotics, where pure trial-and-error without safeguards would be
-unacceptable. We next analyze the performance outcomes of the various RL agents under these
-conditions.
+In summary, the formal safety checks integrated into the learning process helped prevent unsafe simulated states during the exploratory phase of training and shaped the agent's behaviour by penalizing unsafe actions. The agent therefore learns with a runtime safety shield. This combination of monitored runtime constraints and penalty-driven learning is one approach to deploying deep RL in safety-critical domains such as space robotics, in which unconstrained trial-and-error exploration is not admissible. The next section analyses the performance of the six RL agents under these conditions.
 
 \begin{rthreehl}
-\hlthree{[R3.5]} \textbf{Computational Overhead and Scalability:} The three safety monitors --- momentum observer, collision distance checker, and joint-limit assertion --- each consist of simple algebraic operations over the robot's link states, scaling as $\mathcal{O}(n_{\text{links}})$ per time step. For the 4-DOF arm considered here, this overhead is negligible compared to the physics simulation itself. End-to-end training times, including the full safety stack, are reported as metric T3 in \autoref{tab:kpi_comp}: they range from approximately 8 minutes (PG, PPO) to 38 minutes (TD3) for 1000 episodes on a standard workstation (AMD Ryzen 7 7700, 32 GB RAM). For onboard deployment, only the learned policy network needs to execute in the control loop: the two hidden-layer network (128 units per layer, $\approx$\,17\,000 parameters) requires only a small number of matrix multiplications and can comfortably run at 10 Hz on modern space-qualified embedded processors (e.g., ARM Cortex-A series). The safety monitors can be retained as lightweight parallel watchdog processes, or reduced to the most safety-critical checks (torque saturation, joint-limit assertion) with minimal additional compute. This modular architecture makes the approach scalable to resource-constrained onboard systems.
+\hlthree{[R3.5]} \textbf{Computational Overhead and Scalability:} The three safety monitors --- momentum observer, collision distance checker, and joint-limit assertion --- each consist of simple algebraic operations over the robot's link states, scaling as $\mathcal{O}(n_{\text{links}})$ per time step. For the 4-DOF arm considered here, this overhead is negligible compared to the physics simulation itself. End-to-end training times, including the full safety stack, are reported as metric T3 in \autoref{tab:kpi_comp}: they range from approximately 8 minutes (PG, PPO) to 38 minutes (TD3) for 1000 episodes on a standard workstation (AMD Ryzen 7 7700, 32 GB RAM). For onboard deployment, only the learned policy network needs to execute in the control loop. The default PPO baseline uses a compact two-hidden-layer network (128 units per layer, $\approx$\,20\,000 parameters), while the optimized PPO configuration adopted for the final results (cf.\ \cref{sec:reward_ablation}) uses a deeper $[256, 256, 128]$ policy with $\approx$\,1.05$\,\times\,10^{5}$ parameters --- still on the order of $10^5$ weights and well below the memory footprint of typical perception networks deployed on space-qualified hardware. At the 10\,Hz control rate used here, a single forward pass through this network requires on the order of $2\,\times\,10^{5}$ multiply-accumulate operations per step, which is compatible with the throughput of modern space-qualified embedded processors (e.g., ARM Cortex-A or LEON-class CPUs with a hardware FPU). The safety monitors can be retained as lightweight parallel watchdog processes, or reduced to the most safety-critical checks (torque saturation, joint-limit assertion) with minimal additional compute. This modular architecture supports scalability to resource-constrained onboard systems.
 \end{rthreehl}
 
 \begin{figure}[!b]
@@ -768,46 +649,27 @@ conditions.
 	\caption{Result of the Simulink Design Verifier \\ 
   This figure shows the result of a formal property verification performed on the torque constraint model. 
   The verification confirms that the specified safety property is satisfied for all analyzed execution paths. 
-  This analysis provides formal guarantees on control torque limits beyond empirical simulation-based validation.}
+  This analysis provides model-based evidence for torque-limit compliance beyond empirical simulation-based validation.}
 	\label{fig:verify_tau_result}
 \end{figure}
 
 \section{Comparison of Continuous RL Agents} \label{comparison}
-A central question of this study is: Which continuous-action RL algorithm is most effective for
-controlling a free-floating space robot? To answer this, we evaluated six RL algorithms from three major
-families on the same task and environment \cite{b2,b7}. The algorithms compared are:
+This section compares six continuous-action RL algorithms from three families on the same task and environment \cite{b2,b7}. The algorithms considered are:
 
 \begin{itemize}
-  \item Policy Gradient (PG): the classic REINFORCE algorithm (Monte Carlo policy gradient), included as
-a baseline for direct policy optimization without advanced variance reduction \cite{b7,b21}.
-  \item Proximal Policy Optimization (PPO): a modern policy-gradient method that uses clipped
-probability ratio updates to ensure stable and conservative policy improvements. PPO is known
-for its balance of stability and performance \cite{b15}.
-  \item Trust Region Policy Optimization (TRPO): a policy-gradient method that enforces a trust-region
-constraint (via Kullback–Leibler divergence) on policy updates. TRPO is expected to perform similarly to
-PPO in terms of stability, albeit with higher computational cost due to solving a constrained
-optimization each update \cite{b14}.
-  \item Deep Deterministic Policy Gradient (DDPG): an off-policy actor-critic algorithm with a
-deterministic policy and target networks. DDPG can excel in continuous control by learning a Q-function 
-and a policy simultaneously, but it is known to be sensitive to hyperparameters and can
-be unstable \cite{b16}.
-  \item Twin Delayed DDPG (TD3): an improved variant of DDPG that addresses function approximation
-issues by using two critic networks to mitigate overestimation bias and by delaying policy
-updates. TD3 generally offers more stable learning than standard DDPG \cite{b17}.
-  \item Soft Actor-Critic (SAC): an off-policy actor-critic algorithm that learns a stochastic policy and
-includes an entropy term in the reward to encourage exploration. SAC aims to achieve both
-high reward and high entropy, making the agent’s behavior robust and exploratory. It often
-achieves very good performance but can be computationally heavier due to sampling and
-entropy calculations \cite{b18}.
-\end{itemize}        
-These algorithms cover a spectrum from on-policy to off-policy, from deterministic to stochastic, and
-from simpler to more complex update rules. Based on prior knowledge and the nature of our problem,
-we hypothesized that algorithms with more robust, stable policy updates (like PPO and TRPO) would
-likely outperform others in this highly coupled, continuous control scenario. Off-policy methods
-(DDPG, TD3, SAC) might reach good performance as well, but could suffer from tuning sensitivity and
-stability issues given the complex dynamics and safety constraints. Indeed, DDPG and basic PG were
-expected to be the least reliable due to known tendencies for instability without additional
-regularization.
+  \item \textit{Policy Gradient (PG):} the REINFORCE algorithm (Monte Carlo policy gradient), included as
+a baseline for direct policy optimization without variance-reduction techniques \cite{b7,b21}.
+  \item \textit{Proximal Policy Optimization (PPO):} a policy-gradient method that uses a clipped
+probability-ratio surrogate to bound policy updates \cite{b15}.
+  \item \textit{Trust Region Policy Optimization (TRPO):} a policy-gradient method that enforces a trust-region
+constraint based on the Kullback--Leibler divergence at each update; the constrained optimization step incurs a higher per-update computational cost than PPO \cite{b14}.
+  \item \textit{Deep Deterministic Policy Gradient (DDPG):} an off-policy actor-critic algorithm with a
+deterministic policy and target networks; DDPG jointly learns a $Q$-function and a policy and is sensitive to hyperparameter choices \cite{b16}.
+  \item \textit{Twin Delayed DDPG (TD3):} a variant of DDPG that uses two critic networks to reduce overestimation bias and delays policy updates relative to value updates \cite{b17}.
+  \item \textit{Soft Actor-Critic (SAC):} an off-policy actor-critic algorithm with a stochastic policy and an entropy term in the objective; this entropy regularization promotes exploration but increases the per-step computational cost relative to deterministic methods \cite{b18}.
+\end{itemize}
+
+The six algorithms cover the on-policy/off-policy and deterministic/stochastic axes, as well as a range of update rules. Given the strong base--manipulator coupling and the safety constraints, methods with constrained or clipped policy updates (PPO, TRPO) are expected to provide more stable training than algorithms without such constraints (PG, DDPG). The off-policy actor-critic methods (DDPG, TD3, SAC) may achieve comparable performance but are typically more sensitive to hyperparameter selection.
 
 \begin{table}[!t]
 \centering
@@ -826,25 +688,11 @@ Soft Actor-Critic (SAC) & Off-policy  \\
 \bottomrule
 \end{tabular}
 \end{table}
-On-policy methods (PG, PPO, TRPO) update their policies using only data from the current policy, leading to 
-stable but less sample-efficient learning. Off-policy methods (DDPG, TD3, SAC) reuse experience from a replay buffer, 
-improving sample efficiency at the cost of higher sensitivity to hyperparameters~\cite{b2,b7}. For free-floating space 
-robot control, where strong nonlinear coupling and safety constraints demand reliable convergence, on-policy methods are expected to be advantageous.
+On-policy methods (PG, PPO, TRPO) update the policy only from data generated by the current policy, which typically leads to stable but less sample-efficient learning. Off-policy methods (DDPG, TD3, SAC) reuse experience stored in a replay buffer, which improves sample efficiency at the cost of higher sensitivity to hyperparameters~\cite{b2,b7}. For free-floating space-robot control with strong nonlinear coupling and safety constraints, the constrained-update on-policy methods are expected to provide more reliable convergence.
 
-\textbf{Training Setup:} All experiments were conducted on a workstation equipped with an AMD Ryzen 7 7700 processor 
-and 32 GB of RAM, using MATLAB R2025b with the Reinforcement Learning Toolbox and Simscape Multibody. We used the same
-network architecture (initially two hidden layers of 128 units each for policy and for value function,
-where applicable) and same reward structure for all. Hyperparameters (learning rate, discount
-factor $\gamma = 0.99$, etc.) were initially set to default reasonable values and kept consistent across agents as
-much as possible. All agents were trained using a learning rate of $\alpha = 1 \times 10^{-3}$ for both actor and critic networks, unless stated otherwise.
-Hence, any performance differences can be
-attributed primarily to the algorithmic differences, not to unequal tuning. Later we will tune PPO
-further, but for the main comparison, PPO uses a default configuration as well. Each agent’s training
-run of 1000 episodes yielded a final policy which we then evaluated.
+\textbf{Training Setup.} All experiments were performed on a workstation with an AMD Ryzen 7 7700 processor and 32\,GB of RAM, using MATLAB R2025b with the Reinforcement Learning Toolbox and Simscape Multibody. The same network architecture (two hidden layers of 128 units each for the policy and, where applicable, for the value function) and the same reward function were used for all agents. The discount factor was fixed at $\gamma = 0.99$. The learning rate for both actor and critic networks was $\alpha = 1 \times 10^{-3}$ unless stated otherwise. With these unified settings, observed performance differences can be attributed primarily to the algorithmic differences rather than to unequal tuning. PPO was further tuned in a subsequent step; in the main comparison, PPO uses its default configuration. Each agent was trained for 1000 episodes; the resulting policy was then evaluated.
 
-\textbf{Performance Metrics:} We evaluated the agents on the KPIs described earlier (tracking error, base
-stability, etc.) by running 30 test episodes for each.~\autoref{tab:kpi_comp} summarizes a subset of these metrics,
-highlighting the differences between agents.
+\textbf{Performance Metrics.} The agents were evaluated on the KPIs introduced in Section~\ref{RL} by running 30 evaluation episodes per agent. \autoref{tab:kpi_comp} reports a subset of these metrics for the six agents.
 
 \begin{table*}[!t]
 \centering
@@ -878,49 +726,24 @@ $\sim$13\,min & $\sim$38\,min & $\sim$35\,min & \textbf{$\sim$8\,min} & $\sim$8\
 \end{tabular}
 \end{table*}
 
-\noindent
-The results in \autoref{tab:kpi_comp} reveal clear patterns across the six agents. Regarding \emph{training stability}, 
-TRPO and PPO exhibited the most stable learning (T1 values of 0.61 and 1.78, respectively), whereas DDPG showed highly 
-erratic behavior (T1\,=\,64.5). PPO was also the fastest to train (T3\,$\approx$\,8\,min), while off-policy 
-methods required substantially longer (TD3\,$\approx$\,38\,min, SAC\,$\approx$\,35\,min).
+The results in \autoref{tab:kpi_comp} display the following patterns. With respect to \emph{training stability}, TRPO and PPO yield the smallest late-training reward variance ($T_1 = 0.61$ and $T_1 = 1.78$, respectively), whereas DDPG shows the largest ($T_1 = 64.5$). The training time $T_3$ is shortest for PPO ($\approx 8\,\mathrm{min}$); the off-policy methods are slower (TD3 $\approx 38\,\mathrm{min}$, SAC $\approx 35\,\mathrm{min}$).
 
-In terms of \emph{trajectory tracking}, PPO achieved the lowest mean squared error (K2\,=\,0.0257), significantly 
-outperforming the runner-up TRPO (0.0680). DDPG achieved the lowest peak error (K3\,=\,0.4758) in its best runs 
-but was highly inconsistent. PG, SAC, and TD3 all exhibited substantially larger tracking errors, with PG's mean error roughly six times that of PPO.
+For \emph{trajectory tracking}, PPO attains the lowest mean squared error ($K_2 = 0.0257$), lower than that of TRPO ($K_2 = 0.0680$). DDPG attains the lowest peak error ($K_3 = 0.4758$) but with large variability across runs. PG, SAC, and TD3 yield larger tracking errors; the mean error of PG is approximately six times that of PPO.
 
-For \emph{base motion minimization}, PPO and TRPO both kept the base orientation error small (K4 of 0.0667 and 0.0694), 
-while DDPG allowed the base to drift considerably (K4\,=\,0.2682). Interestingly, TD3 achieved very low base angular velocity (K8\,$\approx$\,0.02\,rad/s) 
-by adopting an overly conservative strategy that sacrificed tracking accuracy. All agents successfully avoided collisions (K5\,=\,0). 
-PPO and TRPO occasionally approached joint limits (K6 of 5.1\% and 2.1\%, respectively), indicating more aggressive use of the workspace for better tracking.
+For \emph{base-motion minimization}, PPO and TRPO yield comparable base-orientation errors ($K_4 = 0.0667$ and $K_4 = 0.0694$), while DDPG produces a larger drift ($K_4 = 0.2682$). TD3 yields a low base angular velocity ($K_8 \approx 0.02\,\mathrm{rad/s}$) at the cost of degraded tracking accuracy, consistent with a conservative policy that suppresses actuation. All agents avoid collisions ($K_5 = 0$). PPO and TRPO approach the joint limits in a small fraction of the steps ($K_6 = 5.1\%$ and $K_6 = 2.1\%$, respectively), corresponding to a wider use of the joint range.
 
-PPO also produced the smoothest control signals (K7\,=\,0.6812), while TD3 and DDPG generated the jerkiest outputs ($\approx$\,0.8--1.0). 
-Energy consumption (K9) was moderate for PPO ($\approx$\,6.33) and lowest for TRPO ($\approx$\,3.76); the very low values for DDPG and TD3 ($<$\,1.0) 
-reflect insufficient actuation rather than efficiency.
-Qualitatively, PPO produced the most competent behavior: the arm moved accurately along the circle with minimal base rotation. 
-TRPO performed similarly but with slightly slower response. SAC tended to oscillate around the path, TD3 adopted an overly conservative 
-strategy sacrificing tracking accuracy, DDPG was inconsistent across runs (explaining its high T1), and PG never achieved reliable tracking within 1000 episodes.
+PPO produces the smoothest control signals ($K_7 = 0.6812$); the highest jerk values are observed for TD3 and DDPG ($K_7 \approx 0.8$--$1.0$). The energy consumption $K_9$ is moderate for PPO ($\approx 6.33$) and lowest for TRPO ($\approx 3.76$); the very low values for DDPG and TD3 ($K_9 < 1.0$) coincide with insufficient actuation and should not be interpreted as energy efficiency. Qualitatively, PPO traces the circular reference with low base disturbance; TRPO produces a similar profile with a slower response; SAC oscillates around the reference; TD3 adopts a conservative strategy that reduces tracking accuracy; DDPG is inconsistent across runs, in line with the large $T_1$; and PG does not reach reliable tracking within 1000 episodes.
 
-\textbf{Overall Winner, PPO:} Aggregating all the criteria, PPO stands out as the best-performing agent. As
-summarized succinctly in the report:
+\textbf{Summary of the comparison.} Aggregating the criteria above:
 \begin{itemize}
-	\item PPO offers the best combination of training stability (low T1/T2),
-	training speed (short T3), tracking accuracy (low K2/K3), and smoothness (low K7), with a moderate joint limit
-	violation rate.
-	\item  TRPO is a close second, described as similarly stable and precise but requiring more
-	computation time and still incurring slight limit violations.
-	\item The off-policy methods (TD3, SAC) did not
-	achieve better performance and were significantly more computation-intensive, with higher tracking
-	errors.
-	\item Finally, PG and DDPG were less robust both in training and in achieved performance, showing
-	the largest fluctuations and poorest metrics.
+        \item PPO offers the best combination of training stability (low $T_1$/$T_2$), training time ($T_3$), tracking accuracy (low $K_2$/$K_3$), and control smoothness (low $K_7$), at the cost of a moderate joint-limit violation rate.
+        \item TRPO is close to PPO on most metrics, but requires more computation time and still incurs occasional joint-limit violations.
+        \item The off-policy methods (TD3, SAC) do not improve on PPO under unified conditions and are more computation-intensive, with higher tracking errors.
+        \item PG and DDPG show the largest fluctuations and the weakest performance on most KPIs.
 \end{itemize}
-These findings validate our hypothesis that on-policy methods with 
-robust update rules are best suited for this highly coupled, safety-critical control problem. 
-Based on these results, we selected PPO for further optimization.
+These results are consistent with the on-policy/off-policy distinction in \autoref{tab:on_off_policy}: under the strong dynamic coupling and the safety constraints of the considered task, the constrained-update on-policy methods are the most reliable. Based on these results, PPO is selected for further tuning.
 
-Based on these results, we selected PPO as the reference agent for further development and
-optimization. The next section discusses how we improved PPO’s performance even further through
-targeted optimizations.
+The next section reports the architectural and hyperparameter modifications applied to PPO and their effect on the KPIs.
 
 \begin{table*}[!t]
 \centering
@@ -928,8 +751,8 @@ targeted optimizations.
   Each cell shows $\Delta\tilde{x}$ (median difference, agent$-$PPO) with significance superscript:
   ${}^{***}p<0.001$, ${}^{**}p<0.01$, ${}^{*}p<0.05$, ${}^{\mathrm{n.s.}}p\geq0.05$.
   For K1, positive $\Delta\tilde{x}$ means the agent achieves a higher (better) return.
-  For K2--K4, K6--K8, negative $\Delta\tilde{x}$ means lower (better) error/violation/jerk.
-  K5 is a binary collision flag (1\,=\,safe); K9 lower means more energy-efficient.}
+  For K2--K9, negative $\Delta\tilde{x}$ means lower (better) error/violation/jerk/energy values.
+  K5 is the collision rate (0\,=\,no collisions); all evaluated agents achieved K5\,=\,0.}
 \label{tab:significance}
 \renewcommand{\arraystretch}{1.3}
 \setlength{\tabcolsep}{5pt}
@@ -938,10 +761,10 @@ targeted optimizations.
 \toprule
 \textbf{Agent} & \textbf{K1} & \textbf{K2} & \textbf{K3} & \textbf{K4} & \textbf{K5} & \textbf{K6} & \textbf{K7} & \textbf{K8} & \textbf{K9} \\
 \midrule
-TRPO & $+7.55^{*}$    & $-0.277^{***}$ & $-0.526^{***}$ & $+0.003^{\mathrm{n.s.}}$ & $-1^{***}$    & $-0.137^{***}$ & $+0.362^{***}$ & $-0.041^{***}$ & $-9.38^{***}$  \\
-TD3  & $+8.90^{***}$  & $+0.047^{\mathrm{n.s.}}$ & $-0.276^{***}$ & $-0.097^{***}$ & $-1^{***}$    & $-0.156^{***}$ & $+0.731^{***}$ & $-0.095^{***}$ & $-12.91^{***}$ \\
+TRPO & $+7.55^{*}$    & $-0.277^{***}$ & $-0.526^{***}$ & $+0.003^{\mathrm{n.s.}}$ & $0^{\mathrm{n.s.}}$    & $-0.137^{***}$ & $+0.362^{***}$ & $-0.041^{***}$ & $-9.38^{***}$  \\
+TD3  & $+8.90^{***}$  & $+0.047^{\mathrm{n.s.}}$ & $-0.276^{***}$ & $-0.097^{***}$ & $0^{\mathrm{n.s.}}$    & $-0.156^{***}$ & $+0.731^{***}$ & $-0.095^{***}$ & $-12.91^{***}$ \\
 SAC  & $-33.79^{***}$ & $+0.908^{***}$ & $+0.981^{***}$ & $+0.093^{**}$  & $0^{\mathrm{n.s.}}$   & $-0.059^{***}$ & $+0.404^{***}$ & $+0.032^{***}$ & $+2.44^{*}$    \\
-PG   & $-24.46^{*}$   & $-0.051^{\mathrm{n.s.}}$ & $-0.132^{\mathrm{n.s.}}$ & $+0.158^{**}$  & $-1^{***}$    & $-0.156^{***}$ & $+0.199^{***}$ & $0.000^{\mathrm{n.s.}}$  & $-4.05^{***}$  \\
+PG   & $-24.46^{*}$   & $-0.051^{\mathrm{n.s.}}$ & $-0.132^{\mathrm{n.s.}}$ & $+0.158^{**}$  & $0^{\mathrm{n.s.}}$    & $-0.156^{***}$ & $+0.199^{***}$ & $0.000^{\mathrm{n.s.}}$  & $-4.05^{***}$  \\
 DDPG & $-102.02^{***}$& $+0.060^{\mathrm{n.s.}}$ & $-0.095^{\mathrm{n.s.}}$ & $+0.331^{***}$ & $0^{\mathrm{n.s.}}$   & $-0.153^{***}$ & $+0.724^{***}$ & $-0.006^{\mathrm{n.s.}}$ & $-12.17^{***}$ \\
 \bottomrule
 \end{tabular}
@@ -978,12 +801,9 @@ that SAC’s oscillatory behaviour causes consistently large position errors.
 Regarding \emph{base stability and safety} (K4--K6), PPO significantly outperforms TD3, SAC,
 PG, and DDPG in base orientation error (K4, all $p<0.01$), while the difference against TRPO
 is not significant ($p=0.926$), indicating comparable stability for on-policy methods.
-The collision-rate KPI (K5) is identically zero for TRPO, TD3, and PG, resulting in a
-statistically significant disadvantage compared to PPO ($p<0.001$, $\Delta\tilde{x}=-1$),
-which achieves K5\,=\,1 consistently due to its exploration of the workspace.
-No significant difference is found for DDPG and SAC (both also achieve K5\,=\,1), confirming
-that collision avoidance is maintained equally well across on-policy and off-policy stochastic
-methods.
+For the collision-rate KPI (K5), all evaluated agents achieve K5\,=\,0 over the 30 evaluation
+episodes. The collision metric therefore does not distinguish the agents in this evaluation and is
+reported descriptively rather than used for ranking.
 
 For \emph{control quality and efficiency} (K7--K9), PPO produces significantly smoother
 control signals than all competing agents (K7, all $p<0.001$), with DDPG and TD3 showing
@@ -1072,25 +892,20 @@ providing a quantitative measure of estimation uncertainty per agent and KPI.
 \end{figure*}
 
 \section{Optimization of the PPO Agent}
-Having identified PPO as the most promising algorithm, we focused on enhancing its performance on path tracking task of 
-the space robot. The PPO agent we compared above was a “default” PPO configuration (as
-provided by MATLAB’s RL Toolbox example) with minimal tuning \cite{b4}. While it already outperformed other
-agents, we hypothesized there was room to improve in terms of faster convergence, higher precision,
-and eliminating the remaining constraint violations. We therefore undertook a systematic
-optimization of PPO, involving both network architecture modifications and hyperparameter tuning.
+Based on the comparison in Section~\ref{comparison}, PPO is selected for further tuning. The PPO agent used so far corresponds to the default configuration provided by MATLAB's Reinforcement Learning Toolbox example \cite{b4}, with minimal manual adjustment. The following modifications target three objectives: faster convergence, lower tracking and base-orientation errors, and avoidance of the remaining joint-limit violations. The tuning involves both network architecture and hyperparameters.
 
 
 
 \begin{figure*}[!t]
 	\centering
 	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\linewidth]{Figures/rainingsverlauf_ppo_default.png}
+		\includegraphics[width=\linewidth,height=0.25\textheight]{Figures/trainingsverlauf_ppo_default.png}
 		\caption{PPO (Default)}
 		\label{fig:training_ppo_default}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\linewidth]{Figures/trainingsverlauf_ppo_optimized.png}
+		\includegraphics[width=\linewidth, height=0.25\textheight]{Figures/trainingsverlauf_ppo_optimized.png}
 		\caption{PPO (Optimized)}
 		\label{fig:training_ppo_opt}
 	\end{subfigure}
@@ -1104,19 +919,8 @@ optimization of PPO, involving both network architecture modifications and hyper
 \noindent
 
 \begin{roverlaphl}
-\hloverlap{[R2.10/R3.8]} \textbf{Network Architecture Improvements:} By default, the PPO agent used two hidden layers of 128
-neurons each (with ReLU activations) for both the policy and value function networks. We
-experimented with deeper and wider networks, as well as alternative activation functions, to better
-capture the dynamics of the problem. Our optimized architecture ultimately used 3 hidden layers for
-the policy network with layer sizes [256, 256, 128] and 2 hidden layers for the value network with sizes
-[256, 128]. We found that the additional depth and capacity in the policy network helped the agent learn
-the intricate relationship between arm motions and base reactions (especially given the 23-dimensional
-state input) \cite{b4}. We also introduced layer normalization in the first layer to help stabilize learning,
-given the different scales of input features (joint angles vs. orientation quaternions, etc.). The activation
-function remained ReLU, which was sufficient. These architecture changes were implemented by
-explicitly defining the neural network layers instead of using the auto-generated default network.
-In summary, the optimized policy network was larger and potentially more expressive, which we believe
-allowed PPO to find a control strategy which is better tuned.
+\hloverlap{[R2.10/R3.8]} \textbf{Network architecture.} The default PPO agent uses two hidden layers of 128
+units each with ReLU activations for both the policy and the value network. Variants with deeper and wider networks and with alternative activation functions were evaluated. The selected architecture uses three hidden layers of sizes $[256, 256, 128]$ for the policy network and two hidden layers of sizes $[256, 128]$ for the value network. The additional depth and capacity of the policy network reduce the tracking error and the base-orientation error (cf.\ \autoref{tab:ppo_optimization_kpi}) for the 23-dimensional state input \cite{b4}. Layer normalization is applied to the first layer to compensate for the different scales of the input features (e.g., joint angles versus orientation quaternions). The activation function is kept as ReLU. The networks are defined explicitly rather than through the toolbox default constructor.
 
 \textbf{Hyperparameter Tuning:} The optimization followed a coordinate-wise grid search: each hyperparameter was swept across a discrete set of candidate values while all others were held at their current best, and the configuration yielding the highest mean episodic reward over the final 50 training episodes (out of $N_{\text{train}}=1000$) was selected. In total, 16 training runs of 1000 episodes each were conducted during this tuning phase. The swept parameters, their candidate values, and the selected values are as follows:
 \begin{itemize}
@@ -1132,20 +936,7 @@ Through this process we converged on a configuration that provided a more stable
 
 \subsection{Circular Trajectory}
 
-Training Outcome: The effects of these optimizations were evident in the training learning curves (see~\autoref{fig:training_ppo_compare}). 
-The default PPO agent’s learning curve initially rose, but then plateaued at a fairly
-negative reward value (\textasciitilde-2 per episode) and exhibited high variance even after many episodes. This
-plateau suggested it reached a suboptimal policy and struggled to improve further. In contrast, the
-optimized PPO agent’s learning curve kept rising steadily and converged to a much higher average
-reward (less negative, closer to zero) with significantly reduced variance. Table~\ref{tab:ppo_optimization_kpi} reports the KPI averages 
-over $N_{eval}=30$ evaluation episodes for PPO with the default configuration and the optimized configuration. Specifically, where the
-default PPO leveled off around -2.0 cumulative reward, the optimized PPO approached -0.4 on average,
-a dramatic improvement. The variability (shaded region in the reward plot) shrank, indicating the
-agent’s behavior became consistently optimal across training episodes. Quantitatively, the
-mean episodic reward K1 improved from -2.23 (default PPO) to -0.43 (optimized PPO). This
-roughly fivefold increase in reward corresponds to the agent accomplishing much more of the task
-(since zero would be perfect tracking with no penalties). The lower variance also hints that the agent not
-only improved its average performance but did so reliably without frequent failures.
+\textbf{Training outcome.} The effect of the modifications can be seen in the training curves (see~\autoref{fig:training_ppo_compare}). The default PPO agent's episodic return increases initially and then plateaus around $-2$ per episode with high variance over the remaining training, indicating convergence to a suboptimal policy. In contrast, the optimized PPO agent's return continues to increase and converges to a higher value (closer to zero) with reduced variance. Table~\ref{tab:ppo_optimization_kpi} reports the KPI averages over $N_{\mathrm{eval}} = 30$ evaluation episodes for PPO with the default and the optimized configurations. The mean episodic return $K_1$ increases from $-2.23$ for the default PPO to $-0.43$ for the optimized PPO, an increase by a factor of approximately five. The reduced variance indicates that the improvement is consistent across episodes rather than driven by a few outliers.
 
 \begin{figure*}[!t]
     \centering
@@ -1177,15 +968,15 @@ only improved its average performance but did so reliably without frequent failu
         \caption{PPO (Optimized)}
         \label{fig:basis_opt}
     \end{subfigure}
-    \caption{Course of base orientation (quaternion components) during a test episode.}
+    \caption{Time evolution of the base orientation (quaternion components) during a test episode.}
     \label{fig:basis_orientation_compare}
 \end{figure*}
 
 \begin{table}[!b]
 	\centering
-	\caption{Performance of PPO agent before and after optimization. The optimized PPO shows substantial
-		improvements in all aspects (higher rewards, lower errors, zero safety violations, smoother and more
-		efficient control).}
+	\caption{Performance of PPO agent before and after optimization. The optimized PPO improves most reported
+		KPIs, with higher rewards, lower errors, no observed safety violations in the evaluation episodes, and smoother
+		control.}
     \label{tab:ppo_optimization_kpi}
 	\renewcommand{\arraystretch}{1.2}
 	\setlength{\tabcolsep}{3pt}
@@ -1200,25 +991,20 @@ only improved its average performance but did so reliably without frequent failu
 		Collision Rate (K5)             & 0 & 0 \\
 		Joint Limit Violation Rate (K6) & 0.0505 (5.1\%) & \textbf{0} \\
 		Torque Smoothness (K7, jerk)     & 0.6812  & \textbf{0.351} \\
+		Mean Base Angular Velocity (K8)  & 0.095  & \textbf{0.050} \\
 		Energy Consumption (K9)          & 6.325  & \textbf{5.314} \\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-Beyond the reward improvement, the optimizations translate directly to task performance. \autoref{fig:trajektorie_xy_compare} 
-shows the end-effector path in the XY-plane: the default PPO deviates significantly from the reference circle and exhibits jagged oscillations, 
-whereas the optimized PPO traces the reference almost exactly. The mean squared tracking error K2 dropped from 0.0257 to 0.0083 (a 67.7\% reduction), 
-and the maximum error K3 decreased from 0.4833 to 0.27.
+The reward improvement translates directly into task-level performance. \autoref{fig:trajektorie_xy_compare}
+shows the end-effector path in the $XY$ plane: the default PPO deviates from the reference circle and exhibits oscillations, while the optimized PPO closely follows the reference. The mean squared tracking error $K_2$ decreases from $0.0257$ to $0.0083$ (a reduction of $67.7\%$), and the maximum error $K_3$ from $0.4833$ to $0.27$.
 
-Base stabilization improved markedly (\autoref{fig:basis_orientation_compare}): the mean orientation error K4 fell from 0.0667 to 0.022 (factor $\approx$\,3), 
-and the mean angular velocity K8 was halved from 0.095 to 0.050\,rad/s. The optimized agent learned arm motions that effectively cancel momentum transfer to the base.
+Base stabilization improves accordingly (\autoref{fig:basis_orientation_compare}): the mean orientation error $K_4$ decreases from $0.0667$ to $0.022$ (a factor of approximately three), and the mean angular velocity $K_8$ decreases from $0.095\,\mathrm{rad/s}$ to $0.050\,\mathrm{rad/s}$. The optimized agent uses arm motions that compensate for momentum transfer to the base.
 
-The optimized PPO also eliminated all safety violations (K5\,=\,K6\,=\,0 over 30 episodes, compared to 5.1\% joint-limit violations for the default), 
-improved torque smoothness (K7: 0.6812$\to$0.351), and reduced energy consumption by 16\% (K9: 6.325$\to$5.314). Notably, better tracking, base stability, safety, 
-and energy efficiency were all achieved in parallel, indicating a fundamentally more efficient control strategy.
+For the optimized PPO, no safety violations are observed ($K_5 = K_6 = 0$ over the 30 evaluation episodes, compared to $K_6 = 5.1\%$ for the default configuration). It also improves torque smoothness ($K_7$: $0.6812 \to 0.351$) and reduces the energy consumption by $16\%$ ($K_9$: $6.325 \to 5.314$). These changes are observed simultaneously in the reported evaluation, without an apparent trade-off among the selected KPIs.
 
-The optimized PPO agent fulfills all task objectives simultaneously: precise trajectory tracking, minimal base disturbance, zero safety violations,
-smooth actuation, and reduced energy consumption. This validates the approach of systematic hyperparameter tuning and network tailoring for safety-critical space robot control.
+The optimized PPO agent satisfies the task objectives considered here in combination in the reported evaluation: tracking accuracy, base disturbance, safety constraints, control smoothness, and energy consumption. These results support the use of systematic hyperparameter tuning and tailored network design for safety-critical space-robot control under the considered conditions.
 
 \subsection{Ablation Study of Reward Components}\label{sec:reward_ablation}
 \begin{rtwohl}
@@ -1246,7 +1032,7 @@ the baseline configuration. The resulting KPIs are summarized in~\autoref{tab:re
         Baseline            & $\mathbf{-0.43}$   & $\mathbf{0.0083}$ & $\mathbf{0.022}$ & $\mathbf{0}$      & $\mathbf{0.351}$ & 5.314 \\
         $W_p = 0$           & $-6.48$            & $0.238$           & $0.046$          & $0$               & $0.626$          & 2.868 \\
         $W_v = 0$           & $-0.85$            & $0.022$           & $0.049$          & $0.0015$          & $0.655$          & 3.561 \\
-        $W_{\mathrm{ori}}=0$& $\mathbf{-23.65}$  & $0.017$           & $\mathbf{0.668}$ & $0.047$           & $0.588$          & 4.363 \\
+        $W_{\mathrm{ori}}=0$& $-23.65$            & $0.017$           & $0.668$          & $0.047$           & $0.588$          & 4.363 \\
         $W_{wb} = 0$        & $-1.17$            & $0.032$           & $0.059$          & $0.0022$          & $0.657$          & 3.554 \\
         $W_{vb} = 0$        & $-1.31$            & $0.039$           & $0.054$          & $0.0004$          & $0.670$          & 3.192 \\
         $W_u = 0$           & $-1.32$            & $0.037$           & $0.060$          & $0$               & $0.618$          & 3.856 \\
@@ -1258,18 +1044,18 @@ the baseline configuration. The resulting KPIs are summarized in~\autoref{tab:re
 \end{table}
 
 \begin{rtwohl}
-\noindent\textbf{Dominant weights ($W_{\mathrm{ori}}$, $W_p$).} Removing the base-orientation penalty is catastrophic: the mean
+\noindent\textbf{Dominant weights ($W_{\mathrm{ori}}$, $W_p$).} Removing the base-orientation penalty has a substantial effect: the mean
 episodic reward K1 collapses from $-0.43$ to $-23.65$, and the mean base-orientation error K4 rises by more than an order of
 magnitude (from $0.022$ to $0.668$). Interestingly, the end-effector tracking error K2 even decreases slightly, which reveals that
 without $W_{\mathrm{ori}}$ the agent optimizes EE tracking at the expense of completely losing base stabilization. Because base
-stability is the primary challenge in free-floating manipulation, this confirms that $W_{\mathrm{ori}}$ is structurally essential
+stability is the primary challenge in free-floating manipulation, this indicates that $W_{\mathrm{ori}}$ is central
 rather than merely fine-tuning the behavior. Removing $W_p$ degrades EE tracking severely (K2 rises by a factor of $\approx 29$
 and K3 increases approximately $3.5\times$, not shown in the table), driving K1 to $-6.48$.
 
 \noindent\textbf{Secondary weights ($W_v$, $W_{wb}$, $W_{vb}$).} These terms individually have a small but measurable impact:
 K1 lies in the range $[-1.31, -0.85]$ compared to the baseline $-0.43$, and tracking accuracy and smoothness are noticeably worse
 (K2 rises by a factor of $2$–$5$, K7 roughly doubles). They shape the motion quality and the base velocity damping, but are not
-individually load-bearing for task completion.
+individually decisive for task completion in this benchmark.
 
 \noindent\textbf{Control-effort weights ($W_u$, $W_d$).} Disabling the penalties on torque magnitude and torque change modestly
 increases tracking error (K2) and roughly doubles the jerk metric K7, while K1 remains around $-1.3$. This confirms that these
@@ -1280,28 +1066,28 @@ causes a pronounced performance drop, with K1 falling to $-3.65$ and $-3.96$, re
 by roughly an order of magnitude (from $0.0083$ to $\approx 0.075$). Without $r_{\text{prog}}$, the agent loses the dense
 directional signal that rewards incremental reduction of the position error, and the joint-limit violation rate K6 rises to
 $1.73\%$ — indicating that the agent tends to execute more aggressive motions when deprived of step-wise progress feedback.
-Without $r_{\text{bonus}}$, the agent lacks the local attractor near the reference trajectory and fails to refine tracking
-in the terminal phase. Both terms are therefore not merely cosmetic shaping; they are essential for training-time convergence
-and for the final tracking accuracy of the policy.
+Without $r_{\text{bonus}}$, the agent lacks the local attractor near the reference trajectory and does not refine tracking
+as effectively in the terminal phase. Both terms therefore materially affect training-time convergence
+and the final tracking accuracy of the policy.
 
 \noindent\textbf{Note on the energy metric K9.} K9 appears \emph{lower} in every ablation variant than in the baseline ($5.314$).
 This does not indicate improved energy efficiency; rather, it is an artifact of earlier episode termination when the agent fails
 (e.g., collision or excessive orientation error), which truncates the integration window. K9 should therefore only be interpreted
 jointly with K1, K2, and K4.
 
-\noindent\textbf{Summary.} The ablation confirms that $W_{\mathrm{ori}}$ and $W_p$ are the two dominant cost components of the
+\noindent\textbf{Summary.} The ablation indicates that $W_{\mathrm{ori}}$ and $W_p$ are the two dominant cost components of the
 composite reward, while the remaining five cost weights contribute refinements in motion quality, base velocity damping, and
-actuation smoothness. Both positive reward terms ($r_{\text{prog}}$ and $r_{\text{bonus}}$) are additionally shown to be load-bearing
+actuation smoothness. Both positive reward terms ($r_{\text{prog}}$ and $r_{\text{bonus}}$) are additionally shown to be important
 for training-time convergence and final tracking accuracy. Removing any single secondary cost weight still yields a functioning,
-if degraded, policy, whereas removing $W_{\mathrm{ori}}$, $W_p$, or either of the positive reward terms leads to a clearly
+if degraded, policy, whereas removing $W_{\mathrm{ori}}$, $W_p$, or either of the positive reward terms leads to a markedly
 degraded controller. This supports the reward design choices reported in~\autoref{RL} and shows that the benchmark conclusions
 do not rely on fine balancing of low-weight terms.
 \end{rtwohl}
 
 \subsection{Sensitivity Analysis of Reward Weights}\label{sec:reward_sensitivity}
 \begin{roverlaphl}
-\hloverlap{[R2.5/R3.4]} The ablation study in~\autoref{sec:reward_ablation} establishes which reward components are
-structurally load-bearing. A complementary question, raised independently by both reviewers, is whether the
+\hloverlap{[R2.5/R3.4]} The ablation study in~\autoref{sec:reward_ablation} identifies which reward components are
+most influential. A complementary question, raised independently by both reviewers, is whether the
 conclusions reported in~\autoref{tab:kpi_comp} are robust against \emph{moderate} miscalibration of the reward weights:
 does the PPO agent still converge to a working policy when the dominant cost weights are perturbed, and does the
 ranking of the algorithms remain qualitatively stable? To answer this, we performed a one-at-a-time sensitivity
@@ -1331,7 +1117,7 @@ policies, whose KPIs are summarized in~\autoref{tab:reward_sensitivity}.
         $W_p \times 0.5$                    & $-3.62$          & $0.0494$          & $0.583$           & $0.059$          & $0.611$          & $3.800$ \\
         $W_v \times 2$                      & $-3.07$          & $0.0246$          & $\mathbf{0.480}$  & $0.061$          & $0.634$          & $4.212$ \\
         $W_v \times 0.5$                    & $-3.48$          & $0.0315$          & $0.535$           & $0.064$          & $0.622$          & $3.827$ \\
-        $W_{\mathrm{ori}} \times 2$         & $\mathbf{-6.89}$ & $\mathbf{0.2221}$ & $\mathbf{0.907}$  & $0.041$          & $0.622$          & $3.059$ \\
+        $W_{\mathrm{ori}} \times 2$         & $-6.89$          & $0.2221$          & $0.907$           & $0.041$          & $0.622$          & $3.059$ \\
         $W_{\mathrm{ori}} \times 0.5$       & $-2.82$          & $0.0438$          & $0.786$           & $0.050$          & $0.639$          & $3.546$ \\
         $W_{wb} \times 2$                   & $-3.41$          & $0.0789$          & $0.746$           & $0.044$          & $0.640$          & $3.283$ \\
         $W_{wb} \times 0.5$                 & $-3.00$          & $0.0644$          & $0.740$           & $0.045$          & $0.638$          & $3.557$ \\
@@ -1344,15 +1130,15 @@ policies, whose KPIs are summarized in~\autoref{tab:reward_sensitivity}.
 K1 varies from $-2.82$ at $W_{\mathrm{ori}}\times 0.5$ to $-6.89$ at $W_{\mathrm{ori}}\times 2$, a spread of more than
 a factor of two. Doubling $W_{\mathrm{ori}}$ over-emphasizes base stabilization at the cost of the end-effector tracking
 objective: K2 rises to $0.222$ (a factor of $\approx 27$ over the baseline), while K4 remains tight at $0.041$.
-Halving $W_{\mathrm{ori}}$, in contrast, relaxes the base-stabilization pressure without causing catastrophic
-behavior — the agent still tracks the reference ($K2=0.0438$) but with twice the baseline base-orientation error
+Halving $W_{\mathrm{ori}}$, in contrast, relaxes the base-stabilization pressure without causing loss of task execution:
+the agent still tracks the reference ($K2=0.0438$) but with twice the baseline base-orientation error
 ($K4=0.050$ vs.\ baseline $0.022$). This is fully consistent with the ablation conclusion that $W_{\mathrm{ori}}$
-is the structurally dominant cost weight.
+is the dominant cost weight.
 
 \noindent\textbf{Secondary dominance of $W_p$.} The EE position weight is moderately sensitive: K1 ranges from
 $-3.62$ to $-4.56$, and K2 rises by a factor of $4$--$6$ over the baseline in both directions. Both perturbations
 disturb the balance between EE tracking and base stabilization, but neither causes the policy to break — again
-consistent with the ablation finding that $W_p$ is the second most load-bearing weight.
+consistent with the ablation finding that $W_p$ is the second most influential weight.
 
 \noindent\textbf{Low sensitivity of $W_v$ and $W_{wb}$.} The velocity-error and base-angular-velocity weights show
 the smallest K1 spread (roughly symmetric around $K1\approx -3.2$), confirming that these terms shape motion
@@ -1360,23 +1146,23 @@ quality and base damping but do not fundamentally alter the task-solvability of 
 ablation result that completely removing either of these weights still yields a functional, if somewhat degraded,
 controller.
 
-\noindent\textbf{Safety guarantees remain intact.} Across all eight perturbed configurations the collision rate
+\noindent\textbf{Safety metrics remain within limits.} Across all eight perturbed configurations the collision rate
 remains at $K5=0$ and the joint-limit violation rate stays below $0.53\,\%$ ($K6 \le 0.0053$). The formal
-safety-monitoring layer introduced in~\autoref{formal} therefore decouples the constraint-enforcement guarantees
-from the exact numerical tuning of the reward weights, which is an important robustness property for an
-on-orbit-servicing controller: reward miscalibration degrades task performance but does not compromise hard
-safety limits.
+safety-monitoring layer introduced in~\autoref{formal} therefore reduces the dependence of constraint enforcement
+on the exact numerical tuning of the reward weights, which is an important robustness property for an
+on-orbit-servicing controller: reward miscalibration degrades task performance but does not compromise the
+monitored safety limits in the tested cases.
 
 \noindent\textbf{Robustness of the algorithm ranking.} Across all eight weight perturbations the optimized PPO
 agent remains functional, with K1 bounded in $[-6.89, -2.82]$, $K5=0$, and bounded joint-limit violations. Even
-in the worst-case configuration ($W_{\mathrm{ori}}\times 2$) the resulting EE tracking error ($K2=0.222$) is not
-worse than the \emph{optimally-tuned} TD3 and SAC baselines reported in~\autoref{tab:kpi_comp} ($K2 \approx 0.19$
+in the worst-case configuration ($W_{\mathrm{ori}}\times 2$), the resulting EE tracking error ($K2=0.222$) remains
+within the same order of magnitude as the TD3 and SAC baselines reported in~\autoref{tab:kpi_comp} ($K2 \approx 0.19$
 for both, at the nominal weights). Since the other benchmarked agents (TRPO, SAC, TD3, PG, DDPG) are already
 noticeably weaker at the nominal reward weights, a uniform $\times 2$/$\times 0.5$ perturbation of any single
 dominant weight does not plausibly overturn the ranking reported in~\autoref{sec:reward_ablation}. A full
 cross-evaluation of all six algorithms over the complete eight-configuration grid would multiply the training
-budget by a factor of six and is beyond the scope of this benchmark; however, the result reported here is
-sufficient to establish that the ranking conclusions are not an artifact of a brittle, precisely-tuned operating
+budget by a factor of six and is beyond the scope of this benchmark; however, the result reported here
+suggests that the ranking conclusions are not an artifact of a brittle, precisely-tuned operating
 point.
 
 \noindent\textbf{Note on the energy metric K9.} As in the ablation, K9 is consistently lower than the baseline
@@ -1384,9 +1170,9 @@ point.
 fails to stabilize (the integration window shortens), not genuine energy efficiency. K9 should therefore be
 interpreted jointly with K1, K2, and K4.
 
-\noindent\textbf{Summary.} The sensitivity analysis confirms the reward-design choices reported in~\autoref{RL}:
+\noindent\textbf{Summary.} The sensitivity analysis supports the reward-design choices reported in~\autoref{RL}:
 $W_{\mathrm{ori}}$ is the most sensitive weight, $W_p$ is secondary, and $W_v$ and $W_{wb}$ are comparatively
-insensitive. Task solvability and all hard safety limits are preserved across the full $\times 0.5$ to $\times 2$
+insensitive. Task solvability and the monitored safety limits remain satisfied across the full $\times 0.5$ to $\times 2$
 range on every tested weight, and the algorithm ranking reported in~\autoref{tab:kpi_comp} is robust against
 moderate reward-weight miscalibration.
 \end{roverlaphl}
@@ -1419,7 +1205,7 @@ coefficients by a factor of $1.5$. The combined case applied all four perturbati
         \toprule
         \textbf{Condition} & \textbf{K1} & \textbf{K2} & \textbf{K3} & \textbf{K4} & \textbf{K5} & \textbf{K6} & \textbf{K7} & \textbf{K8} & \textbf{K9} \\
         \midrule
-        Nominal optimized PPO & $-0.4300$ & $0.0083$ & $0.2700$ & $0.0220$ & $0$ & $0$ & $0.3510$ & $0.0500$ & $5.3140$ \\
+        Nominal optimized PPO & $-0.3709$ & $0.0021$ & $0.1614$ & $0.0227$ & $0$ & $0$ & $0.8401$ & $0.0258$ & $3.9425$ \\
         Sensor noise & $-0.4557$ & $0.0030$ & $0.2164$ & $0.0227$ & $0$ & $0$ & $0.6677$ & $0.0398$ & $3.8498$ \\
         Reduced saturation ($0.75\,\tau_{\max}$) & $-0.4300$ & $0.0028$ & $0.1982$ & $0.0226$ & $0$ & $0$ & $0.6912$ & $0.0373$ & $3.3913$ \\
         External disturbance & $-0.5791$ & $0.0029$ & $0.2052$ & $0.0268$ & $0$ & $0$ & $0.6671$ & $0.0447$ & $3.7735$ \\
@@ -1430,7 +1216,7 @@ coefficients by a factor of $1.5$. The combined case applied all four perturbati
 \end{table*}
 
 \begin{rtwohl}
-\noindent\textbf{Robustness results.} The optimized PPO policy remained safe in all stress tests: no collisions
+\noindent\textbf{Robustness results.} The optimized PPO policy remained within the monitored safety limits in all stress tests: no collisions
 or joint-limit violations occurred in any condition ($K5=K6=0$). The strongest degradation is observed for the
 combined stress case and for parameter uncertainty, as expected because both directly change the effective dynamics
 seen by the fixed policy. Even in the combined case, the controller remains stable, with the mean base-orientation
@@ -1444,10 +1230,7 @@ reduced actuator authority, while the formal safety layer preserves the hard saf
 \end{rtwohl}
 
 \subsection{Piecewise-Linear Trajectory}
-While the previous evaluations focused on tracking a smooth circular end-effector (EE) reference, we 
-additionally tested how well the controller generalizes to \emph{linear} trajectories.
-This is relevant for practical on-orbit manipulation tasks, where approach and retreat motions are frequently 
-planned as straight-line segments rather than continuous curves.
+The previous evaluations consider tracking of a smooth circular end-effector (EE) reference. To assess how the controller generalizes to a different reference geometry, an additional evaluation is performed on a piecewise-linear trajectory. This case is relevant for on-orbit manipulation tasks in which approach and retreat motions are planned as straight-line segments rather than continuous curves.
 
 \noindent
 Trajectory definition: the linear reference is constructed from the same circle parameters (center and radius) used 
@@ -1478,7 +1261,7 @@ $T_{s,\mathrm{agent}}=0.1\,\mathrm{s}$ (same as in the other experiments).
         \caption{PPO (Optimized)}
         \label{fig:r_traj_opt}
     \end{subfigure}
-    \caption{Target/actual comparison of the ramp end-effector trajectory in the XY plane.}
+    \caption{Target/actual comparison of the piecewise-linear end-effector trajectory in the XY plane.}
     \label{fig:r_trajektorie_xy_compare}
 \end{figure*}
 
@@ -1495,26 +1278,14 @@ $T_{s,\mathrm{agent}}=0.1\,\mathrm{s}$ (same as in the other experiments).
         \caption{PPO (Optimized)}
         \label{fig:r_basis_opt}
     \end{subfigure}
-    \caption{Course of base orientation (quaternion components) during a test episode with ramp trajectory.}
+    \caption{Time evolution of the base orientation (quaternion components) during a test episode with a piecewise-linear trajectory.}
     \label{fig:r_basis_orientation_compare}
 \end{figure*}
-\noindent
-Results: Table~\ref{tab:ppo_linear_kpi} reports the KPI averages over $N_{eval}=30$ evaluation episodes for PPO 
-with the default configuration and the optimized configuration, now tested on the piecewise-linear reference.
-The optimized PPO improves overall task success (K1 increases from $-0.4565$ to $-0.2977$), reduces base attitude 
-disturbance (K4 decreases by $\approx 44\%$) (see ~\autoref{fig:r_basis_orientation_compare}), lowers residual 
-base angular velocity (K8 decreases by $\approx 15\%$), and significantly reduces energy consumption (K9 decreases by $\approx 35\%$).
-The mean and peak end-effector tracking errors (K2 and K3) remain almost unchanged, with a slight improvement 
-in the mean error (see ~\autoref{fig:r_trajektorie_xy_compare}).
-However, the control smoothness metric (K7) becomes worse than the default PPO.
-This suggests that the hyperparameter optimization (highly beneficial for circular tracking) 
-does not fully transfer to piecewise-linear motion profiles.
-A straightforward mitigation is to include a mixture of reference types (circular, linear segments, and hybrid 
-trajectories) during training (or during hyperparameter search) to explicitly optimize for trajectory generalization.
+\textbf{Results.} Table~\ref{tab:ppo_linear_kpi} reports the KPI averages over $N_{\mathrm{eval}} = 30$ evaluation episodes for PPO with the default and the optimized configurations on the piecewise-linear reference. The optimized PPO increases the episodic return ($K_1$: $-0.4565 \to -0.2977$), reduces the base attitude disturbance ($K_4$ decreases by approximately $44\%$, see~\autoref{fig:r_basis_orientation_compare}), reduces the residual base angular velocity ($K_8$ decreases by approximately $15\%$), and reduces the energy consumption ($K_9$ decreases by approximately $35\%$). The mean and peak tracking errors ($K_2$ and $K_3$) remain close to those of the default configuration, with a small reduction of the mean error (see~\autoref{fig:r_trajektorie_xy_compare}). The control smoothness metric $K_7$, however, is worse than for the default PPO. This indicates that the hyperparameter configuration tuned for circular tracking does not fully transfer to piecewise-linear references. A direct mitigation is to include a mixture of reference types (circular, linear, and hybrid trajectories) during training or during the hyperparameter search.
 
 \begin{table}[!b]
 \centering
-\caption{Generalization test on a piecewise-linear end-effector trajectory (two-segment ramp). Values are 
+\caption{Generalization test on a piecewise-linear end-effector trajectory (two-segment path). Values are 
 averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}
 \label{tab:ppo_linear_kpi}
 \renewcommand{\arraystretch}{1.2}
@@ -1537,51 +1308,20 @@ Energy Consumption (K9)              & 7.7144 & \textbf{5.0341} \\
 \end{table}
 
 
-Both the circular and piecewise-linear evaluations validate the approach of systematic hyperparameter tuning 
-and network tailoring for safety-critical space robot control, while also revealing that trajectory-specific 
-optimization may be needed for optimal generalization.
+Both the circular and the piecewise-linear evaluations support the use of systematic hyperparameter tuning and tailored network design for safety-critical space-robot control. The piecewise-linear results also show that trajectory-specific tuning may be required to maintain control smoothness across reference geometries.
 
-In the next section, we will discuss the broader implications of these results, limitations, and future
-avenues to bring this work closer to deployment on physical testbeds for space robotics.
+The following section discusses the implications, limitations, and future steps toward deployment on physical testbeds for space robotics.
 
 \section{Discussion and Conclusion}
 \begin{rtwohl}
-\hltwo{[R2.14]} This work has presented a comprehensive study on applying continuous deep reinforcement learning
-to the control of a free-floating space robotic arm, with an emphasis on safety and performance. The
-results demonstrate that an RL-based controller can successfully handle the challenging
-manipulation task in a space environment. Concretely, the optimized PPO agent achieved a mean
-squared end-effector tracking error (K2) of $0.0083$, a $67.7\,\%$ reduction compared to the
-default configuration ($0.0257$), while reducing the mean base orientation error (K4) by a factor
-of approximately three (from $0.0667$ to $0.022$) and halving the mean base angular velocity
-(K8: $0.095 \to 0.050\,\mathrm{rad/s}$). Crucially, zero safety violations were recorded over all
-30 evaluation episodes (K5\,=\,K6\,=\,0), compared to a $5.1\,\%$ joint-limit violation rate for the
-default agent. Torque smoothness (K7) improved by $48.5\,\%$ and energy consumption (K9)
-decreased by $16\,\%$. These improvements were achieved simultaneously, indicating a
-fundamentally more efficient control strategy rather than a trade-off between objectives \cite{b1,b7}.
+\hltwo{[R2.14]} This work has investigated the application of continuous deep reinforcement learning to the control of a free-floating space robotic arm, with an emphasis on safety and performance. The results show that an RL-based controller can perform the considered manipulation task in the simulated space environment under the stated assumptions. The optimized PPO agent yields a mean squared end-effector tracking error of $K_2 = 0.0083$, a reduction of $67.7\%$ relative to the default configuration ($K_2 = 0.0257$); the mean base-orientation error decreases by a factor of approximately three ($K_4$: $0.0667 \to 0.022$), and the mean base angular velocity is halved ($K_8$: $0.095\,\mathrm{rad/s} \to 0.050\,\mathrm{rad/s}$). No safety violations were recorded over the 30 evaluation episodes ($K_5 = K_6 = 0$), compared with a $5.1\%$ joint-limit violation rate for the default configuration. Torque smoothness improves by $48.5\%$ ($K_7$) and energy consumption decreases by $16\%$ ($K_9$). These effects are observed together in the reported evaluation rather than as an apparent trade-off between the selected objectives \cite{b1,b7}.
 \end{rtwohl}
 
 \begin{rtwohl}
-\hltwo{[R2.14]} A further evaluation was conducted on a piecewise-linear end-effector reference
-to probe trajectory generalization. The optimized PPO agent improved over the default on most
-metrics (reward K1: $-0.4565 \to -0.2977$; base orientation error K4: $-44\,\%$; energy K9:
-$-35\,\%$), confirming partial transfer of the learned policy. However, the control smoothness
-metric K7 degraded relative to the default configuration, indicating that the hyperparameter
-configuration optimized for circular tracking does not fully transfer to piecewise-linear
-motion profiles. This highlights the need for trajectory-diverse training or trajectory-specific
-tuning to achieve robust generalization \cite{b8}.
+\hltwo{[R2.14]} An additional evaluation was carried out on a piecewise-linear end-effector reference to assess trajectory generalization. The optimized PPO agent outperforms the default configuration on most metrics (return $K_1$: $-0.4565 \to -0.2977$; base-orientation error $K_4$: $-44\%$; energy $K_9$: $-35\%$), which indicates partial transfer of the learned policy. The control-smoothness metric $K_7$, however, is worse than for the default configuration, showing that the hyperparameter configuration tuned for circular tracking does not fully transfer to piecewise-linear references. This motivates either trajectory-diverse training or trajectory-specific tuning to support generalization across reference geometries \cite{b8}.
 \end{rtwohl}
 
-\textbf{Practical Implications:} The success of PPO (and TRPO) in this domain suggests that policy gradient
-methods are well-suited for complex, continuous control tasks with coupled dynamics and safety
-constraints. In particular, PPO’s ability to handle continuous action spaces and its stable update rule
-(clipped surrogate objective) made it robust in the face of the highly nonlinear dynamics of the free-floating robot. 
-The integrated safety components (collision avoidance, etc.) effectively acted as a form of
-“shielding” during training, they prevented the agent from exploring disastrously unsafe actions by
-cutting those episodes short \cite{b15,b23,b22}. This, combined with the penalty-driven learning, means the final
-policy inherently respects those constraints (since it learned quickly that violating them yields no
-reward). For real missions, this is very promising: it implies we can embed safety checks in the training
-simulator and reasonably expect the trained policy to abide by them when deployed (assuming the real
-system is within the simulator’s fidelity) \cite{b22,b24}.
+\textbf{Practical Implications.} The performance of PPO and TRPO on this task indicates that policy-gradient methods with constrained updates are suitable candidates for continuous control tasks with strong dynamic coupling and safety constraints. The clipped surrogate objective of PPO provides bounded policy updates under the nonlinear free-floating dynamics. The integrated safety components (collision monitor, joint-limit assertion, torque-bound verification) act as a runtime shield during training: they terminate episodes in which the policy would violate a monitored constraint and apply a terminal penalty \cite{b15,b23,b22}. Combined with the penalty-driven reward, this leads to a final policy that respects the monitored constraints in the reported evaluation. For deployment on a physical system, this suggests that safety checks embedded in the training simulator may remain useful at runtime, provided that the deployed system stays within the simulator's fidelity range \cite{b22,b24}.
 
 
 \begin{rthreehl}
@@ -1600,36 +1340,18 @@ or barrier functions~\cite{b22,b24,b23,b34}; and (iv)~hardware-in-the-loop valid
 
 
 \begin{rtwohl}
-\hltwo{[R2.14]} \textbf{Conclusion:} In conclusion, this research demonstrates a viable framework for applying deep
-reinforcement learning to complex space robotic systems. A systematic comparison of six
-state-of-the-art RL algorithms under identical conditions identified PPO as the top-performing
-approach for Cartesian end-effector tracking of a free-floating space robot. Subsequent
-hyperparameter tuning and network tailoring of the PPO agent yielded a policy that
-simultaneously achieved a $67.7\,\%$ reduction in tracking error, a three-fold improvement in
-base orientation stability, zero safety violations over 30 evaluation episodes, and a $16\,\%$
-reduction in energy consumption---all relative to the default PPO configuration. The integration
-of formal safety verification directly into the training loop ensured that these results were
-obtained under continuously enforced safety constraints, addressing the typical black-box
+\hltwo{[R2.14]} \textbf{Conclusion.} This work has presented a framework that combines deep reinforcement learning, multibody simulation, and formal-methods-based safety monitoring for Cartesian path tracking of a free-floating space robot. A comparison of six continuous-action RL algorithms under unified conditions identified PPO as the algorithm with the most favourable trade-off between tracking accuracy, base disturbance, and training stability for the considered task. Subsequent hyperparameter tuning and network tailoring of the PPO agent yielded a policy that, relative to the default PPO configuration, reduces the tracking error by $67.7\%$, reduces the base-orientation error by a factor of approximately three, shows no joint-limit or collision violations over 30 evaluation episodes, and reduces the energy consumption by $16\%$. The integration
+of monitored safety constraints and torque-bound verification into the training loop helped keep these results
+within the defined safety envelope, addressing part of the typical black-box
 nature of learned controllers. These findings, grounded in quantitative experimental evidence,
-support the suitability of safety-augmented deep RL for safety-critical space manipulation tasks.
+support further investigation of safety-augmented deep RL for safety-critical space manipulation tasks.
 \end{rtwohl}
 
 
 
-The work also provides insights into the influence of algorithm choice and parameter tuning on
-learning performance for physical systems. Our findings reinforce the notion that there is no one-size-fits-all in RL, careful selection and tuning of the agent (and network structure) can significantly
-impact the outcome, even more so than we might expect from generic benchmarks. For practitioners,
-this means that investing time in benchmarking algorithms (as we did) can pay off in identifying the
-\mbox{right approach for the problem at hand.}
+The results also illustrate the influence of algorithm choice and parameter tuning on learning performance for the considered task. They support the view that no single RL algorithm is uniformly best across applications: under unified conditions, the choice of algorithm, network architecture, and hyperparameter setting visibly affects the achieved tracking accuracy and base stability. Systematic benchmarking of candidate algorithms is therefore a practical step in the selection of an appropriate RL controller for a given task.
 
-Finally, while challenges remain for real-world deployment, this study lays a foundation. It suggests that
-future space robots, tasked with servicing satellites, assembling structures, or handling space debris,
-could employ learning-based controllers that adapt to complex dynamics and uncertainties, all while
-operating safely within predefined limits. We envision an architecture where an RL policy drives the
-robot’s motions, supervised by a layer of formal logic that monitors and vetoes any unacceptable
-actions (though, ideally, the policy has learned not to propose such actions in the first place). Such
-an approach could provide the flexibility and efficiency of learned behaviors with the trust and
-guarantee of model-based safety, a combination well-suited to the unforgiving environment of space \cite{b1,b23}.
+While several open problems remain for real-world deployment, the proposed framework provides a basis for further investigation. Possible application areas include satellite servicing, on-orbit assembly, and active debris removal, where learning-based controllers can adapt to uncertain dynamics within predefined operational limits. The combination of an RL policy with a separate runtime layer that monitors and, where required, overrides commands violating the specified constraints is one realization of such an architecture; in this combination, the learned policy provides adaptability, while the monitoring layer enforces the specified safety-critical properties~\cite{b1,b23}.
 
 %\begin{figure}[!t]
 %	\centering
@@ -1648,11 +1370,7 @@ guarantee of model-based safety, a combination well-suited to the unforgiving en
 	\label{fig:oos}
 \end{figure}
 
-Ultimately, our work demonstrates a step in that direction, emphasizing that with the right algorithms
-and safeguards, “autonomous learning-based control” can be a powerful paradigm for future space
-robotic missions. The results encourage continued research at the intersection of robotics,
-reinforcement learning, and formal methods to further unlock the potential of intelligent space
-systems.
+The present study contributes one step in this direction. Future research at the intersection of robotics, reinforcement learning, and formal methods is required to extend the present results to physical deployment and to broader mission scenarios.
 
 \section*{Acknowledgment}
 The authors used DeepL Translator/Write~\cite{deeplTr,deeplWr} and OpenAI ChatGPT~\cite{openai_chatgpt} solely for language editing and grammar enhancement. 
@@ -1887,6 +1605,26 @@ DeepL SE, ``DeepL Write,'' [Online]. Available: \url{https://www.deepl.com/de/wr
 
 \bibitem{openai_chatgpt}
 OpenAI, ``ChatGPT,'' [Online]. Available: \url{https://chat.openai.com}
+
+
+
+\bibitem{todorov2012mujoco}
+E. Todorov, T. Erez, and Y. Tassa, ``MuJoCo: A physics engine for model-based control,'' in \emph{Proc. IEEE/RSJ Int. Conf. Intell. Robots Syst. (IROS)}, 2012, pp. 5026--5033.
+
+
+
+\bibitem{koenig2004gazebo}
+N. Koenig and A. Howard, ``Design and use paradigms for Gazebo, an open-source multi-robot simulator,'' in \emph{Proc. IEEE/RSJ Int. Conf. Intell. Robots Syst. (IROS)}, vol. 3, 2004, pp. 2149--2154.
+
+
+
+\bibitem{korber2021comparing}
+M. K\"orber, J. Lange, S. Rediske, S. Steinmann, and R. Gl\"uck, ``Comparing popular simulation environments in the scope of robotics and reinforcement learning,'' arXiv preprint arXiv:2103.04616, 2021.
+
+
+
+\bibitem{collins2021review}
+J. Collins, S. Chand, A. Vanderkop, and D. Howard, ``A review of physics simulators for robotic applications,'' \emph{IEEE Access}, vol. 9, pp. 51416--51431, 2021.
 
 
 

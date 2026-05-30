@@ -35,18 +35,18 @@
 | R2.12 | Lernkurven, Fehlerverteilungen und Vergleichs-Performance-Charts hinzufügen | ✅ |
 | R2.13 | Boxplots, Violin Plots, Konfidenzintervalle zur Darstellung der Performance-Variabilität | ✅ |
 | R2.14 | Fazit mit tatsächlichen experimentellen Ergebnissen abgleichen | ✅ |
-| R2.15 | Grammar, Satzstruktur und Klarheit durch sorgfältiges Proofreading verbessern | ⬜ |
-| R2.16 | Qualität aller Abbildungen verbessern | ⬜ |
+| R2.15 | Grammar, Satzstruktur und Klarheit durch sorgfältiges Proofreading verbessern | ✅ |
+| R2.16 | Qualität aller Abbildungen verbessern | ✅ |
 
 ---
 
-## Reviewer 3 — Blau
+## Reviewer 3 — Blau 
 
 | # | Kommentar | Status |
 |---|-----------|--------|
 | R3.1 | Novelty gegenüber bestehenden Arbeiten expliziter hervorheben, klare Abgrenzung zu Tab. 1 | ✅ |
 | R3.2 | Simulationsannahmen explizit nennen und begründen (ideal sensing, kein Rauschen, perfekte Simulation) | ✅ |
-| R3.3 | Vergleich mit anderen Simulationsplattformen (Gazebo, MuJoCo) — Vor-/Nachteile von MATLAB/Simulink | ⬜ |
+| R3.3 | Vergleich mit anderen Simulationsplattformen (Gazebo, MuJoCo) — Vor-/Nachteile von MATLAB/Simulink | ✅ |
 | R3.4 | Sensitivitätsanalyse der Reward-Gewichte (= R2.5) | ✅ (grün, überschneidet R2.5) |
 | R3.5 | Skalierbarkeit der Safety-Mechanismen für Onboard-Systeme diskutieren (Computational Overhead) | ✅ |
 | R3.6 | Energie- und Smoothness-KPIs im Kontext von Weltraummissionen besser begründen | ✅ |
