@@ -103,8 +103,8 @@ safe simulation, space robotics,  trajectory tracking
 		\centering
 		\includegraphics[width=\linewidth]{Figures/oos0.png}
 	\end{subfigure}
-	\caption{Virtual testbeds that leverage AI-driven digital twins support safe, flexible, and efficient 
-  development of learning-based control methods for in-space operations under realistic yet controllable 
+	\caption{Virtual testbeds based on AI-driven digital twins support the safe and repeatable
+  development of learning-based control methods for in-space operations under realistic yet controllable
   conditions.}
 	\label{fig:oos0}
 \end{figure}
@@ -439,7 +439,7 @@ and angular base velocities, and $\tau$ the joint torque vector. The final term 
 The weights used in all experiments are summarized in~\autoref{tab:reward_weights}.
 \begin{rtwohl}
 \hltwo{[R2.4]} The physical intuition behind the weight choices is as follows.
-The end-effector position error weight $W_p = 150$ is large because trajectory tracking is the primary task objective; a high penalty ensures the agent prioritizes reducing the position error above all other considerations.
+The end-effector position error weight $W_p = 150$ is large because trajectory tracking is the primary task objective; a high weight makes the position error the dominant term of the cost at typical error magnitudes.
 The velocity error weight $W_v = 25$ is lower than $W_p$ to avoid over-penalizing transient dynamics during fast arm motion, while still discouraging persistent velocity offsets.
 The base orientation weight $W_{\text{ori}} = 200$ is the largest in the cost function, reflecting that base attitude disturbance is safety-critical in on-orbit operations: any uncontrolled rotation of the spacecraft base can jeopardize mission success independently of tracking performance.
 The base angular velocity weight $W_{\omega_b} = 8$ provides a damping-like penalty on ongoing base rotation, while the linear velocity weight $W_{v_b} = 2$ is kept small because, in a free-floating system initialized with zero total linear momentum, base translation is momentum-coupled to the manipulator motion and is expected to remain limited for the considered task configuration. Recall that manipulator motion can induce base translation because the total system center of mass is conserved. The torque magnitude weight $W_u = 0.02$ and torque-rate weight $W_d = 0.06$ are intentionally small to leave the agent sufficient freedom to explore diverse control actions; the torque-rate penalty is slightly larger to specifically discourage high-frequency chattering in the control signal.
@@ -490,13 +490,13 @@ All agents are trained for the same number of episodes, $N_{\mathrm{train}} = 10
 converge or reach a performance plateau. During training the cumulative episode reward, the mean end-effector tracking error, and the mean base motion are recorded per episode. A successful training run is characterized by an episode return that increases toward zero (negative costs are used) and by a decrease of the tracking error and base motion over time. The number of episodes terminated prematurely by the safety monitors is also tracked and expected to decrease to zero as training progresses.
 
 \begin{rtwohl}
-\hltwo{[R2.8]} To ensure reproducibility, all training runs were initialized using MATLAB's Mersenne Twister random number generator with a fixed seed of zero (\texttt{rng(0,`twister')}), applied prior to each training session. For each of the six algorithms, \textbf{three independent training runs} were performed under identical conditions---same environment, reward function, episode length, and initial state---resulting in 18 training runs in total. The policy selection procedure was as follows: after all three runs per algorithm completed, the policy checkpoint achieving the highest mean episodic reward over the final 50 training episodes was identified. This checkpoint was then used exclusively for all subsequent evaluation experiments. We found relatively consistent results across runs for the more stable algorithms (PPO, TRPO), whereas some runs of less stable methods (e.g.\ DDPG) would diverge, underscoring the importance of algorithmic stability in this setting.
+\hltwo{[R2.8]} To ensure reproducibility, all training runs were initialized using MATLAB's Mersenne Twister random number generator with a fixed seed of zero (\texttt{rng(0,`twister')}), applied prior to each training session. For each of the six algorithms, \textbf{three independent training runs} were performed under identical conditions---same environment, reward function, episode length, and initial state---resulting in 18 training runs in total. The policy selection procedure was as follows: after all three runs per algorithm completed, the policy checkpoint achieving the highest mean episodic reward over the final 50 training episodes was identified. This checkpoint was then used exclusively for all subsequent evaluation experiments. The results were relatively consistent across runs for the more stable algorithms (PPO, TRPO), whereas some runs of the less stable methods (e.g.\ DDPG) diverged, which underlines the importance of algorithmic stability in this setting.
 \end{rtwohl}
 
-\textbf{Evaluation and Metrics:} After training, we evaluated each agent’s performance on $N_{eval}
-= 30$ independent episodes from a fixed initial configuration to gather statistics. Over these
-evaluation runs, we compute a set of Key Performance Indicators (KPIs) to quantitatively compare the
-agents.
+\textbf{Evaluation and Metrics:} After training, each agent's performance was evaluated on $N_{eval}
+= 30$ independent episodes from a fixed initial configuration. Over these
+evaluation runs, a set of Key Performance Indicators (KPIs) was computed to compare the
+agents quantitatively.
 
 \begin{rthreehl}
 \hlthree{[R3.10]} The nine KPIs are organized into three groups to aid interpretation: \emph{tracking accuracy} (K2, K3 measure how closely the end-effector follows the reference path), \emph{base stability and safety} (K4 measures spacecraft attitude drift; K5 and K6 capture constraint violations), and \emph{efficiency} (K7 quantifies control smoothness; K8 measures residual base rotation; K9 measures energy consumption). K1 serves as an overall scalar summary of the agent’s performance across all objectives, since it is the cumulative reward that jointly penalizes all undesired behaviors.
@@ -696,11 +696,11 @@ On-policy methods (PG, PPO, TRPO) update the policy only from data generated by 
 
 \begin{table*}[!t]
 \centering
-\caption{Selected performance metrics for each RL agent (best values in bold). PPO excels in most
-categories, achieving the lowest tracking errors (K2, K3), best base stability (K4), and smoothest control
-(K7), while maintaining short training time. TRPO is a close second in many metrics but requires more
-training time. Off-policy methods (TD3, SAC, DDPG) show larger errors or instabilities (e.g., high T1 for 
-DDPG) despite some strengths (DDPG's low max error K3). KPI data from evaluation of 30 episodes per agent.}
+\caption{Selected performance metrics for each RL agent (best value in each row in bold). PPO attains the
+lowest tracking errors (K2, K3), the lowest base-orientation error (K4), and the lowest jerk (K7), with the
+shortest training time (T3). TRPO is close to PPO on several metrics but requires more training time. The
+off-policy methods (TD3, SAC, DDPG) show larger errors or a larger late-training reward variance (e.g., high
+T1 for DDPG); DDPG attains the lowest maximum error (K3). Values are averaged over 30 evaluation episodes per agent.}
 \label{tab:kpi_comp}
 \renewcommand{\arraystretch}{1.3}
 \setlength{\tabcolsep}{8pt}
@@ -772,8 +772,8 @@ DDPG & $-102.02^{***}$& $+0.060^{\mathrm{n.s.}}$ & $-0.095^{\mathrm{n.s.}}$ & $+
 
 \begin{rthreehl}
 \hlthree{[R3.7]} \textbf{Statistical Significance of Agent Comparisons:}
-To substantiate the qualitative ranking above with rigorous statistical evidence, we applied
-non-parametric hypothesis tests to the 30 evaluation episodes per agent.
+To substantiate the qualitative ranking above with statistical evidence, non-parametric
+hypothesis tests were applied to the 30 evaluation episodes per agent.
 First, a Friedman test confirmed that at least one agent differs significantly from the others for
 every KPI (all $p < 10^{-17}$), justifying pairwise comparisons.
 Subsequently, pairwise Wilcoxon signed-rank tests were conducted between PPO (baseline) and each
@@ -912,8 +912,8 @@ Based on the comparison in Section~\ref{comparison}, PPO is selected for further
 	\caption{Comparison of episodic rewards for default and optimized PPO agents.
   (a) Episode reward evolution during training using the default PPO hyperparameters. 
   (b) Episode reward evolution using the optimized PPO configuration.
- The optimized configuration exhibits faster convergence and higher average episode rewards, 
- indicating improved learning efficiency and policy performance.}
+ The optimized configuration shows faster convergence and a higher average episodic return than the
+ default configuration.}
 	\label{fig:training_ppo_compare}
 \end{figure*}
 \noindent
@@ -931,7 +931,7 @@ units each with ReLU activations for both the policy and the value network. Vari
   \item \textbf{Mini-batch size} — candidates: $\{128,\;256\}$; selected: $256$. Larger batches provided more stable gradient estimates per update, reducing training variance.
 \end{itemize}
 
-Through this process we converged on a configuration that provided a more stable and higher-performing PPO agent. Notably, the asymmetric learning rates --- a slower actor ($5\!\times\!10^{-4}$) paired with a faster critic ($1\!\times\!10^{-3}$) --- reflect the different roles of the two networks: the value function must adapt quickly to policy changes, while conservative actor updates prevent destabilizing the learned control strategy.
+This process yielded a configuration that provided a more stable and higher-performing PPO agent. Notably, the asymmetric learning rates --- a slower actor ($5\!\times\!10^{-4}$) paired with a faster critic ($1\!\times\!10^{-3}$) --- reflect the different roles of the two networks: the value function must adapt quickly to policy changes, while conservative actor updates prevent destabilizing the learned control strategy.
 \end{roverlaphl}
 
 \subsection{Circular Trajectory}
@@ -1009,10 +1009,10 @@ The optimized PPO agent satisfies the task objectives considered here in combina
 \subsection{Ablation Study of Reward Components}\label{sec:reward_ablation}
 \begin{rtwohl}
 \hltwo{[R2.6]} To quantify the contribution of each individual term in the composite reward function defined in~\autoref{eq:reward},
-we performed an ablation study in which the optimized PPO agent was retrained on the circular trajectory with one reward component
+an ablation study was performed in which the optimized PPO agent was retrained on the circular trajectory with one reward component
 disabled at a time. Each of the seven weights in the cost term $c_t$ was set to zero in turn while keeping the remaining six at
 their baseline values ($W_p=150$, $W_v=25$, $W_{\mathrm{ori}}=200$, $W_{wb}=8$, $W_{vb}=2$, $W_u=0.02$, $W_d=0.06$). In addition,
-we separately disabled the two positive reward terms by setting $r_{\text{prog}}=0$ and $r_{\text{bonus}}=0$, respectively,
+the two positive reward terms were separately disabled by setting $r_{\text{prog}}=0$ and $r_{\text{bonus}}=0$, respectively,
 to isolate the contribution of the progress signal and the proximity bonus. All other aspects of the training and evaluation
 pipeline (hyperparameters, random seeds, episode horizon, and the $N_{eval}=30$ evaluation protocol) were held identical to
 the baseline configuration. The resulting KPIs are summarized in~\autoref{tab:reward_ablation}.
@@ -1090,8 +1090,8 @@ do not rely on fine balancing of low-weight terms.
 most influential. A complementary question, raised independently by both reviewers, is whether the
 conclusions reported in~\autoref{tab:kpi_comp} are robust against \emph{moderate} miscalibration of the reward weights:
 does the PPO agent still converge to a working policy when the dominant cost weights are perturbed, and does the
-ranking of the algorithms remain qualitatively stable? To answer this, we performed a one-at-a-time sensitivity
-analysis on the four dominant cost weights identified by the ablation, namely $W_p$, $W_v$, $W_{\mathrm{ori}}$, and
+ranking of the algorithms remain qualitatively stable? To answer this, a one-at-a-time sensitivity
+analysis was performed on the four dominant cost weights identified by the ablation, namely $W_p$, $W_v$, $W_{\mathrm{ori}}$, and
 $W_{wb}$. Each of these four weights was independently perturbed by a factor of $\times 2$ and $\times 0.5$ around its
 baseline value ($W_p=150$, $W_v=25$, $W_{\mathrm{ori}}=200$, $W_{wb}=8$), while all remaining reward weights, the
 PPO hyperparameters (as optimized in~\autoref{sec:reward_ablation}), the random seeds, the episode horizon, and the
@@ -1180,7 +1180,7 @@ moderate reward-weight miscalibration.
 \subsection{Robustness Evaluation under Non-Ideal Conditions}\label{sec:robustness_eval}
 \begin{rtwohl}
 \hltwo{[R2.11]} To evaluate the robustness of the optimized PPO policy beyond the nominal simulation assumptions,
-we performed an additional stress-test campaign on the circular trajectory. The already trained optimized PPO policy
+an additional stress-test campaign was performed on the circular trajectory. The already trained optimized PPO policy
 was evaluated without retraining over $N_{\mathrm{eval}}=30$ episodes for each condition. Five non-ideal cases were
 considered: sensor noise, reduced actuator authority, an external torque disturbance, parameter uncertainty, and a
 combined stress case. Sensor noise was injected directly between the observation vector and the RL agent using the
@@ -1335,7 +1335,7 @@ communication delays, and physical interactions remain to be validated on physic
 
 Future work should address these gaps through: (i)~domain randomization over simulation parameters and latency injection to improve sim-to-real robustness~\cite{b8} (see \cref{fig:oos}); (ii)~extension to more complex tasks such as dual-arm coordination, on-orbit assembly, or active debris removal; (iii)~advanced
 RL architectures (recurrent policies, attention mechanisms) and safe RL algorithms with explicit constraint handling via Lagrange multipliers
-or barrier functions~\cite{b22,b24,b23,b34}; and (iv)~hardware-in-the-loop validation on our testbed for In-Space Robotized Services (IROS) with virtually simulated microgravity and predicted energy consumption (see \cref{fig:oos}).
+or barrier functions~\cite{b22,b24,b23,b34}; and (iv)~hardware-in-the-loop validation on the authors' testbed for In-Space Robotized Services (IROS) with virtually simulated microgravity and predicted energy consumption (see \cref{fig:oos}).
 \end{rthreehl}
 
 
@@ -1366,7 +1366,7 @@ While several open problems remain for real-world deployment, the proposed frame
 		\centering
 		\includegraphics[width=\linewidth]{Figures/oos1.png}
 	\end{subfigure}
-	\caption{Gradual hybrid testbeds integrate AI-driven digital twins on the left with physical robotic systems on the right, providing a versatile framework for exploring robust policy optimization and domain randomization strategies for sim-to-real generalization.}
+	\caption{Gradual hybrid testbeds integrate AI-driven digital twins (left) with physical robotic systems (right), providing a framework for studying policy optimization and domain-randomization strategies for sim-to-real transfer.}
 	\label{fig:oos}
 \end{figure}
 
