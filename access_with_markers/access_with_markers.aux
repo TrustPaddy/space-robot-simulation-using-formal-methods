@@ -58,11 +58,11 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Need for Benchmark Studies}{4}{subsection.2.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-E}}Research Gap}{4}{subsection.2.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {III}System Modeling and Simulation Environment}{4}{section.3}\protected@file@percent }
+\newlabel{sec:sim}{{III}{4}{System Modeling and Simulation Environment}{section.3}{}}
+\newlabel{sec:sim@cref}{{[section][3][]III}{[1][4][]4}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Advantages of AI-Endowed Digital Twin Technology in On-Orbit Servicing}{4}{subsection.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Robot Model}{4}{subsection.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Dynamic Simulation in MATLAB/Simulink}{4}{subsection.3.3}\protected@file@percent }
-\newlabel{sec:sim}{{\mbox  {III-C}}{4}{Dynamic Simulation in MATLAB/Simulink}{subsection.3.3}{}}
-\newlabel{sec:sim@cref}{{[subsection][3][3]\mbox  {III-C}}{[1][4][]4}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Tracking the desired end-effector circular path using inverse kinematics.}}{5}{figure.caption.3}\protected@file@percent }
 \newlabel{fig:ref_kreis_gesamt}{{2}{5}{Tracking the desired end-effector circular path using inverse kinematics}{figure.caption.3}{}}
 \newlabel{fig:ref_kreis_gesamt@cref}{{[figure][2][]2}{[1][4][]5}{}{}{}}
@@ -106,13 +106,13 @@
 \newlabel{formal}{{V}{10}{Safety Monitoring and Constraint Enforcement}{section.5}{}}
 \newlabel{formal@cref}{{[section][5][]V}{[1][10][]10}{}{}{}}
 \citation{b31}
-\citation{b5}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Overview of the Momentum Monitor Subsystem (Momentum Observer) in the Simulink Model \texttt  {SpaceRobot.slx}   This figure shows the computation of the total linear and angular momentum of the free-floating space robot. The velocities and orientations of the base and all manipulator links are measured and aggregated within a MATLAB function to obtain the system momentum. This monitor is used to analyze momentum conservation and quantify base–manipulator dynamic coupling effects.}}{11}{figure.caption.9}\protected@file@percent }
 \newlabel{fig:impuls_monitor}{{6}{11}{Overview of the Momentum Monitor Subsystem (Momentum Observer) in the Simulink Model \texttt {SpaceRobot.slx} \\ This figure shows the computation of the total linear and angular momentum of the free-floating space robot. The velocities and orientations of the base and all manipulator links are measured and aggregated within a MATLAB function to obtain the system momentum. This monitor is used to analyze momentum conservation and quantify base–manipulator dynamic coupling effects}{figure.caption.9}{}}
 \newlabel{fig:impuls_monitor@cref}{{[figure][6][]6}{[1][10][]11}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Dynamics of the total momentum of the robot.}}{11}{figure.caption.10}\protected@file@percent }
 \newlabel{fig:impulserhaltung_scope}{{7}{11}{Dynamics of the total momentum of the robot}{figure.caption.10}{}}
 \newlabel{fig:impulserhaltung_scope@cref}{{[figure][7][]7}{[1][10][]11}{}{}{}}
+\citation{b5}
 \citation{b23}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Overview of the Collision Monitor Subsystem in the Simulink Model \texttt  {SpaceRobot.slx}   This figure illustrates the collision monitoring logic used to ensure safe robot operation during training and evaluation. Joint and link configurations are processed to compute the minimum distance to obstacles, which is compared against a predefined safety threshold. A collision flag is generated and used for episode termination or safety-related penalties.}}{12}{figure.caption.11}\protected@file@percent }
 \newlabel{fig:spacerobot_slx_colissionmonitor}{{8}{12}{Overview of the Collision Monitor Subsystem in the Simulink Model \texttt {SpaceRobot.slx} \\ This figure illustrates the collision monitoring logic used to ensure safe robot operation during training and evaluation. Joint and link configurations are processed to compute the minimum distance to obstacles, which is compared against a predefined safety threshold. A collision flag is generated and used for episode termination or safety-related penalties}{figure.caption.11}{}}
@@ -133,8 +133,6 @@
 \citation{b15}
 \citation{b14}
 \citation{b16}
-\citation{b17}
-\citation{b18}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Verification model with Simulink Design Verifier \texttt  {Verify\_tau.slx}   This figure depicts the Simulink property model used to formally verify the joint torque constraints. The absolute joint torques are compared against predefined maximum limits using a relational operator. The property is checked over the analyzed abstract state space, supporting bounded control actions in the verification model.}}{13}{figure.caption.13}\protected@file@percent }
 \newlabel{fig:verify_tau}{{10}{13}{Verification model with Simulink Design Verifier \texttt {Verify\_tau.slx} \\ This figure depicts the Simulink property model used to formally verify the joint torque constraints. The absolute joint torques are compared against predefined maximum limits using a relational operator. The property is checked over the analyzed abstract state space, supporting bounded control actions in the verification model}{figure.caption.13}{}}
 \newlabel{fig:verify_tau@cref}{{[figure][10][]10}{[1][12][]13}{}{}{}}
@@ -144,106 +142,108 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Result of the Simulink Design Verifier   This figure shows the result of a formal property verification performed on the torque constraint model. The verification confirms that the specified safety property is satisfied for all analyzed execution paths. This analysis provides model-based evidence for torque-limit compliance beyond empirical simulation-based validation.}}{13}{figure.caption.14}\protected@file@percent }
 \newlabel{fig:verify_tau_result}{{11}{13}{Result of the Simulink Design Verifier \\ This figure shows the result of a formal property verification performed on the torque constraint model. The verification confirms that the specified safety property is satisfied for all analyzed execution paths. This analysis provides model-based evidence for torque-limit compliance beyond empirical simulation-based validation}{figure.caption.14}{}}
 \newlabel{fig:verify_tau_result@cref}{{[figure][11][]11}{[1][13][]13}{}{}{}}
+\citation{b17}
+\citation{b18}
 \citation{b2,b7}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Classification of the evaluated reinforcement learning algorithms.}}{14}{table.caption.15}\protected@file@percent }
 \newlabel{tab:on_off_policy}{{4}{14}{Classification of the evaluated reinforcement learning algorithms}{table.caption.15}{}}
 \newlabel{tab:on_off_policy@cref}{{[table][4][]4}{[1][14][]14}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Selected performance metrics for each RL agent (best value in each row in bold). PPO attains the lowest tracking errors (K2, K3), the lowest base-orientation error (K4), and the lowest jerk (K7), with the shortest training time (T3). TRPO is close to PPO on several metrics but requires more training time. The off-policy methods (TD3, SAC, DDPG) show larger errors or a larger late-training reward variance (e.g., high T1 for DDPG); DDPG attains the lowest maximum error (K3). Values are averaged over 30 evaluation episodes per agent.}}{15}{table.caption.16}\protected@file@percent }
-\newlabel{tab:kpi_comp}{{5}{15}{Selected performance metrics for each RL agent (best value in each row in bold). PPO attains the lowest tracking errors (K2, K3), the lowest base-orientation error (K4), and the lowest jerk (K7), with the shortest training time (T3). TRPO is close to PPO on several metrics but requires more training time. The off-policy methods (TD3, SAC, DDPG) show larger errors or a larger late-training reward variance (e.g., high T1 for DDPG); DDPG attains the lowest maximum error (K3). Values are averaged over 30 evaluation episodes per agent}{table.caption.16}{}}
+\citation{b4}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Selected performance metrics for each RL agent (best value in each row in bold). PPO attains the lowest tracking errors (K2, K3), the lowest base-orientation error (K4), and the lowest jerk (K7), with the shortest training time (T3). TRPO is close to PPO on several metrics but requires more training time. The off-policy methods (TD3, SAC, DDPG) show larger errors or a larger late-training reward variance (e.g., high T1 for DDPG). DDPG attains the lowest maximum error (K3). Values are averaged over 30 evaluation episodes per agent.}}{15}{table.caption.16}\protected@file@percent }
+\newlabel{tab:kpi_comp}{{5}{15}{Selected performance metrics for each RL agent (best value in each row in bold). PPO attains the lowest tracking errors (K2, K3), the lowest base-orientation error (K4), and the lowest jerk (K7), with the shortest training time (T3). TRPO is close to PPO on several metrics but requires more training time. The off-policy methods (TD3, SAC, DDPG) show larger errors or a larger late-training reward variance (e.g., high T1 for DDPG). DDPG attains the lowest maximum error (K3). Values are averaged over 30 evaluation episodes per agent}{table.caption.16}{}}
 \newlabel{tab:kpi_comp@cref}{{[table][5][]5}{[1][14][]15}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Pairwise Wilcoxon signed-rank tests: each agent vs.\ PPO (baseline), Holm-corrected. Each cell shows $\Delta \tilde  {x}$ (median difference, agent$-$PPO) with significance superscript: ${}^{***}p<0.001$, ${}^{**}p<0.01$, ${}^{*}p<0.05$, ${}^{\mathrm  {n.s.}}p\geq 0.05$. For K1, positive $\Delta \tilde  {x}$ means the agent achieves a higher (better) return. For K2--K9, negative $\Delta \tilde  {x}$ means lower (better) error/violation/jerk/energy values. K5 is the collision rate (0\,=\,no collisions); all evaluated agents achieved K5\,=\,0.}}{15}{table.caption.17}\protected@file@percent }
-\newlabel{tab:significance}{{6}{15}{Pairwise Wilcoxon signed-rank tests: each agent vs.\ PPO (baseline), Holm-corrected. Each cell shows $\Delta \tilde {x}$ (median difference, agent$-$PPO) with significance superscript: ${}^{***}p<0.001$, ${}^{**}p<0.01$, ${}^{*}p<0.05$, ${}^{\mathrm {n.s.}}p\geq 0.05$. For K1, positive $\Delta \tilde {x}$ means the agent achieves a higher (better) return. For K2--K9, negative $\Delta \tilde {x}$ means lower (better) error/violation/jerk/energy values. K5 is the collision rate (0\,=\,no collisions); all evaluated agents achieved K5\,=\,0}{table.caption.17}{}}
-\newlabel{tab:significance@cref}{{[table][6][]6}{[1][14][]15}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Optimization of the PPO Agent}{15}{section.7}\protected@file@percent }
 \citation{b4}
-\citation{b4}
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Optimization of the PPO Agent}{16}{section.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-A}}Circular Trajectory}{16}{subsection.7.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Performance of PPO agent before and after optimization. The optimized PPO improves most reported KPIs, with higher rewards, lower errors, no observed safety violations in the evaluation episodes, and smoother control.}}{16}{table.caption.23}\protected@file@percent }
-\newlabel{tab:ppo_optimization_kpi}{{7}{16}{Performance of PPO agent before and after optimization. The optimized PPO improves most reported KPIs, with higher rewards, lower errors, no observed safety violations in the evaluation episodes, and smoother control}{table.caption.23}{}}
-\newlabel{tab:ppo_optimization_kpi@cref}{{[table][7][]7}{[1][16][]16}{}{}{}}
-\newlabel{fig:boxplot_k2}{{12a}{17}{K2: Mean Squared EE Position Error}{figure.caption.18}{}}
-\newlabel{fig:boxplot_k2@cref}{{[subfigure][1][12]12a}{[1][16][]17}{}{}{}}
-\newlabel{sub@fig:boxplot_k2}{{a}{17}{K2: Mean Squared EE Position Error}{figure.caption.18}{}}
-\newlabel{sub@fig:boxplot_k2@cref}{{[subfigure][1][12]12a}{[1][16][]17}{}{}{}}
-\newlabel{fig:boxplot_k4}{{12b}{17}{K4: Mean Base Orientation Error}{figure.caption.18}{}}
-\newlabel{fig:boxplot_k4@cref}{{[subfigure][2][12]12b}{[1][16][]17}{}{}{}}
-\newlabel{sub@fig:boxplot_k4}{{b}{17}{K4: Mean Base Orientation Error}{figure.caption.18}{}}
-\newlabel{sub@fig:boxplot_k4@cref}{{[subfigure][2][12]12b}{[1][16][]17}{}{}{}}
-\newlabel{fig:boxplot_k7}{{12c}{17}{K7: Control Smoothness (Norm.\ Jerk)}{figure.caption.18}{}}
-\newlabel{fig:boxplot_k7@cref}{{[subfigure][3][12]12c}{[1][16][]17}{}{}{}}
-\newlabel{sub@fig:boxplot_k7}{{c}{17}{K7: Control Smoothness (Norm.\ Jerk)}{figure.caption.18}{}}
-\newlabel{sub@fig:boxplot_k7@cref}{{[subfigure][3][12]12c}{[1][16][]17}{}{}{}}
-\newlabel{fig:boxplot_k9}{{12d}{17}{K9: Energy Consumption}{figure.caption.18}{}}
-\newlabel{fig:boxplot_k9@cref}{{[subfigure][4][12]12d}{[1][16][]17}{}{}{}}
-\newlabel{sub@fig:boxplot_k9}{{d}{17}{K9: Energy Consumption}{figure.caption.18}{}}
-\newlabel{sub@fig:boxplot_k9@cref}{{[subfigure][4][12]12d}{[1][16][]17}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rtwo}}\texthl  {[R2.13]}} Boxplots of selected KPI distributions over 30 evaluation episodes per agent. Each box spans the interquartile range (IQR); the centre line marks the median; whiskers extend to 1.5\,$\times $\,IQR; circles denote outliers. PPO consistently achieves low tracking error (K2) and smooth control (K7) with small spread, while PG and SAC show high variability. The low K9 values for TD3 and DDPG reflect insufficient actuation rather than energy efficiency.}}{17}{figure.caption.18}\protected@file@percent }
-\newlabel{fig:boxplots}{{12}{17}{\hltwo {[R2.13]} Boxplots of selected KPI distributions over 30 evaluation episodes per agent. Each box spans the interquartile range (IQR); the centre line marks the median; whiskers extend to 1.5\,$\times $\,IQR; circles denote outliers. PPO consistently achieves low tracking error (K2) and smooth control (K7) with small spread, while PG and SAC show high variability. The low K9 values for TD3 and DDPG reflect insufficient actuation rather than energy efficiency}{figure.caption.18}{}}
-\newlabel{fig:boxplots@cref}{{[figure][12][]12}{[1][16][]17}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-B}}Ablation Study of Reward Components}{17}{subsection.7.2}\protected@file@percent }
-\newlabel{sec:reward_ablation}{{\mbox  {VII-B}}{17}{Ablation Study of Reward Components}{subsection.7.2}{}}
-\newlabel{sec:reward_ablation@cref}{{[subsection][2][7]\mbox  {VII-B}}{[1][17][]17}{}{}{}}
-\newlabel{fig:ci_k2}{{13a}{18}{K2: Mean Squared EE Position Error}{figure.caption.19}{}}
-\newlabel{fig:ci_k2@cref}{{[subfigure][1][13]13a}{[1][16][]18}{}{}{}}
-\newlabel{sub@fig:ci_k2}{{a}{18}{K2: Mean Squared EE Position Error}{figure.caption.19}{}}
-\newlabel{sub@fig:ci_k2@cref}{{[subfigure][1][13]13a}{[1][16][]18}{}{}{}}
-\newlabel{fig:ci_k4}{{13b}{18}{K4: Mean Base Orientation Error}{figure.caption.19}{}}
-\newlabel{fig:ci_k4@cref}{{[subfigure][2][13]13b}{[1][16][]18}{}{}{}}
-\newlabel{sub@fig:ci_k4}{{b}{18}{K4: Mean Base Orientation Error}{figure.caption.19}{}}
-\newlabel{sub@fig:ci_k4@cref}{{[subfigure][2][13]13b}{[1][16][]18}{}{}{}}
-\newlabel{fig:ci_k7}{{13c}{18}{K7: Control Smoothness (Norm.\ Jerk)}{figure.caption.19}{}}
-\newlabel{fig:ci_k7@cref}{{[subfigure][3][13]13c}{[1][16][]18}{}{}{}}
-\newlabel{sub@fig:ci_k7}{{c}{18}{K7: Control Smoothness (Norm.\ Jerk)}{figure.caption.19}{}}
-\newlabel{sub@fig:ci_k7@cref}{{[subfigure][3][13]13c}{[1][16][]18}{}{}{}}
-\newlabel{fig:ci_k9}{{13d}{18}{K9: Energy Consumption}{figure.caption.19}{}}
-\newlabel{fig:ci_k9@cref}{{[subfigure][4][13]13d}{[1][16][]18}{}{}{}}
-\newlabel{sub@fig:ci_k9}{{d}{18}{K9: Energy Consumption}{figure.caption.19}{}}
-\newlabel{sub@fig:ci_k9@cref}{{[subfigure][4][13]13d}{[1][16][]18}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rtwo}}\texthl  {[R2.12]}} 95\% bootstrap confidence intervals for selected KPIs across all agents (30 evaluation episodes per agent). Narrow intervals for TD3 and DDPG reflect near-constant behaviour (policy collapse), whereas PPO's intervals are tight despite exploring the full workspace. TRPO and PPO show overlapping intervals for K4 (base orientation), consistent with the non-significant Wilcoxon result ($p=0.926$).}}{18}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:ci_plots}{{13}{18}{\hltwo {[R2.12]} 95\% bootstrap confidence intervals for selected KPIs across all agents (30 evaluation episodes per agent). Narrow intervals for TD3 and DDPG reflect near-constant behaviour (policy collapse), whereas PPO's intervals are tight despite exploring the full workspace. TRPO and PPO show overlapping intervals for K4 (base orientation), consistent with the non-significant Wilcoxon result ($p=0.926$)}{figure.caption.19}{}}
-\newlabel{fig:ci_plots@cref}{{[figure][13][]13}{[1][16][]18}{}{}{}}
-\newlabel{fig:training_ppo_default}{{14a}{18}{PPO (Default)}{figure.caption.20}{}}
-\newlabel{fig:training_ppo_default@cref}{{[subfigure][1][14]14a}{[1][16][]18}{}{}{}}
-\newlabel{sub@fig:training_ppo_default}{{a}{18}{PPO (Default)}{figure.caption.20}{}}
-\newlabel{sub@fig:training_ppo_default@cref}{{[subfigure][1][14]14a}{[1][16][]18}{}{}{}}
-\newlabel{fig:training_ppo_opt}{{14b}{18}{PPO (Optimized)}{figure.caption.20}{}}
-\newlabel{fig:training_ppo_opt@cref}{{[subfigure][2][14]14b}{[1][16][]18}{}{}{}}
-\newlabel{sub@fig:training_ppo_opt}{{b}{18}{PPO (Optimized)}{figure.caption.20}{}}
-\newlabel{sub@fig:training_ppo_opt@cref}{{[subfigure][2][14]14b}{[1][16][]18}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Comparison of episodic rewards for default and optimized PPO agents. (a) Episode reward evolution during training using the default PPO hyperparameters. (b) Episode reward evolution using the optimized PPO configuration. The optimized configuration shows faster convergence and a higher average episodic return than the default configuration.}}{18}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:training_ppo_compare}{{14}{18}{Comparison of episodic rewards for default and optimized PPO agents. (a) Episode reward evolution during training using the default PPO hyperparameters. (b) Episode reward evolution using the optimized PPO configuration. The optimized configuration shows faster convergence and a higher average episodic return than the default configuration}{figure.caption.20}{}}
-\newlabel{fig:training_ppo_compare@cref}{{[figure][14][]14}{[1][16][]18}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Pairwise Wilcoxon signed-rank tests of each agent vs.\ PPO (baseline), Holm-corrected. Each cell shows $\Delta \tilde  {x}$ (median difference, agent$-$PPO) with significance superscript: ${}^{***}p<0.001$, ${}^{**}p<0.01$, ${}^{*}p<0.05$, ${}^{\mathrm  {n.s.}}p\geq 0.05$. For K1, positive $\Delta \tilde  {x}$ means the agent achieves a higher (better) return. For K2--K9, negative $\Delta \tilde  {x}$ means lower (better) error/violation/jerk/energy values. K5 is the collision rate (0\,=\,no collisions). All evaluated agents achieved K5\,=\,0.}}{16}{table.caption.17}\protected@file@percent }
+\newlabel{tab:significance}{{6}{16}{Pairwise Wilcoxon signed-rank tests of each agent vs.\ PPO (baseline), Holm-corrected. Each cell shows $\Delta \tilde {x}$ (median difference, agent$-$PPO) with significance superscript: ${}^{***}p<0.001$, ${}^{**}p<0.01$, ${}^{*}p<0.05$, ${}^{\mathrm {n.s.}}p\geq 0.05$. For K1, positive $\Delta \tilde {x}$ means the agent achieves a higher (better) return. For K2--K9, negative $\Delta \tilde {x}$ means lower (better) error/violation/jerk/energy values. K5 is the collision rate (0\,=\,no collisions). All evaluated agents achieved K5\,=\,0}{table.caption.17}{}}
+\newlabel{tab:significance@cref}{{[table][6][]6}{[1][15][]16}{}{}{}}
+\newlabel{fig:boxplot_k2}{{12a}{16}{K2: Mean Squared EE Position Error}{figure.caption.18}{}}
+\newlabel{fig:boxplot_k2@cref}{{[subfigure][1][12]12a}{[1][15][]16}{}{}{}}
+\newlabel{sub@fig:boxplot_k2}{{a}{16}{K2: Mean Squared EE Position Error}{figure.caption.18}{}}
+\newlabel{sub@fig:boxplot_k2@cref}{{[subfigure][1][12]12a}{[1][15][]16}{}{}{}}
+\newlabel{fig:boxplot_k4}{{12b}{16}{K4: Mean Base Orientation Error}{figure.caption.18}{}}
+\newlabel{fig:boxplot_k4@cref}{{[subfigure][2][12]12b}{[1][15][]16}{}{}{}}
+\newlabel{sub@fig:boxplot_k4}{{b}{16}{K4: Mean Base Orientation Error}{figure.caption.18}{}}
+\newlabel{sub@fig:boxplot_k4@cref}{{[subfigure][2][12]12b}{[1][15][]16}{}{}{}}
+\newlabel{fig:boxplot_k7}{{12c}{16}{K7: Control Smoothness (Norm.\ Jerk)}{figure.caption.18}{}}
+\newlabel{fig:boxplot_k7@cref}{{[subfigure][3][12]12c}{[1][15][]16}{}{}{}}
+\newlabel{sub@fig:boxplot_k7}{{c}{16}{K7: Control Smoothness (Norm.\ Jerk)}{figure.caption.18}{}}
+\newlabel{sub@fig:boxplot_k7@cref}{{[subfigure][3][12]12c}{[1][15][]16}{}{}{}}
+\newlabel{fig:boxplot_k9}{{12d}{16}{K9: Energy Consumption}{figure.caption.18}{}}
+\newlabel{fig:boxplot_k9@cref}{{[subfigure][4][12]12d}{[1][15][]16}{}{}{}}
+\newlabel{sub@fig:boxplot_k9}{{d}{16}{K9: Energy Consumption}{figure.caption.18}{}}
+\newlabel{sub@fig:boxplot_k9@cref}{{[subfigure][4][12]12d}{[1][15][]16}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rtwo}}\texthl  {[R2.13]}} Boxplots of selected KPI distributions over 30 evaluation episodes per agent. Each box spans the interquartile range (IQR), the center line marks the median, the whiskers extend to 1.5\,$\times $\,IQR, and circles denote outliers. PPO consistently achieves low tracking error ($K_2$) and smooth control ($K_7$) with small spread, while PG and SAC show high variability. The low $K_9$ values for TD3 and DDPG reflect insufficient actuation rather than energy efficiency.}}{16}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:boxplots}{{12}{16}{\hltwo {[R2.13]} Boxplots of selected KPI distributions over 30 evaluation episodes per agent. Each box spans the interquartile range (IQR), the center line marks the median, the whiskers extend to 1.5\,$\times $\,IQR, and circles denote outliers. PPO consistently achieves low tracking error ($K_2$) and smooth control ($K_7$) with small spread, while PG and SAC show high variability. The low $K_9$ values for TD3 and DDPG reflect insufficient actuation rather than energy efficiency}{figure.caption.18}{}}
+\newlabel{fig:boxplots@cref}{{[figure][12][]12}{[1][15][]16}{}{}{}}
+\newlabel{fig:ci_k2}{{13a}{17}{K2: Mean Squared EE Position Error}{figure.caption.19}{}}
+\newlabel{fig:ci_k2@cref}{{[subfigure][1][13]13a}{[1][15][]17}{}{}{}}
+\newlabel{sub@fig:ci_k2}{{a}{17}{K2: Mean Squared EE Position Error}{figure.caption.19}{}}
+\newlabel{sub@fig:ci_k2@cref}{{[subfigure][1][13]13a}{[1][15][]17}{}{}{}}
+\newlabel{fig:ci_k4}{{13b}{17}{K4: Mean Base Orientation Error}{figure.caption.19}{}}
+\newlabel{fig:ci_k4@cref}{{[subfigure][2][13]13b}{[1][15][]17}{}{}{}}
+\newlabel{sub@fig:ci_k4}{{b}{17}{K4: Mean Base Orientation Error}{figure.caption.19}{}}
+\newlabel{sub@fig:ci_k4@cref}{{[subfigure][2][13]13b}{[1][15][]17}{}{}{}}
+\newlabel{fig:ci_k7}{{13c}{17}{K7: Control Smoothness (Norm.\ Jerk)}{figure.caption.19}{}}
+\newlabel{fig:ci_k7@cref}{{[subfigure][3][13]13c}{[1][15][]17}{}{}{}}
+\newlabel{sub@fig:ci_k7}{{c}{17}{K7: Control Smoothness (Norm.\ Jerk)}{figure.caption.19}{}}
+\newlabel{sub@fig:ci_k7@cref}{{[subfigure][3][13]13c}{[1][15][]17}{}{}{}}
+\newlabel{fig:ci_k9}{{13d}{17}{K9: Energy Consumption}{figure.caption.19}{}}
+\newlabel{fig:ci_k9@cref}{{[subfigure][4][13]13d}{[1][15][]17}{}{}{}}
+\newlabel{sub@fig:ci_k9}{{d}{17}{K9: Energy Consumption}{figure.caption.19}{}}
+\newlabel{sub@fig:ci_k9@cref}{{[subfigure][4][13]13d}{[1][15][]17}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rtwo}}\texthl  {[R2.12]}} 95\% bootstrap confidence intervals for selected KPIs across all agents (30 evaluation episodes per agent). Narrow intervals for TD3 and DDPG reflect near-constant behavior (policy collapse), whereas PPO's intervals are tight despite exploring the full workspace. TRPO and PPO show overlapping intervals for $K_4$ (base orientation), consistent with the non-significant Wilcoxon result ($p=0.926$).}}{17}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:ci_plots}{{13}{17}{\hltwo {[R2.12]} 95\% bootstrap confidence intervals for selected KPIs across all agents (30 evaluation episodes per agent). Narrow intervals for TD3 and DDPG reflect near-constant behavior (policy collapse), whereas PPO's intervals are tight despite exploring the full workspace. TRPO and PPO show overlapping intervals for $K_4$ (base orientation), consistent with the non-significant Wilcoxon result ($p=0.926$)}{figure.caption.19}{}}
+\newlabel{fig:ci_plots@cref}{{[figure][13][]13}{[1][15][]17}{}{}{}}
+\newlabel{fig:training_ppo_default}{{14a}{17}{PPO (Default)}{figure.caption.20}{}}
+\newlabel{fig:training_ppo_default@cref}{{[subfigure][1][14]14a}{[1][15][]17}{}{}{}}
+\newlabel{sub@fig:training_ppo_default}{{a}{17}{PPO (Default)}{figure.caption.20}{}}
+\newlabel{sub@fig:training_ppo_default@cref}{{[subfigure][1][14]14a}{[1][15][]17}{}{}{}}
+\newlabel{fig:training_ppo_opt}{{14b}{17}{PPO (Optimized)}{figure.caption.20}{}}
+\newlabel{fig:training_ppo_opt@cref}{{[subfigure][2][14]14b}{[1][15][]17}{}{}{}}
+\newlabel{sub@fig:training_ppo_opt}{{b}{17}{PPO (Optimized)}{figure.caption.20}{}}
+\newlabel{sub@fig:training_ppo_opt@cref}{{[subfigure][2][14]14b}{[1][15][]17}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Comparison of episodic rewards for default and optimized PPO agents. (a) Episode reward evolution during training using the default PPO hyperparameters. (b) Episode reward evolution using the optimized PPO configuration. The optimized configuration shows faster convergence and a higher average episodic return than the default configuration.}}{17}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:training_ppo_compare}{{14}{17}{Comparison of episodic rewards for default and optimized PPO agents. (a) Episode reward evolution during training using the default PPO hyperparameters. (b) Episode reward evolution using the optimized PPO configuration. The optimized configuration shows faster convergence and a higher average episodic return than the default configuration}{figure.caption.20}{}}
+\newlabel{fig:training_ppo_compare@cref}{{[figure][14][]14}{[1][15][]17}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-A}}Circular Trajectory}{18}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-B}}Ablation Study of Reward Components}{18}{subsection.7.2}\protected@file@percent }
+\newlabel{sec:reward_ablation}{{\mbox  {VII-B}}{18}{Ablation Study of Reward Components}{subsection.7.2}{}}
+\newlabel{sec:reward_ablation@cref}{{[subsection][2][7]\mbox  {VII-B}}{[1][18][]18}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Performance of PPO agent before and after optimization. The optimized PPO improves most reported KPIs, with higher rewards, lower errors, no observed safety violations in the evaluation episodes, and smoother control.}}{18}{table.caption.23}\protected@file@percent }
+\newlabel{tab:ppo_optimization_kpi}{{7}{18}{Performance of PPO agent before and after optimization. The optimized PPO improves most reported KPIs, with higher rewards, lower errors, no observed safety violations in the evaluation episodes, and smoother control}{table.caption.23}{}}
+\newlabel{tab:ppo_optimization_kpi@cref}{{[table][7][]7}{[1][18][]18}{}{}{}}
 \newlabel{fig:traj_default}{{15a}{19}{PPO (Default)}{figure.caption.21}{}}
-\newlabel{fig:traj_default@cref}{{[subfigure][1][15]15a}{[1][16][]19}{}{}{}}
+\newlabel{fig:traj_default@cref}{{[subfigure][1][15]15a}{[1][18][]19}{}{}{}}
 \newlabel{sub@fig:traj_default}{{a}{19}{PPO (Default)}{figure.caption.21}{}}
-\newlabel{sub@fig:traj_default@cref}{{[subfigure][1][15]15a}{[1][16][]19}{}{}{}}
+\newlabel{sub@fig:traj_default@cref}{{[subfigure][1][15]15a}{[1][18][]19}{}{}{}}
 \newlabel{fig:traj_opt}{{15b}{19}{PPO (Optimized)}{figure.caption.21}{}}
-\newlabel{fig:traj_opt@cref}{{[subfigure][2][15]15b}{[1][16][]19}{}{}{}}
+\newlabel{fig:traj_opt@cref}{{[subfigure][2][15]15b}{[1][18][]19}{}{}{}}
 \newlabel{sub@fig:traj_opt}{{b}{19}{PPO (Optimized)}{figure.caption.21}{}}
-\newlabel{sub@fig:traj_opt@cref}{{[subfigure][2][15]15b}{[1][16][]19}{}{}{}}
+\newlabel{sub@fig:traj_opt@cref}{{[subfigure][2][15]15b}{[1][18][]19}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Target/actual comparison of the end-effector trajectory in the XY plane.}}{19}{figure.caption.21}\protected@file@percent }
 \newlabel{fig:trajektorie_xy_compare}{{15}{19}{Target/actual comparison of the end-effector trajectory in the XY plane}{figure.caption.21}{}}
-\newlabel{fig:trajektorie_xy_compare@cref}{{[figure][15][]15}{[1][16][]19}{}{}{}}
+\newlabel{fig:trajektorie_xy_compare@cref}{{[figure][15][]15}{[1][18][]19}{}{}{}}
 \newlabel{fig:basis_default}{{16a}{19}{PPO (Default)}{figure.caption.22}{}}
-\newlabel{fig:basis_default@cref}{{[subfigure][1][16]16a}{[1][16][]19}{}{}{}}
+\newlabel{fig:basis_default@cref}{{[subfigure][1][16]16a}{[1][18][]19}{}{}{}}
 \newlabel{sub@fig:basis_default}{{a}{19}{PPO (Default)}{figure.caption.22}{}}
-\newlabel{sub@fig:basis_default@cref}{{[subfigure][1][16]16a}{[1][16][]19}{}{}{}}
+\newlabel{sub@fig:basis_default@cref}{{[subfigure][1][16]16a}{[1][18][]19}{}{}{}}
 \newlabel{fig:basis_opt}{{16b}{19}{PPO (Optimized)}{figure.caption.22}{}}
-\newlabel{fig:basis_opt@cref}{{[subfigure][2][16]16b}{[1][16][]19}{}{}{}}
+\newlabel{fig:basis_opt@cref}{{[subfigure][2][16]16b}{[1][18][]19}{}{}{}}
 \newlabel{sub@fig:basis_opt}{{b}{19}{PPO (Optimized)}{figure.caption.22}{}}
-\newlabel{sub@fig:basis_opt@cref}{{[subfigure][2][16]16b}{[1][16][]19}{}{}{}}
+\newlabel{sub@fig:basis_opt@cref}{{[subfigure][2][16]16b}{[1][18][]19}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Time evolution of the base orientation (quaternion components) during a test episode.}}{19}{figure.caption.22}\protected@file@percent }
 \newlabel{fig:basis_orientation_compare}{{16}{19}{Time evolution of the base orientation (quaternion components) during a test episode}{figure.caption.22}{}}
-\newlabel{fig:basis_orientation_compare@cref}{{[figure][16][]16}{[1][16][]19}{}{}{}}
+\newlabel{fig:basis_orientation_compare@cref}{{[figure][16][]16}{[1][18][]19}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rtwo}}\texthl  {[R2.6]}} Ablation study of the reward components. Each row corresponds to a separately retrained optimized PPO agent with one reward weight set to zero. KPIs are averaged over $N_{eval}=30$ evaluation episodes on the circular trajectory.}}{19}{table.caption.24}\protected@file@percent }
 \newlabel{tab:reward_ablation}{{8}{19}{\hltwo {[R2.6]} Ablation study of the reward components. Each row corresponds to a separately retrained optimized PPO agent with one reward weight set to zero. KPIs are averaged over $N_{eval}=30$ evaluation episodes on the circular trajectory}{table.caption.24}{}}
 \newlabel{tab:reward_ablation@cref}{{[table][8][]8}{[1][19][]19}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-C}}Sensitivity Analysis of Reward Weights}{20}{subsection.7.3}\protected@file@percent }
-\newlabel{sec:reward_sensitivity}{{\mbox  {VII-C}}{20}{Sensitivity Analysis of Reward Weights}{subsection.7.3}{}}
-\newlabel{sec:reward_sensitivity@cref}{{[subsection][3][7]\mbox  {VII-C}}{[1][20][]20}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces {\def \textcolor {yellow}{\textcolor {roverlap}}\texthl  {[R2.5/R3.4]}} One-at-a-time sensitivity analysis of the four dominant reward weights. Each row corresponds to a separately retrained optimized PPO agent with one weight multiplied by $\times 2$ or $\times 0.5$ around its baseline value, all other weights and training settings held constant. KPIs are averaged over $N_{eval}=30$ evaluation episodes on the circular trajectory.}}{20}{table.caption.25}\protected@file@percent }
 \newlabel{tab:reward_sensitivity}{{9}{20}{\hloverlap {[R2.5/R3.4]} One-at-a-time sensitivity analysis of the four dominant reward weights. Each row corresponds to a separately retrained optimized PPO agent with one weight multiplied by $\times 2$ or $\times 0.5$ around its baseline value, all other weights and training settings held constant. KPIs are averaged over $N_{eval}=30$ evaluation episodes on the circular trajectory}{table.caption.25}{}}
 \newlabel{tab:reward_sensitivity@cref}{{[table][9][]9}{[1][20][]20}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-C}}Sensitivity Analysis of Reward Weights}{20}{subsection.7.3}\protected@file@percent }
+\newlabel{sec:reward_sensitivity}{{\mbox  {VII-C}}{20}{Sensitivity Analysis of Reward Weights}{subsection.7.3}{}}
+\newlabel{sec:reward_sensitivity@cref}{{[subsection][3][7]\mbox  {VII-C}}{[1][20][]20}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-D}}Robustness Evaluation under Non-Ideal Conditions}{21}{subsection.7.4}\protected@file@percent }
 \newlabel{sec:robustness_eval}{{\mbox  {VII-D}}{21}{Robustness Evaluation under Non-Ideal Conditions}{subsection.7.4}{}}
 \newlabel{sec:robustness_eval@cref}{{[subsection][4][7]\mbox  {VII-D}}{[1][21][]21}{}{}{}}
@@ -256,8 +256,8 @@
 \newlabel{eq:linear_traj}{{5}{22}{Piecewise-Linear Trajectory}{equation.5}{}}
 \newlabel{eq:linear_traj@cref}{{[equation][5][]5}{[1][22][]22}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{22}{section.8}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Generalization test on a piecewise-linear end-effector trajectory (two-segment path). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better).}}{22}{table.caption.29}\protected@file@percent }
-\newlabel{tab:ppo_linear_kpi}{{11}{22}{Generalization test on a piecewise-linear end-effector trajectory (two-segment path). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better; K2--K9 lower is better)}{table.caption.29}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Generalization test on a piecewise-linear end-effector trajectory (two-segment path). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better, K2--K9 lower is better).}}{22}{table.caption.29}\protected@file@percent }
+\newlabel{tab:ppo_linear_kpi}{{11}{22}{Generalization test on a piecewise-linear end-effector trajectory (two-segment path). Values are averaged over $N_{eval}=30$ episodes. Bold indicates the better value according to the KPI definition (K1 higher is better, K2--K9 lower is better)}{table.caption.29}{}}
 \newlabel{tab:ppo_linear_kpi@cref}{{[table][11][]11}{[1][22][]22}{}{}{}}
 \citation{b15,b23,b22}
 \citation{b22,b24}
@@ -290,8 +290,8 @@
 \citation{b1,b23}
 \citation{deeplTr,deeplWr}
 \citation{openai_chatgpt}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Gradual hybrid testbeds integrate AI-driven digital twins (left) with physical robotic systems (right), providing a framework for studying policy optimization and domain-randomization strategies for sim-to-real transfer. Illustration created using a picture of the physical setup at frankfurt university of applied sciences and with the help of GPT-Image-2.}}{24}{figure.caption.30}\protected@file@percent }
-\newlabel{fig:oos}{{19}{24}{Gradual hybrid testbeds integrate AI-driven digital twins (left) with physical robotic systems (right), providing a framework for studying policy optimization and domain-randomization strategies for sim-to-real transfer. Illustration created using a picture of the physical setup at frankfurt university of applied sciences and with the help of GPT-Image-2}{figure.caption.30}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Gradual hybrid testbeds integrate AI-driven digital twins (left) with physical robotic systems (right), providing a framework for studying policy optimization and domain-randomization strategies for sim-to-real transfer. Illustration created using a picture of the physical setup at Frankfurt University of Applied Sciences and with the help of GPT-Image-2.}}{24}{figure.caption.30}\protected@file@percent }
+\newlabel{fig:oos}{{19}{24}{Gradual hybrid testbeds integrate AI-driven digital twins (left) with physical robotic systems (right), providing a framework for studying policy optimization and domain-randomization strategies for sim-to-real transfer. Illustration created using a picture of the physical setup at Frankfurt University of Applied Sciences and with the help of GPT-Image-2}{figure.caption.30}{}}
 \newlabel{fig:oos@cref}{{[figure][19][]19}{[1][24][]24}{}{}{}}
 \bibcite{b1}{1}
 \bibcite{b6}{2}
@@ -343,8 +343,8 @@
 \bibcite{todorov2012mujoco}{48}
 \bibcite{koenig2004gazebo}{49}
 \bibcite{korber2021comparing}{50}
-\bibcite{collins2021review}{51}
 \@writefile{toc}{\contentsline {section}{REFERENCES}{25}{section*.32}\protected@file@percent }
+\bibcite{collins2021review}{51}
 \@writefile{toc}{\contentsline {subsection}{Patrick S. Ermisch}{26}{section*.33}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{Eric Guiffo Kaigom}{26}{section*.33}\protected@file@percent }
 \gdef \@abspage@last{26}

@@ -1,0 +1,3475 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.2.3)  23 JUL 2026 22:00
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**access_diff.tex
+(./access_diff.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(./ieeeaccess.cls (./IEEEtran.cls
+Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+\@IEEEtrantmpdimenA=\dimen148
+\@IEEEtrantmpdimenB=\dimen149
+\@IEEEtrantmpdimenC=\dimen150
+\@IEEEtrantmpcountA=\count275
+\@IEEEtrantmpcountB=\count276
+\@IEEEtrantmpcountC=\count277
+\@IEEEtrantmptoksA=\toks17
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 5
+03.
+(c:/texlive/2025/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+-- Using 8.5in x 11in (letter) paper.
+-- Using PDF output.
+\@IEEEnormalsizeunitybaselineskip=\dimen151
+-- This is a 10 point document.
+LaTeX Encoding Info:    Redeclaring text command \textunderscore (encoding ?) o
+n input line 937.
+\CLASSINFOnormalsizebaselineskip=\dimen152
+\CLASSINFOnormalsizeunitybaselineskip=\dimen153
+\IEEEnormaljot=\dimen154
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+\IEEEquantizedlength=\dimen155
+\IEEEquantizedlengthdiff=\dimen156
+\IEEEquantizedtextheightdiff=\dimen157
+\IEEEilabelindentA=\dimen158
+\IEEEilabelindentB=\dimen159
+\IEEEilabelindent=\dimen160
+\IEEEelabelindent=\dimen161
+\IEEEdlabelindent=\dimen162
+\IEEElabelindent=\dimen163
+\IEEEiednormlabelsep=\dimen164
+\IEEEiedmathlabelsep=\dimen165
+\IEEEiedtopsep=\skip49
+\c@section=\count278
+\c@subsection=\count279
+\c@subsubsection=\count280
+\c@paragraph=\count281
+\c@IEEEsubequation=\count282
+\abovecaptionskip=\skip50
+\belowcaptionskip=\skip51
+\c@figure=\count283
+\c@table=\count284
+\@IEEEeqnnumcols=\count285
+\@IEEEeqncolcnt=\count286
+\@IEEEsubeqnnumrollback=\count287
+\@IEEEquantizeheightA=\dimen166
+\@IEEEquantizeheightB=\dimen167
+\@IEEEquantizeheightC=\dimen168
+\@IEEEquantizeprevdepth=\dimen169
+\@IEEEquantizemultiple=\count288
+\@IEEEquantizeboxA=\box53
+\@IEEEtmpitemindent=\dimen170
+\IEEEPARstartletwidth=\dimen171
+\c@IEEEbiography=\count289
+\@IEEEtranrubishbin=\box54
+) (c:/texlive/2025/texmf-dist/tex/generic/iftex/ifpdf.sty
+Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
+
+(c:/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+(c:/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2025/11/04 v2.10 package option processing (HA)
+
+(c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks18
+\XKV@tempa@toks=\toks19
+\XKV@tempb@toks=\toks20
+
+(c:/texlive/2025/texmf-dist/tex/generic/xkeyval/keyval.tex))
+\XKV@depth=\count290
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+)){c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+pdfTeX warning: pdflatex.exe (file t1-times.map): cannot open font map file
+
+
+pdfTeX warning: pdflatex.exe (file t1-formata.map): cannot open font map file
+
+
+pdfTeX warning: pdflatex.exe (file t1-giovannistd.map): cannot open font map fi
+le
+\@draftversionrule=\dimen172
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2025/01/14 v1.3e Standard LaTeX Color (DPC)
+
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 149.
+
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(c:/texlive/2025/texmf-dist/tex/latex/spotcolor/spotcolor.sty
+Package: spotcolor 2006/11/15 v1.2 Package for adding Spot Color support to pdf
+LaTeX.
+
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+)
+\thecolorprofile=\count291
+\thecolor=\count292
+)
+\PANTONE=\toks21
+Package color Info: Redefining color black on input line 134.
+\figbox=\box55
+\titlewidth=\skip52
+\abstractwidth=\skip53
+\c@addrCtr=\count293
+\abstractbox=\box56
+\indexbox=\box57
+\absht=\dimen173
+\kwdht=\dimen174
+\@tempcntc=\count294
+\titlepgskip=\skip54
+\maketitlebox=\box58
+)
+(c:/texlive/2025/texmf-dist/tex/latex/cite/cite.sty
+LaTeX Info: Redefining \cite on input line 302.
+LaTeX Info: Redefining \nocite on input line 332.
+Package: cite 2015/02/27  v 5.5
+)
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2025/07/09 v2.17z AMS math features
+\@mathmargin=\skip55
+
+For additional information on amsmath, use the `?' option.
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks22
+\ex@=\dimen175
+))
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen176
+)
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count295
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count296
+\leftroot@=\count297
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count298
+\DOTSCASE@=\count299
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box59
+\strutbox@=\box60
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen177
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count300
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count301
+\dotsspace@=\muskip17
+\c@parentequation=\count302
+\dspbrk@lvl=\count303
+\tag@help=\toks23
+\row@=\count304
+\column@=\count305
+\maxfields@=\count306
+\andhelp@=\toks24
+\eqnshift@=\dimen178
+\alignsep@=\dimen179
+\tagshift@=\dimen180
+\tagwidth@=\dimen181
+\totwidth@=\dimen182
+\lineht@=\dimen183
+\@envbody=\toks25
+\multlinegap=\skip56
+\multlinetaggap=\skip57
+\mathdisplay@stack=\toks26
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
+)
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(c:/texlive/2025/texmf-dist/tex/latex/algorithms/algorithmic.sty
+Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+
+(c:/texlive/2025/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+)
+\c@ALC@unique=\count307
+\c@ALC@line=\count308
+\c@ALC@rem=\count309
+\c@ALC@depth=\count310
+\ALC@tlm=\skip58
+\algorithmicindent=\skip59
+)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+\Gin@req@height=\dimen184
+\Gin@req@width=\dimen185
+)
+(c:/texlive/2025/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+)
+(c:/texlive/2025/texmf-dist/tex/latex/makecell/makecell.sty
+Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
+
+(c:/texlive/2025/texmf-dist/tex/latex/tools/array.sty
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
+\col@sep=\dimen186
+\ar@mcellbox=\box61
+\extrarowheight=\dimen187
+\NC@list=\toks27
+\extratabsurround=\skip60
+\backup@length=\skip61
+\ar@cellbox=\box62
+)
+\rotheadsize=\dimen188
+\c@nlinenum=\count311
+\TeXr@lab=\toks28
+)
+(c:/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen189
+\lightrulewidth=\dimen190
+\cmidrulewidth=\dimen191
+\belowrulesep=\dimen192
+\belowbottomsep=\dimen193
+\aboverulesep=\dimen194
+\abovetopsep=\dimen195
+\cmidrulesep=\dimen196
+\cmidrulekern=\dimen197
+\defaultaddspace=\dimen198
+\@cmidla=\count312
+\@cmidlb=\count313
+\@aboverulesep=\dimen199
+\@belowrulesep=\dimen256
+\@thisruleclass=\count314
+\@lastruleclass=\count315
+\@thisrulewidth=\dimen257
+)
+(c:/texlive/2025/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count316
+\float@exts=\toks29
+\float@box=\box63
+\@float@everytoks=\toks30
+\@floatcapt=\box64
+)
+(c:/texlive/2025/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+
+(c:/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(c:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen258
+\captionmargin=\dimen259
+\caption@leftmargin=\dimen260
+\caption@rightmargin=\dimen261
+\caption@width=\dimen262
+\caption@indent=\dimen263
+\caption@parindent=\dimen264
+\caption@hangindent=\dimen265
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
+Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEta
+blestring \begin {flushleft} \vspace *{5pt} {\vss \color {accessblue}\tablecaph
+eadfont #1. \ }{\raggedright \tablecapfont #2\vss }\end {flushleft} \@IEEEtable
+captionsepspace \else \@IEEEfigurecaptionsepspace \setbox \@tempboxa \hbox {\st
+rut {\color {accessblue}\figcapheadfont #1. \ }\raggedright \figcapfont #2\stru
+t }\ifdim \xfigwd >\columnwidth \setbox \@tempboxa \hbox {{\color {accessblue}\
+figcapheadfont #1. \ }}\mbox {}\hfill \begin {tabular}{@{}l@{}}\noindent \ragge
+dright \unhbox \@tempboxa \figcapfont #2\end {tabular}\hfill \mbox {}\else \set
+box \@tempboxa \hbox {{\color {accessblue}\figcapheadfont #1. \ }}{\vss \ragged
+right \noindent \unhbox \@tempboxa \figcapfont #2\vss }\fi \fi \vskip 1pt plus 
+1pt minus 1pt on input line 1175.
+)
+
+Package caption Warning: Unknown document class (or package),
+(caption)                standard defaults will be used.
+See the caption package documentation for explanation.
+
+\c@caption@flags=\count317
+\c@continuedfloat=\count318
+Package caption Info: float package is loaded.
+)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count319
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count320
+) (c:/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+LaTeX Info: Redefining \color on input line 762.
+
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2026-01-29 v7.01p Hypertext links for LaTeX
+
+(c:/texlive/2025/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)
+(c:/texlive/2025/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(c:/texlive/2025/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+
+(c:/texlive/2025/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(c:/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(c:/texlive/2025/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+))
+(c:/texlive/2025/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2026-01-29 v2.58 Cross-referencing by name of section
+
+(c:/texlive/2025/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(c:/texlive/2025/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+
+(c:/texlive/2025/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count321
+)
+(c:/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count322
+)
+(c:/texlive/2025/texmf-dist/tex/generic/stringenc/stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\@linkdim=\dimen266
+\Hy@linkcounter=\count323
+\Hy@pagecounter=\count324
+
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2026-01-29 v7.01p Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(c:/texlive/2025/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count325
+
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2026-01-29 v7.01p Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4201.
+Package hyperref Info: Link nesting OFF on input line 4206.
+Package hyperref Info: Hyper index ON on input line 4209.
+Package hyperref Info: Plain pages OFF on input line 4216.
+Package hyperref Info: Backreferencing OFF on input line 4221.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4468.
+\c@Hy@tempcnt=\count326
+
+(c:/texlive/2025/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4807.
+\XeTeXLinkMargin=\dimen267
+
+(c:/texlive/2025/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(c:/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count327
+\Field@Width=\dimen268
+\Fld@charsize=\dimen269
+Package hyperref Info: Hyper figures OFF on input line 6084.
+Package hyperref Info: Link nesting OFF on input line 6089.
+Package hyperref Info: Hyper index ON on input line 6092.
+Package hyperref Info: backreferencing OFF on input line 6099.
+Package hyperref Info: Link coloring OFF on input line 6104.
+Package hyperref Info: Link coloring with OCG OFF on input line 6109.
+Package hyperref Info: PDF/A mode OFF on input line 6114.
+\Hy@abspage=\count328
+\c@Item=\count329
+\c@Hfootnote=\count330
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2026-01-29 v7.01p Hyperref driver for pdfTeX
+\Fld@listcount=\count331
+\c@bookmark@seq@number=\count332
+
+(c:/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+
+(c:/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+84.
+)
+\Hy@SectionHShift=\skip62
+)
+(c:/texlive/2025/texmf-dist/tex/latex/tools/varioref.sty
+Package: varioref 2025/01/14 v1.6g package for extended references (FMi)
+\c@vrcnt=\count333
+)
+(c:/texlive/2025/texmf-dist/tex/latex/cleveref/cleveref.sty
+Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
+Package cleveref Info: `hyperref' support loaded on input line 2370.
+LaTeX Info: Redefining \cref on input line 2370.
+LaTeX Info: Redefining \Cref on input line 2370.
+LaTeX Info: Redefining \crefrange on input line 2370.
+LaTeX Info: Redefining \Crefrange on input line 2370.
+LaTeX Info: Redefining \cpageref on input line 2370.
+LaTeX Info: Redefining \Cpageref on input line 2370.
+LaTeX Info: Redefining \cpagerefrange on input line 2370.
+LaTeX Info: Redefining \Cpagerefrange on input line 2370.
+LaTeX Info: Redefining \labelcref on input line 2370.
+LaTeX Info: Redefining \labelcpageref on input line 2370.
+Package cleveref Info: `varioref' support loaded on input line 2605.
+Package cleveref Info: `cleveref' supersedes `varioref's \labelformatcommand on
+ input line 2605.
+LaTeX Info: Redefining \vref on input line 2605.
+LaTeX Info: Redefining \Vref on input line 2605.
+LaTeX Info: Redefining \vrefrange on input line 2605.
+LaTeX Info: Redefining \fullref on input line 2605.
+)
+==> First Aid for cleveref.sty applied!
+Package hyperref Info: Option `colorlinks' set `true' on input line 27.
+(c:/texlive/2025/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box65
+\UL@hyphenbox=\box66
+\UL@skip=\skip63
+\UL@hook=\toks31
+\UL@height=\dimen270
+\UL@pe=\count334
+\UL@pixel=\dimen271
+\ULC@box=\box67
+Package: ulem 2019/11/18
+\ULdepth=\dimen272
+)
+(c:/texlive/2025/texmf-dist/tex/latex/oberdiek/settobox.sty
+Package: settobox 2016/05/16 v1.5 Assign box dimensions to length registers (HO
+)
+)
+(c:/texlive/2025/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
+\DIFdelgraphicsbox=\box68
+\DIFdelgraphicswidth=\skip64
+\DIFdelgraphicsheight=\skip65
+LaTeX Info: Redefining \DIFaddbegin on input line 97.
+LaTeX Info: Redefining \DIFaddend on input line 98.
+LaTeX Info: Redefining \DIFdelbegin on input line 99.
+LaTeX Info: Redefining \DIFdelend on input line 100.
+LaTeX Info: Redefining \DIFaddbeginFL on input line 105.
+LaTeX Info: Redefining \DIFaddendFL on input line 106.
+LaTeX Info: Redefining \DIFdelbeginFL on input line 107.
+LaTeX Info: Redefining \DIFdelendFL on input line 108.
+
+(c:/texlive/2025/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count335
+\lst@gtempboxa=\box69
+\lst@token=\toks32
+\lst@length=\count336
+\lst@currlwidth=\dimen273
+\lst@column=\count337
+\lst@pos=\count338
+\lst@lostspace=\dimen274
+\lst@width=\dimen275
+\lst@newlines=\count339
+\lst@lineno=\count340
+\lst@maxwidth=\dimen276
+
+(c:/texlive/2025/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2025/11/14 1.11b (Carsten Heinz)
+)
+(c:/texlive/2025/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
+\c@lstnumber=\count341
+\lst@skipnumbers=\count342
+\lst@framebox=\box70
+)
+(c:/texlive/2025/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2025/11/14 1.11b listings configuration
+))
+Package: listings 2025/11/14 1.11b (Carsten Heinz)
+
+==> First Aid for listings.sty no longer applied!
+    Expected:
+        2024/09/23 1.10c (Carsten Heinz)
+    but found:
+        2025/11/14 1.11b (Carsten Heinz)
+    so I'm assuming it got fixed.
+(c:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count343
+)
+(./access_diff.aux)
+\openout1 = `access_diff.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+
+-- Lines per column: 56 (exact).
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 13
+4.
+(c:/texlive/2025/texmf-dist/tex/latex/psnfss/t1ptm.fd
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+)
+
+LaTeX Font Warning: Font shape `T1/ptm/n/n' undefined
+(Font)              using `T1/ptm/m/n' instead on input line 134.
+
+(c:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count344
+\scratchdimen=\dimen277
+\scratchbox=\box71
+\nofMPsegments=\count345
+\nofMParguments=\count346
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count347
+\MPscratchDim=\dimen278
+\MPnumerator=\count348
+\makeMPintoPDFobject=\count349
+\everyMPtoPDFconversion=\toks34
+) (c:/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(c:/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
+Package caption Info: End \AtBeginDocument code.
+Package hyperref Info: Link coloring ON on input line 134.
+
+(./access_diff.out) (./access_diff.out)
+\@outlinefile=\write3
+\openout3 = `access_diff.out'.
+
+\c@lstlisting=\count350
+<../bullet.png, id=108, 12.045pt x 35.38219pt>
+File: ../bullet.png Graphic file (type png)
+<use ../bullet.png>
+Package pdftex.def Info: ../bullet.png  used on input line 153.
+(pdftex.def)             Requested size: 5.0pt x 14.6871pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 153.
+
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 15
+3.
+(c:/texlive/2025/texmf-dist/tex/latex/psnfss/t1phv.fd
+File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
+)
+
+LaTeX Font Warning: Font shape `T1/phv/n/n' undefined
+(Font)              using `T1/phv/m/n' instead on input line 153.
+
+LaTeX Font Info:    Trying to load font information for U+msa on input line 167
+.
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 167
+.
+
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+File: ../bullet.png Graphic file (type png)
+<use ../bullet.png>
+Package pdftex.def Info: ../bullet.png  used on input line 175.
+(pdftex.def)             Requested size: 5.0pt x 14.6871pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 175.
+
+
+Package xcolor Warning: Incompatible color definition on input line 183.
+
+LaTeX Font Info:    Calculating math sizes for size <9.9> on input line 183.
+LaTeX Font Info:    Calculating math sizes for size <6.6> on input line 183.
+
+Overfull \hbox (9.2679pt too wide) in paragraph at lines 183--183
+[]  
+ []
+
+
+Overfull \hbox (9.2679pt too wide) in paragraph at lines 183--183
+[]  
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 184.
+
+<../Figures/oos0.png, id=109, 1453.43pt x 1090.0725pt>
+File: ../Figures/oos0.png Graphic file (type png)
+<use ../Figures/oos0.png>
+Package pdftex.def Info: ../Figures/oos0.png  used on input line 190.
+(pdftex.def)             Requested size: 240.24814pt x 180.17023pt.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 190--191
+ [][][] 
+ []
+
+
+Underfull \hbox (badness 2343) in paragraph at lines 195--195
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1968) in paragraph at lines 195--195
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [] 
+  |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1603) in paragraph at lines 199--211
+\T1/ptm/n/n/10 Free-floating robot ma-nip-u-la-tors op-er-at-ing in []|   []   
+|   []
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+Package xcolor Warning: Incompatible color definition on input line 211.
+
+<../Logo.png, id=113, 206.27063pt x 53.44969pt>
+File: ../Logo.png Graphic file (type png)
+<use ../Logo.png>
+Package pdftex.def Info: ../Logo.png  used on input line 211.
+(pdftex.def)             Requested size: 91.32pt x 23.66309pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[1{c:/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}
+
+
+ <../logo.png> <../bullet.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 213--236
+|   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2318) in paragraph at lines 238--255
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 7273) in paragraph at lines 238--255
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2600) in paragraph at lines 238--255
+|   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1377) in paragraph at lines 238--255
+\T1/ptm/n/n/10 based []|   []   |   []   |   []   |   []   |   []   |   []   | 
+  []
+ []
+
+
+Underfull \hbox (badness 1383) in paragraph at lines 238--255
+|   [][][]|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \vbox (badness 1527) has occurred while \output is active []
+
+
+Underfull \hbox (badness 1910) in paragraph at lines 266--266
+[]\T1/ptm/n/n/10 TABLE 1: |Re-cent ad-vances in Deep RL-based mo-tion man-age-m
+ent for free-floating space robots. []|   []
+ []
+
+
+Underfull \hbox (badness 6526) in paragraph at lines 266--266
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1701) in paragraph at lines 266--266
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1831) in paragraph at lines 301--304
+|   [][][]|   []   |   []   |   []   |   [][]\T1/ptm/n/n/10 . Re-cent ad-
+ []
+
+
+Underfull \hbox (badness 1742) in paragraph at lines 301--304
+|   []   |   []   |   []   |   []   [][]|   []   |   []   |   []   |   []   |  
+ []
+ []
+
+
+Underfull \hbox (badness 1571) in paragraph at lines 301--304
+|   []   |   []   |   []   |   []   []\T1/ptm/n/n/10 to space
+ []
+
+
+Underfull \hbox (badness 2582) in paragraph at lines 305--326
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   [][]|   []   |
+   []
+ []
+
+
+Underfull \hbox (badness 1796) in paragraph at lines 305--326
+|   [][][]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+
+ []
+
+
+Underfull \hbox (badness 1762) in paragraph at lines 305--326
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1540) in paragraph at lines 327--328
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2828) in paragraph at lines 327--328
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+<../notaglineLogo.png, id=160, 169.38281pt x 42.91031pt>
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 328.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[2 <../notaglinelogo.png> <../Figures/oos0.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 334--337
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 4859) in paragraph at lines 334--337
+|   []   |   []   []\T1/ptm/n/n/10 Trust Re-gion Pol-icy Op-ti-miza-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 338--341
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3735) in paragraph at lines 338--341
+|   []   |   []   |   []   [][]|   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2142) in paragraph at lines 338--341
+|   []   |   [][] []|   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2351) in paragraph at lines 338--341
+[]\T1/ptm/n/n/10 into the learn-ing loop [[][]2[][]], [[][]23[][]]--[[][]25[][]
+]. A col-li-sion
+ []
+
+
+Underfull \hbox (badness 2027) in paragraph at lines 341--344
+\T1/ptm/n/n/10 sim-u-la-tion []|   []   [][]|   []   |   []   |   []   |   []  
+ []a free-
+ []
+
+
+Underfull \hbox (badness 2875) in paragraph at lines 341--344
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 5161) in paragraph at lines 341--344
+|   []   [][]|   []   []\T1/ptm/n/n/10 end-effector []|   []   |   []
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 344.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[3]
+Overfull \hbox (19.38394pt too wide) in paragraph at lines 352--353
+[]|   []   |   []   |   []   |   []   []\T1/ptm/n/n/10 sim-u-la-tion, deep []| 
+  [][][]|   []
+ []
+
+
+Underfull \hbox (badness 6173) in paragraph at lines 352--353
+|   []   |   []   |   []   |   []   |   []   |   [][][]|   []
+ []
+
+
+Underfull \hbox (badness 3758) in paragraph at lines 352--353
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 4886) in paragraph at lines 352--353
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 354.
+
+
+Package xcolor Warning: Incompatible color definition on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFdelincludegraphics' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFOincludegraphics' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFaddincludegraphics' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFOincludegraphics' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFaddincludegraphics' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFOincludegraphics' on input line 357.
+
+
+Underfull \hbox (badness 3189) in paragraph at lines 368--369
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 370.
+
+
+Package xcolor Warning: Incompatible color definition on input line 377.
+
+
+Underfull \hbox (badness 2368) in paragraph at lines 383--391
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2591) in paragraph at lines 383--391
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1412) in paragraph at lines 383--391
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFdelincludegraphics' on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFOincludegraphics' on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFaddincludegraphics' on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFOincludegraphics' on input line 392.
+
+
+Underfull \hbox (badness 2111) in paragraph at lines 393--404
+|   []   |   []   |   []   |   []   |   []   |   [][][]|   []
+ []
+
+
+Underfull \hbox (badness 5908) in paragraph at lines 393--404
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1603) in paragraph at lines 393--404
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1565) in paragraph at lines 393--404
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 405.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 405.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 405.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFdelincludegraphics' on input line 405.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 405.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 405.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFOincludegraphics' on input line 405.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 405.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 405.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFaddincludegraphics' on input line 405.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\<let>-command' on input line 405.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\includegraphics' on input line 405.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\DIFOincludegraphics' on input line 405.
+
+
+Overfull \hbox (4.73349pt too wide) in paragraph at lines 406--413
+|   []   |   []   |   []   |   []   |   []   [][]|   []
+ []
+
+
+Underfull \hbox (badness 6094) in paragraph at lines 406--413
+|   []   []\T1/ptm/n/n/10 of RL al-go-rithms for []|   []   []space
+ []
+
+
+Underfull \hbox (badness 2088) in paragraph at lines 406--413
+\T1/ptm/n/n/10 robot con-trol are []|   []   |   []   |   []   |   []   |   [] 
+  |   []
+ []
+
+
+Underfull \hbox (badness 2772) in paragraph at lines 406--413
+[][]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 5431) in paragraph at lines 406--413
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 6927) in paragraph at lines 406--413
+|   []   |   []   |   []   |   []   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 413.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[4
+pdfTeX warning (ext4): destination with the same identifier (name{subsection.2.
+3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.413 
+      ]
+
+Package xcolor Warning: Incompatible color definition on input line 414.
+
+
+Underfull \hbox (badness 1939) in paragraph at lines 416--422
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3907) in paragraph at lines 416--422
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 423.
+
+<../Figures/ref_kreisbahn_2.png, id=246, 1077.02374pt x 722.7pt>
+File: ../Figures/ref_kreisbahn_2.png Graphic file (type png)
+<use ../Figures/ref_kreisbahn_2.png>
+Package pdftex.def Info: ../Figures/ref_kreisbahn_2.png  used on input line 441
+.
+(pdftex.def)             Requested size: 227.30324pt x 152.52135pt.
+<../Figures/ref_kreisbahn_3.png, id=247, 1077.02374pt x 722.7pt>
+File: ../Figures/ref_kreisbahn_3.png Graphic file (type png)
+<use ../Figures/ref_kreisbahn_3.png>
+Package pdftex.def Info: ../Figures/ref_kreisbahn_3.png  used on input line 451
+.
+(pdftex.def)             Requested size: 227.30324pt x 152.52135pt.
+
+Package xcolor Warning: Incompatible color definition on input line 457.
+
+
+Underfull \hbox (badness 5832) in paragraph at lines 464--465
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3849) in paragraph at lines 464--465
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3291) in paragraph at lines 464--465
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+<../Figures/Spacerobot_slx.pdf, id=251, 792.9625pt x 397.485pt>
+File: ../Figures/Spacerobot_slx.pdf Graphic file (type pdf)
+<use ../Figures/Spacerobot_slx.pdf>
+Package pdftex.def Info: ../Figures/Spacerobot_slx.pdf  used on input line 472.
+
+(pdftex.def)             Requested size: 495.01717pt x 248.13638pt.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 47
+6.
+(c:/texlive/2025/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+
+Package xcolor Warning: Incompatible color definition on input line 480.
+
+
+LaTeX Font Warning: Font shape `T1/pcr/n/n' undefined
+(Font)              using `T1/pcr/m/n' instead on input line 485.
+
+
+Package xcolor Warning: Incompatible color definition on input line 491.
+
+
+LaTeX Font Warning: Font shape `T1/ptm/n/it' undefined
+(Font)              using `T1/ptm/n/n' instead on input line 497.
+
+
+Underfull \hbox (badness 4726) in paragraph at lines 497--499
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1490) in paragraph at lines 497--499
+[][]|   []   |   []   |   [][] []|   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 5274) in paragraph at lines 497--499
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2781) in paragraph at lines 497--499
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 499.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[5]
+Underfull \hbox (badness 1975) in paragraph at lines 508--510
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1721) in paragraph at lines 508--510
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3058) in paragraph at lines 508--510
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2478) in paragraph at lines 508--510
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3148) in paragraph at lines 508--510
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 518--518
+[]|\T1/ptm/b/n/8 MATLAB/
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 520--520
+[]|\T1/ptm/m/n/8 Simscape
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 521--521
+[]|\T1/ptm/m/n/8 Free-floating
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 522--522
+[]|\T1/ptm/m/n/8 Formal ver-i-fi-ca-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 522--522
+[]|\T1/ptm/m/n/8 Native
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 522--522
+\T1/ptm/m/n/8 (State-flow,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 523--523
+[]|\T1/ptm/m/n/8 gym-gazebo,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 523--524
+[]|\T1/ptm/m/n/8 Gymnasium,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 524--524
+[]|\T1/ptm/m/n/8 Limited (via
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 525--525
+[]|\T1/ptm/m/n/8 Code gen-er-a-tion /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 525--525
+[]|\T1/ptm/m/n/8 Mature
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 525--525
+\T1/ptm/m/n/8 (Em-bed-ded
+ []
+
+
+Overfull \hbox (10.18617pt too wide) in paragraph at lines 516--529
+ [][] 
+ []
+
+<../Figures/spacerobot_slx_robot.pdf, id=282, 790.955pt x 357.335pt>
+File: ../Figures/spacerobot_slx_robot.pdf Graphic file (type pdf)
+<use ../Figures/spacerobot_slx_robot.pdf>
+Package pdftex.def Info: ../Figures/spacerobot_slx_robot.pdf  used on input lin
+e 535.
+(pdftex.def)             Requested size: 495.01717pt x 223.63916pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 552.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[6 <../Figures/ref_kreisbahn_2.png> <../Figures/ref_kreisbahn_3.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 552.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[7 <../Figures/Spacerobot_slx.pdf> <../Figures/spacerobot_slx_robot.pdf>]
+<../Figures/spacerobot_slx_reference.pdf, id=321, 790.955pt x 245.91875pt>
+File: ../Figures/spacerobot_slx_reference.pdf Graphic file (type pdf)
+<use ../Figures/spacerobot_slx_reference.pdf>
+Package pdftex.def Info: ../Figures/spacerobot_slx_reference.pdf  used on input
+ line 557.
+(pdftex.def)             Requested size: 489.96872pt x 152.34045pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 577.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+Package xcolor Warning: Incompatible color definition on input line 590.
+
+
+Underfull \hbox (badness 3138) in paragraph at lines 593--598
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1817) in paragraph at lines 593--598
+|   []   |   []   |   []   [][]|   []   |   []   |   []   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 603.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[8]
+Underfull \hbox (badness 2310) in paragraph at lines 603--607
+[]|   []   |   []   |   []   |   []   [][]|   []   |   [][] []|   []
+ []
+
+
+Underfull \hbox (badness 2970) in paragraph at lines 603--607
+|   []   |   []   [][]|   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2486) in paragraph at lines 603--607
+[]\T1/ptm/n/it/10 quater-nion []|   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 7030) in paragraph at lines 603--607
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1603) in paragraph at lines 603--607
+|   []   |   []   [][]|   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 4872) in paragraph at lines 603--607
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2564) in paragraph at lines 603--607
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Overfull \hbox (234.35942pt too wide) in paragraph at lines 612--615
+[]|   []   []\T1/ptm/n/it/10 over-all ob-ser-va-tion vec-tor has di-men-sion []
+|   []
+ []
+
+
+Overfull \hbox (104.36392pt too wide) in paragraph at lines 612--615
+|   []   |   []   |   [][][]|   []
+ []
+
+
+Underfull \vbox (badness 1728) has occurred while \output is active []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 630.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[9 <../Figures/spacerobot_slx_reference.pdf>]
+Underfull \hbox (badness 4832) in paragraph at lines 632--636
+\T1/ptm/b/n/10 Reward Func-tion De-sign[]|   [][][]|   [][] []|   []   |   []  
+ |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2012) in paragraph at lines 672--682
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2626) in paragraph at lines 672--682
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [] 
+  |   []
+ []
+
+
+Underfull \hbox (badness 1389) in paragraph at lines 683--687
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1616) in paragraph at lines 683--687
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1371) in paragraph at lines 711--719
+[]\T1/ptm/b/n/10 Training Pro-ce-dure[]|   [][][]|   [][] []|   []   |   []   |
+   []   |   []   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 719.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[10]
+Underfull \hbox (badness 1603) in paragraph at lines 720--723
+[][]|   []   []\T1/ptm/n/it/10 or safety vi-o-la-tion). []|   []   |   []   |  
+ []
+ []
+
+
+Underfull \hbox (badness 1377) in paragraph at lines 724--732
+\T1/ptm/n/it/10 The []|   []   |   []   |   []   |   []   |   [][][]|   []
+ []
+
+
+Underfull \hbox (badness 1436) in paragraph at lines 724--732
+\T1/ptm/n/it/10 same num-ber of episodes[]|   []   |   []   |   []   |   []   |
+   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 744.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 746--751
+|   []   |   [][][]|   []   |   []   []\T1/ptm/n/it/10 cu-mu-la-tive re-ward pe
+r
+ []
+
+
+Overfull \hbox (10.76514pt too wide) in paragraph at lines 746--751
+|   []   |   []   |   []   [][]|   []
+ []
+
+
+Underfull \hbox (badness 7468) in paragraph at lines 757--761
+[]|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Overfull \hbox (22.14886pt too wide) in paragraph at lines 757--761
+|   []   |   []   [][]|   []
+ []
+
+
+Underfull \hbox (badness 5217) in paragraph at lines 766--770
+|   []   |   []   |   []   |   []   |   []   |   []   |   [][][]|   [][]
+ []
+
+
+Overfull \hbox (21.13187pt too wide) in paragraph at lines 766--770
+[]|   [][][]|   []   |   []   |   []   |   [][]\T1/ptm/n/it/10 ). []|   []
+ []
+
+
+Underfull \hbox (badness 5345) in paragraph at lines 776--780
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 776--780
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 776--780
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3492) in paragraph at lines 776--780
+[][]|   []   [][]|   [][] []|   [][][]|   []
+ []
+
+
+Underfull \hbox (badness 1701) in paragraph at lines 785--789
+[][]|   [][] []|   [][][]|   []   |   [][][]|   []   |   []   |   []   |   []  
+ |   []   []\T1/ptm/n/it/10 at
+ []
+
+
+Overfull \hbox (1.41673pt too wide) in paragraph at lines 785--789
+[][]|   []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 795--800
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Overfull \hbox (37.89082pt too wide) in paragraph at lines 795--800
+[][]|   []
+ []
+
+
+Overfull \hbox (2.60884pt too wide) detected at line 803
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 806--812
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2080) in paragraph at lines 806--812
+[]|   [][][]|   []   |   []   |   [][][]|   []   |   []   []\T1/ptm/n/it/10 dif
+-fer-ence of
+ []
+
+
+Overfull \hbox (153.81975pt too wide) in paragraph at lines 806--812
+[][]|   []
+ []
+
+
+Underfull \hbox (badness 3333) in paragraph at lines 821--826
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2376) in paragraph at lines 821--826
+\T1/ptm/n/it/10 task ([]|   []   [][]|   []   |   []   []is bet-ter, ide-ally z
+ero[]|   []
+ []
+
+
+Overfull \hbox (4.47972pt too wide) detected at line 835
+[][]
+ []
+
+
+Underfull \hbox (badness 1902) in paragraph at lines 839--849
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 6910) in paragraph at lines 839--849
+|   []   |   []   [][]|   []   |   []   |   [][] []|   []
+ []
+
+
+Underfull \hbox (badness 4686) in paragraph at lines 839--849
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1552) in paragraph at lines 839--849
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Overfull \hbox (6.69421pt too wide) in paragraph at lines 839--849
+[][]|   []
+ []
+
+
+Underfull \hbox (badness 2293) in paragraph at lines 839--849
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2111) in paragraph at lines 839--849
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3482) in paragraph at lines 852--857
+|   []   []\T1/ptm/n/it/10 training-related met-rics []|   []   |   []   |   []
+   [][]|   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 857.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[12]
+Underfull \hbox (badness 2165) in paragraph at lines 861--865
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1354) in paragraph at lines 861--865
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 866.
+
+
+Underfull \hbox (badness 1852) in paragraph at lines 867--870
+|   []   |   []   |   []   |   []   [][]|   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3229) in paragraph at lines 867--870
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   [][]|   []
+ []
+
+<../Figures/impuls_monitor.pdf, id=387, 793.96625pt x 302.12875pt>
+File: ../Figures/impuls_monitor.pdf Graphic file (type pdf)
+<use ../Figures/impuls_monitor.pdf>
+Package pdftex.def Info: ../Figures/impuls_monitor.pdf  used on input line 875.
+
+(pdftex.def)             Requested size: 505.12177pt x 192.21843pt.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 875--880
+ [][][] 
+ []
+
+<../Figures/impulserhaltung_scope.png, id=388, 4111.36pt x 2292.565pt>
+File: ../Figures/impulserhaltung_scope.png Graphic file (type png)
+<use ../Figures/impulserhaltung_scope.png>
+Package pdftex.def Info: ../Figures/impulserhaltung_scope.png  used on input li
+ne 885.
+(pdftex.def)             Requested size: 230.53912pt x 128.52269pt.
+
+Overfull \hbox (7.24413pt too wide) in paragraph at lines 889--901
+[]|   []   |   []   |   []   [][]|   []   |   []
+ []
+
+
+Underfull \hbox (badness 1360) in paragraph at lines 889--901
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+<../Figures/spacerobot_slx_colissionmonitor.pdf, id=393, 784.9325pt x 195.73125
+pt>
+File: ../Figures/spacerobot_slx_colissionmonitor.pdf Graphic file (type pdf)
+<use ../Figures/spacerobot_slx_colissionmonitor.pdf>
+Package pdftex.def Info: ../Figures/spacerobot_slx_colissionmonitor.pdf  used o
+n input line 905.
+(pdftex.def)             Requested size: 378.84132pt x 94.46959pt.
+<../Figures/warning_collision.png, id=394, 2248.4pt x 513.92pt>
+File: ../Figures/warning_collision.png Graphic file (type png)
+<use ../Figures/warning_collision.png>
+Package pdftex.def Info: ../Figures/warning_collision.png  used on input line 9
+18.
+(pdftex.def)             Requested size: 242.45628pt x 55.41783pt.
+<../Figures/tau_collision.png, id=395, 1220.56pt x 883.3pt>
+File: ../Figures/tau_collision.png Graphic file (type png)
+<use ../Figures/tau_collision.png>
+Package pdftex.def Info: ../Figures/tau_collision.png  used on input line 925.
+(pdftex.def)             Requested size: 242.45628pt x 175.45732pt.
+
+Underfull \hbox (badness 1776) in paragraph at lines 932--946
+|   [][] []|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 946.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[13]
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 9
+48.
+ (c:/texlive/2025/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+)
+
+LaTeX Font Warning: Font shape `TS1/ptm/n/n' undefined
+(Font)              using `TS1/ptm/m/n' instead
+(Font)              for symbol `textpm' on input line 948.
+
+
+Underfull \vbox (badness 1122) has occurred while \output is active []
+
+
+Underfull \hbox (badness 5548) in paragraph at lines 964--981
+[]|   []   |   []   |   []   |   []   |   []   [][]|   []
+ []
+
+
+Underfull \hbox (badness 1910) in paragraph at lines 964--981
+\T1/ptm/n/it/10 pol-icy []|   []   |   []   |   []   |   []   |   [][][]|   [][
+].
+ []
+
+
+Underfull \hbox (badness 1478) in paragraph at lines 964--981
+|   []   |   []   |   []   |   []   |   []   [][][]\T1/ptm/n/it/10 Fig-ure 11[]
+[][] []|   []   |   []   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 981.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[14 <../Figures/impuls_monitor.pdf> <../Figures/impulserhaltung_scope.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+<../Figures/verify_tau_slx.png, id=427, 2694.065pt x 2505.36pt>
+File: ../Figures/verify_tau_slx.png Graphic file (type png)
+<use ../Figures/verify_tau_slx.png>
+Package pdftex.def Info: ../Figures/verify_tau_slx.png  used on input line 984.
+
+(pdftex.def)             Requested size: 242.67355pt x 225.66382pt.
+
+Underfull \hbox (badness 6641) in paragraph at lines 993--997
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 997.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[15 <../Figures/spacerobot_slx_colissionmonitor.pdf> <../Figures/warning_collis
+ion.png> <../Figures/tau_collision.png>]
+Underfull \hbox (badness 1400) in paragraph at lines 1004--1008
+|   []   [][][]\T1/ptm/n/it/10 Ta-ble 5[][][][]|   []   |   []   |   []   |   [
+]   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2409) in paragraph at lines 1004--1008
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2205) in paragraph at lines 1004--1008
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+<../Figures/verify_tau_reslult.png, id=446, 2160.07pt x 1373.13pt>
+File: ../Figures/verify_tau_reslult.png Graphic file (type png)
+<use ../Figures/verify_tau_reslult.png>
+Package pdftex.def Info: ../Figures/verify_tau_reslult.png  used on input line 
+1011.
+(pdftex.def)             Requested size: 242.67355pt x 154.25046pt.
+
+Package xcolor Warning: Incompatible color definition on input line 1019.
+
+
+Underfull \hbox (badness 3078) in paragraph at lines 1020--1023
+|   []   |   []   []\T1/ptm/n/it/10 continuous-action RL []|   []   |   []   | 
+  []
+ []
+
+
+Underfull \hbox (badness 2237) in paragraph at lines 1025--1027
+[]|   []   |   []   |   []   |   []   |   []   [][]|   []   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1027.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[16 <../Figures/verify_tau_slx.png>]
+Underfull \hbox (badness 8075) in paragraph at lines 1027--1031
+[]|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 4899) in paragraph at lines 1027--1031
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1616) in paragraph at lines 1031--1035
+\T1/ptm/n/it/10 method that en-forces a trust-region con-straint []|   []
+ []
+
+
+Underfull \hbox (badness 1655) in paragraph at lines 1039--1041
+|   []   |   [][] []|   []   []\T1/ptm/n/it/10 vari-ant of DDPG that []|   []
+ []
+
+
+Underfull \hbox (badness 1596) in paragraph at lines 1072--1074
+|   []   |   []   [][]|   []   |   []   |   []   []\T1/ptm/n/it/10 on-policy
+ []
+
+
+Underfull \hbox (badness 1852) in paragraph at lines 1072--1074
+\T1/ptm/n/it/10 meth-ods are ex-pected to []|   []   |   [][][]|   []   |   []
+ []
+
+
+Underfull \hbox (badness 6910) in paragraph at lines 1075--1078
+[]\T1/ptm/b/n/10 Training Setup[]|   [][][]|   [][] \T1/ptm/n/it/10 All ex-per-
+i-ments were []|   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1078.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[17 <../Figures/verify_tau_reslult.png>]
+Underfull \hbox (badness 1496) in paragraph at lines 1119--1121
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [][
+][]|   []
+ []
+
+
+Underfull \hbox (badness 1721) in paragraph at lines 1126--1127
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2065) in paragraph at lines 1126--1127
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2726) in paragraph at lines 1130--1133
+\T1/ptm/n/it/10 Ag-gre-gat-ing []|   []   |   []   |   []   |   []   |   []   |
+   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3058) in paragraph at lines 1136--1137
+|   []   |   []   |   []   |   []   |   []   [][]|   []   |   []
+ []
+
+
+Underfull \hbox (badness 2103) in paragraph at lines 1137--1139
+[]|   []   []\T1/ptm/n/it/10 PG and DDPG []|   []   |   []   |   []   |   []   
+|   []
+ []
+
+
+Underfull \hbox (badness 1946) in paragraph at lines 1140--1142
+\T1/ptm/n/it/10 These []|   []   |   []   |   []   |   []   |   []   [][]|   []
+   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1142.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[18]
+Underfull \hbox (badness 3058) in paragraph at lines 1174--1186
+[]|   []   |   []   |   []   |   []   |   [][] []|   []
+ []
+
+
+Underfull \hbox (badness 2617) in paragraph at lines 1174--1186
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1188--1196
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1365) in paragraph at lines 1197--1202
+[]|   []   [][]|   []   |   [][] []|   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 4060) in paragraph at lines 1203--1210
+[]|   []   [][]|   []   |   []   |   []   |   [][] []|   []   |   []
+ []
+
+
+Underfull \hbox (badness 3701) in paragraph at lines 1203--1210
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1430) in paragraph at lines 1203--1210
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1484) in paragraph at lines 1203--1210
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2197) in paragraph at lines 1219--1229
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+<../Figures/boxplot_K2.png, id=480, 659.5842pt x 437.4744pt>
+File: ../Figures/boxplot_K2.png Graphic file (type png)
+<use ../Figures/boxplot_K2.png>
+Package pdftex.def Info: ../Figures/boxplot_K2.png  used on input line 1233.
+(pdftex.def)             Requested size: 242.45628pt x 160.80829pt.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 1233--1234
+[][][] 
+ []
+
+<../Figures/boxplot_K4.png, id=481, 659.5842pt x 437.4744pt>
+File: ../Figures/boxplot_K4.png Graphic file (type png)
+<use ../Figures/boxplot_K4.png>
+Package pdftex.def Info: ../Figures/boxplot_K4.png  used on input line 1239.
+(pdftex.def)             Requested size: 242.45628pt x 160.80829pt.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 1239--1240
+[][][] 
+ []
+
+<../Figures/boxplot_K7.png, id=482, 659.5842pt x 437.4744pt>
+File: ../Figures/boxplot_K7.png Graphic file (type png)
+<use ../Figures/boxplot_K7.png>
+Package pdftex.def Info: ../Figures/boxplot_K7.png  used on input line 1245.
+(pdftex.def)             Requested size: 242.45628pt x 160.80829pt.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 1245--1246
+[][][] 
+ []
+
+<../Figures/boxplot_K9.png, id=483, 656.9343pt x 437.4744pt>
+File: ../Figures/boxplot_K9.png Graphic file (type png)
+<use ../Figures/boxplot_K9.png>
+Package pdftex.def Info: ../Figures/boxplot_K9.png  used on input line 1251.
+(pdftex.def)             Requested size: 242.45628pt x 161.4558pt.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 1251--1252
+[][][] 
+ []
+
+<../Figures/ci_K2.png, id=484, 659.5842pt x 437.4744pt>
+File: ../Figures/ci_K2.png Graphic file (type png)
+<use ../Figures/ci_K2.png>
+Package pdftex.def Info: ../Figures/ci_K2.png  used on input line 1267.
+(pdftex.def)             Requested size: 242.45628pt x 160.80829pt.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 1267--1268
+[][][] 
+ []
+
+<../Figures/ci_K4.png, id=485, 665.3658pt x 437.4744pt>
+File: ../Figures/ci_K4.png Graphic file (type png)
+<use ../Figures/ci_K4.png>
+Package pdftex.def Info: ../Figures/ci_K4.png  used on input line 1273.
+(pdftex.def)             Requested size: 242.45628pt x 159.41315pt.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 1273--1274
+[][][] 
+ []
+
+<../Figures/ci_K7.png, id=486, 659.5842pt x 437.4744pt>
+File: ../Figures/ci_K7.png Graphic file (type png)
+<use ../Figures/ci_K7.png>
+Package pdftex.def Info: ../Figures/ci_K7.png  used on input line 1279.
+(pdftex.def)             Requested size: 242.45628pt x 160.80829pt.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 1279--1280
+[][][] 
+ []
+
+<../Figures/ci_K9.png, id=487, 656.9343pt x 437.4744pt>
+File: ../Figures/ci_K9.png Graphic file (type png)
+<use ../Figures/ci_K9.png>
+Package pdftex.def Info: ../Figures/ci_K9.png  used on input line 1285.
+(pdftex.def)             Requested size: 242.45628pt x 161.4558pt.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 1285--1286
+[][][] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1298.
+
+
+Underfull \hbox (badness 2050) in paragraph at lines 1300--1308
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3128) in paragraph at lines 1300--1308
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1308.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[19]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1308.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[20 <../Figures/boxplot_K2.png (PNG copy)> <../Figures/boxplot_K4.png (PNG copy
+)> <../Figures/boxplot_K7.png (PNG copy)> <../Figures/boxplot_K9.png (PNG copy)
+>]
+<../Figures/trainingsverlauf_ppo_default.png, id=509, 3946.745pt x 2525.435pt>
+File: ../Figures/trainingsverlauf_ppo_default.png Graphic file (type png)
+<use ../Figures/trainingsverlauf_ppo_default.png>
+Package pdftex.def Info: ../Figures/trainingsverlauf_ppo_default.png  used on i
+nput line 1316.
+(pdftex.def)             Requested size: 242.45538pt x 167.974pt.
+
+Overfull \hbox (6.79909pt too wide) in paragraph at lines 1316--1317
+[][][] 
+ []
+
+<../Figures/trainingsverlauf_ppo_optimized.png, id=510, 3737.965pt x 2589.675pt
+>
+File: ../Figures/trainingsverlauf_ppo_optimized.png Graphic file (type png)
+<use ../Figures/trainingsverlauf_ppo_optimized.png>
+Package pdftex.def Info: ../Figures/trainingsverlauf_ppo_optimized.png  used on
+ input line 1324.
+(pdftex.def)             Requested size: 242.40588pt x 167.97914pt.
+
+Overfull \hbox (6.74959pt too wide) in paragraph at lines 1324--1325
+[][][] 
+ []
+
+
+Underfull \vbox (badness 2057) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1359.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[21 <../Figures/ci_K2.png (PNG copy)> <../Figures/ci_K4.png (PNG copy)> <../Fig
+ures/ci_K7.png (PNG copy)> <../Figures/ci_K9.png (PNG copy)>]
+Underfull \hbox (badness 2027) in paragraph at lines 1359--1361
+|   []   |   []   |   []   |   []   |   []   [][]|   []
+ []
+
+
+Underfull \hbox (badness 1360) in paragraph at lines 1364--1365
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 6078) in paragraph at lines 1364--1365
+|   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 5939) in paragraph at lines 1364--1365
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1983) in paragraph at lines 1364--1365
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3219) in paragraph at lines 1380--1381
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3354) in paragraph at lines 1380--1381
+|   []   |   []   |   []   |   []   |   []   |   []   [][]|   []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1380--1381
+|   []   |   [][] []|   []   |   []
+ []
+
+
+Underfull \vbox (badness 1571) has occurred while \output is active []
+
+
+Underfull \hbox (badness 7558) in paragraph at lines 1382--1385
+|   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 5652) in paragraph at lines 1387--1388
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1388.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[22 <../Figures/trainingsverlauf_ppo_default.png> <../Figures/trainingsverlauf_
+ppo_optimized.png>]
+Underfull \hbox (badness 2318) in paragraph at lines 1390--1395
+|   []   |   []   [][]|   []   |   []   |   []   |   []   |   []
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1403.
+
+
+Underfull \hbox (badness 1424) in paragraph at lines 1405--1416
+|   []   |   []   |   []   |   []   |   []   |   []   [][]|   []   |   []
+ []
+
+
+Underfull \hbox (badness 1521) in paragraph at lines 1405--1416
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [] 
+  |   []
+ []
+
+<../Figures/soll_vs_ist_kreisbahn.png, id=530, 2870.725pt x 1810.765pt>
+File: ../Figures/soll_vs_ist_kreisbahn.png Graphic file (type png)
+<use ../Figures/soll_vs_ist_kreisbahn.png>
+Package pdftex.def Info: ../Figures/soll_vs_ist_kreisbahn.png  used on input li
+ne 1420.
+(pdftex.def)             Requested size: 242.45628pt x 152.93211pt.
+<../Figures/soll_vs_ist_kreisbahn_opt.png, id=531, 2870.725pt x 1814.78pt>
+File: ../Figures/soll_vs_ist_kreisbahn_opt.png Graphic file (type png)
+<use ../Figures/soll_vs_ist_kreisbahn_opt.png>
+Package pdftex.def Info: ../Figures/soll_vs_ist_kreisbahn_opt.png  used on inpu
+t line 1426.
+(pdftex.def)             Requested size: 242.45628pt x 153.27121pt.
+<../Figures/basis_orientaion_ppo.png, id=532, 2774.365pt x 1838.87pt>
+File: ../Figures/basis_orientaion_ppo.png Graphic file (type png)
+<use ../Figures/basis_orientaion_ppo.png>
+Package pdftex.def Info: ../Figures/basis_orientaion_ppo.png  used on input lin
+e 1437.
+(pdftex.def)             Requested size: 242.45628pt x 160.69308pt.
+<../Figures/basis_orientation_ppo_optimized.png, id=533, 4111.36pt x 2959.055pt
+>
+File: ../Figures/basis_orientation_ppo_optimized.png Graphic file (type png)
+<use ../Figures/basis_orientation_ppo_optimized.png>
+Package pdftex.def Info: ../Figures/basis_orientation_ppo_optimized.png  used o
+n input line 1443.
+(pdftex.def)             Requested size: 242.45628pt x 174.46533pt.
+
+Underfull \hbox (badness 2096) in paragraph at lines 1457--1457
+[]\T1/ptm/n/it/10 TABLE 7: |Per-for-mance of PPO agent be-fore and af-
+ []
+
+
+Underfull \hbox (badness 1590) in paragraph at lines 1457--1457
+\T1/ptm/n/it/10 ter op-ti-miza-tion. The op-ti-mized PPO []|   []   |   []
+ []
+
+
+Overfull \hbox (8.1007pt too wide) in paragraph at lines 1476--1491
+ [][] 
+ []
+
+
+Underfull \hbox (badness 2111) in paragraph at lines 1493--1495
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Overfull \hbox (4.98418pt too wide) in paragraph at lines 1496--1497
+[]\T1/ptm/n/it/10 Base sta-bi-liza-tion []|   []   |   []   [][]|   []   |   []
+
+ []
+
+
+Underfull \hbox (badness 4120) in paragraph at lines 1498--1501
+|   []   |   []   [][]|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1498--1501
+|   []   |   []   |   []   |   []   |   []   |   []   []\T1/ptm/n/it/10 30
+ []
+
+
+Underfull \hbox (badness 3746) in paragraph at lines 1498--1501
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1503--1504
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 4366) in paragraph at lines 1503--1504
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1504.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[23]
+
+Package xcolor Warning: Incompatible color definition on input line 1505.
+
+
+Underfull \hbox (badness 2080) in paragraph at lines 1506--1515
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1688) in paragraph at lines 1506--1515
+|   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2478) in paragraph at lines 1519--1519
+[]\T1/ptm/n/it/10 TABLE 8: |[]|   []   |   []   |   []   |   []   |   []   |   
+[]
+ []
+
+
+Overfull \hbox (6.94073pt too wide) in paragraph at lines 1541--1549
+[]|   []   |   []   |   []   |   [][] []|   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3601) in paragraph at lines 1541--1549
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1552) in paragraph at lines 1541--1549
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1902) in paragraph at lines 1541--1549
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2126) in paragraph at lines 1541--1549
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \vbox (badness 3989) has occurred while \output is active []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1549.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[24 <../Figures/soll_vs_ist_kreisbahn.png> <../Figures/soll_vs_ist_kreisbahn_op
+t.png> <../Figures/basis_orientaion_ppo.png> <../Figures/basis_orientation_ppo_
+optimized.png>]
+Underfull \hbox (badness 8038) in paragraph at lines 1550--1555
+[]|   []   |   []   |   []   |   []   |   [][] []|   []   |   []
+ []
+
+
+Underfull \hbox (badness 1867) in paragraph at lines 1577--1585
+|   []   |   []   [][][]\T1/ptm/n/it/10 sec-tion IV[][][] []|   []   |   []   |
+   []   |   []   |   []
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1586.
+
+
+Underfull \hbox (badness 1540) in paragraph at lines 1587--1599
+|   []   |   []   |   []   |   []   [][][]\T1/ptm/n/it/10 Ta-ble 5[][][] []|   
+[]   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1708) in paragraph at lines 1587--1599
+|   []   []\T1/ptm/n/it/10 and []|   []   |   []   |   []   |   []   |   []   |
+   []
+ []
+
+
+Underfull \hbox (badness 2837) in paragraph at lines 1587--1599
+[][]|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1661) in paragraph at lines 1587--1599
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2460) in paragraph at lines 1605--1605
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3291) in paragraph at lines 1626--1635
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2512) in paragraph at lines 1626--1635
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3168) in paragraph at lines 1626--1635
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1635.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[25]
+Underfull \hbox (badness 1365) in paragraph at lines 1649--1656
+[]|   []   |   []   |   []   |   []   |   [][] []|   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 4316) in paragraph at lines 1649--1656
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2486) in paragraph at lines 1649--1656
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1442) in paragraph at lines 1657--1670
+|   []   |   []   |   []   |   []   |   []   |   [][][]|   []
+ []
+
+
+Underfull \hbox (badness 2111) in paragraph at lines 1671--1676
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Overfull \hbox (4.34386pt too wide) in paragraph at lines 1677--1684
+[]|   [][] []|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1677--1684
+|   []   |   []   |   []   [][][]\T1/ptm/n/it/10 sec-tion IV[][][][]|   []   | 
+  []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 6493) in paragraph at lines 1677--1684
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1685.
+
+
+Underfull \hbox (badness 4036) in paragraph at lines 1697--1698
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3364) in paragraph at lines 1697--1698
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 7667) in paragraph at lines 1697--1698
+|   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1697--1698
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1881) in paragraph at lines 1697--1698
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3579) in paragraph at lines 1722--1733
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2245) in paragraph at lines 1722--1733
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1734.
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1734.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[26]
+<../Figures/rampe_1.png, id=570, 2906.86pt x 1834.855pt>
+File: ../Figures/rampe_1.png Graphic file (type png)
+<use ../Figures/rampe_1.png>
+Package pdftex.def Info: ../Figures/rampe_1.png  used on input line 1759.
+(pdftex.def)             Requested size: 242.45628pt x 153.03487pt.
+<../Figures/rampe_opt_1.png, id=571, 2906.86pt x 1834.855pt>
+File: ../Figures/rampe_opt_1.png Graphic file (type png)
+<use ../Figures/rampe_opt_1.png>
+Package pdftex.def Info: ../Figures/rampe_opt_1.png  used on input line 1765.
+(pdftex.def)             Requested size: 242.45628pt x 153.03487pt.
+<../Figures/basis_ori_1.png, id=572, 1387.1825pt x 919.435pt>
+File: ../Figures/basis_ori_1.png Graphic file (type png)
+<use ../Figures/basis_ori_1.png>
+Package pdftex.def Info: ../Figures/basis_ori_1.png  used on input line 1776.
+(pdftex.def)             Requested size: 242.45628pt x 160.69308pt.
+<../Figures/basis_ori_opt_1.png, id=573, 2774.365pt x 1838.87pt>
+File: ../Figures/basis_ori_opt_1.png Graphic file (type png)
+<use ../Figures/basis_ori_opt_1.png>
+Package pdftex.def Info: ../Figures/basis_ori_opt_1.png  used on input line 178
+2.
+(pdftex.def)             Requested size: 242.45628pt x 160.69308pt.
+
+Overfull \hbox (5.73253pt too wide) in paragraph at lines 1802--1817
+ [][] 
+ []
+
+
+Underfull \hbox (badness 1728) in paragraph at lines 1820--1821
+[]\T1/ptm/n/it/10 that trajectory-specific []|   []   |   []   |   []   |   [] 
+  |   []
+ []
+
+
+Underfull \hbox (badness 3189) in paragraph at lines 1822--1823
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [
+]   |   []
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1824.
+
+
+Underfull \hbox (badness 1502) in paragraph at lines 1825--1834
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1721) in paragraph at lines 1825--1834
+|   []   |   []   |   []   |   []   |   []   |   []   []\T1/ptm/n/it/10 end-eff
+ector []|   []
+ []
+
+
+Underfull \hbox (badness 1796) in paragraph at lines 1825--1834
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2707) in paragraph at lines 1825--1834
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 4441) in paragraph at lines 1825--1834
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 4036) in paragraph at lines 1825--1834
+|   []   |   []   |   []   |   []   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1834.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[27]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \hbox (badness 2799) in paragraph at lines 1837--1848
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 3460) in paragraph at lines 1837--1848
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \vbox (badness 1603) has occurred while \output is active []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1848.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[28 <../Figures/rampe_1.png> <../Figures/rampe_opt_1.png> <../Figures/basis_ori
+_1.png (PNG copy)> <../Figures/basis_ori_opt_1.png>]
+Underfull \hbox (badness 1565) in paragraph at lines 1849--1860
+|   []   |   [][][]|   []   []\T1/ptm/n/it/10 clipped sur-ro-gate ob-jec-tive [
+]|   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1460) in paragraph at lines 1849--1860
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2837) in paragraph at lines 1862--1870
+[]\T1/ptm/b/n/10 Limitations and Fu-ture Work[]|   [][][]|   [][] \T1/ptm/n/it/
+10 Sev-eral lim-i-ta-tions
+ []
+
+
+Underfull \hbox (badness 3514) in paragraph at lines 1862--1870
+\T1/ptm/n/it/10 should be ac-knowl-edged. First, a sim-to-real gap re-
+ []
+
+
+Underfull \hbox (badness 4846) in paragraph at lines 1862--1870
+\T1/ptm/n/it/10 mains[]|   []   |   []   |   []   |   []   |   []   |   []   | 
+  []
+ []
+
+
+Underfull \hbox (badness 7047) in paragraph at lines 1862--1870
+[][]|   []   |   []   |   []   |   []   |   []   |   []   |   []   [][][]\T1/pt
+m/n/it/10 sec-
+ []
+
+
+Underfull \hbox (badness 2042) in paragraph at lines 1862--1870
+|   []   |   []   |   []   [][]|   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2790) in paragraph at lines 1862--1870
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1472) in paragraph at lines 1862--1870
+|   []   |   []   |   []   [][]|   []   |   []   |   [][][]|   []   |   []   | 
+  []
+ []
+
+
+Underfull \hbox (badness 5008) in paragraph at lines 1862--1870
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 6332) in paragraph at lines 1862--1870
+|   []   |   []   [][]|   []   |   [][][]|   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1735) in paragraph at lines 1862--1870
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 6893) in paragraph at lines 1862--1870
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+LaTeX Warning: Reference `fig:physicaltestbed' on page 1 undefined on input lin
+e 1881.
+
+
+Underfull \hbox (badness 2680) in paragraph at lines 1871--1884
+[]\T1/ptm/n/it/10 Future work should ad-dress these gaps []|   []   [][]|   []
+ []
+
+
+Underfull \hbox (badness 2020) in paragraph at lines 1871--1884
+|   []   |   []   |   []   |   []   []\T1/ptm/n/it/10 (i) do-main ran-dom-iza-t
+ion
+ []
+
+
+Underfull \hbox (badness 1960) in paragraph at lines 1871--1884
+|   []   |   []   |   []   |   []   []\T1/ptm/n/it/10 sim-to-real []|   []   | 
+  []   |   []
+ []
+
+
+Underfull \hbox (badness 3039) in paragraph at lines 1886--1897
+|   []   |   []   |   []   |   []   []\T1/ptm/n/it/10 deep re-in-force-ment lea
+rn-
+ []
+
+
+Underfull \hbox (badness 3049) in paragraph at lines 1886--1897
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1521) in paragraph at lines 1886--1897
+|   []   |   []   |   []   |   []   []\T1/ptm/n/it/10 free-floating []|   []   
+|   []   |   []
+ []
+
+
+Underfull \hbox (badness 4036) in paragraph at lines 1886--1897
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2913) in paragraph at lines 1886--1897
+|   []   |   []   |   []   |   []   |   [][]\T1/ptm/n/it/10 . []|   []   |   []
+
+ []
+
+
+Underfull \hbox (badness 1371) in paragraph at lines 1886--1897
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 2591) in paragraph at lines 1886--1897
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1897.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[29]
+Underfull \hbox (badness 2922) in paragraph at lines 1900--1905
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [] 
+  |   []
+ []
+
+
+Underfull \hbox (badness 6268) in paragraph at lines 1900--1905
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 4699) in paragraph at lines 1906--1913
+[]\T1/ptm/n/it/10 re-main for real-world de-ploy-ment, []|   []   |   []   |   
+[]   |   []
+ []
+
+
+Underfull \hbox (badness 1515) in paragraph at lines 1906--1913
+|   []   |   []   []\T1/ptm/n/it/10 learning-based con-trollers []|   []   |   
+[]   |   []
+ []
+
+
+Underfull \hbox (badness 1648) in paragraph at lines 1906--1913
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+<../Figures/oos1.png, id=629, 1453.43pt x 1090.0725pt>
+File: ../Figures/oos1.png Graphic file (type png)
+<use ../Figures/oos1.png>
+Package pdftex.def Info: ../Figures/oos1.png  used on input line 1928.
+(pdftex.def)             Requested size: 240.24814pt x 180.17023pt.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 1928--1929
+ [][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1931--1931
+|   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 5403) in paragraph at lines 1931--1931
+|   []   |   []   |   []   |   []   |   []   []\T1/ptm/n/it/10 for []|   []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1931--1931
+|   []   |   [][][]|   []   |   []   |   []   |   []
+ []
+
+
+Underfull \hbox (badness 1681) in paragraph at lines 1931--1931
+|   []   |   []   |   []   |   []   |   [][]\T1/ptm/n/it/10 .
+ []
+
+
+Underfull \hbox (badness 1533) in paragraph at lines 1939--1941
+|   []   |   []   [][]|   []   |   []   |   []   |   []   |   []
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1942.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1946.
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 1958.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[30 <../Figures/oos1.png (PNG copy)>]
+LaTeX Font Info:    Calculating math sizes for size <7.61> on input line 2058.
+
+Underfull \hbox (badness 3148) in paragraph at lines 2143--2144
+[]\T1/ptm/m/n/7.61 MathWorks, ``Solver Con-fig-u-ra-tion,'' MAT-LAB & Simulink 
+Doc-u-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2148--2149
+\T1/ptm/m/n/7.61 mathworks . com / help / simulink / gui / ^^\xedstepsizefundam
+entalsampletime .
+ []
+
+
+Underfull \hbox (badness 1509) in paragraph at lines 2153--2154
+[]\T1/ptm/m/n/7.61 MathWorks, ``Re-in-force-ment Learn-ing Toolbox---rlPPOAgent
+,'' MAT-
+ []
+
+
+Underfull \hbox (badness 3354) in paragraph at lines 2192--2193
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [
+]   |   []   |   []
+ []
+
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 2204.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[31]
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 2204.
+
+<../Figures/Bewerbungsfoto_Ermisch.jpg, id=676, 616.55344pt x 862.72313pt>
+File: ../Figures/Bewerbungsfoto_Ermisch.jpg Graphic file (type jpg)
+<use ../Figures/Bewerbungsfoto_Ermisch.jpg>
+Package pdftex.def Info: ../Figures/Bewerbungsfoto_Ermisch.jpg  used on input l
+ine 2204.
+(pdftex.def)             Requested size: 64.55656pt x 90.3319pt.
+File: ../Figures/Bewerbungsfoto_Ermisch.jpg Graphic file (type jpg)
+<use ../Figures/Bewerbungsfoto_Ermisch.jpg>
+Package pdftex.def Info: ../Figures/Bewerbungsfoto_Ermisch.jpg  used on input l
+ine 2204.
+(pdftex.def)             Requested size: 64.55656pt x 90.3319pt.
+<../Figures/egk.jpg, id=679, 138.2766pt x 153.6942pt>
+File: ../Figures/egk.jpg Graphic file (type jpg)
+<use ../Figures/egk.jpg>
+Package pdftex.def Info: ../Figures/egk.jpg  used on input line 2221.
+(pdftex.def)             Requested size: 72.27136pt x 80.32948pt.
+File: ../Figures/egk.jpg Graphic file (type jpg)
+<use ../Figures/egk.jpg>
+Package pdftex.def Info: ../Figures/egk.jpg  used on input line 2221.
+(pdftex.def)             Requested size: 72.27136pt x 80.32948pt.
+
+Underfull \hbox (badness 8094) in paragraph at lines 2221--2222
+\T1/ptm/n/n/8 Cameroon. He re-ceived the Dipl.-Ing. and
+ []
+
+
+Underfull \hbox (badness 1394) in paragraph at lines 2221--2222
+[] \T1/ptm/n/n/8 (summa cum laude) de-grees in elec-
+ []
+
+
+Underfull \hbox (badness 2837) in paragraph at lines 2221--2222
+\T1/ptm/n/n/8 tri-cal en-gi-neer-ing from RWTH Aachen Uni-
+ []
+
+File: ../bullet.png Graphic file (type png)
+<use ../bullet.png>
+Package pdftex.def Info: ../bullet.png  used on input line 2224.
+(pdftex.def)             Requested size: 5.0pt x 14.6871pt.
+File: ../notaglineLogo.png Graphic file (type png)
+<use ../notaglineLogo.png>
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 2227.
+(pdftex.def)             Requested size: 91.32pt x 23.1352pt.
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Overfull \hbox (505.12177pt too wide) has occurred while \output is active
+[]
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[32
+
+ <../Figures/Bewerbungsfoto_Ermisch.jpg> <../Figures/egk.jpg>]
+(./access_diff.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+ ***********
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were undefined references.
+
+Package rerunfilecheck Info: File `access_diff.out' has not changed.
+(rerunfilecheck)             Checksum: 922B83443D6F2A8202D88B46C2D2A269;5471.
+ ) 
+Here is how much of TeX's memory you used:
+ 17825 strings out of 467533
+ 296779 string characters out of 5423669
+ 907644 words of memory out of 5000000
+ 46321 multiletter control sequences out of 15000+600000
+ 737776 words of font info for 199 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 83i,20n,131p,2399b,664s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{section*.32} has been referenced but does not exist
+, replaced by a fixed one
+
+<c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texli
+ve/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2025/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmi6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pf
+b><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texl
+ive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><c:/texlive/
+2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2025/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pf
+b><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/tex
+live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2025/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2025/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmsy9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/
+amsfonts/latxfont/lasy6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsf
+onts/latxfont/linew10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfon
+ts/symbols/msbm10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8
+a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/texli
+ve/2025/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb><c:/texlive/2025/texmf-
+dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2025/texmf-dist/fonts/type
+1/urw/times/utmb8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a
+.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on access_diff.pdf (32 pages, 14805983 bytes).
+PDF statistics:
+ 850 PDF objects out of 1000 (max. 8388607)
+ 672 compressed objects within 7 object streams
+ 145 named destinations out of 1000 (max. 500000)
+ 426 words of extra memory for PDF output out of 10000 (max. 10000000)
+
