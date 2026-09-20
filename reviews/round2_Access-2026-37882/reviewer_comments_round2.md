@@ -33,28 +33,45 @@ von `\hlone` (Paket `soul`), der markierte Text wird davor und danach fortgesetz
 
 - Modell und Code vereinheitlicht und reproduzierbar: alle Parameter in `benchmarkConfig.m`, Modellmigration
   `parametrizeSpaceRobotModel.m`, jede Ergebnisdatei speichert Git-Commit und Modell-Prüfsumme.
-- **Hauptbenchmark `results/benchmark_v2` fertig** (19.09.2026): 6 Default-Agenten + optimiertes PPO, je 5 Seeds
-  (0–4), 1000 Episoden, zufällige Startpose ±1° im Training; Auswertung deterministisch auf 31 Startzuständen
-  (nominal + 30 zufällig, gleich für alle Agenten).
-- **Ergebnis (Mittel ± Std über 5 Seeds, 30 zufällige Startzustände):**
+- **Hauptbenchmark `results/benchmark_v2` fertig mit 10 Seeds** (20.09.2026): 6 Default-Agenten + optimiertes PPO,
+  je 10 Seeds (0–9) = 70 Läufe, 1000 Episoden, zufällige Startpose ±1° im Training; Auswertung deterministisch auf
+  31 Startzuständen (nominal + 30 zufällig, gleich für alle Agenten). Keine Fehler, Laufzeiten 6,5–36 min je Lauf.
+  Optimiertes PPO = Hyperparameter aus `PPO_1.mat` (10.12.2025), Agenten neu trainiert.
+- **Tabelle 1 (Robustheit, alle Läufe), Fisher-Test gegen TRPO default nach Holm:**
 
-  | Konfiguration | K1 | K2 | K4 | Seeds mit Abbruch | T3 |
-  |---|---|---|---|---|---|
-  | TRPO default | −0,25 ± 0,20 | 0,0078 ± 0,0076 | 0,023 ± 0,005 | 0/5 | 10,7 min |
-  | PPO optimiert | −0,20 ± 0,13 | 0,0050 ± 0,0016 | 0,025 ± 0,021 | 0/5 | 8,6 min |
-  | PPO default | −44 ± 40 | 0,48 ± 0,52 | 0,11 ± 0,06 | 3/5 | 7,9 min |
-  | SAC default | −25 ± 26 | 0,37 ± 0,24 | 0,09 ± 0,09 | 2/5 | 35,0 min |
-  | DDPG default | −21 ± 21 | 0,13 ± 0,08 | 0,30 ± 0,13 | 2/5 | 24,1 min |
-  | TD3 default | −42 ± 52 | 0,64 ± 0,83 | 0,23 ± 0,14 | 3/5 (Kollisionen) | 29,3 min |
-  | PG default | −59 ± 33 | 1,10 ± 0,84 | 0,15 ± 0,08 | 4/5 | 6,5 min |
+  | Konfiguration | erfolgreiche Läufe | Abbruchrate | Abbruchgrund | p (Holm) |
+  |---|---|---|---|---|
+  | TRPO default | 10/10 | 0 % | – | – |
+  | PPO optimiert | 10/10 | 0 % | – | 1,0 |
+  | SAC default | 6/10 | 40 % | Gelenkgrenze | 0,17 |
+  | TD3 default | 5/10 | 48 % | 25 % Kollisionen | 0,098 |
+  | DDPG default | 4/10 | 52 % | 22 % Kollisionen | 0,043 |
+  | PPO default | 3/10 | 70 % | 14 % Kollisionen | 0,015 |
+  | PG default | 2/10 | 80 % | Gelenkgrenze | 0,0043 |
 
-  TRPO default ist bei K1/K2 gegen jeden anderen Default-Agenten signifikant besser (Mann-Whitney, Seed-Ebene,
-  p = 0,008–0,016 unkorrigiert). PPO optimiert ist nicht von TRPO default zu unterscheiden (alle p ≥ 0,42).
-- **⚠️ Neue Hauptaussage nötig (Entscheidung mit Prof offen):** „PPO bietet unter den Default-Agenten den besten
-  Kompromiss“ hält nicht. Vorschlag: Unter Toolbox-Standardwerten ist nur TRPO über alle Seeds robust, PPO und die
-  Off-Policy-Verfahren sind stark seed-abhängig, das Tuning beseitigt die Seed-Abhängigkeit von PPO und erreicht
-  TRPO-Niveau bei kürzerer Trainingszeit. Einschränkung: Default-Lernrate 0,01 benachteiligt vermutlich PPO und
-  Off-Policy-Verfahren.
+- **Tabelle 2 (nur erfolgreiche Läufe), Mann-Whitney gegen TRPO default nach Holm:**
+
+  | Konfiguration | n | K2 Mittel ± Std | K2 Median [min–max] | K4 Median | T2 | p (K2) |
+  |---|---|---|---|---|---|---|
+  | PPO optimiert | 10 | 0,0041 ± 0,0023 | 0,0035 [0,0016–0,0082] | 0,014 | 9,2 min | 0,089 |
+  | TRPO default | 10 | 0,0145 ± 0,0196 | 0,0061 [0,0025–0,0656] | 0,025 | 11,3 min | – |
+  | PPO default | 3 | 0,0134 ± 0,0081 | 0,0092 | 0,054 | 8,4 min | zu wenige Läufe |
+  | PG default | 2 | 0,0177 ± 0,0036 | 0,0177 | 0,030 | 6,9 min | zu wenige Läufe |
+  | TD3 default | 5 | 0,0886 ± 0,0560 | 0,0911 | 0,070 | 29,1 min | 0,0093 |
+  | DDPG default | 4 | 0,1599 ± 0,0919 | 0,1340 | 0,324 | 24,3 min | 0,0060 |
+  | SAC default | 6 | 0,2168 ± 0,1098 | 0,1866 | 0,159 | 35,2 min | 0,0010 |
+
+  TRPO streut schief (drei schwache Seeds), deshalb ist der Median aussagekräftiger als Mittel ± Std. Offen: ob
+  Tab. 2 im Paper Mittel ± Std, Median oder beides zeigt (mit Prof abstimmen).
+- **Neue Hauptaussage (Vorschlag, mit Prof abzustimmen):** Unter Toolbox-Standardwerten schließt nur TRPO alle
+  Läufe ohne Sicherheitsabbruch ab. Unter den erfolgreichen Läufen erreicht das optimierte PPO den kleinsten
+  Bahnfehler bei kürzerer Trainingszeit, ohne dass der Abstand zu TRPO statistisch gesichert ist (p = 0,089).
+  SAC, DDPG und TD3 sind auch im Erfolgsfall signifikant schlechter. Einschränkung: Default-Lernrate 0,01
+  benachteiligt vermutlich PPO und die Off-Policy-Verfahren.
+- **Offene Frage zum optimierten PPO:** Die Hyperparameter stammen aus einer Rastersuche vom Dezember 2025, also vor
+  der Vereinheitlichung von Modell und Protokoll, ausgewählt über je einen Seed. Im Repo liegt zusätzlich eine
+  Bayes-Optimierung (Juli 2026, 60 Trials) mit ganz anderen Werten, die nicht verwendet wird. Entweder im Text
+  offenlegen oder die Suche unter dem finalen Modell wiederholen (8 Konfigurationen × 3 Seeds, ca. 40 min).
 - **Modell erweitert (19.09.2026, Code-Stand nach Commit 982ffe2):** Stresstest-Bedingungen als Konfiguration in
   `benchmarkConfig`: Messrauschen auf allen 23 Beobachtungen (`noise.obs_std`, Block „obs noise“, neue Folge je
   Episode, in der Auswertung gleich für alle Agenten), äußeres Gelenkmoment (`dist.tau`, `dist.t_on/t_off`, Block
@@ -118,7 +135,7 @@ Nicht von den Gutachtern genannt, aber für ein neues Review-Team angreifbar →
 | A4 | Reviewer-Tags im clean Manuskript: „(R2.13)“, „(R2.12)“, „raised independently by both reviewers“ | Statistik-Abschnitt, Sensitivity Analysis | Entfernt | ✅ |
 | A5 | Alle 8 Sensitivitätsvarianten schlechter als Default-PPO; „ranking robust“ nur für PPO geprüft. Erklärt durch A18 | Sensitivity Analysis | Mit R2.4b neu rechnen | 🔬 (Teil C) |
 | A6 | Tabelle I: „Formal Ver. = Yes“ für die eigene Arbeit überzeichnet | `tab:sample` | „Formal Meth. = Partial†“ mit Fußnote | ✅ |
-| A7 | Abstract nach Ergänzungen > 250 Wörter | Abstract | Gestrafft auf 243 Wörter (bei Teil B erneut prüfen) | ✅ |
+| A7 | Abstract nach Ergänzungen > 250 Wörter | Abstract | Gestrafft; nach den Änderungen vom 20.09.2026 bei 252 Wörtern, beim Neuschreiben in Teil B unter 250 bringen | ⬜ (Teil B) |
 | A8 | K7 im Code = 1 − mittlerer Jerk (höher = glatter), Paper-Definition umgekehrt. Betrifft alle K7-Werte, Abb. 12c/13c, Contributions, Conclusion („48.5 % smoother“) | `computeKPIsFromLogs.m`, alle K7-Stellen | Code korrigiert (Definition im Paper war richtig); alle K7-Werte neu | ✅ Code / ⬜ Werte (Teil B/C) |
 | A9 | Tab. 5 und Tab. 6/Abb. 12/13 aus verschiedenen Daten (K2 PPO 0,0257 vs. Median ≈ 0,33; Tab. 6 zeigt TRPO bei K2 signifikant besser, Text das Gegenteil) | Sec. VI | Alle Tabellen/Abbildungen aus `analyzeBenchmark` | ⬜ (Teil B) |
 | A10 | Ungleiche Trainingsbedingungen: 5 Agenten mit Kreis r = 0,4, PPO mit r = 0,5; je Agent anderer StopTrainingValue | Einzelskripte | Neutraining unter identischen Bedingungen; T3-Werte in Sec. V (Computational Overhead) aktualisiert | ✅ Experiment + Sec. V / ⬜ Tab. 5 (Teil B) |
@@ -131,7 +148,7 @@ Nicht von den Gutachtern genannt, aber für ein neues Review-Team angreifbar →
 | A18 | Ablations-/Sensitivitätsagenten mit dritter PPO-Konfiguration (Actor-LR 5,7e-5, H 600, B 200) | Sec. VII-B/C | Neu trainieren | 🔬 (Teil C) |
 | A19 | Kollision beendete Episode nicht; Assertion für Gelenkgrenzen existierte nicht; „task completion“ als Abbruchbedingung gibt es nicht | Contributions, Sec. III-C, IV, V | Abbruch implementiert, Text angepasst (Joint-Limit-Monitor im Reward-Block) | ✅ Modell + Text / ⬜ Ergebnis-Sätze in Sec. V (K5/K6-Werte, Teil B) |
 | A20 | Mit konstanter Terminalstrafe −1 beenden Agenten Episoden absichtlich (Pilot: 0 % vollständige Episoden) | Sec. IV Reward | r_fail = −(N − k + 1), Gl. `eq:rfail`, Begründung mit Pilot | ✅ |
-| A21 | Modellparameter fehlten im Paper; URDF hatte 65 kg; Aussage „identified values from literature [b12]“ trifft nicht zu | Sec. III-B | URDF angeglichen; Tabelle `tab:robot_params`; Satz ersetzt. **[b12] ist jetzt unzitiert → Bibitem entfernen oder an anderer Stelle zitieren** | ✅ / ⬜ [b12] |
+| A21 | Modellparameter fehlten im Paper; URDF hatte 65 kg; Aussage „identified values from literature [b12]“ trifft nicht zu | Sec. III-B | URDF angeglichen; Tabelle `tab:robot_params`; Satz ersetzt. [b12] jetzt in Related Work zitiert (Satz zur Modellidentifikation) | ✅ |
 | A23 | Abb. 7: p_x steigt linear auf ≈ 1,2e-5 Ns, Text sagt „within 1e-6 Ns“ | Sec. V Momentum | Nach A27 neu erzeugen, Satz anpassen | 🔬 (Teil C) |
 | A24 | Solver-Schritt 0,01 s (ode4) ≠ Agenten-Takt 0,1 s; Paper sagte „gleich“ | Sec. III-C, Sec. IV Action Space | Text korrigiert | ✅ |
 | A25 | Episode = Halbkreis (T = 8,5 s, 85 Schritte), nicht „one or two laps“, nicht periodisch | Sec. III-D, Sec. IV Training Procedure | Text korrigiert | ✅ |
@@ -139,7 +156,7 @@ Nicht von den Gutachtern genannt, aber für ein neues Review-Team angreifbar →
 | A27 | Impulsmonitor rechnet mit 5 kg Basismasse (Modell 25 kg), berechnet nur linearen Impuls; „pause training“ nicht implementiert | Sec. V Momentum, Abb. 6/7 | Text: Drehimpuls und „pause training“ gestrichen, Caption Abb. 6. Monitor rechnet jetzt mit `robotP` (Gesamtmassen, siehe A42), `p_tot` geloggt. Kontrolle: vorher max \|p\| = 0,3–1,9 N s (p = 10·v_Basis), jetzt 7e-8 bis 3e-4 N s (Rundungs-/Integrationsfehler ode4) | ✅ Text + Monitor / 🔬 Abb. 7 |
 | A28 | Tabelle I, Zeile „Ours“: RL Alg. nur „PPO“, obwohl 6 Verfahren verglichen werden | `tab:sample` | Alle 6 Verfahren eingetragen | ✅ |
 | A29 | Acknowledgment „solely for language editing“ stimmt nicht mehr (KI-Unterstützung bei Code und Auswertung) | Acknowledgment | Offenlegung ergänzt, Bibitem `anthropic_claude` | ✅ |
-| A30 | T2 definiert, aber nie berechnet; T1 unklar definiert | Sec. IV, Sec. VI Summary | T2 gestrichen, T1 = Std. der letzten 100 Episoden. Ggf. T3 → T2 umbenennen | ✅ / ⬜ Umbenennung (Teil B) |
+| A30 | T2 definiert, aber nie berechnet; T1 unklar definiert | Sec. IV, Sec. VI Summary | T2 gestrichen, T1 = Std. der letzten 100 Episoden. T3 → T2 umbenannt (beide Fassungen und `analyzeBenchmark`) | ✅ |
 | A31 | DDPG mit [b7] (Sutton & Barto) zitiert statt mit [b16] (Lillicrap) | Contributions | Zitat korrigiert | ✅ |
 | A32 | Caption Tab. 7 schreibt PPO den niedrigsten Wert bei K3 zu, fett markiert ist DDPG | `tab:kpi_comp` | Caption korrigiert | ✅ (mit Teil B neu prüfen) |
 | A33 | K9 im Text als ∫\|τ·q̇\|dt, in der Definition als Σ_j \|τ_j q̇_j\| | Sec. IV, Begründung K7/K9 | Text an Definition angepasst | ✅ |
@@ -151,7 +168,7 @@ Nicht von den Gutachtern genannt, aber für ein neues Review-Team angreifbar →
 | A39 | Stresstest: „K2 stays close to the nominal level“, laut Tabelle 0,0021 → 0,0078 | Sec. VII-D | Neutral formuliert | ✅ (Werte in Teil C neu, A2) |
 | A40 | „Safety metrics remain within limits“ und „does not compromise the monitored safety limits“, obwohl K6 bis 0,53 % reicht. Kausale Aussage zum Monitor nicht belegt | Sec. VII-C Safety Metrics | Neutral formuliert | ✅ (Werte in Teil C neu) |
 | A41 | Absatz „Computational Overhead“ stand hinter dem Übergangssatz „The next section …“ | Sec. V | Vor die Zusammenfassung verschoben | ✅ |
-| A42 | Solid-Blöcke „Visual“ (URDF-Import) tragen Masse: 5 kg / I = 1 kg m² an der Basis, 1 kg / 0,1 kg m² je Glied. Simuliert (auch benchmark_v2): Basis 30 kg, 6 kg m²; Glieder 2 kg, 0,2 kg m². Tab. `robot_params` und URDF nannten 25 / 1 kg; `param_scale` skalierte nur den Inertia-Anteil | Sec. III-B, Tab. `robot_params` | Code: Gesamtwerte in `benchmarkConfig` (version 2), exakte Aufteilung auf beide Blöcke, `upgradeConfig` für alte Agentendateien, URDF angeglichen; Ergebnisse bitgleich. **Paper: Tabelle auf 30 kg / 6 kg m² / 2 kg / 0,2 kg m² ändern, nach Freigabe durch Patrick** | ✅ Code / ⬜ Paper |
+| A42 | Solid-Blöcke „Visual“ (URDF-Import) tragen Masse: 5 kg / I = 1 kg m² an der Basis, 1 kg / 0,1 kg m² je Glied. Simuliert (auch benchmark_v2): Basis 30 kg, 6 kg m²; Glieder 2 kg, 0,2 kg m². Tab. `robot_params` und URDF nannten 25 / 1 kg; `param_scale` skalierte nur den Inertia-Anteil | Sec. III-B, Tab. `robot_params` | Code: Gesamtwerte in `benchmarkConfig` (version 2), exakte Aufteilung auf beide Blöcke, `upgradeConfig` für alte Agentendateien, URDF angeglichen; Ergebnisse bitgleich. Paper: Tabelle `robot_params` auf 30 kg / 6 kg m² / 2 kg / 0,2 kg m² geändert (20.09.2026) | ✅ |
 
 **Sprachliche Überarbeitung (19.09.2026, nicht markiert):** ganzes Manuskript überarbeitet (kürzere Sätze, keine
 Doppelpunkte und Semikolons im Fließtext, vorsichtigere Formulierungen, einheitliche Notation $K_1$–$K_9$,

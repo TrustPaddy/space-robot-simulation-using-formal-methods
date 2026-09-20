@@ -297,7 +297,7 @@ redundancy and a dynamics-related null-space to design the joint velocities. Att
 instead use reaction wheels or thrusters to counteract the momentum transfer \cite{b6,kaigom2011optimal}.
 These approaches offer strong performance guarantees and interpretability when the system model is
 accurate. However, they are sensitive to model uncertainties and unmodeled dynamics and require a
-detailed model identification. They are therefore difficult to apply under the data-scarce and hazardous
+detailed model identification \cite{b12}. They are therefore difficult to apply under the data-scarce and hazardous
 conditions of on-orbit operations.
 
 \subsection{Reinforcement Learning-Based Control Techniques}
@@ -412,10 +412,10 @@ file (\texttt{SpaceRobot.urdf}) imported into Simulink's multibody environment \
 \toprule
 \textbf{Parameter} & \textbf{Value} \\
 \midrule
-Base, cube with 1\,m edge length, mass & 25\,kg \\
-Base, principal moments of inertia & 5\,kg\,m$^2$ \\
-Links (4), length and mass & 1\,m, 1\,kg \\
-Links, principal moments of inertia & 0.1\,kg\,m$^2$ \\
+Base, cube with 1\,m edge length, mass & 30\,kg \\
+Base, principal moments of inertia & 6\,kg\,m$^2$ \\
+Links (4), length and mass & 1\,m, 2\,kg \\
+Links, principal moments of inertia & 0.2\,kg\,m$^2$ \\
 Viscous joint damping & 1.5\,N\,m\,s/rad \\
 Joint limits $q_1$ and $q_2$ to $q_4$ & $\pm 85^\circ$ and $\pm 170^\circ$ \\
 Joint-limit stiffness and damping & 3000\,N\,m/rad, 40\,N\,m\,s/rad \\
@@ -846,7 +846,7 @@ for mission planning.
 
 \hlone{[A30] In addition to the KPIs above, two training-related metrics are reported. $T_1$ is the
 standard deviation of the episode reward over the last 100 training episodes, an indicator of training
-stability. $T_3$ is the wall-clock training time required for 1000 episodes, an indicator of the
+stability. $T_2$ is the wall-clock training time required for 1000 episodes, an indicator of the
 computational load.}
 
 Applying these metrics to all six agents yields a common basis for comparison. The
@@ -990,7 +990,7 @@ joint-limit monitor consist of simple algebraic operations over the link states 
 $\mathcal{O}(n_{\mathrm{links}})$ per time step. The pairwise distance check of the collision monitor
 scales as $\mathcal{O}(n_{\mathrm{links}}^2)$.} For the 4-DOF arm considered here, this overhead is small
 compared with the physics simulation itself. End-to-end training times, including the full safety stack,
-are reported as metric $T_3$ in \cref{tab:kpi_comp}. \hlone{[A10] They range from about 7 minutes (PG) to
+are reported as metric $T_2$ in \cref{tab:kpi_comp}. \hlone{[A10] They range from about 7 minutes (PG) to
 35 minutes (SAC) for 1000 episodes on a standard workstation (AMD Ryzen 7 7700, 32\,GB RAM), with six
 training runs executed in parallel.} For onboard deployment, only the learned policy network needs to
 execute in the control loop. \hlone{[A14] The default and the optimized PPO agents use a compact policy
@@ -1113,7 +1113,7 @@ A13] with the protocol described there, which uses 30 random initial states for 
 \centering
 \caption{Selected performance metrics of each RL agent. The best value in each row is shown in bold.
 \hlone{[A32] PPO attains the lowest mean squared tracking error ($K_2$), the lowest base orientation
-error ($K_4$), and the lowest jerk ($K_7$), with the shortest training time ($T_3$). DDPG attains the
+error ($K_4$), and the lowest jerk ($K_7$), with the shortest training time ($T_2$). DDPG attains the
 lowest maximum error ($K_3$).} TRPO is close to PPO on several metrics but requires more training time.
 The off-policy methods (TD3, SAC, DDPG) show larger errors or a larger late-training reward variance, for
 example a high $T_1$ for DDPG. Values are averaged over 30 evaluation episodes per agent.}
@@ -1136,7 +1136,7 @@ $\boldsymbol{K_7}$: Control Smoothness (Jerk) &
 0.7498 & 0.9981 & 0.7536 & \textbf{0.6812} & 0.7125 & 0.8118 \\
 $\boldsymbol{T_1}$: Reward Std.\ (Late Training) &
 \textbf{0.6144} & 8.5168 & 9.6907 & 1.7756 & 13.1970 & 64.4764 \\
-$\boldsymbol{T_3}$: Training Time (1000 Episodes) &
+$\boldsymbol{T_2}$: Training Time (1000 Episodes) &
 $\sim$13\,min & $\sim$38\,min & $\sim$35\,min & \textbf{$\sim$8\,min} & $\sim$8\,min & $\sim$24\,min \\
 \bottomrule
 \end{tabular}
@@ -1144,7 +1144,7 @@ $\sim$13\,min & $\sim$38\,min & $\sim$35\,min & \textbf{$\sim$8\,min} & $\sim$8\
 
 The results in \cref{tab:kpi_comp} show several patterns. With respect to \emph{training stability}, TRPO
 and PPO yield the smallest late-training reward variance ($T_1 = 0.61$ and $T_1 = 1.78$,
-respectively), whereas DDPG shows the largest ($T_1 = 64.5$). The training time $T_3$ is
+respectively), whereas DDPG shows the largest ($T_1 = 64.5$). The training time $T_2$ is
 shortest for PPO ($\approx 8\,\mathrm{min}$). The off-policy methods are slower (TD3 $\approx 38\,\mathrm{min}$, SAC
 $\approx 35\,\mathrm{min}$).
 
@@ -1175,7 +1175,7 @@ runs, in line with the large $T_1$. PG does not reach reliable tracking within
 \textbf{Summary of the Comparison.} The comparison can be summarized as follows:
 \begin{itemize}
         \item PPO shows the most favorable combination of training stability (low $T_1$)\hlone{[A30]},
-        training time ($T_3$), tracking accuracy (low $K_2$), and control smoothness (low $K_7$) in this
+        training time ($T_2$), tracking accuracy (low $K_2$), and control smoothness (low $K_7$) in this
         comparison, at the cost of a moderate joint-limit violation rate.
         \item TRPO is close to PPO on most metrics, but requires more computation time
         and still incurs occasional joint-limit violations.
