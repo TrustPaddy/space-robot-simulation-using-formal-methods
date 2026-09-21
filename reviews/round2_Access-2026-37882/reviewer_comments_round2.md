@@ -122,8 +122,8 @@ Formulierungen und den Umfang der Evaluation.
 |---|-----------|----------|---------|--------|
 | R2.1 | „Formal verification“ enger fassen: nur Runtime-Monitore + Offline-Torque-Check auf vereinfachtem Modell; keine formale Verifikation von Closed-Loop-Stabilität, Task Completion, Kollisionsfreiheit über alle Trajektorien oder des vollen Simscape-Modells. Titel/Abstract dürfen keine vollständige formale Sicherheitszertifizierung suggerieren | Abstract: Satz zur Reichweite der Safety-Komponente; Contributions, Research Gap, Related Work: „formal-methods-based (runtime) safety monitoring“; Tabelle I „Formal Meth. = Partial†“ + Fußnote; Safety-Abschnitt: Einleitungssatz + explizit, was *nicht* verifiziert ist; SLDV-Caption „simplified verification model only“; Robustheitsfazit und Conclusion abgeschwächt. Zusätzlich (A19, A26, A27): Beschreibung der Monitore an die tatsächliche Umsetzung angepasst | Abstract, Sec. I, II, IV, V, Robustness, Discussion/Conclusion | ✅ |
 | R2.2 | Idealisierte Simulation (ideal sensing, zero latency, rigid body, keine Störungen) → Hauptaussage „simulation benchmark under controlled assumptions“, nicht operational readiness | Abstract-Satz; neuer Absatz nach den Annahmen (Sec. III) inkl. Verweis auf Stress-Test; Practical Implications und Conclusion begrenzt | Abstract, Sec. III, Discussion/Conclusion | ✅ |
-| R2.3a | Evaluationsumfang klein (3 Läufe, 30 Episoden, feste Startkonfiguration) → Schlussfolgerungen ausdrücklich konditional | Satz „conclusions remain conditional …“ jetzt im neuen Evaluationsabsatz (Sec. IV). Limitations-Punkt „evaluation scope“ und Robustheitsfazit beschreiben noch das alte Protokoll (3 Läufe, feste Startkonfiguration) | Sec. IV, Robustness, Limitations | ✅ Sec. IV / ⬜ Limitations, Robustheit an neues Protokoll anpassen (Teil B) |
-| R2.3b | Evaluation erweitern (Seed-Sensitivität, Generalisierung über Startzustände/Trajektorien/Parameter/Störungen) | **10 Seeds** je Konfiguration (Absprache mit Prof., 20.09.2026), alle 6 Agenten + PPO optimiert; zufällige Startpose im Training; 31 Startzustände in der Auswertung; Statistik auf Seed-Ebene (Mann-Whitney, Holm) nur über die erfolgreichen Läufe, Abbruchraten mit Fisher. Methodik in Sec. IV eingebaut. Ergebnisse (Tab. 5–7, Abb. 12–14) noch einzuarbeiten | Sec. IV, VI, VII, Tab. KPI-Vergleich, Statistik, Boxplots/CI-Plots | ✅ Methodentext / 🔬 Seeds 5–9 rechnen / ⬜ Ergebnisse (Teil B) / 🔬 Trajektorien, Störungen (Teil C) |
+| R2.3a | Evaluationsumfang klein (3 Läufe, 30 Episoden, feste Startkonfiguration) → Schlussfolgerungen ausdrücklich konditional | Satz „conclusions remain conditional …“ jetzt im neuen Evaluationsabsatz (Sec. IV). Limitations-Punkt „evaluation scope“ und Robustheitsfazit beschreiben noch das alte Protokoll (3 Läufe, feste Startkonfiguration) | Sec. IV, Robustness, Limitations | ✅ Sec. IV + Limitations (21.09.2026: 10 Seeds, 31 Startzustände, zwei Bahnen, wenige erfolgreiche Läufe bei einigen Agenten) / ⬜ Robustheitsfazit (Teil C) |
+| R2.3b | Evaluation erweitern (Seed-Sensitivität, Generalisierung über Startzustände/Trajektorien/Parameter/Störungen) | **10 Seeds** je Konfiguration (Absprache mit Prof., 20.09.2026), alle 6 Agenten + PPO optimiert; zufällige Startpose im Training; 31 Startzustände in der Auswertung; Statistik auf Seed-Ebene (Mann-Whitney, Holm) nur über die erfolgreichen Läufe, Abbruchraten mit Fisher. Methodik in Sec. IV eingebaut. Ergebnisse Hauptbenchmark in Sec. VI/VII-A eingebaut (21.09.2026) | Sec. IV, VI, VII, Tab. KPI-Vergleich, Statistik, Boxplots/CI-Plots | ✅ Methodentext + Ergebnisse (Teil B) / ⬜ Trajektorien, Störungen im Text (Teil C, gerechnet) |
 | — | **Trennung Abbruchrate / KPIs (Prof., 20.09.2026)** | Zwei Tabellen statt einer: Tab. 1 Robustheit über ALLE Läufe (erfolgreiche Läufe, Abbruchrate, Anteil Kollisionen), Tab. 2 KPIs NUR über die erfolgreichen Läufe (K2, K4, T3, plus vollständige KPI-Tabelle). Erfolgreich = keine der 31 Auswertungsepisoden bricht ab. Umgesetzt in `analyzeBenchmark`; Methodiktext in Sec. IV in beiden Fassungen ergänzt (in den bestehenden `\hlone`-Blöcken [R2.3, A1, A12] und [R2.3, A13]) | Sec. IV, Sec. VI | ✅ Code + Methodentext / ⬜ Tabellen mit Zahlen (Teil B) |
 | R2.4a | Reward-Gewichte handgetuned → kurze Sensitivitätsstudie | Existiert, muss aber neu gerechnet werden (A18) → danach im Response Letter darauf verweisen | Sec. Sensitivity Analysis | 🔬 (mit R2.4b) |
 | R2.4b | Sensitivität nicht nur für PPO, sonst ist „ranking robust“ nicht belegt | PPO, TRPO, SAC (default) mit W_ori und W_p × 0.5 / × 2, je 3 Seeds; Ranking pro Variante über K2/K4/K6 (nicht K1, da K1 den geänderten Reward misst); zusätzlich K1 mit nominalen Gewichten aus den Logs | Tab. reward_sensitivity, Absätze „Robustness of the algorithm ranking“, „Summary“ | 🔬 |
@@ -144,17 +144,17 @@ Nicht von den Gutachtern genannt, aber für ein neues Review-Team angreifbar →
 | A5 | Alle 8 Sensitivitätsvarianten schlechter als Default-PPO; „ranking robust“ nur für PPO geprüft. Erklärt durch A18 | Sensitivity Analysis | Mit R2.4b neu rechnen | 🔬 (Teil C) |
 | A6 | Tabelle I: „Formal Ver. = Yes“ für die eigene Arbeit überzeichnet | `tab:sample` | „Formal Meth. = Partial†“ mit Fußnote | ✅ |
 | A7 | Abstract nach Ergänzungen > 250 Wörter | Abstract | Gestrafft; nach den Änderungen vom 20.09.2026 bei 252 Wörtern, beim Neuschreiben in Teil B unter 250 bringen | ⬜ (Teil B) |
-| A8 | K7 im Code = 1 − mittlerer Jerk (höher = glatter), Paper-Definition umgekehrt. Betrifft alle K7-Werte, Abb. 12c/13c, Contributions, Conclusion („48.5 % smoother“) | `computeKPIsFromLogs.m`, alle K7-Stellen | Code korrigiert (Definition im Paper war richtig); alle K7-Werte neu | ✅ Code / ⬜ Werte (Teil B/C) |
-| A9 | Tab. 5 und Tab. 6/Abb. 12/13 aus verschiedenen Daten (K2 PPO 0,0257 vs. Median ≈ 0,33; Tab. 6 zeigt TRPO bei K2 signifikant besser, Text das Gegenteil) | Sec. VI | Alle Tabellen/Abbildungen aus `analyzeBenchmark` | ⬜ (Teil B) |
-| A10 | Ungleiche Trainingsbedingungen: 5 Agenten mit Kreis r = 0,4, PPO mit r = 0,5; je Agent anderer StopTrainingValue | Einzelskripte | Neutraining unter identischen Bedingungen; T3-Werte in Sec. V (Computational Overhead) aktualisiert | ✅ Experiment + Sec. V / ⬜ Tab. 5 (Teil B) |
+| A8 | K7 im Code = 1 − mittlerer Jerk (höher = glatter), Paper-Definition umgekehrt. Betrifft alle K7-Werte, Abb. 12c/13c, Contributions, Conclusion („48.5 % smoother“) | `computeKPIsFromLogs.m`, alle K7-Stellen | Code korrigiert (Definition im Paper war richtig); alle K7-Werte neu | ✅ Code + Werte Teil B / ⬜ Teil C |
+| A9 | Tab. 5 und Tab. 6/Abb. 12/13 aus verschiedenen Daten (K2 PPO 0,0257 vs. Median ≈ 0,33; Tab. 6 zeigt TRPO bei K2 signifikant besser, Text das Gegenteil) | Sec. VI | Alle Tabellen/Abbildungen aus `analyzeBenchmark` bzw. `makeFigures` (Tab. robustness_seeds, kpi_comp, significance, ppo_optimization_kpi, Abb. 12–16) | ✅ |
+| A10 | Ungleiche Trainingsbedingungen: 5 Agenten mit Kreis r = 0,4, PPO mit r = 0,5; je Agent anderer StopTrainingValue | Einzelskripte | Neutraining unter identischen Bedingungen; T3-Werte in Sec. V (Computational Overhead) aktualisiert | ✅ |
 | A11 | Modell: τ_max = 2 N m, d_safe = 2 cm; Paper: 25 Nm, 5 cm | Sec. IV Action Space, Sec. V Collision Monitor | Text korrigiert | ✅ |
 | A12 | Behauptet, nicht implementiert: 3 Läufe, Checkpoint-Auswahl, Randomisierung, Verifikation des Startzustands, Aufzeichnung von Tracking-Fehler je Episode; DT-Absatz überzeichnet („scenarios and constraints are sampled …, improves robustness …“) | Sec. III-A, Sec. IV Training Procedure | Implementiert (5 Seeds, zufällige Startpose ±1°, letzter Agent nach 1000 Ep.) und Text angepasst | ✅ |
-| A13 | Evaluation: feste Startpose + stochastische Policy; TD3/DDPG = 30 identische Episoden | Sec. IV Evaluation and Metrics, Sec. VI Performance Metrics | Deterministische Policy, 31 Startzustände, Seed-Ebene; Text angepasst | ✅ Text / ⬜ Tabellen, Statistik (Teil B) |
+| A13 | Evaluation: feste Startpose + stochastische Policy; TD3/DDPG = 30 identische Episoden | Sec. IV Evaluation and Metrics, Sec. VI Performance Metrics | Deterministische Policy, 31 Startzustände, Seed-Ebene; Text angepasst | ✅ |
 | A14 | Optimiertes PPO im Paper ([256,256,128]+LayerNorm, Actor 5e-4 / Critic 1e-3) ≠ trainiert (2×128, Actor 1e-3, Critic 5e-4, γ 0,995, H 1024, B 256, 10 Epochen, Gradient-Threshold 1, Mittelwert ohne tanh) | Contributions, Sec. V Computational Overhead, Sec. VII | Text korrigiert, LR-Begründung ersetzt, „Fixed settings“ ergänzt | ✅ |
 | A15 | q/dq im Modell in umgekehrter Gelenkreihenfolge → Kollisionsmonitor prüfte falsche Armstellung, K6 falsche Grenzen, K9 falsche Paare τ_i·q̇_j | `SpaceRobot.slx` | Modell korrigiert | ✅ Modell / ⬜ Screenshot Abb. 4 |
 | A17 | Default-Agenten hatten LR 0,01 (MATLAB-Standard), nicht 1e-3; PG war nicht auf Standardwerten; MATLAB-Version R2026a statt R2025b | Sec. VI Training Setup | Reine Toolbox-Defaults; Text + neue Tabelle `tab:hyperparameters` | ✅ |
 | A18 | Ablations-/Sensitivitätsagenten mit dritter PPO-Konfiguration (Actor-LR 5,7e-5, H 600, B 200) | Sec. VII-B/C | Neu trainieren | 🔬 (Teil C) |
-| A19 | Kollision beendete Episode nicht; Assertion für Gelenkgrenzen existierte nicht; „task completion“ als Abbruchbedingung gibt es nicht | Contributions, Sec. III-C, IV, V | Abbruch implementiert, Text angepasst (Joint-Limit-Monitor im Reward-Block) | ✅ Modell + Text / ⬜ Ergebnis-Sätze in Sec. V (K5/K6-Werte, Teil B) |
+| A19 | Kollision beendete Episode nicht; Assertion für Gelenkgrenzen existierte nicht; „task completion“ als Abbruchbedingung gibt es nicht | Contributions, Sec. III-C, IV, V | Abbruch implementiert, Text angepasst (Joint-Limit-Monitor im Reward-Block). Ergebnissätze in Sec. V: 108 von 2170 Episoden mit Kontakt (6 Läufe), 791 durch Gelenkgrenze, TRPO und PPO optimiert ohne Verletzung | ✅ |
 | A20 | Mit konstanter Terminalstrafe −1 beenden Agenten Episoden absichtlich (Pilot: 0 % vollständige Episoden) | Sec. IV Reward | r_fail = −(N − k + 1), Gl. `eq:rfail`, Begründung mit Pilot | ✅ |
 | A21 | Modellparameter fehlten im Paper; URDF hatte 65 kg; Aussage „identified values from literature [b12]“ trifft nicht zu | Sec. III-B | URDF angeglichen; Tabelle `tab:robot_params`; Satz ersetzt. [b12] jetzt in Related Work zitiert (Satz zur Modellidentifikation) | ✅ |
 | A23 | Abb. 7: p_x steigt linear auf ≈ 1,2e-5 Ns, Text sagt „within 1e-6 Ns“ | Sec. V Momentum | Abb. 7 neu aus `p_tot` (PPO optimiert, Seed 0, nominale Startpose): max \|p\| = 2,7e-7 N s, Versatz im ersten Agentenschritt, danach konstant. Über alle ausgewerteten Episoden bis 3e-4 N s. Satz in Sec. V anpassen | ✅ Abbildung / ⬜ Satz |
@@ -166,7 +166,7 @@ Nicht von den Gutachtern genannt, aber für ein neues Review-Team angreifbar →
 | A29 | Acknowledgment „solely for language editing“ stimmt nicht mehr (KI-Unterstützung bei Code und Auswertung) | Acknowledgment | Offenlegung ergänzt, Bibitem `anthropic_claude` | ✅ |
 | A30 | T2 definiert, aber nie berechnet; T1 unklar definiert | Sec. IV, Sec. VI Summary | T2 gestrichen, T1 = Std. der letzten 100 Episoden. T3 → T2 umbenannt (beide Fassungen und `analyzeBenchmark`) | ✅ |
 | A31 | DDPG mit [b7] (Sutton & Barto) zitiert statt mit [b16] (Lillicrap) | Contributions | Zitat korrigiert | ✅ |
-| A32 | Caption Tab. 7 schreibt PPO den niedrigsten Wert bei K3 zu, fett markiert ist DDPG | `tab:kpi_comp` | Caption korrigiert | ✅ (mit Teil B neu prüfen) |
+| A32 | Caption Tab. 7 schreibt PPO den niedrigsten Wert bei K3 zu, fett markiert ist DDPG | `tab:kpi_comp` | Tabelle in Teil B neu aufgebaut | ✅ |
 | A33 | K9 im Text als ∫\|τ·q̇\|dt, in der Definition als Σ_j \|τ_j q̇_j\| | Sec. IV, Begründung K7/K9 | Text an Definition angepasst | ✅ |
 | A34 | Kollisionsmonitor als O(n_links) angegeben, der paarweise Abstandscheck skaliert mit O(n_links²) | Sec. V Computational Overhead | Korrigiert | ✅ |
 | A35 | Ablation: „K2 sinkt ohne W_ori leicht“, laut Tabelle steigt K2 von 0,0083 auf 0,017 | Sec. VII-B Dominant Weights | Aussage an Tabelle angepasst | ✅ (Werte in Teil C neu) |
@@ -177,20 +177,22 @@ Nicht von den Gutachtern genannt, aber für ein neues Review-Team angreifbar →
 | A40 | „Safety metrics remain within limits“ und „does not compromise the monitored safety limits“, obwohl K6 bis 0,53 % reicht. Kausale Aussage zum Monitor nicht belegt | Sec. VII-C Safety Metrics | Neutral formuliert | ✅ (Werte in Teil C neu) |
 | A41 | Absatz „Computational Overhead“ stand hinter dem Übergangssatz „The next section …“ | Sec. V | Vor die Zusammenfassung verschoben | ✅ |
 | A42 | Solid-Blöcke „Visual“ (URDF-Import) tragen Masse: 5 kg / I = 1 kg m² an der Basis, 1 kg / 0,1 kg m² je Glied. Simuliert (auch benchmark_v2): Basis 30 kg, 6 kg m²; Glieder 2 kg, 0,2 kg m². Tab. `robot_params` und URDF nannten 25 / 1 kg; `param_scale` skalierte nur den Inertia-Anteil | Sec. III-B, Tab. `robot_params` | Code: Gesamtwerte in `benchmarkConfig` (version 2), exakte Aufteilung auf beide Blöcke, `upgradeConfig` für alte Agentendateien, URDF angeglichen; Ergebnisse bitgleich. Paper: Tabelle `robot_params` auf 30 kg / 6 kg m² / 2 kg / 0,2 kg m² geändert (20.09.2026) | ✅ |
+| A43 | Hyperparameter des optimierten PPO stammen aus einer Rastersuche vom Dezember 2025 (ein Lauf je Kandidat, früherer Modellstand, vor Reward-Gewichten, Abbruchregel und Auswertungsprotokoll). Bayes-Optimierung Juli 2026 im Repo mit anderen Werten, nicht verwendet | Sec. VII Hyperparameter Tuning, Limitations | Offengelegt: Suche mit einem Lauf je Kandidat auf früherem Modellstand, Werte als feste Konfiguration, nicht als Optimum. In den Limitations zusätzlich: andere Algorithmen nur mit Default-Hyperparametern | ✅ |
 
 **Sprachliche Überarbeitung (19.09.2026, nicht markiert):** ganzes Manuskript überarbeitet (kürzere Sätze, keine
 Doppelpunkte und Semikolons im Fließtext, vorsichtigere Formulierungen, einheitliche Notation $K_1$–$K_9$,
 KPI-Namen, Verweise „Fig.“/„Table“/„Section“/„(n)“, Captions). Nicht gelb markiert, im Response Letter pauschal
 erwähnen. Nur die inhaltlichen Korrekturen A31–A41 sind markiert.
 
-### Stellen, die noch alte Ergebnisse enthalten (Teil B/C)
+### Stellen, die noch alte Ergebnisse enthalten (Teil C)
 
-- Sec. V: „In the final evaluation, no collisions were observed for any agent (K5 = 0)“ (TD3 hatte Kollisionen); Absatz zu
-  Gelenkgrenzen mit PPO 5,1 % / TRPO 2,1 %; „Limitations of the Formal Methods Component“: „no violations …
-  observed“; Momentum: „remained within 10^-6 N s“.
-- Sec. VI komplett (Tab. 5, 6, Abb. 12, 13, Text, Summary), Sec. VII-Einleitung (Begründung für PPO, Ziele),
-  Tab. 7, Abb. 14–16, Contributions (Satz zur Wahl von PPO und zu den Verbesserungen), Abstract, Conclusion.
-- Sec. VII-B bis E (Ablation, Sensitivität, Robustheit, Zwei-Segment-Bahn): Teil C.
+- Teil B ist eingebaut (21.09.2026): Abstract, Contributions, Sec. V (Impuls, Kollision, Gelenkgrenzen,
+  Grenzen der Formal-Methods-Komponente), Sec. VI komplett, Sec. VII-Einleitung, Hyperparameter-Suche (A43),
+  Sec. VII-A mit Tab. 7, Diskussion (1. Absatz), Practical Implications, Limitations, Conclusion.
+- Noch alt: Sec. VII-B bis E (Ablation, Sensitivität, Robustheit, Zwei-Segment-Bahn) und der zweite
+  Diskussionsabsatz zur Zwei-Segment-Bahn. Die Zahlen dafür liegen vor (`results/analysis_partC/`,
+  `results/benchmark_v2/analysis/<Bedingung>_*`, `results/twoseg/analysis/`).
+- Abstract und Conclusion nennen schon die Ergebnisse von Teil C (Zwei-Segment-Bahn, Stresstests).
 
 ---
 
@@ -203,12 +205,9 @@ erwähnen. Nur die inhaltlichen Korrekturen A31–A41 sind markiert.
 
 ## Nächste Schritte
 
-1. Neue Hauptaussage mit Prof abstimmen (siehe „Stand der Experimente“)
-2. Teil B einarbeiten: Tab. 5–7 und Hyperparameter-Tabelle aus `analyzeBenchmark`, Sec. VI/VII-Text, Abstract,
-   Conclusion, Limitations (R2.3a), Ergebnis-Sätze in Sec. V
-3. Kampagnen Teil C starten (Patrick): nach Commit `startup`, `runPartC` (102 Trainings + 28 Auswertungen, grob
-   4 h mit 6 Workern). Stand mit `campaignStatus("<Kampagne>")`. Hinweis: τ_sat × 0,75 (1,5 N m) greift bei TRPO
-   default und PPO optimiert nie (max |τ| nominal 0,76 bzw. 1,22 N m), deshalb zusätzlich Bedingung τ_sat × 0,3
-3a. A42: Tab. `robot_params` auf 30 kg / 6 kg m² / 2 kg / 0,2 kg m² ändern (nach Freigabe), beide Fassungen
-4. Abbildungen neu: Abb. 3/4 (Screenshots), 7, 12–18
-5. Response Letter schreiben (inkl. Hinweis auf die nicht markierte sprachliche Überarbeitung)
+1. Teil C im Text: Sec. VII-B bis E und der zweite Diskussionsabsatz aus den vorliegenden Zahlen
+2. Modell-Screenshots neu (Patrick): Spacerobot_slx, Robot, Reference, Impuls-Monitor, Kollisionsmonitor,
+   dabei die automatisch platzierten neuen Blöcke aufräumen. `tau_collision.png` prüfen (altes Modell)
+3. Response Letter (Concern / Response / Action je Punkt, Hinweis auf die nicht markierte sprachliche
+   Überarbeitung und die Kopfzeile)
+4. Endkontrolle: Zahlen Text gegen Tabellen, beide PDFs, Resubmission-Checkliste

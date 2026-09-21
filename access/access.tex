@@ -77,23 +77,23 @@ Frankfurt am Main, Germany \\(e-mail: steven.ermisch@stud.fra-uas.de, kaigom@fra
 \corresp{Corresponding author: Eric Guiffo Kaigom (e-mail: kaigom@fra-uas.de).}
 
 \begin{abstract}
-Free-floating space robots exhibit a strong dynamic coupling between manipulator motion and base attitude,
-which complicates Cartesian path tracking of the end-effector. Supervised data-driven control is difficult to
-apply because labeled on-orbit data are scarce. This work therefore benchmarks six reinforcement learning (RL)
-algorithms (TRPO, TD3, SAC, PPO, PG, and DDPG) for Cartesian path tracking of a free-floating space robot. The
-benchmark uses a physics-based Simulink/Simscape environment with integrated runtime safety monitoring. Performance is
-evaluated using a unified set of key performance indicators covering training duration and stability, tracking
-accuracy, base attitude disturbance, motion smoothness, energy consumption, and collision risk. Among the six agents
-with default hyperparameters, PPO yields the most favorable trade-off between tracking accuracy, base disturbance
-minimization, and training stability. The effect of tuning its hyperparameters is then quantified for circular and
-piecewise-linear Cartesian paths. Compared with the default configuration, the optimized PPO agent increases the
-mean episodic return from $-2.23$ to $-0.43$. It reduces the mean squared and maximum tracking errors by 67.7\%
-and 44.1\%, the base orientation error by 67.0\%, and the energy consumption by 16.0\%. No collisions or
-joint-limit violations are observed in the 30 evaluation episodes considered. All results are obtained in
-simulation under controlled assumptions (ideal sensing, zero latency, rigid-body dynamics, and no external
-disturbances in the nominal setup) and do not establish operational readiness. The safety component comprises
-runtime monitors for selected properties and an offline torque-bound check on a simplified model, not a formal
-proof of closed-loop safety.
+Free-floating space robots exhibit a strong dynamic coupling between
+manipulator motion and base attitude, which complicates Cartesian path tracking of the end-effector.
+Labeled on-orbit data for supervised learning are scarce. This work therefore benchmarks six
+reinforcement learning (RL) algorithms (TRPO, TD3, SAC, PPO, PG, and DDPG) for Cartesian path tracking
+of a free-floating space robot in a physics-based Simulink/Simscape environment with runtime safety
+monitoring. Each configuration is trained with ten seeds. The success rate and the
+performance of the successful runs are evaluated separately with unified key performance indicators.
+With default hyperparameters, only TRPO completes all ten runs without a safety abort, whereas
+the other agents terminate 40\% to 80\% of their evaluation episodes. Even in their successful runs, SAC,
+DDPG, and TD3 track the path with a significantly larger error than TRPO. A tuned PPO configuration also
+completes all runs and reaches the lowest mean squared tracking error (0.0041 compared with 0.0145 for
+TRPO) with a shorter training time, but this difference is not statistically significant. On a
+piecewise-linear path, the tuned agent tracks significantly better than TRPO. Both agents complete all
+runs under observation noise, reduced torque limits, an external joint torque, and model parameters
+increased by 50\%. All results are obtained in simulation under controlled assumptions and do not
+establish operational readiness. The safety component comprises runtime monitors for selected properties
+and an offline torque-bound check on a simplified model, not a formal proof of closed-loop safety.
 \end{abstract}
 \begin{keywords}
 Free-floating on-orbit servicing, Proximal Policy Optimization (PPO), reinforcement learning,
@@ -235,20 +235,21 @@ with runtime monitoring of selected safety properties, which extends the individ
 The main contributions of this work are summarized as follows:
 
 \begin{itemize}
-  \item \textit{Comparative evaluation of RL agents.} Six continuous-action RL algorithms are implemented and evaluated
-  on the same path-tracking task. The algorithms are Trust Region Policy Optimization (TRPO) \cite{b14},
-  Twin Delayed Deep
-Deterministic Policy Gradient (TD3) \cite{b17}, Soft Actor-Critic (SAC) \cite{b18}, Proximal Policy Optimization
-(PPO) \cite{b15}, vanilla Policy Gradient (PG) \cite{b21}, and Deep Deterministic Policy Gradient (DDPG) \cite{b16}.
-The comparison is performed under unified conditions and examines which algorithm offers the most
-favorable trade-off between tracking accuracy, base disturbance, and training stability.
-  \item \textit{Integration of formal-methods-based safety monitoring.} Formal-methods tooling is
-  integrated into the learning loop \cite{b5, b6, b22, b23}. A collision monitor, a joint-limit monitor,
-  and a momentum-conservation check run at runtime, and the joint-torque bound is additionally checked
-  offline with Simulink Design Verifier on a simplified abstraction of the policy. This combination
-  monitors selected safety properties (collision events, joint limits, and bounded actuator commands)
-  during training and testing. It does not constitute a formal proof of closed-loop stability, task
-  completion, or collision avoidance for the full nonlinear multibody model.
+  \item \textit{Comparative evaluation of RL agents.} Six continuous-action RL algorithms are implemented
+  and evaluated on the same path-tracking task. The algorithms are Trust Region Policy Optimization
+  (TRPO) \cite{b14}, Twin Delayed Deep Deterministic Policy Gradient (TD3) \cite{b17}, Soft Actor-Critic
+  (SAC) \cite{b18}, Proximal Policy Optimization (PPO) \cite{b15}, vanilla Policy Gradient (PG)
+  \cite{b21}, and Deep Deterministic Policy Gradient (DDPG) ~\cite{b16}. The
+  comparison is performed under unified conditions with ten seeds per algorithm. It reports separately how
+  often training succeeds and how well the successful runs perform.
+  \item  \textit{Integration of formal-methods-based safety monitoring.}
+  Formal-methods tooling is integrated into the learning loop \cite{b5, b6, b22, b23}. A
+  collision monitor, a joint-limit monitor, and a momentum-conservation check run at runtime, and the
+  joint-torque bound is additionally checked offline with Simulink Design Verifier on a simplified
+  abstraction of the policy. This combination monitors selected safety properties (collision events,
+  joint limits, and bounded actuator commands) during training and testing. It does not constitute a
+  formal proof of closed-loop stability, task completion, or collision avoidance for the full nonlinear
+  multibody model.
  \item \textit{Simulation environment for multi-criteria evaluation in on-orbit servicing.} A
  MATLAB/Simulink simulation framework is developed for a free-floating space robot. It uses the Simscape
  physics engine and a multibody model derived from a Unified Robot Description Format (URDF) file. The
@@ -256,20 +257,21 @@ favorable trade-off between tracking accuracy, base disturbance, and training st
  kinematic, inertial, and sensor/actuator parameters. The associated RL environment provides observations
  and rewards through a composite reward function that penalizes end-effector tracking error, base motion,
  large joint velocities, and excessive control effort. Together with the reset conditions, this reward
- shaping allows the agent to learn the task while penalizing base disturbance and violations of the
- monitored constraints \cite{b25,b26,b27,b28,b7}.
- \item \textit{Optimization of the PPO agent.} Based on the comparative results, PPO is selected for
- further tuning. Hyperparameters such as the learning rates, the rollout horizon, the mini-batch size,
- and the entropy weight are adjusted to improve training stability and policy performance. The hidden
- layers of the default networks are kept. Relative to the default configuration, the optimized PPO agent
- reduces the tracking error and produces smoother control inputs on the tested KPIs. No violations of the
- monitored safety properties are observed in the 30 evaluation episodes.
+ shaping allows the agent to learn the task while penalizing base disturbance and
+ violations of the monitored constraints \cite{b25,b26,b27,b28,b7}.
+ \item \textit{Optimization of the PPO agent.} The default PPO agent converged in only three
+ of ten runs, but its successful runs tracked the path with an error similar to that of TRPO. PPO is
+ therefore tuned to reduce this seed dependence. Hyperparameters such as the learning rates,
+ the rollout horizon, the mini-batch size, and the entropy weight are adjusted. The hidden layers of the
+ default networks are kept. The tuned agent completes all ten runs without an
+ observed violation of the monitored properties and reaches the lowest mean tracking error in the
+ benchmark.
 \end{itemize}
 
-Within the considered simulation setup, the combination of multibody simulation, deep RL, and runtime
-safety monitoring yields control policies without observed violations of the monitored constraints in the
-evaluation episodes. The optimized policy also reduces the tracking error and the base disturbance
-relative to the default configuration. The remainder of this work is organized as follows. \cref{sec:sim}
+Within the considered simulation setup, TRPO and the tuned PPO agent completed
+all runs without observed violations of the monitored constraints. The tuned policy also reduced the
+tracking error and the base disturbance relative to the successful runs of the default PPO
+configuration.The remainder of this work is organized as follows. \cref{sec:sim}
 describes the system model and the simulation environment. \cref{RL} introduces the reinforcement
 learning framework. \cref{formal} presents the safety monitors and formal-methods components.
 \cref{comparison} reports the comparative evaluation of the six RL algorithms. \cref{sec:ppo_opt}
@@ -865,14 +867,18 @@ linear and the total angular momentum of the robot (base and arm) are conserved.
 momentum, the total linear momentum remains close to zero throughout the simulation \cite{b6}. A momentum
 observer computes the total linear momentum $p_{\mathrm{tot}}$ and checks for its conservation (see
 \cref{fig:impuls_monitor}). Virtual sensors attached to the base and to each link provide the body
-velocities, from which $p_{\mathrm{tot}} = \sum_{i} m_{i} v_{i}$ is computed. In an ideal simulation,
-$p_{\mathrm{tot}}$ remains close to zero throughout an episode. Small numerical deviations on the order
-of $10^{-6}\,\mathrm{N\,s}$ may arise from time-integration errors. A persistent, systematic drift of
-$p_{\mathrm{tot}}$ would indicate an unintended external force or a modeling error, such as an unmodeled
-constraint. In the reported experiments, $p_{\mathrm{tot}}$ remained within $10^{-6}\,\mathrm{N\,s}$ of
-zero throughout each episode with the learned policy (see~\cref{fig:impulserhaltung_scope}). This
-indicates that the simulation conserves momentum within the numerical tolerance. The momentum observer is
-a diagnostic tool. It is evaluated offline and does not influence the training.
+velocities, from which $p_{\mathrm{tot}} = \sum_{i} m_{i} v_{i}$ is computed. In an ideal
+simulation, $p_{\mathrm{tot}}$ remains close to zero throughout an episode. Small numerical
+deviations may arise from time-integration errors. A persistent, systematic drift of $p_{\mathrm{tot}}$
+would indicate an unintended external force or a modeling error, such as an unmodeled constraint.
+\cref{fig:impulserhaltung_scope} shows $p_{\mathrm{tot}}$ for an evaluation episode of the
+optimized PPO agent from the nominal initial state. An offset of $2.7 \times 10^{-7}\,\mathrm{N\,s}$
+appears in the first agent step, after which $p_{\mathrm{tot}}$ stays constant. For TRPO and the
+optimized PPO agent, $|p_{\mathrm{tot}}|$ remained below $10^{-6}\,\mathrm{N\,s}$ in all 620 evaluation
+episodes. The other agents reached up to $4.3 \times 10^{-4}\,\mathrm{N\,s}$. These larger deviations
+may be explained by the integration error of the fixed-step solver for rapidly changing torque commands.
+The values indicate that the simulation conserves momentum within the numerical tolerance. The
+momentum observer is a diagnostic tool. It is evaluated offline and does not influence the training.
 
 \begin{figure*}[!t]
     \centering    \includegraphics[width=0.75\linewidth]{Figures/spacerobot_slx_colissionmonitor.pdf}
@@ -900,31 +906,30 @@ a diagnostic tool. It is evaluated offline and does not influence the training.
     \caption{Test of the collision monitor and the associated joint torques.}
     \label{fig:collision_combined}
 \end{figure*}
-\textbf{Collision Monitor.} At every agent step, a collision monitor computes the minimum distance
-$d_{\min}$ between non-adjacent robot bodies from the URDF collision geometry (see
-\cref{fig:spacerobot_slx_colissionmonitor}) \cite{b31}. If $d_{\min}$ falls below the safety threshold
-$d_{\mathrm{safe}} = 2\,\mathrm{cm}$, a warning is raised and logged. If a contact between two bodies is
-detected, all commanded joint torques are overridden to zero and the episode is terminated with the
-penalty in \eqref{eq:rfail}. The monitor was tested by intentionally commanding the arm toward the base
-and by starting an episode in a colliding configuration. In both cases, the contact was detected, and the
-robot was stopped (see~\cref{fig:collision_combined}). During training, collisions occurred in early
-exploratory episodes for some agents, but were captured by the monitor and penalized through episode
-termination. In the final evaluation, no collisions were observed for any agent ($K_5 = 0$ over all 30
-evaluation episodes).
+\textbf{Collision Monitor.} At every agent step, a collision monitor computes the
+minimum distance $d_{\min}$ between non-adjacent robot bodies from the URDF collision geometry (see
+\cref{fig:spacerobot_slx_colissionmonitor}) \cite{b31}. If $d_{\min}$ falls below the safety
+threshold $d_{\mathrm{safe}} = 2\,\mathrm{cm}$, a warning is raised and logged. If a contact between two
+bodies is detected, all commanded joint torques are overridden to zero and the episode is terminated with
+the penalty in \eqref{eq:rfail}. The monitor was tested by intentionally commanding the arm
+toward the base and by starting an episode in a colliding configuration. In both cases, the contact was
+detected, and the robot was stopped (see~\cref{fig:collision_combined}). During training,
+collisions occurred mainly in early exploratory episodes. The monitor detected them and terminated the
+episode. In the evaluation of the 70 trained agents, 108 of 2170 episodes ended with a detected contact.
+These episodes belong to six runs of DDPG, TD3, PG, and the default PPO agent. No contact occurred in the
+evaluation episodes of TRPO, SAC, and the optimized PPO agent.
 
 \textbf{Joint Limit Enforcement.} Each revolute joint of the arm is subject to mechanical limits.
 Violating these limits could damage a real robot and often indicates an unstable controller. The joint
 limits are enforced at two levels. First, the Simscape model includes mechanical joint limits with
-penalty forces, i.e., a stiff barrier that opposes further motion beyond the limit. Second, a joint-limit
-monitor in the reward block compares every joint angle with its admissible range at each agent step. A
-violation terminates the episode with the penalty in \eqref{eq:rfail}, which prevents further motion into
-the limit. After training, the joint-limit violation rate is low. PPO and TRPO reach the limits in a
-few percent of evaluation steps (5.1\% and 2.1\%, respectively), whereas TD3, SAC, PG, and DDPG remain
-within the admissible range ($K_6 \approx 0$). The higher $K_6$ value of PPO ($K_6 = 0.0505$) coincides
-with the lowest tracking error and may indicate a more extensive use of the workspace. In all cases,
-the enforcement mechanism stopped further simulated motion at the limit. The torques were set to zero in
-the offending step and the episode was marked as failed. For the optimized PPO agent
-(\cref{sec:ppo_opt}), no such events are observed in the evaluation episodes ($K_6 = 0$).
+penalty forces, i.e., a stiff barrier that opposes further motion beyond the limit. Second,
+a joint-limit monitor in the reward block compares every joint angle with its admissible range at each
+agent step. A violation terminates the episode with the penalty in \eqref{eq:rfail}, which
+prevents further motion into the limit. In the evaluation of the 70 trained agents,
+joint-limit violations terminated 791 of the 2170 episodes. They were the most frequent reason for a
+terminated episode. TRPO and the optimized PPO agent reached no joint limit in any evaluation episode.
+Because a violation ends the episode, the joint limit violation rate $K_6$ is zero for every run without
+a terminated episode. The violations are therefore reported as abort rates in \cref{tab:robustness_seeds}.
 
 \textbf{Formal Verification of Torque Constraints.} In addition to runtime saturation, an offline formal
 verification was performed to check torque-bound compliance of the trained policy block. Using MATLAB
@@ -952,18 +957,19 @@ checking selected properties on an abstracted model of the agent.
 \textbf{Limitations of the Formal Methods Component.} The mechanisms above cover a defined set of
 monitored properties, namely collision events, joint-limit events, bounded torques, and physical
 consistency through the momentum check. Other properties, such as task completion within a time bound or
-formal stability margins, are not verified. In particular, the runtime monitors detect violations and
-terminate the episode but do not prove their absence, and the offline SLDV check establishes only the
-torque bound on the simplified verification model. Neither closed-loop stability, task completion, nor
-collision avoidance over all possible trajectories of the full nonlinear Simscape model is formally
-verified. A complete formal specification of the mission, for example temporal-logic specifications such
-as ``the robot shall accomplish $X$ without $Y$ happening'', would be considerably more complex and is
-beyond the scope of this work. This work targets the safety properties that are considered most relevant
-for the task. Within this scope, the runtime monitors terminated episodes that would have violated a
-monitored property and penalized the corresponding actions. By the end of training, no violations of the
-monitored constraints were observed in the reported evaluation episodes \cite{b23}. This is empirical
-evidence for the tested initial configuration and reference trajectories, not a guarantee over all
-reachable states.
+formal stability margins, are not verified. In particular, the runtime monitors detect
+violations and terminate the episode but do not prove their absence, and the offline SLDV check
+establishes only the torque bound on the simplified verification model. Neither closed-loop stability,
+task completion, nor collision avoidance over all possible trajectories of the full nonlinear Simscape
+model is formally verified. A complete formal specification of the mission, for example temporal-logic
+specifications such as ``the robot shall accomplish $X$ without $Y$ happening'', would be considerably
+more complex and is beyond the scope of this work. This work targets the safety properties that are
+considered most relevant for the task. Within this scope, the runtime monitors terminated episodes that
+would have violated a monitored property and penalized the corresponding actions. For TRPO
+and the optimized PPO agent, no violations of the monitored constraints were observed in any evaluation
+episode \cite{b23}. The other agents violated a monitored constraint in part of their runs, and
+the monitors terminated these episodes. This is empirical evidence for the tested initial
+states and reference trajectories, not a guarantee over all reachable states.
 
 \textbf{Computational Overhead and Scalability.} The momentum observer and the joint-limit monitor
 consist of simple algebraic operations over the link states and scale as
@@ -1084,160 +1090,126 @@ PPO (optimized) & $10^{-3}$ & $5\!\times\!10^{-4}$ & 0.995 & horizon 1024 & 256 
 \end{table*}
 
 
-\textbf{Performance Metrics.} The agents were evaluated on the KPIs introduced in \cref{RL} with the
-protocol described there, which uses 30 random initial states for each of the ten seeds.
-\cref{tab:kpi_comp} reports a subset of these metrics for the six agents.
+\textbf{Evaluation Protocol.} The agents were evaluated with the protocol of \cref{RL}. Each of the 60
+default runs was evaluated on the same 31 initial states. A run counts as successful when none of its
+evaluation episodes was terminated by a monitor. \cref{tab:robustness_seeds} reports the number of
+successful runs and the abort rate over all runs. \cref{tab:kpi_comp} reports the KPIs over the
+successful runs only.
+
+\begin{table}[!t]
+\centering
+\caption{Success of the default agents over ten training runs each. A run is successful when none of its
+31 evaluation episodes is terminated by a monitor. The abort rate is the share of terminated episodes among
+the 310 evaluation episodes of an agent. The share caused by a detected contact is listed separately, and
+the remaining terminations were caused by joint-limit violations. The last column gives the
+Holm-corrected $p$-value of Fisher's exact test on the number of successful runs against TRPO.}
+\label{tab:robustness_seeds}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Agent} & \textbf{Successful} & \textbf{Abort} & \textbf{Aborts by} & $\boldsymbol{p}$ \\
+ & \textbf{runs} & \textbf{rate} & \textbf{contact} & \textbf{vs.\ TRPO} \\
+\midrule
+TRPO & 10/10 & 0.0\% & -- & -- \\
+SAC & 6/10 & 40.0\% & 0.0\% & 0.087 \\
+TD3 & 5/10 & 48.4\% & 24.7\% & 0.065 \\
+DDPG & 4/10 & 51.6\% & 22.5\% & 0.033 \\
+PPO & 3/10 & 70.0\% & 14.3\% & 0.012 \\
+PG & 2/10 & 80.0\% & 1.6\% & 0.0036 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Success Across Seeds.} The number of successful runs ranged from two to ten out of ten
+(\cref{tab:robustness_seeds}). TRPO completed all ten runs without a terminated evaluation episode.
+SAC, TD3, and DDPG succeeded in four to six runs, the default PPO agent in three, and PG in two. In
+27 of the 30 failed runs, all 31 evaluation episodes were terminated. A failed run therefore reflects a
+systematic property of the learned policy. Most terminations were caused by joint-limit violations.
+Contacts between robot bodies occurred only in runs of TD3, DDPG, PPO, and PG. Compared with TRPO, the
+number of successful runs was significantly lower for PG, PPO, and DDPG (Fisher's exact test,
+Holm-corrected $p \le 0.033$). The differences to TD3 and SAC were not significant with ten runs per
+agent.
 
 \begin{table*}[!t]
 \centering
-\caption{Selected performance metrics of each RL agent. The best value in each row is shown in bold.
-PPO attains the lowest mean squared tracking error ($K_2$), the lowest base orientation error ($K_4$), and the
-lowest jerk ($K_7$), with the shortest training time ($T_2$). DDPG attains the lowest maximum error ($K_3$). TRPO
-is close to PPO on several metrics but requires more training time. The off-policy methods (TD3, SAC, DDPG) show
-larger errors or a larger late-training reward variance, for example a high $T_1$ for DDPG. Values are averaged over
-30 evaluation episodes per agent.}
+\caption{Performance of the successful runs of the default agents. All values are the mean and the
+standard deviation over the successful runs of an agent. $K_2$ is the mean squared EE position error,
+$K_4$ the mean base orientation error, and $T_2$ the training time. The collision rate $K_5$ and the
+joint limit violation rate $K_6$ are zero for every successful run and are omitted.}
 \label{tab:kpi_comp}
 \renewcommand{\arraystretch}{1.3}
-\setlength{\tabcolsep}{8pt}
-\begin{tabular}{lcccccc}
+\setlength{\tabcolsep}{10pt}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{KPI (unit)} & \textbf{TRPO} & \textbf{TD3} & \textbf{SAC} & \textbf{PPO} & \textbf{PG} & \textbf{DDPG} \\
+\textbf{Agent} & \textbf{Successful runs} & $\boldsymbol{K_2}$ & $\boldsymbol{K_4}$ &
+  $\boldsymbol{T_2}$ \textbf{(min)} \\
 \midrule
-$\boldsymbol{K_2}$: Mean Squared EE Position Error &
-0.0680 & 0.1914 & 0.1908 & \textbf{0.0257} & 0.1638 & 0.0937 \\
-$\boldsymbol{K_3}$: Maximum EE Position Error &
-0.6783 & 0.5341 & 0.7766 & 0.4833 & 1.0654 & \textbf{0.4758} \\
-$\boldsymbol{K_4}$: Mean Base Orientation Error &
-0.0694 & 0.0868 & 0.1687 & \textbf{0.0667} & 0.1302 & 0.2682 \\
-$\boldsymbol{K_6}$: Joint Limit Violation Rate &
-0.0214 (2.1\%) & 0 & 0 & 0.0505 (5.1\%) & 0 & 0 \\
-$\boldsymbol{K_7}$: Control Smoothness (Jerk) &
-0.7498 & 0.9981 & 0.7536 & \textbf{0.6812} & 0.7125 & 0.8118 \\
-$\boldsymbol{T_1}$: Reward Std.\ (Late Training) &
-\textbf{0.6144} & 8.5168 & 9.6907 & 1.7756 & 13.1970 & 64.4764 \\
-$\boldsymbol{T_2}$: Training Time (1000 Episodes) &
-$\sim$13\,min & $\sim$38\,min & $\sim$35\,min & \textbf{$\sim$8\,min} & $\sim$8\,min & $\sim$24\,min \\
+TRPO & 10 & $0.0145 \pm 0.0196$ & $0.026 \pm 0.009$ & $11.3 \pm 0.7$ \\
+SAC & 6 & $0.2168 \pm 0.1098$ & $0.145 \pm 0.092$ & $35.2 \pm 0.4$ \\
+TD3 & 5 & $0.0886 \pm 0.0560$ & $0.098 \pm 0.080$ & $29.1 \pm 1.4$ \\
+DDPG & 4 & $0.1599 \pm 0.0919$ & $0.353 \pm 0.171$ & $24.3 \pm 0.2$ \\
+PPO & 3 & $0.0134 \pm 0.0081$ & $0.050 \pm 0.014$ & $8.4 \pm 0.7$ \\
+PG & 2 & $0.0177 \pm 0.0036$ & $0.030 \pm 0.011$ & $6.9 \pm 1.3$ \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-The results in \cref{tab:kpi_comp} show several patterns. With respect to \emph{training stability}, TRPO
-and PPO yield the smallest late-training reward variance ($T_1 = 0.61$ and $T_1 = 1.78$,
-respectively), whereas DDPG shows the largest ($T_1 = 64.5$). The training time $T_2$ is
-shortest for PPO ($\approx 8\,\mathrm{min}$). The off-policy methods are slower (TD3 $\approx 38\,\mathrm{min}$, SAC
-$\approx 35\,\mathrm{min}$).
+\textbf{Performance of the Successful Runs.} \cref{tab:kpi_comp} summarizes the tracking error $K_2$,
+the base orientation error $K_4$, and the training time $T_2$ of the successful runs. TRPO, PPO, and PG
+reached mean squared tracking errors between 0.013 and 0.018 in their successful runs. TD3, DDPG, and
+SAC remained between 0.089 and 0.217, although their successful runs completed every evaluation episode.
+Their base orientation errors were also larger ($K_4$ between 0.098 and 0.353, compared with 0.026 for
+TRPO). The standard deviation of TRPO results mainly from three of the ten runs with $K_2$ between 0.021
+and 0.066 (\cref{fig:boxplot_k2}). The median of TRPO is 0.0061.
 
-For \emph{trajectory tracking}, PPO attains the lowest mean squared error ($K_2 = 0.0257$), lower
-than that of TRPO ($K_2 = 0.0680$). DDPG attains the lowest peak error ($K_3 = 0.4758$)
-but with large variability across runs. PG, SAC, and TD3 yield larger tracking errors.
-The mean error of PG is approximately six times that of PPO.
+TRPO required 11.3\,min per training run, the default PPO agent 8.4\,min, and PG 6.9\,min. The off-policy
+agents required 24.3 to 35.2\,min. The late-training reward variance was small for TRPO, PPO, and PG
+($T_1 \le 1.23$) and large for TD3, DDPG, and SAC ($T_1$ between 13.9 and 20.0). This suggests that the
+off-policy agents had not settled after 1000 episodes.
 
-For \emph{base-motion minimization}, PPO and TRPO yield comparable base-orientation errors ($K_4 = 0.0667$ and
-$K_4 = 0.0694$), while DDPG produces a larger drift ($K_4 = 0.2682$). TD3 yields
-a low base angular velocity ($K_8 \approx 0.02\,\mathrm{rad/s}$) at the cost of degraded tracking
-accuracy, consistent with a conservative policy that suppresses actuation. No collisions were observed for any
-agent ($K_5 = 0$).
-PPO and TRPO approach the joint limits in a small fraction of the steps
-($K_6 = 5.1\%$ and $K_6 = 2.1\%$, respectively), corresponding to a wider use of
-the joint range.
-
-PPO produces the smoothest control signals ($K_7 = 0.6812$). The highest jerk values are
-observed for TD3 and DDPG ($K_7 \approx 0.8$--$1.0$). The energy consumption $K_9$ is moderate
-for PPO ($\approx 6.33$) and lowest for TRPO ($\approx 3.76$). The low values
-for DDPG and TD3 ($K_9 < 1.0$) coincide with insufficient actuation and should not
-be interpreted as energy efficiency. Qualitatively, PPO traces the circular reference with low base
-disturbance. TRPO produces a similar profile with a slower response. SAC oscillates around the
-reference. TD3 adopts a conservative strategy that reduces tracking accuracy. DDPG is inconsistent across
-runs, in line with the large $T_1$. PG does not reach reliable tracking within
-1000 episodes.
-
-\textbf{Summary of the Comparison.} The comparison can be summarized as follows:
-\begin{itemize}
-        \item PPO shows the most favorable combination of training stability (low $T_1$), training time ($T_2$),
-        tracking accuracy (low $K_2$), and control smoothness (low $K_7$) in this comparison, at the cost of a
-        moderate joint-limit violation rate.
-        \item TRPO is close to PPO on most metrics, but requires more computation time
-        and still incurs occasional joint-limit violations.
-        \item The off-policy methods (TD3, SAC) do not improve on PPO under unified conditions
-        and are more computation-intensive, with higher tracking errors.
-        \item PG and DDPG show the largest fluctuations and the weakest performance on most
-        KPIs.
-\end{itemize}
-These results are consistent with the on-policy/off-policy distinction in \cref{tab:on_off_policy}. Under the
-strong dynamic coupling and the safety constraints of the considered task, the on-policy methods with constrained
-updates were the most reliable in this benchmark. Based on these results, PPO is selected for further tuning.
-
-The next section reports the hyperparameter modifications applied to PPO and their
-effect on the KPIs.
+The control smoothness $K_7$ and the energy consumption $K_9$ separate the agents in a similar way. TRPO
+and PG produced smooth torque commands ($K_7 \le 0.010$) with a low energy consumption ($K_9 \le 2.0$).
+The default PPO agent tracked the path with a similar error but with a larger jerk ($K_7 = 0.383$) and
+energy consumption ($K_9 = 12.4$). The off-policy agents combined larger tracking errors with $K_7$
+between 0.20 and 0.55 and $K_9$ between 8.6 and 19.3.
 
 \begin{table*}[!t]
 \centering
-\caption{Pairwise Wilcoxon signed-rank tests of each agent vs.\ PPO (baseline), Holm-corrected.
-  Each cell shows $\Delta\tilde{x}$ (median difference, agent$-$PPO) with the significance level as superscript
-  (${}^{***}p<0.001$, ${}^{**}p<0.01$, ${}^{*}p<0.05$, ${}^{\mathrm{n.s.}}p\geq0.05$).
-  For $K_1$, positive $\Delta\tilde{x}$ means the agent achieves a higher (better) return.
-  For $K_2$--$K_9$, negative $\Delta\tilde{x}$ means lower (better) error/violation/jerk/energy values.
-  $K_5$ is the collision rate (0\,=\,no collisions). All evaluated agents achieved $K_5$\,=\,0.}
+\caption{Seed-level comparison of the successful runs of the default agents with those of TRPO. Each cell
+gives the median difference $\Delta\tilde{x}$ (agent minus TRPO) with the Holm-corrected significance of a
+two-sided Mann--Whitney $U$ test as superscript (${}^{***}p<0.001$, ${}^{**}p<0.01$, ${}^{*}p<0.05$,
+${}^{\mathrm{n.s.}}p\geq0.05$). For $K_1$, a negative difference means a lower return than TRPO. For the
+other KPIs, a positive difference means a larger error, jerk, angular velocity, or energy than TRPO. PPO
+and PG are not tested because they have fewer than four successful runs.}
 \label{tab:significance}
 \renewcommand{\arraystretch}{1.3}
 \setlength{\tabcolsep}{5pt}
 \footnotesize
-\begin{tabular}{l *{9}{r}}
+\begin{tabular}{lc *{7}{r}}
 \toprule
-\textbf{Agent} & $\boldsymbol{K_1}$ & $\boldsymbol{K_2}$ & $\boldsymbol{K_3}$ & $\boldsymbol{K_4}$ & $\boldsymbol{K_5}$ & $\boldsymbol{K_6}$ & $\boldsymbol{K_7}$ & $\boldsymbol{K_8}$ & $\boldsymbol{K_9}$ \\
+\textbf{Agent} & $\boldsymbol{n}$ & $\boldsymbol{K_1}$ & $\boldsymbol{K_2}$ & $\boldsymbol{K_3}$ &
+  $\boldsymbol{K_4}$ & $\boldsymbol{K_7}$ & $\boldsymbol{K_8}$ & $\boldsymbol{K_9}$ \\
 \midrule
-TRPO & $+7.55^{*}$    & $-0.277^{***}$ & $-0.526^{***}$ & $+0.003^{\mathrm{n.s.}}$ & $0^{\mathrm{n.s.}}$    & $-0.137^{***}$ & $+0.362^{***}$ & $-0.041^{***}$ & $-9.38^{***}$  \\
-TD3  & $+8.90^{***}$  & $+0.047^{\mathrm{n.s.}}$ & $-0.276^{***}$ & $-0.097^{***}$ & $0^{\mathrm{n.s.}}$    & $-0.156^{***}$ & $+0.731^{***}$ & $-0.095^{***}$ & $-12.91^{***}$ \\
-SAC  & $-33.79^{***}$ & $+0.908^{***}$ & $+0.981^{***}$ & $+0.093^{**}$  & $0^{\mathrm{n.s.}}$   & $-0.059^{***}$ & $+0.404^{***}$ & $+0.032^{***}$ & $+2.44^{*}$    \\
-PG   & $-24.46^{*}$   & $-0.051^{\mathrm{n.s.}}$ & $-0.132^{\mathrm{n.s.}}$ & $+0.158^{**}$  & $0^{\mathrm{n.s.}}$    & $-0.156^{***}$ & $+0.199^{***}$ & $0.000^{\mathrm{n.s.}}$  & $-4.05^{***}$  \\
-DDPG & $-102.02^{***}$& $+0.060^{\mathrm{n.s.}}$ & $-0.095^{\mathrm{n.s.}}$ & $+0.331^{***}$ & $0^{\mathrm{n.s.}}$   & $-0.153^{***}$ & $+0.724^{***}$ & $-0.006^{\mathrm{n.s.}}$ & $-12.17^{***}$ \\
+SAC  & 6 & $-8.08^{***}$ & $+0.180^{***}$ & $+0.779^{***}$ & $+0.134^{*}$ & $+0.125^{\mathrm{n.s.}}$ &
+  $+0.027^{*}$ & $+7.06^{\mathrm{n.s.}}$ \\
+TD3  & 5 & $-3.07^{**}$ & $+0.085^{**}$ & $+0.387^{**}$ & $+0.046^{**}$ & $+0.532^{**}$ &
+  $+0.027^{**}$ & $+18.3^{**}$ \\
+DDPG & 4 & $-7.81^{**}$ & $+0.128^{**}$ & $+0.770^{**}$ & $+0.299^{**}$ & $+0.562^{**}$ &
+  $+0.062^{**}$ & $+13.1^{**}$ \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-\textbf{Statistical Significance of Agent Comparisons.}
-To test the ranking above statistically, non-parametric hypothesis tests were applied to the 30 evaluation
-episodes per agent. First, a Friedman test indicated that at least one agent differs significantly from the others
-for every KPI (all $p < 10^{-17}$). Pairwise Wilcoxon signed-rank tests were then conducted between PPO (baseline)
-and each competing agent. A Holm correction was applied to control the family-wise error rate across the multiple
-comparisons. \cref{tab:significance} reports the Holm-corrected $p$-values and the median differences. % chktex 24
-Positive values indicate a better result of PPO for a minimization objective, and negative values indicate a
-better result of PPO for a maximization objective.
+\textbf{Statistical Tests.} \cref{tab:significance} compares the successful runs of each default agent
+with those of TRPO on the seed level. PPO and PG are not tested because they have fewer than four
+successful runs. SAC, TD3, and DDPG had a significantly lower return $K_1$ and significantly larger
+tracking errors $K_2$ and $K_3$ than TRPO (Holm-corrected $p \le 0.005$). Their base orientation error
+$K_4$ was also significantly larger ($p \le 0.031$). For SAC, the differences in $K_7$ and $K_9$ were not
+significant.
 
-The statistical tests support the conclusions drawn from the summary metrics and add some details.
-For \emph{episodic return} ($K_1$), TRPO and TD3 achieve slightly higher returns than PPO
-($\Delta\tilde{x}=+7.55$ and $+8.90$, respectively), but both converge to a
-conservative strategy. TD3 in particular yields $K_7\approx0.998$ and $K_9<1$,
-which indicates near-zero actuation rather than effective tracking.
-SAC, PG, and DDPG produce significantly lower returns than PPO ($p<0.001$ each), with DDPG
-showing the largest deficit ($\Delta\tilde{x}=-102$).
-
-For \emph{tracking accuracy} ($K_2$, $K_3$), PPO differs significantly from TRPO, TD3, and SAC
-(all $p<0.001$). The differences from PG and DDPG are not significant at the
-$\alpha=0.05$ level after Holm correction, which is likely due to the high variability of these agents.
-The median difference is largest for SAC ($K_2$, $\Delta\tilde{x}=+0.908$), which is consistent with the
-oscillatory behavior of SAC.
-
-Regarding \emph{base stability and safety} ($K_4$--$K_6$), the base orientation error of PPO differs significantly
-from that of TD3, SAC, PG, and DDPG ($K_4$, all $p<0.01$). The difference from TRPO is not significant
-($p=0.926$), which indicates a comparable base stability of the two on-policy methods.
-For the collision-rate KPI ($K_5$), all evaluated agents achieve $K_5=0$ over the 30 evaluation
-episodes. The collision metric therefore does not distinguish the agents in this evaluation and is
-reported descriptively rather than used for ranking.
-
-For \emph{control quality and efficiency} ($K_7$--$K_9$), PPO produces significantly smoother
-control signals than all competing agents ($K_7$, all $p<0.001$), with DDPG and TD3 showing
-the largest jerk deficits ($\Delta\tilde{x}=+0.724$ and $+0.731$).
-Energy consumption ($K_9$) is significantly lower for TRPO, TD3, and DDPG than for PPO.
-However, as noted for $K_1$, these low values are likely due to reduced actuation and not to higher
-efficiency. They have to be interpreted together with the tracking errors.
-
-Overall, the tests are consistent with a favorable balance of PPO across the KPIs in this comparison. The smoother
-control signals of PPO are significant against all other agents, and its base orientation error does not differ
-significantly from that of TRPO.
-\cref{fig:boxplots} shows the distribution of four selected KPIs over the 30 evaluation episodes as boxplots,
-including the spread and the outliers of each agent.
-\cref{fig:ci_plots} shows the corresponding 95\% bootstrap confidence intervals for each agent and KPI.
+\cref{fig:boxplots} shows the distribution of four KPIs over the successful runs, and
+\cref{fig:ci_plots} shows the corresponding 95\% bootstrap confidence intervals of the mean. Both figures
+include the optimized PPO agent of \cref{sec:ppo_opt} for reference.
 
 \begin{figure*}[!t]
   \centering
@@ -1255,7 +1227,7 @@ including the spread and the outliers of each agent.
   \\[6pt]
   \begin{subfigure}{0.48\textwidth}
     \includegraphics[width=\linewidth]{Figures/boxplot_K7.png}
-    \caption{$K_7$: Control Smoothness (Norm.\ Jerk)}
+    \caption{$K_7$: Control Smoothness (Jerk)}
     \label{fig:boxplot_k7}
   \end{subfigure}
   \hfill
@@ -1264,12 +1236,11 @@ including the spread and the outliers of each agent.
     \caption{$K_9$: Energy Consumption}
     \label{fig:boxplot_k9}
   \end{subfigure}
-  \caption{Boxplots of selected KPI distributions over 30 evaluation episodes per agent.
-    Each box spans the interquartile range (IQR), the center line marks the median,
-    the whiskers extend to 1.5\,$\times$\,IQR, and circles denote outliers.
-    PPO shows a low tracking error ($K_2$) and smooth control ($K_7$) with a small spread, whereas PG and SAC
-    vary more. The low $K_9$ values of TD3 and DDPG reflect insufficient actuation rather than energy
-    efficiency.}
+  \caption{Distribution of selected KPIs over the successful runs of each agent. Each point is one run,
+    averaged over the 30 random initial states, and the number of successful runs is given below each
+    agent. Each box spans the interquartile range, and the center line marks the median. Axes are
+    logarithmic where the values span more than a factor of 50. The optimized PPO agent of
+    \cref{sec:ppo_opt} is included for reference.}
   \label{fig:boxplots}
 \end{figure*}
 
@@ -1289,7 +1260,7 @@ including the spread and the outliers of each agent.
   \\[6pt]
   \begin{subfigure}{0.48\textwidth}
     \includegraphics[width=\linewidth]{Figures/ci_K7.png}
-    \caption{$K_7$: Control Smoothness (Norm.\ Jerk)}
+    \caption{$K_7$: Control Smoothness (Jerk)}
     \label{fig:ci_k7}
   \end{subfigure}
   \hfill
@@ -1298,19 +1269,36 @@ including the spread and the outliers of each agent.
     \caption{$K_9$: Energy Consumption}
     \label{fig:ci_k9}
   \end{subfigure}
-  \caption{95\% bootstrap confidence intervals for selected KPIs across all agents
-    (30 evaluation episodes per agent).
-    The narrow intervals of TD3 and DDPG reflect a nearly constant behavior across episodes. The intervals of PPO
-    are also narrow, although PPO uses a larger part of the workspace. TRPO and PPO show overlapping intervals for
-    $K_4$ (base orientation), which is consistent with the non-significant Wilcoxon result ($p=0.926$).}
+  \caption{Mean and 95\% bootstrap confidence interval of selected KPIs over the successful runs of each
+    agent (2000 resamples). The number of successful runs is given below each agent. The intervals of
+    agents with few successful runs are wide or undefined. The optimized PPO agent of \cref{sec:ppo_opt}
+    is included for reference.}
   \label{fig:ci_plots}
 \end{figure*}
 
-\section{Optimization of the PPO Agent}\label{sec:ppo_opt} Based on the comparison in \cref{comparison},
-PPO is selected for further tuning. The PPO agent used so far corresponds to the default configuration of
-MATLAB's Reinforcement Learning Toolbox \cite{b4}. The modifications aim at faster convergence, lower
-tracking and base orientation errors, and the avoidance of the remaining joint-limit violations. The
-tuning concerns the hyperparameters, while the hidden layers of the networks are kept.
+\textbf{Summary of the Comparison.} With the toolbox default hyperparameters, the comparison can be
+summarized as follows:
+\begin{itemize}
+  \item TRPO was the only default agent that completed all ten runs without a terminated evaluation
+  episode. It also reached a low tracking error, although three of its runs were weaker than the others.
+  \item The default PPO agent and PG succeeded in only three and two of ten runs. Their successful runs
+  tracked the path with an error similar to that of TRPO.
+  \item SAC, TD3, and DDPG succeeded in four to six runs. Even in their successful runs, they showed
+  significantly larger tracking errors than TRPO and required two to three times longer training.
+\end{itemize}
+These results suggest that the trust-region constraint of TRPO stabilizes training under the strong
+base--manipulator coupling. The clipped updates of PPO did not provide the same stability with the
+default learning rate of $10^{-2}$. This learning rate is high for PPO and the off-policy methods and
+likely contributes to their seed dependence. PPO is selected for tuning in \cref{sec:ppo_opt} because
+its successful runs were competitive with TRPO and it trained faster than TRPO. The tuning therefore
+targets the seed dependence.
+
+\section{Optimization of the PPO Agent}\label{sec:ppo_opt} The default PPO agent succeeded
+in only three of ten runs in \cref{comparison}, but its successful runs tracked the path with an
+error similar to that of TRPO. This section examines whether a tuned configuration removes this seed
+dependence. The PPO agent used so far corresponds to the default configuration of MATLAB's
+Reinforcement Learning Toolbox \cite{b4}. The tuning concerns the hyperparameters, while the
+hidden layers of the networks are kept.
 
 
 
@@ -1327,9 +1315,10 @@ tuning concerns the hyperparameters, while the hidden layers of the networks are
 		\caption{PPO (optimized)}
 		\label{fig:training_ppo_opt}
 	\end{subfigure}
-	\caption{Episode rewards during training of the default and the optimized PPO agents. (a) Default
-  hyperparameters. (b) Optimized configuration. The optimized configuration converges faster and reaches a higher
-  average episodic return.}
+	\caption{Episode rewards during training of the default and the optimized PPO agents over ten seeds. The
+  thin lines show the moving average over 25 episodes of each seed, the thick line the mean over the seeds,
+  and the band one standard deviation. Both panels use the same axis. (a) Default hyperparameters.
+  (b) Optimized configuration.}
 	\label{fig:training_ppo_compare}
 \end{figure*}
 \textbf{Network Architecture.} The optimized agent keeps the hidden layers of the default PPO agent. The
@@ -1338,18 +1327,22 @@ to the default agent, the mean output of the Gaussian policy is not bounded by a
 The commanded torques are limited by the saturation block instead. The networks are defined explicitly
 rather than through the toolbox default constructor.
 
-\textbf{Hyperparameter Tuning.} The configuration was determined in a preliminary coordinate-wise grid
-search and is kept fixed for all experiments reported here. Each hyperparameter was swept over a discrete
-set of candidate values while all others were held at their current best values. The configuration with
-the highest mean episodic reward over the final 50 of the $N_{\mathrm{train}}=1000$ training episodes was
-selected. In total, 16 training runs of 1000 episodes each were conducted during this tuning phase. The
-swept parameters, their candidate values, and the selected values are as follows:
+\textbf{Hyperparameter Tuning.} The configuration was determined in a preliminary
+coordinate-wise grid search and is kept fixed for all experiments reported here. The search
+used a single training run per candidate. It was carried out on an earlier version of the simulation
+model, before the reward weights, the termination rule, and the evaluation protocol of this work were
+fixed. The selected values are therefore used as a fixed configuration and are not claimed to be optimal
+for the final setup. Each hyperparameter was swept over a discrete set of candidate values while all
+others were held at their current best values. The configuration with the highest mean episodic reward
+over the final 50 of the $N_{\mathrm{train}}=1000$ training episodes was selected. In total, 16 training
+runs of 1000 episodes each were conducted during this tuning phase. The swept parameters, their candidate
+values, and the selected values are as follows:
 \begin{itemize}
-  \item \textit{Actor learning rate.} Candidates $\{1\!\times\!10^{-3},\;5\!\times\!10^{-4}\}$, selected
-  $1\!\times\!10^{-3}$. Both candidates are an order of magnitude below the toolbox default of $10^{-2}$,
-  which reduces the size of the policy updates.
-  \item \textit{Critic learning rate.} Candidates $\{1\!\times\!10^{-3},\;5\!\times\!10^{-4}\}$, selected
-  $5\!\times\!10^{-4}$, which gave the highest mean episodic reward in the search.
+  \item \textit{Actor learning rate.} Candidates $\{1\!\times\!10^{-3},\;5\!\times\!10^{-4}\}$,
+  selected $1\!\times\!10^{-3}$. Both candidates are an order of magnitude below the toolbox
+  default of $10^{-2}$, which reduces the size of the policy updates.
+  \item \textit{Critic learning rate.} Candidates $\{1\!\times\!10^{-3},\;5\!\times\!10^{-4}\}$,
+  selected $5\!\times\!10^{-4}$, which gave the highest mean episodic reward in the search.
   \item \textit{Entropy loss weight.} Candidates $\{1\!\times\!10^{-2},\;1\!\times\!10^{-3}\}$, selected
   $1\!\times\!10^{-3}$. A small entropy bonus is intended to prevent a premature convergence to a
   suboptimal deterministic policy while avoiding undirected exploration.
@@ -1357,28 +1350,39 @@ swept parameters, their candidate values, and the selected values are as follows
   is a compromise between the trajectory information per update and the memory requirements and update latency.
   \item \textit{Mini-batch size.} Candidates $\{128,\;256\}$, selected $256$. Larger mini-batches are expected to give
   more stable gradient estimates and thus a lower training variance.
-  \item \textit{Fixed settings.} The discount factor was set to $\gamma = 0.995$, the number of epochs
-  per update to 10, and the gradient threshold of both optimizers to 1. The clip factor of 0.2
-  and the GAE factor of 0.95 remain at their default values.
+  \item  \textit{Fixed settings.} The discount factor was set to $\gamma = 0.995$,
+  the number of epochs per update to 10, and the gradient threshold of both optimizers to 1. The
+  clip factor of 0.2 and the GAE factor of 0.95 remain at their default values.
 \end{itemize}
 
-In the tuning runs, the resulting configuration gave a more stable and better-performing PPO agent.
-Compared with the default configuration, the optimized agent uses learning rates that are ten to twenty
-times smaller, larger rollouts and mini-batches, more epochs per update, and gradient clipping. Together,
-these settings limit the size of each policy update.
+In the tuning runs, the selected configuration gave the highest mean episodic reward.
+Compared with the default configuration, the optimized agent uses learning rates that are
+ten to twenty times smaller, larger rollouts and mini-batches, more epochs per update, and gradient
+clipping. Together, these settings limit the size of each policy update.
 
 \subsection{Circular Trajectory}
 
-\textbf{Training Outcome.} The effect of the modifications can be seen in the training curves
-(see~\cref{fig:training_ppo_compare}). The episodic return of the default PPO agent increases initially and then
-plateaus around $-2$ per episode with high variance over the remaining training. This suggests a convergence to a
-suboptimal policy. In contrast, the return of the optimized PPO agent continues to increase and converges to
-a higher value (closer to zero) with reduced variance. \cref{tab:ppo_optimization_kpi} reports the KPI averages
-over $N_{\mathrm{eval}} = 30$ evaluation episodes for PPO with the default and the optimized
-configurations. The mean episodic return $K_1$ increases from $-2.23$ for the default PPO agent to
-$-0.43$ for the optimized PPO agent, which is about five times closer to zero. The
-reduced variance indicates that the improvement is consistent across episodes rather than driven by
-a few outliers.
+\textbf{Training Outcome.} \cref{fig:training_ppo_compare} shows the training curves of both
+configurations over ten seeds. The moving-average return of the default PPO agent dropped to about $-61$
+within the first 35 episodes and then rose slowly to $-12.7$ after 1000 episodes, with a large spread
+between the seeds. The optimized configuration started at about $-12$, exceeded $-1$ after 625 episodes,
+and reached $-0.36$ with a small spread between the seeds. For comparison, TRPO reached $-0.81$ after 1000
+episodes.
+
+\textbf{Success and Performance.} \cref{tab:ppo_optimization_kpi} compares the optimized PPO agent with the
+default PPO agent and with TRPO. The optimized configuration completed all ten runs without a terminated
+evaluation episode, compared with three runs for the default configuration (Fisher's exact test,
+$p = 0.003$). Over the successful runs, it reached a mean squared tracking error of $K_2 = 0.0041$,
+compared with 0.0134 for the default PPO agent and 0.0145 for TRPO. The base orientation error $K_4$ was
+0.021, compared with 0.050 and 0.026. The optimized agent also produced smoother torque commands than the
+default PPO agent ($K_7$, $0.383 \to 0.0097$) with a lower energy consumption ($K_9$, $12.4 \to 2.16$).
+Its control smoothness and energy consumption were similar to those of TRPO.
+
+\textbf{Comparison With TRPO.} On the seed level, only the difference in the base orientation error
+reached the 5\% level ($K_4$, Mann--Whitney, $p = 0.045$). The differences in the return $K_1$, the
+tracking error $K_2$, and the base angular velocity $K_8$ were not significant ($p$ between 0.076 and
+0.089). Given the number of KPIs tested, the single significant result should be interpreted with care.
+The optimized agent trained in 9.2\,min per run, compared with 11.3\,min for TRPO.
 
 \begin{figure*}[!t]
     \centering
@@ -1393,7 +1397,9 @@ a few outliers.
         \caption{PPO (optimized)}
         \label{fig:traj_opt}
     \end{subfigure}
-    \caption{Reference and actual end-effector trajectory in the $XY$ plane.}
+    \caption{Reference and actual end-effector path in the $XY$ plane for one evaluation episode from the
+    nominal initial state. Each panel shows the successful run with the median $K_2$ of its configuration,
+    seed 2 for the default and seed 0 for the optimized PPO agent.}
     \label{fig:trajektorie_xy_compare}
 \end{figure*}
 
@@ -1410,55 +1416,48 @@ a few outliers.
         \caption{PPO (optimized)}
         \label{fig:basis_opt}
     \end{subfigure}
-    \caption{Time evolution of the base orientation (quaternion components) during a test episode.}
+    \caption{Vector part of the base orientation quaternion during the episodes of
+    \cref{fig:trajektorie_xy_compare}. The base rotates only about the $z$-axis. The scalar part stays
+    above 0.9996 in both episodes.}
     \label{fig:basis_orientation_compare}
 \end{figure*}
 
-\begin{table}[!b]
+\begin{table*}[!t]
 	\centering
-	\caption{Performance of the PPO agent before and after optimization. The optimized PPO agent improves most
-		reported KPIs. It reaches a higher return, lower errors, and smoother control, with no observed violations of
-		the monitored properties in the evaluation episodes.}
+	\caption{Default PPO agent, optimized PPO agent, and TRPO on the circular path. The first row gives the
+		number of successful runs out of ten. All other values are the mean and the standard deviation over
+		the successful runs. $K_5$ and $K_6$ are zero for every successful run and are omitted.}
     \label{tab:ppo_optimization_kpi}
 	\renewcommand{\arraystretch}{1.2}
-	\setlength{\tabcolsep}{3pt}
-	\begin{tabular}{lcc}
+	\setlength{\tabcolsep}{8pt}
+	\begin{tabular}{lccc}
 		\toprule
-		\textbf{Metric (KPI)} & \textbf{PPO (default)} & \textbf{PPO (optimized)} \\
+		\textbf{Metric (KPI)} & \textbf{PPO (default)} & \textbf{PPO (optimized)} & \textbf{TRPO} \\
 		\midrule
-		Mean Episodic Return ($K_1$)        & $-2.23$  & $\mathbf{-0.43}$ \\
-		Mean Squared EE Position Error ($K_2$)      & 0.0257  & \textbf{0.0083} \\
-		Maximum EE Position Error ($K_3$)       & 0.4833   & \textbf{0.27} \\
-		Mean Base Orientation Error ($K_4$) & 0.0667  & \textbf{0.022} \\
-		Collision Rate ($K_5$)             & 0 & 0 \\
-		Joint Limit Violation Rate ($K_6$) & 0.0505 (5.1\%) & \textbf{0} \\
-		Control Smoothness ($K_7$, Jerk)     & 0.6812  & \textbf{0.351} \\
-		Mean Base Angular Velocity ($K_8$)  & 0.095  & \textbf{0.050} \\
-		Energy Consumption ($K_9$)          & 6.325  & \textbf{5.314} \\
+		Successful runs & 3/10 & 10/10 & 10/10 \\
+		Mean Episodic Return ($K_1$) & $-0.72 \pm 0.12$ & $-0.15 \pm 0.12$ & $-0.44 \pm 0.55$ \\
+		Mean Squared EE Position Error ($K_2$) & $0.0134 \pm 0.0081$ & $0.0041 \pm 0.0023$ & $0.0145 \pm 0.0196$ \\
+		Maximum EE Position Error ($K_3$) & $0.215 \pm 0.040$ & $0.168 \pm 0.020$ & $0.229 \pm 0.095$ \\
+		Mean Base Orientation Error ($K_4$) & $0.050 \pm 0.014$ & $0.021 \pm 0.016$ & $0.026 \pm 0.009$ \\
+		Control Smoothness ($K_7$, Jerk) & $0.383 \pm 0.068$ & $0.0097 \pm 0.0017$ & $0.0098 \pm 0.0017$ \\
+		Mean Base Angular Velocity ($K_8$) & $0.031 \pm 0.007$ & $0.012 \pm 0.005$ & $0.017 \pm 0.008$ \\
+		Energy Consumption ($K_9$) & $12.4 \pm 9.7$ & $2.16 \pm 0.69$ & $2.00 \pm 0.78$ \\
+		Reward Std.\ (Late Training, $T_1$) & $1.23 \pm 0.58$ & $0.098 \pm 0.027$ & $0.26 \pm 0.18$ \\
+		Training Time ($T_2$, min) & $8.4 \pm 0.7$ & $9.2 \pm 0.6$ & $11.3 \pm 0.7$ \\
 		\bottomrule
 	\end{tabular}
-\end{table}
+\end{table*}
 
-The higher return is reflected in the task-level KPIs. \cref{fig:trajektorie_xy_compare}
-shows the end-effector path in the $XY$ plane. The default PPO agent deviates from the
-reference circle and oscillates, whereas the optimized PPO agent follows the reference closely. The
-mean squared tracking error $K_2$ decreases from $0.0257$ to $0.0083$ (a reduction of $67.7\%$),
-and the maximum error $K_3$ from $0.4833$ to $0.27$.
+\cref{fig:trajektorie_xy_compare} shows the end-effector path of one evaluation episode for each PPO
+configuration. The default PPO agent follows the first quarter of the semicircle but oscillates around
+the reference in the second half, which is consistent with its large jerk $K_7$. The optimized agent
+follows the reference without visible oscillation and stays slightly inside the circle near the end of
+the path. \cref{fig:basis_orientation_compare} shows the base orientation during the same episodes. The
+largest vector component of the quaternion was 0.028 for the default and 0.013 for the optimized agent.
 
-Base stabilization improves as well (\cref{fig:basis_orientation_compare}). The mean orientation error
-$K_4$ decreases from $0.0667$ to $0.022$ (a factor of approximately three), and the mean angular velocity
-$K_8$ decreases from $0.095\,\mathrm{rad/s}$ to $0.050\,\mathrm{rad/s}$. The lower $K_4$ suggests that
-the optimized agent partly compensates the momentum transfer to the base with its arm motion.
-
-For the optimized PPO agent, no violations of the monitored properties are observed ($K_5 = K_6 = 0$
-over the 30 evaluation episodes, compared to $K_6 = 5.1\%$ for the default configuration).
-It also improves the control smoothness ($K_7$, $0.6812 \to 0.351$) and reduces the energy consumption
-by $16.0\%$ ($K_9$, $6.325 \to 5.314$). These changes are observed simultaneously in the reported
-evaluation, without an apparent trade-off among the selected KPIs.
-
-In the reported evaluation, the optimized PPO agent improves tracking accuracy, base disturbance, control
-smoothness, and energy consumption together, without observed violations of the monitored constraints. These
-results support the use of hyperparameter tuning for space-robot control under the considered conditions.
+Under the tested conditions, the tuning removed the seed dependence of the default PPO agent. The tuned
+agent reached the tracking accuracy and base stability of TRPO with a shorter training time. Its lower
+tracking error compared with TRPO was not statistically significant with ten runs per configuration.
 
 \subsection{Ablation Study of Reward Components}\label{sec:reward_ablation} An ablation study quantifies
 the contribution of each term of the reward function in~\eqref{eq:reward}. The optimized PPO agent was
@@ -1785,16 +1784,14 @@ testbeds for space robotics.
 \section{Discussion and Conclusion}\label{sec:discussion} This work investigated continuous-action deep
 RL for the control of a free-floating space robotic arm, with a focus on control performance and the
 monitored safety properties. The results show that an RL-based controller can perform the considered
-manipulation task in the simulated space environment under the stated assumptions. The optimized PPO
-agent yields a mean squared end-effector tracking error of $K_2 = 0.0083$, a reduction of $67.7\%$
-relative to the default configuration ($K_2 = 0.0257$). The mean base orientation error decreases by a
-factor of approximately three ($K_4$, $0.0667 \to 0.022$), and the mean base angular velocity is
-approximately halved ($K_8$, $0.095\,\mathrm{rad/s} \to 0.050\,\mathrm{rad/s}$). No violations of the
-monitored safety properties were recorded over the 30 evaluation episodes ($K_5 = K_6 = 0$), compared
-with a $5.1\%$ joint-limit violation rate for the default configuration. Control smoothness improves by
-$48.5\%$ ($K_7$), and the energy consumption decreases by $16.0\%$ ($K_9$). These effects are observed
-together in the reported evaluation rather than as an apparent trade-off between the selected objectives
-\cite{b1,b7}.
+manipulation task in the simulated space environment under the stated assumptions. With the
+toolbox default hyperparameters, the agents differed more in how often training succeeded than in the
+performance of their successful runs. TRPO completed all ten runs, whereas the other default agents
+terminated 40.0\% to 80.0\% of their evaluation episodes. The tuned PPO agent also completed all runs. It
+reached a mean squared tracking error of $K_2 = 0.0041$, compared with 0.0145 for TRPO and 0.0134 for the
+successful runs of the default PPO agent. Its advantage over TRPO was not statistically significant, but
+it trained faster. No violations of the monitored safety properties were recorded for
+TRPO and the tuned PPO agent in any evaluation episode \cite{b1,b7}.
 
 An additional evaluation on a piecewise-linear end-effector reference assessed the transfer to a different
 trajectory. The optimized PPO agent performs better than the default configuration on most metrics. It increases
@@ -1805,17 +1802,19 @@ configuration tuned for circular tracking therefore does not fully transfer to p
 This motivates either trajectory-diverse training or trajectory-specific tuning to improve the transfer across
 reference geometries \cite{b8}.
 
-\textbf{Practical Implications.} The performance of PPO and TRPO on this task indicates that policy-gradient
-methods with constrained updates are suitable candidates for continuous control tasks with strong dynamic
-coupling and safety constraints. The clipped surrogate objective of PPO provides bounded policy updates
-under the nonlinear free-floating dynamics. The runtime monitors (collision monitor and joint-limit monitor)
-supervise the training. They terminate episodes in which the
-policy would violate a monitored constraint and apply a terminal penalty \cite{b15,b23,b22}. Combined with
-the penalty-driven reward, this led to a final policy that did not violate the monitored constraints
-in the reported evaluation. The present simulation study does not establish that this behavior transfers to a
-physical system. It suggests only that safety checks embedded in the training simulator may remain useful as
-runtime watchdogs, provided that the deployed system stays within the simulator's fidelity range, which remains
-to be validated \cite{b22,b24}.
+\textbf{Practical Implications.} The results of TRPO and the tuned PPO agent indicate that
+policy-gradient methods with constrained updates are suitable candidates for continuous control tasks
+with strong dynamic coupling and safety constraints. For PPO, this held only with a smaller learning rate
+than the toolbox default. With the default learning rate of $10^{-2}$, the clipped surrogate objective of
+PPO did not prevent the seed dependence observed in \cref{comparison}. The runtime
+monitors (collision monitor and joint-limit monitor) supervise the training. They terminate episodes in
+which the policy would violate a monitored constraint and apply a terminal penalty \cite{b15,b23,b22}.
+Combined with the penalty-driven reward, this
+led to final policies of TRPO and the tuned PPO agent that did not violate the monitored constraints in
+the reported evaluation. The present simulation study does not establish that this behavior transfers to
+a physical system. It suggests only that safety checks embedded in the training simulator may remain
+useful as runtime watchdogs, provided that the deployed system stays within the simulator's fidelity
+range, which remains to be validated \cite{b22,b24}.
 
 
 \textbf{Limitations and Future Work.} The study has several limitations. First, a \emph{sim-to-real gap}
@@ -1830,13 +1829,16 @@ torque application can destabilize a policy that was trained without latency. Mi
 would require domain randomization over simulation parameters, latency injection during training, and
 ultimately HIL validation~\cite{b8,b22}. Second, the RL agent exhibits \emph{hyperparameter sensitivity}.
 The tuned PPO configuration is task-specific and may require re-tuning for different trajectories or
-mission scenarios. Third, the \emph{evaluation scope} is limited. Each algorithm was trained in three
-runs and evaluated over 30 episodes from a fixed initial configuration, for a single robot model and a
-small set of reference trajectories. This does not fully characterize seed sensitivity, generalization
-across initial states, target trajectories, and robot parameters, or robustness to disturbances. The
-reported ranking and improvements are therefore conditional on the tested setup. Fourth, the \emph{state
-representation} was manually designed. Learned representations or recurrent architectures (LSTM) might
-improve performance under partial observability. Fifth, the \emph{safety monitoring} covers selected
+mission scenarios. It was selected in an earlier grid search with a single run per
+candidate. The other algorithms were compared only with their toolbox default hyperparameters, and tuning
+them might change their ranking. Third, the \emph{evaluation scope} is limited.
+Each configuration was trained with ten seeds and evaluated on 31 initial states within $\pm 1^\circ$ of
+the nominal pose, for a single robot model and two reference paths. Ten runs per configuration allow only
+coarse estimates of the success rate, and the KPIs of agents with few successful runs rest on two to four
+runs. The stress tests cover a small set of perturbations. The reported ranking and improvements are
+therefore conditional on the tested setup. Fourth, the \emph{state representation} was manually
+designed. Learned representations or recurrent architectures (LSTM) might improve performance under
+partial observability. Fifth, the \emph{safety monitoring} covers selected
 properties (collision events, joint limits, torque bound, and momentum consistency). It does not
 constitute a formal proof of closed-loop stability, task completion, or collision avoidance for the full
 nonlinear model, nor an exhaustive formal verification of the mission~\cite{b5,b22}. Finally, \emph{no
@@ -1855,24 +1857,22 @@ and predicted energy consumption (see \cref{fig:oos}).
 \textbf{Conclusion.} This work has presented a framework that combines deep reinforcement learning,
 multibody simulation, and formal-methods-based safety monitoring for Cartesian path tracking of a
 free-floating space robot. Six continuous-action RL algorithms were compared under unified conditions
-with the toolbox default hyperparameters. For the considered simulated task and evaluation setup, PPO
-showed the most favorable trade-off between tracking accuracy, base disturbance, and training stability.
-Subsequent hyperparameter tuning of the PPO agent yielded a policy that reduces the tracking error by
-$67.7\%$ relative to the default configuration. It also reduces the base orientation error by a factor of
-approximately three and the energy consumption by $16.0\%$, and no joint-limit violations or collisions
-were observed in the 30 evaluation episodes. Runtime monitoring of selected safety properties in the
-training loop, together with an offline torque-bound check, helped to keep these results within the
-monitored constraints in the evaluated episodes. This addresses a part of the black-box nature of learned
-controllers. These simulation results, obtained under the stated idealizing assumptions, do not establish
-formal safety or operational readiness, but they support further investigation of deep RL with runtime
-safety monitoring for space manipulation tasks.
+with the toolbox default hyperparameters and ten seeds each. For the considered
+simulated task and evaluation setup, TRPO was the only default agent that completed
+all runs without a safety abort. A tuned PPO configuration also completed all runs and reached the lowest
+tracking error with a shorter training time than TRPO, although this difference was not statistically
+significant. Runtime monitoring of selected safety properties in the training loop, together
+with an offline torque-bound check, detected and terminated the violations of the
+other agents. These simulation results, obtained under the stated idealizing
+assumptions, do not establish formal safety or operational readiness, but they support further
+investigation of deep RL with runtime safety monitoring for space manipulation tasks.
 
 The results also illustrate the influence of algorithm choice and hyperparameter tuning on the learning
 performance for the considered task. They are consistent with the view that no single RL algorithm
 is uniformly best across applications. Under unified conditions, the choice of algorithm and hyperparameters
-visibly affected the achieved tracking accuracy and base stability. Systematic benchmarking
-of candidate algorithms is therefore a practical step in the selection of an appropriate
-RL controller for a given task.
+visibly affected the achieved tracking accuracy and base stability and, above all, how often
+training succeeded. Systematic benchmarking of candidate algorithms over several seeds is
+therefore a practical step in the selection of an appropriate RL controller for a given task.
 
 Several open problems remain for real-world deployment, but the proposed framework provides a basis
 for further investigation. Possible application areas include satellite servicing, on-orbit assembly, and active
