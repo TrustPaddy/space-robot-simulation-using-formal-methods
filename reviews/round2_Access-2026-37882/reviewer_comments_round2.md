@@ -92,7 +92,15 @@ von `\hlone` (Paket `soul`), der markierte Text wird davor und danach fortgesetz
   PPO default und TD3 2/5, PG 1/5. KPIs der erfolgreichen Läufe: PPO optimiert K2 = 0,0050, TRPO 0,0078,
   PPO default 0,016, PG 0,020, TD3 0,098, DDPG 0,118, SAC 0,219. Die Trennung entschärft die Aussage über PPO.
   Die Frage nach einem zweiten Roboter (7 DoF) ist verneint, das Paper bleibt beim 4-DoF-Arm.
-- Offen: Kampagnen Teil C rechnen (Start durch Patrick), Abb. 7 aus `p_tot` neu (A23).
+- **Abbildungen neu (21.09.2026, `makeFigures`):** Boxplots und Konfidenzintervalle K2/K4/K7/K9 jetzt über die
+  erfolgreichen Läufe (n unter jeder Box), Lernkurven PPO default/optimiert als Mittel ± Std über 10 Seeds mit
+  gleicher y-Achse, EE-Bahn und Basis-Quaternion (Vektorteil) für Kreis und Zwei-Segment-Bahn, Impuls (Abb. 7).
+  Gezeigte Läufe = erfolgreicher Lauf mit mittlerem K2: Kreis PPO default s2, PPO optimiert s0, TRPO s7
+  (zusätzlich `soll_vs_ist_kreisbahn_trpo.png`); Zwei-Segment PPO default s9 (einziger erfolgreicher), PPO
+  optimiert s5. Basisrotation nur um z (q_x = q_y = 0), min q_w = 0,9927. Captions in Teil B anpassen.
+  Noch von Patrick: Modell-Screenshots (Spacerobot_slx, Robot, Reference, Impuls-Monitor, Kollisionsmonitor),
+  weil das Modell neue Blöcke hat.
+- Offen: Satz zu Abb. 7 in Sec. V (A23), Captions der neuen Abbildungen.
 
 ---
 
@@ -149,7 +157,7 @@ Nicht von den Gutachtern genannt, aber für ein neues Review-Team angreifbar →
 | A19 | Kollision beendete Episode nicht; Assertion für Gelenkgrenzen existierte nicht; „task completion“ als Abbruchbedingung gibt es nicht | Contributions, Sec. III-C, IV, V | Abbruch implementiert, Text angepasst (Joint-Limit-Monitor im Reward-Block) | ✅ Modell + Text / ⬜ Ergebnis-Sätze in Sec. V (K5/K6-Werte, Teil B) |
 | A20 | Mit konstanter Terminalstrafe −1 beenden Agenten Episoden absichtlich (Pilot: 0 % vollständige Episoden) | Sec. IV Reward | r_fail = −(N − k + 1), Gl. `eq:rfail`, Begründung mit Pilot | ✅ |
 | A21 | Modellparameter fehlten im Paper; URDF hatte 65 kg; Aussage „identified values from literature [b12]“ trifft nicht zu | Sec. III-B | URDF angeglichen; Tabelle `tab:robot_params`; Satz ersetzt. [b12] jetzt in Related Work zitiert (Satz zur Modellidentifikation) | ✅ |
-| A23 | Abb. 7: p_x steigt linear auf ≈ 1,2e-5 Ns, Text sagt „within 1e-6 Ns“ | Sec. V Momentum | Nach A27 neu erzeugen, Satz anpassen | 🔬 (Teil C) |
+| A23 | Abb. 7: p_x steigt linear auf ≈ 1,2e-5 Ns, Text sagt „within 1e-6 Ns“ | Sec. V Momentum | Abb. 7 neu aus `p_tot` (PPO optimiert, Seed 0, nominale Startpose): max \|p\| = 2,7e-7 N s, Versatz im ersten Agentenschritt, danach konstant. Über alle ausgewerteten Episoden bis 3e-4 N s. Satz in Sec. V anpassen | ✅ Abbildung / ⬜ Satz |
 | A24 | Solver-Schritt 0,01 s (ode4) ≠ Agenten-Takt 0,1 s; Paper sagte „gleich“ | Sec. III-C, Sec. IV Action Space | Text korrigiert | ✅ |
 | A25 | Episode = Halbkreis (T = 8,5 s, 85 Schritte), nicht „one or two laps“, nicht periodisch | Sec. III-D, Sec. IV Training Procedure | Text korrigiert | ✅ |
 | A26 | d_safe = 2 cm löst nur eine Warnung aus; Moment-Null und Abbruch erst bei Kontakt | Sec. III-C, Sec. V Collision Monitor | Text korrigiert | ✅ |
