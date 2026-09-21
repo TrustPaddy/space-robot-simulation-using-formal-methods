@@ -1384,7 +1384,7 @@ tracking error $K_2$, and the base angular velocity $K_8$ were not significant (
 0.089). Given the number of KPIs tested, the single significant result should be interpreted with care.
 The optimized agent trained in 9.2\,min per run, compared with 11.3\,min for TRPO.
 
-\begin{figure*}[!t]
+\begin{figure*}[t]
     \centering
     \begin{subfigure}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/soll_vs_ist_kreisbahn.png}
@@ -1403,7 +1403,7 @@ The optimized agent trained in 9.2\,min per run, compared with 11.3\,min for TRP
     \label{fig:trajektorie_xy_compare}
 \end{figure*}
 
-\begin{figure*}[!t]
+\begin{figure*}[t]
     \centering
     \begin{subfigure}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/basis_orientaion_ppo.png}
@@ -1422,7 +1422,7 @@ The optimized agent trained in 9.2\,min per run, compared with 11.3\,min for TRP
     \label{fig:basis_orientation_compare}
 \end{figure*}
 
-\begin{table*}[!t]
+\begin{table*}[t]
 	\centering
 	\caption{Default PPO agent, optimized PPO agent, and TRPO on the circular path. The first row gives the
 		number of successful runs out of ten. All other values are the mean and the standard deviation over
@@ -1460,230 +1460,251 @@ agent reached the tracking accuracy and base stability of TRPO with a shorter tr
 tracking error compared with TRPO was not statistically significant with ten runs per configuration.
 
 \subsection{Ablation Study of Reward Components}\label{sec:reward_ablation} An ablation study quantifies
-the contribution of each term of the reward function in~\eqref{eq:reward}. The optimized PPO agent was
-retrained on the circular trajectory with one reward component disabled at a time. Each of the seven
-weights in the cost term $c_t$ was set to zero in turn while the remaining six were kept
-at their baseline values ($W_p=150$, $W_v=25$, $W_{\mathrm{ori}}=200$, $W_{\omega_b}=8$, $W_{v_b}=2$,
-$W_u=0.02$, $W_d=0.06$). In addition, the two positive reward terms were separately disabled by setting
-$r_{\mathrm{prog}}=0$ and $r_{\mathrm{bonus}}=0$, respectively, to isolate the contribution of the
-progress signal and the proximity bonus. All other aspects of the training and evaluation pipeline
-(hyperparameters, random seeds, episode horizon, and the $N_{\mathrm{eval}}=30$ evaluation protocol) were
-identical to the baseline configuration. The resulting KPIs are summarized in~\cref{tab:reward_ablation}.
+the contribution of each term of the reward function in~\eqref{eq:reward}. The
+optimized PPO agent was retrained on the circular trajectory with one reward component disabled at a
+time, with five seeds ($s = 0,\dots,4$) per variant. Each of the seven weights in the cost term $c_t$ was
+set to zero in turn while the remaining six were kept at their baseline values ($W_p=150$, $W_v=25$,
+$W_{\mathrm{ori}}=200$, $W_{\omega_b}=8$, $W_{v_b}=2$, $W_u=0.02$, $W_d=0.06$). In
+addition, the two positive reward terms were disabled by setting $k_p = 0$ and $k_b = 0$, which removes
+$r_{\mathrm{prog}}$ and $r_{\mathrm{bonus}}$. All other settings of training and evaluation were identical
+to those of the optimized PPO agent. All variants were evaluated with the nominal reward weights, so that
+the return $K_1$ is comparable across the variants. The reference row contains the optimized PPO agent of
+\cref{tab:ppo_optimization_kpi} with the same five seeds. The results are summarized in
+\cref{tab:reward_ablation}.
 
-\begin{table}[!t]
+\begin{table*}[t]
     \centering
-    \caption{Ablation study of the reward components. Each row corresponds to a separately retrained optimized
-    PPO agent with one reward weight set to zero. KPIs are averaged over $N_{\mathrm{eval}}=30$ evaluation
-    episodes on the circular trajectory.}
+    \caption{Ablation study of the reward components on the circular trajectory. Each row corresponds to the
+    optimized PPO agent retrained with five seeds and one reward term disabled. The values are the mean and the
+    standard deviation over the successful runs, evaluated with the nominal reward weights. $K_5$ and $K_6$ are
+    zero for every successful run and are omitted.}
     \label{tab:reward_ablation}
-    \renewcommand{\arraystretch}{1.2}
-    \setlength{\tabcolsep}{3pt}
-    \begin{tabular}{lcccccc}
-        \toprule
-        \textbf{Variant} & $\boldsymbol{K_1}$ & $\boldsymbol{K_2}$ & $\boldsymbol{K_4}$ & $\boldsymbol{K_6}$ & $\boldsymbol{K_7}$ & $\boldsymbol{K_9}$ \\
-        \midrule
-        Baseline            & $\mathbf{-0.43}$   & $\mathbf{0.0083}$ & $\mathbf{0.022}$ & $\mathbf{0}$      & $\mathbf{0.351}$ & 5.314 \\
-        $W_p = 0$           & $-6.48$            & $0.238$           & $0.046$          & $0$               & $0.626$          & 2.868 \\
-        $W_v = 0$           & $-0.85$            & $0.022$           & $0.049$          & $0.0015$          & $0.655$          & 3.561 \\
-        $W_{\mathrm{ori}}=0$& $-23.65$            & $0.017$           & $0.668$          & $0.047$           & $0.588$          & 4.363 \\
-        $W_{\omega_b} = 0$        & $-1.17$            & $0.032$           & $0.059$          & $0.0022$          & $0.657$          & 3.554 \\
-        $W_{v_b} = 0$        & $-1.31$            & $0.039$           & $0.054$          & $0.0004$          & $0.670$          & 3.192 \\
-        $W_u = 0$           & $-1.32$            & $0.037$           & $0.060$          & $0$               & $0.618$          & 3.856 \\
-        $W_d = 0$           & $-1.10$            & $0.029$           & $0.057$          & $0.0003$          & $0.632$          & 3.724 \\
-        $r_{\mathrm{prog}} = 0$   & $-3.65$        & $0.075$           & $0.049$          & $0.0173$          & $0.618$          & 3.365 \\
-        $r_{\mathrm{bonus}} = 0$  & $-3.96$        & $0.076$           & $0.057$          & $3.8\mathrm{e}{-5}$ & $0.627$        & 4.078 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-\textbf{Dominant Weights ($W_{\mathrm{ori}}$, $W_p$).} Removing the base-orientation penalty has the
-largest effect. The mean episodic return $K_1$ drops from $-0.43$ to $-23.65$, and the mean base
-orientation error $K_4$ rises by more than an order of magnitude (from $0.022$ to $0.668$). The
-end-effector tracking error ($K_2 = 0.017$) remains lower than in all other ablation variants. This
-suggests that without $W_{\mathrm{ori}}$ the agent focuses on end-effector tracking and largely loses the
-base stabilization. $W_{\mathrm{ori}}$ is therefore a central term of the reward and not only a
-fine-tuning term. Removing $W_p$ degrades the end-effector tracking considerably. $K_2$ rises by a factor
-of about 29, $K_3$ by a factor of about 3.5 (not shown in the table), and $K_1$ drops
-to $-6.48$.
-
-\textbf{Secondary Weights ($W_v$, $W_{\omega_b}$, $W_{v_b}$).} Each of these terms has a small but
-measurable effect. $K_1$ lies in the range $[-1.31, -0.85]$ compared with the baseline value of $-0.43$.
-Tracking accuracy and smoothness are noticeably worse ($K_2$ rises by a factor of 2 to 5, and $K_7$
-roughly doubles). These terms shape the motion quality and the damping of the base velocity, but none of
-them is decisive for task completion in this benchmark.
-
-\textbf{Control-Effort Weights ($W_u$, $W_d$).} Disabling the penalties on torque magnitude and torque change
-moderately increases the tracking error ($K_2$) and roughly doubles the jerk metric $K_7$, while $K_1$ remains
-between $-1.32$ and $-1.10$. This suggests that these terms mainly shape the smoothness of the actuation and have
-little effect on task completion.
-
-\textbf{Positive Reward Terms ($r_{\mathrm{prog}}$, $r_{\mathrm{bonus}}$).} Removing either of the two positive
-reward terms causes a clear drop in performance. $K_1$ falls to $-3.65$ and $-3.96$, respectively, and the tracking
-error $K_2$ increases by roughly an order of magnitude (from $0.0083$ to $\approx 0.075$). Without
-$r_{\mathrm{prog}}$, the agent lacks the dense signal that rewards each reduction of the position error. The
-joint-limit violation rate $K_6$ rises to $1.73\%$, which suggests more aggressive motions without this step-wise
-feedback. Without $r_{\mathrm{bonus}}$, the agent lacks the local attraction near the reference trajectory, which
-may explain the less accurate tracking. Both terms therefore have a clear effect on the final tracking accuracy in
-this ablation.
-
-\textbf{Note on the Energy Metric $\boldsymbol{K_9}$.} $K_9$ is lower in every ablation variant than in the
-baseline ($5.314$). This does not indicate a higher energy efficiency. It is likely an artifact of earlier episode
-termination when the agent fails (for example, after a joint-limit violation or a contact), which truncates the
-integration window. $K_9$ should therefore only be interpreted together with $K_1$, $K_2$, and $K_4$.
-
-\textbf{Summary.} The ablation indicates that $W_{\mathrm{ori}}$ and $W_p$ are the two dominant cost components
-of the reward. The remaining five cost weights refine the motion quality, the damping of the base velocity, and the
-smoothness of the actuation. Both positive reward terms ($r_{\mathrm{prog}}$ and $r_{\mathrm{bonus}}$) also affect
-the final tracking accuracy. Removing a single secondary cost weight still yields a working, if degraded, policy.
-Removing $W_{\mathrm{ori}}$, $W_p$, or one of the positive reward terms leads to a markedly degraded controller.
-This supports the reward design in \cref{RL} and suggests that the results of the optimized PPO agent do not
-depend on a fine balance of the low-weight terms.
-
-\subsection{Sensitivity Analysis of Reward Weights}\label{sec:reward_sensitivity}
-The ablation study in~\cref{sec:reward_ablation} identifies which reward components are
-most influential. A complementary question is how sensitive the results are to a \emph{moderate} miscalibration of
-the reward weights. The analysis examines whether the PPO agent still converges to a working policy when the cost
-weights are perturbed and whether the ranking of the algorithms in \cref{tab:kpi_comp} is likely to change. A
-one-at-a-time sensitivity analysis was performed on four cost weights. These are the two dominant weights $W_p$ and
-$W_{\mathrm{ori}}$ from the ablation and the two secondary weights $W_v$ and $W_{\omega_b}$. Each weight was
-multiplied by 2 and by 0.5 around its baseline value ($W_p=150$, $W_v=25$, $W_{\mathrm{ori}}=200$,
-$W_{\omega_b}=8$). All other settings were kept at the baseline. These are the remaining reward weights, the
-optimized PPO hyperparameters (\cref{sec:ppo_opt}), the random seeds, the episode horizon, and the evaluation
-protocol with $N_{\mathrm{eval}}=30$. This yields eight retrained policies, whose KPIs are summarized
-in~\cref{tab:reward_sensitivity}.
-
-\begin{table}[!t]
-    \centering
-    \caption{One-at-a-time sensitivity analysis of four reward weights. Each row corresponds to
-    a separately retrained optimized PPO agent with one weight multiplied by 2 or 0.5 around its baseline value.
-    All other weights and training settings are held constant. KPIs are averaged over $N_{\mathrm{eval}}=30$
-    evaluation episodes on the circular trajectory.}
-    \label{tab:reward_sensitivity}
-    \renewcommand{\arraystretch}{1.2}
-    \setlength{\tabcolsep}{3pt}
-    \begin{tabular}{lcccccc}
-        \toprule
-        \textbf{Variant} & $\boldsymbol{K_1}$ & $\boldsymbol{K_2}$ & $\boldsymbol{K_3}$ & $\boldsymbol{K_4}$ & $\boldsymbol{K_7}$ & $\boldsymbol{K_9}$ \\
-        \midrule
-        Baseline                            & $\mathbf{-0.43}$ & $\mathbf{0.0083}$ & --                & $\mathbf{0.022}$ & $\mathbf{0.351}$ & $5.314$ \\
-        $W_p \times 2$                      & $-4.56$          & $0.0348$          & $0.629$           & $0.073$          & $0.657$          & $3.762$ \\
-        $W_p \times 0.5$                    & $-3.62$          & $0.0494$          & $0.583$           & $0.059$          & $0.611$          & $3.800$ \\
-        $W_v \times 2$                      & $-3.07$          & $0.0246$          & $\mathbf{0.480}$  & $0.061$          & $0.634$          & $4.212$ \\
-        $W_v \times 0.5$                    & $-3.48$          & $0.0315$          & $0.535$           & $0.064$          & $0.622$          & $3.827$ \\
-        $W_{\mathrm{ori}} \times 2$         & $-6.89$          & $0.2221$          & $0.907$           & $0.041$          & $0.622$          & $3.059$ \\
-        $W_{\mathrm{ori}} \times 0.5$       & $-2.82$          & $0.0438$          & $0.786$           & $0.050$          & $0.639$          & $3.546$ \\
-        $W_{\omega_b} \times 2$                   & $-3.41$          & $0.0789$          & $0.746$           & $0.044$          & $0.640$          & $3.283$ \\
-        $W_{\omega_b} \times 0.5$                 & $-3.00$          & $0.0644$          & $0.740$           & $0.045$          & $0.638$          & $3.557$ \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-\textbf{Dominance of $W_{\mathrm{ori}}$.} The base-orientation weight shows the largest sensitivity. $K_1$ varies
-from $-2.82$ at $W_{\mathrm{ori}}\times 0.5$ to $-6.89$ at $W_{\mathrm{ori}}\times 2$, a spread of more than a
-factor of two. Doubling $W_{\mathrm{ori}}$ shifts the balance toward base stabilization at the cost of
-end-effector tracking. $K_2$ rises to $0.222$, about 27 times the baseline value, while $K_4$ is $0.041$.
-Halving $W_{\mathrm{ori}}$ relaxes the base stabilization, and the task is still solved. The agent still tracks the
-reference ($K_2=0.0438$), but with about twice the baseline base orientation error ($K_4=0.050$ vs.\ $0.022$). This
-is consistent with the ablation result that $W_{\mathrm{ori}}$ is the dominant cost weight.
-
-\textbf{Secondary Dominance of $W_p$.} The end-effector position weight is moderately sensitive. $K_1$ ranges from
-$-3.62$ to $-4.56$, and $K_2$ rises by a factor of 4 to 6 over the baseline in both directions. Both
-perturbations disturb the balance between end-effector tracking and base stabilization, but neither causes the
-policy to fail. This is again consistent with the ablation, in which $W_p$ is the second most influential weight.
-
-\textbf{Low Sensitivity of $W_v$ and $W_{\omega_b}$.} The velocity-error and base-angular-velocity
-weights show the smallest $K_1$ spread, roughly symmetric around $K_1\approx -3.2$. This suggests that
-these terms shape the motion quality and the base damping but do not change whether the task is
-solved. It agrees with the ablation, in which removing either weight still gave a working but degraded
-controller.
-
-\textbf{Safety Metrics.} Across all eight perturbed configurations, no collisions were observed ($K_5=0$), and the
-joint-limit violation rate stayed below $0.53\%$ ($K_6 \le 0.0053$). In the tested cases, a miscalibration of the
-reward weights mainly degraded the task performance. The runtime monitors of \cref{formal} terminate episodes with
-violations independently of the reward weights.
-
-\textbf{Effect on the Algorithm Ranking.} Across all eight weight perturbations, the optimized PPO agent
-still solves the task, with $K_1$ in $[-6.89, -2.82]$, $K_5=0$, and few joint-limit violations. In the
-configuration with the largest degradation ($W_{\mathrm{ori}}\times 2$), the end-effector tracking error
-($K_2=0.222$) is of the same order of magnitude as that of TD3 and SAC at the nominal weights
-($K_2 \approx 0.19$ in~\cref{tab:kpi_comp}). The other benchmarked agents (TRPO, SAC, TD3, PG, DDPG) are
-already noticeably weaker at the nominal reward weights. A perturbation of a single weight by a factor of
-2 or 0.5 is therefore unlikely to change the ranking in \cref{comparison}. This argument is indirect,
-because only the PPO agent was retrained with perturbed weights. A full cross-evaluation of all six
-algorithms over the eight configurations would multiply the training budget by six and is beyond the
-scope of this benchmark.
-
-\textbf{Note on the Energy Metric $\boldsymbol{K_9}$.} As in the ablation, $K_9$ is lower than the baseline value
-($5.314$) in all eight variants. This likely reflects earlier episode termination in configurations where the agent
-fails to stabilize, which shortens the integration window. It does not indicate a higher energy efficiency. $K_9$
-should therefore be interpreted together with $K_1$, $K_2$, and $K_4$.
-
-\textbf{Summary.} The sensitivity analysis supports the reward design in \cref{RL}. $W_{\mathrm{ori}}$ is
-the most sensitive weight, $W_p$ is second, and $W_v$ and $W_{\omega_b}$ are comparatively insensitive.
-In the tested range from 0.5 to 2 times the baseline value, the optimized PPO agent solved the
-task for every tested weight, and no collisions were observed. The ranking in \cref{tab:kpi_comp} is
-unlikely to change under a moderate miscalibration of a single weight, although this was only tested for
-the PPO agent.
-
-\subsection{Robustness Evaluation Under Non-Ideal Conditions}\label{sec:robustness_eval}
-To evaluate the robustness of the optimized PPO policy beyond the nominal simulation assumptions,
-an additional stress-test campaign was performed on the circular trajectory. The already trained optimized
-PPO policy
-was evaluated without retraining over $N_{\mathrm{eval}}=30$ episodes for each condition. Five non-ideal cases were
-considered, namely sensor noise, reduced actuator authority, an external torque disturbance, parameter uncertainty, and
-a
-combined stress case. Sensor noise was injected directly between the observation vector and the
-RL agent using the
-MATLAB function $obs_{\mathrm{noisy}} = obs + 0.005\,\mathrm{randn}(\mathrm{size}(obs))$, while the underlying plant
-dynamics remained unchanged. Actuator saturation was tested by reducing all torque limits to $0.75\,\tau_{\max}$.
-The external disturbance was implemented as an additive joint torque after the torque-saturation block,
-with
-$\tau_{\mathrm{dist},1}=\tau_{\mathrm{dist},2}=2\,\mathrm{N\,m}$ for $2.0 \leq t \leq 2.5\,\mathrm{s}$ and zero
-disturbance otherwise. Parameter uncertainty was modeled by multiplying all masses, inertias, and joint damping
-coefficients by a factor of $1.5$. The combined case applied all four perturbations simultaneously.
-
-\begin{table*}[!t]
-    \centering
-    \caption{Robustness evaluation of the optimized PPO policy under non-ideal simulation conditions.
-    The policy was evaluated without retraining over $N_{\mathrm{eval}}=30$ episodes per condition on the circular
-    trajectory. $K_1$ is maximized, whereas $K_2$--$K_9$ are minimized.}
-    \label{tab:robustness_eval}
+    \renewcommand{\arraystretch}{1.05}
+    \setlength{\tabcolsep}{6pt}
     \small
-    \renewcommand{\arraystretch}{1.15}
-    \setlength{\tabcolsep}{3pt}
-    \begin{tabular}{lccccccccc}
+    \begin{tabular}{lcccccc}
         \toprule
-        \textbf{Condition} & $\boldsymbol{K_1}$ & $\boldsymbol{K_2}$ & $\boldsymbol{K_3}$ & $\boldsymbol{K_4}$ & $\boldsymbol{K_5}$ & $\boldsymbol{K_6}$ & $\boldsymbol{K_7}$ & $\boldsymbol{K_8}$ & $\boldsymbol{K_9}$ \\
+        \textbf{Variant} & \textbf{Successful runs} & $\boldsymbol{K_1}$ & $\boldsymbol{K_2}$ &
+          $\boldsymbol{K_4}$ & $\boldsymbol{K_7}$ & $\boldsymbol{K_9}$ \\
         \midrule
-        Nominal optimized PPO & $-0.3709$ & $0.0021$ & $0.1614$ & $0.0227$ & $0$ & $0$ & $0.8401$ & $0.0258$ & $3.9425$ \\
-        Sensor noise & $-0.4557$ & $0.0030$ & $0.2164$ & $0.0227$ & $0$ & $0$ & $0.6677$ & $0.0398$ & $3.8498$ \\
-        Reduced saturation ($0.75\,\tau_{\max}$) & $-0.4300$ & $0.0028$ & $0.1982$ & $0.0226$ & $0$ & $0$ & $0.6912$ & $0.0373$ & $3.3913$ \\
-        External disturbance & $-0.5791$ & $0.0029$ & $0.2052$ & $0.0268$ & $0$ & $0$ & $0.6671$ & $0.0447$ & $3.7735$ \\
-        Parameter uncertainty ($\times 1.5$) & $-0.7728$ & $0.0067$ & $0.1775$ & $0.0300$ & $0$ & $0$ & $0.6786$ & $0.0343$ & $2.8879$ \\
-        Combined stress case & $-1.3432$ & $0.0078$ & $0.2269$ & $0.0447$ & $0$ & $0$ & $0.6925$ & $0.0402$ & $2.4867$ \\
+        Nominal weights & 5/5 & $-0.20 \pm 0.13$ & $0.0050 \pm 0.0016$ & $0.025 \pm 0.021$ &
+          $0.0101 \pm 0.0013$ & $2.22 \pm 0.85$ \\
+        $W_p = 0$ & 5/5 & $-6.79 \pm 1.41$ & $0.2592 \pm 0.0552$ & $0.014 \pm 0.005$ &
+          $0.0046 \pm 0.0007$ & $0.56 \pm 0.30$ \\
+        $W_v = 0$ & 5/5 & $-0.26 \pm 0.18$ & $0.0054 \pm 0.0030$ & $0.033 \pm 0.025$ &
+          $0.0088 \pm 0.0013$ & $1.99 \pm 0.42$ \\
+        $W_{\mathrm{ori}} = 0$ & 4/5 & $-0.83 \pm 0.51$ & $0.0030 \pm 0.0015$ & $0.104 \pm 0.053$ &
+          $0.0095 \pm 0.0018$ & $2.01 \pm 0.29$ \\
+        $W_{\omega_b} = 0$ & 5/5 & $-0.14 \pm 0.10$ & $0.0041 \pm 0.0026$ & $0.022 \pm 0.007$ &
+          $0.0086 \pm 0.0009$ & $2.00 \pm 0.62$ \\
+        $W_{v_b} = 0$ & 5/5 & $-0.16 \pm 0.08$ & $0.0048 \pm 0.0022$ & $0.017 \pm 0.014$ &
+          $0.0088 \pm 0.0003$ & $2.12 \pm 0.55$ \\
+        $W_u = 0$ & 5/5 & $-0.14 \pm 0.10$ & $0.0042 \pm 0.0030$ & $0.019 \pm 0.010$ &
+          $0.0094 \pm 0.0014$ & $1.94 \pm 0.48$ \\
+        $W_d = 0$ & 5/5 & $-0.27 \pm 0.19$ & $0.0063 \pm 0.0042$ & $0.035 \pm 0.025$ &
+          $0.0100 \pm 0.0016$ & $2.45 \pm 0.46$ \\
+        $k_p = 0$ ($r_{\mathrm{prog}}$ off) & 5/5 & $-0.11 \pm 0.06$ & $0.0036 \pm 0.0020$ &
+          $0.015 \pm 0.006$ & $0.0084 \pm 0.0014$ & $2.16 \pm 0.87$ \\
+        $k_b = 0$ ($r_{\mathrm{bonus}}$ off) & 5/5 & $-0.23 \pm 0.09$ & $0.0057 \pm 0.0042$ &
+          $0.031 \pm 0.018$ & $0.0095 \pm 0.0011$ & $2.03 \pm 0.43$ \\
         \bottomrule
     \end{tabular}
 \end{table*}
 
-\textbf{Robustness Results.} No violations of the monitored properties occurred in any stress test. No collisions
-or joint-limit violations were observed in any condition ($K_5=K_6=0$). The strongest degradation is observed for
-the combined stress case and for parameter uncertainty. This is plausible, because both change the effective
-dynamics seen by the fixed policy. In the combined case, no divergence and no monitor-triggered termination were
-observed. The mean base orientation error increased to $K_4=0.0447$ and the mean tracking error to $K_2=0.0078$.
-Across all non-ideal conditions, $K_7$ increases compared with the nominal optimized PPO result, which suggests
-that the policy compensates for the perturbations with less smooth torque profiles. The lower $K_9$ values under
-stress should not be interpreted as efficiency gains. They likely reflect the changed actuator limits, the modified
-dynamics, and the injected disturbances, which alter the mechanical-work calculation. Overall, the experiment
-indicates that the performance of the optimized PPO policy degrades gradually under sensor noise, disturbances,
-parameter uncertainty, and reduced actuator authority, with no violations of the monitored constraints in the
-tested episodes. Each perturbation is tested at a single level and from a fixed initial configuration. These stress
-tests therefore do not replace a systematic robustness characterization.
+\textbf{Dominant Weights ($W_p$, $W_{\mathrm{ori}}$).} Removing the end-effector position weight $W_p$ had
+the largest effect on tracking. The mean squared tracking error $K_2$ rose from 0.0050 to 0.259, about 52
+times the reference value, and the return $K_1$ dropped from $-0.20$ to $-6.79$. The base orientation error
+decreased at the same time ($K_4$, $0.025 \to 0.014$), which suggests that the agent then mainly
+stabilized the base. The low energy consumption of this variant ($K_9 = 0.56$) reflects the reduced arm
+motion and does not indicate a higher efficiency. Removing the orientation weight $W_{\mathrm{ori}}$ had
+the opposite effect. $K_4$ rose about fourfold to 0.104, one of the five runs failed, and $K_2$ decreased
+to 0.0030. $W_p$ and $W_{\mathrm{ori}}$ therefore balance end-effector tracking against base
+stabilization.
+
+\textbf{Remaining Terms.} Disabling any of the other five cost weights or one of the two positive reward
+terms changed the KPIs little. $K_2$ stayed between 0.0036 and 0.0063 and $K_4$ between 0.015 and 0.035,
+and all runs succeeded. These differences are small compared with the spread between the seeds of the
+reference. In this setting, the low-weight terms and the positive reward terms therefore had no clear
+effect on the final performance. Their effect on the course of training was not analyzed.
+
+\textbf{Summary.} The ablation indicates that $W_p$ and $W_{\mathrm{ori}}$ are the two dominant components of
+the reward. The optimized agent solved the task without any one of the other seven terms. This suggests
+that the results of the optimized PPO agent do not depend on a fine balance of the low-weight terms.
+
+\subsection{Sensitivity Analysis of Reward Weights}\label{sec:reward_sensitivity}
+The ablation study in~\cref{sec:reward_ablation} identifies the dominant reward components. A
+complementary question is how sensitive the results are to a moderate miscalibration of the weights and
+whether the ranking of the algorithms in \cref{comparison} depends on them. Two analyses address this
+question. First, four cost weights of the optimized PPO agent were multiplied by 0.5 and by 2 one at a
+time. These are the two dominant weights $W_p$ and $W_{\mathrm{ori}}$ and the secondary weights $W_v$ and
+$W_{\omega_b}$. Second, TRPO, SAC, and the default PPO agent were retrained with $W_p$ and
+$W_{\mathrm{ori}}$ multiplied by 0.5 and by 2. All variants were trained with five seeds
+($s = 0,\dots,4$) and evaluated with the nominal reward weights. The reference rows contain the same
+agents and seeds of \cref{comparison} and \cref{sec:ppo_opt}.
+
+\begin{table*}[t]
+    \centering
+    \caption{One-at-a-time sensitivity analysis of four reward weights of the optimized PPO agent on the
+    circular trajectory. Each row corresponds to the agent retrained with five seeds and one weight multiplied
+    by 0.5 or 2. The values are the mean and the standard deviation over the successful runs, evaluated with
+    the nominal reward weights.}
+    \label{tab:reward_sensitivity}
+    \renewcommand{\arraystretch}{1.05}
+    \setlength{\tabcolsep}{6pt}
+    \small
+    \begin{tabular}{lcccccc}
+        \toprule
+        \textbf{Variant} & \textbf{Successful runs} & $\boldsymbol{K_1}$ & $\boldsymbol{K_2}$ &
+          $\boldsymbol{K_4}$ & $\boldsymbol{K_7}$ & $\boldsymbol{K_9}$ \\
+        \midrule
+        Nominal weights & 5/5 & $-0.20 \pm 0.13$ & $0.0050 \pm 0.0016$ & $0.025 \pm 0.021$ &
+          $0.0101 \pm 0.0013$ & $2.22 \pm 0.85$ \\
+        $W_p \times 0.5$ & 5/5 & $-0.33 \pm 0.14$ & $0.0114 \pm 0.0049$ & $0.018 \pm 0.007$ &
+          $0.0082 \pm 0.0004$ & $1.83 \pm 0.53$ \\
+        $W_p \times 2$ & 5/5 & $-0.55 \pm 0.69$ & $0.0063 \pm 0.0043$ & $0.070 \pm 0.060$ &
+          $0.0093 \pm 0.0015$ & $2.81 \pm 1.00$ \\
+        $W_v \times 0.5$ & 5/5 & $-0.09 \pm 0.03$ & $0.0026 \pm 0.0010$ & $0.016 \pm 0.003$ &
+          $0.0089 \pm 0.0006$ & $2.41 \pm 0.35$ \\
+        $W_v \times 2$ & 5/5 & $-0.19 \pm 0.17$ & $0.0058 \pm 0.0051$ & $0.021 \pm 0.012$ &
+          $0.0119 \pm 0.0025$ & $2.32 \pm 0.67$ \\
+        $W_{\mathrm{ori}} \times 0.5$ & 5/5 & $-0.18 \pm 0.11$ & $0.0044 \pm 0.0030$ & $0.028 \pm 0.013$ &
+          $0.0092 \pm 0.0006$ & $2.24 \pm 0.34$ \\
+        $W_{\mathrm{ori}} \times 2$ & 5/5 & $-0.20 \pm 0.19$ & $0.0072 \pm 0.0072$ & $0.012 \pm 0.005$ &
+          $0.0085 \pm 0.0013$ & $2.10 \pm 0.29$ \\
+        $W_{\omega_b} \times 0.5$ & 5/5 & $-0.13 \pm 0.06$ & $0.0038 \pm 0.0015$ & $0.018 \pm 0.006$ &
+          $0.0100 \pm 0.0007$ & $2.21 \pm 0.38$ \\
+        $W_{\omega_b} \times 2$ & 5/5 & $-0.16 \pm 0.10$ & $0.0051 \pm 0.0037$ & $0.015 \pm 0.006$ &
+          $0.0079 \pm 0.0011$ & $1.89 \pm 0.33$ \\
+        \bottomrule
+    \end{tabular}
+\end{table*}
+
+\textbf{Optimized PPO Agent.} All 40 runs of the eight perturbed configurations succeeded
+(\cref{tab:reward_sensitivity}). The tracking error $K_2$ ranged from 0.0026 to 0.0114, compared with
+0.0050 at the nominal weights, and the base orientation error $K_4$ ranged from 0.012 to 0.070. The largest
+changes occurred for the two dominant weights. Halving $W_p$ increased $K_2$ to 0.0114, and doubling $W_p$
+increased $K_4$ to 0.070. Doubling $W_{\mathrm{ori}}$ reduced $K_4$ to 0.012 and increased $K_2$ to 0.0072.
+These shifts reflect the trade-off between tracking and base stabilization identified in the ablation. The
+perturbations of $W_v$ and $W_{\omega_b}$ led to smaller changes, with $K_2$ between 0.0026 and 0.0058.
+
+\begin{table}[!t]
+    \centering
+    \caption{Success and tracking error of TRPO, the default PPO agent, and SAC under changed reward weights
+    on the circular trajectory. Each cell gives the number of successful runs out of five and the mean $K_2$
+    over the successful runs.}
+    \label{tab:reward_ranking}
+    \renewcommand{\arraystretch}{1.2}
+    \setlength{\tabcolsep}{4pt}
+    \begin{tabular}{lccc}
+        \toprule
+        \textbf{Variant} & \textbf{TRPO} & \textbf{PPO (default)} & \textbf{SAC} \\
+        \midrule
+        Nominal weights & 5/5, 0.0078 & 2/5, 0.0160 & 3/5, 0.219 \\
+        $W_{\mathrm{ori}} \times 0.5$ & 5/5, 0.0045 & 1/5, 0.067 & 2/5, 0.175 \\
+        $W_{\mathrm{ori}} \times 2$ & 5/5, 0.0307 & 1/5, 0.061 & 3/5, 0.246 \\
+        $W_p \times 0.5$ & 5/5, 0.0180 & 0/5, -- & 2/5, 0.448 \\
+        $W_p \times 2$ & 5/5, 0.0102 & 2/5, 0.072 & 1/5, 0.146 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\textbf{Ranking of the Algorithms.} \cref{tab:reward_ranking} shows TRPO, the default PPO agent, and SAC
+under the four weight variants. TRPO succeeded in all 20 runs of the variants and had the lowest mean
+tracking error in every variant. For TRPO, doubling $W_{\mathrm{ori}}$ increased the mean $K_2$ to 0.0307,
+mainly because of one weak run with $K_2 = 0.105$, and the median was 0.0056. The default PPO agent
+succeeded in zero to two of five runs per variant, and SAC in one to three. The successful runs of SAC
+tracked the path with $K_2$ between 0.146 and 0.448, roughly an order of magnitude above TRPO. In all tested
+variants, the order of the three algorithms by tracking error was the same as with the nominal weights.
+
+\textbf{Summary.} Within the tested range from 0.5 to 2 times the nominal values, the optimized PPO agent
+succeeded in every run, and the reward weights mainly shifted the balance between tracking and base
+stabilization. TRPO succeeded in every run, and the order of TRPO, PPO, and SAC by tracking error did not
+change in any tested variant. The analysis covers
+changes of single weights and three algorithms. Interactions between weights and the behavior of the
+remaining algorithms were not tested.
+
+\subsection{Robustness Evaluation Under Non-Ideal Conditions}\label{sec:robustness_eval}
+The stress tests evaluate the trained policies beyond the nominal simulation assumptions. All 70 policies
+of the benchmark were evaluated without retraining on the same 31 initial states under six non-ideal
+conditions. Sensor noise was added to the observations seen by the agent as zero-mean Gaussian noise with
+a standard deviation of 0.005 in the unit of each channel. The plant and the reward used the undisturbed
+signals. The torque limit of the plant was reduced to $0.75\,\tau_{\max}$. Because this limit had almost no
+effect on TRPO and the optimized PPO agent, a stronger reduction to $0.3\,\tau_{\max}$ was added. An external
+disturbance was applied as an additive joint torque after the torque-saturation block, with
+$\tau_{\mathrm{dist},1}=\tau_{\mathrm{dist},2}=2\,\mathrm{N\,m}$ for $2.0 \le t < 2.5\,\mathrm{s}$.
+Parameter uncertainty was modeled by multiplying all masses, inertias, and joint damping coefficients by
+1.5. The combined case applied the noise, the torque limit of $0.75\,\tau_{\max}$, the disturbance, and the
+parameter change at the same time.
+
+\begin{table*}[t]
+    \centering
+    \caption{Stress tests of the trained policies on the circular trajectory, evaluated without retraining.
+    TRPO and the optimized PPO agent completed all ten runs under every condition. For these two agents, the
+    table gives the mean and the standard deviation of $K_2$ and $K_4$ over the ten runs. For the other
+    default agents, it gives the number of successful runs out of ten.}
+    \label{tab:robustness_eval}
+    \renewcommand{\arraystretch}{1.2}
+    \setlength{\tabcolsep}{4pt}
+    \small
+    \begin{tabular}{lccccccccc}
+        \toprule
+        & \multicolumn{2}{c}{\textbf{TRPO}} & \multicolumn{2}{c}{\textbf{PPO (optimized)}} &
+          \multicolumn{5}{c}{\textbf{Successful runs}} \\
+        \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-10}
+        \textbf{Condition} & $\boldsymbol{K_2}$ & $\boldsymbol{K_4}$ & $\boldsymbol{K_2}$ & $\boldsymbol{K_4}$ &
+          \textbf{SAC} & \textbf{TD3} & \textbf{DDPG} & \textbf{PPO} & \textbf{PG} \\
+        \midrule
+        Nominal & $0.01454 \pm 0.0196$ & $0.026 \pm 0.009$ & $0.00415 \pm 0.0023$ & $0.021 \pm 0.016$ &
+          6 & 5 & 4 & 3 & 2 \\
+        Sensor noise & $0.01455 \pm 0.0196$ & $0.026 \pm 0.009$ & $0.00415 \pm 0.0023$ & $0.021 \pm 0.016$ &
+          6 & 5 & 3 & 3 & 2 \\
+        Torque limit $0.75\,\tau_{\max}$ & $0.01454 \pm 0.0196$ & $0.026 \pm 0.009$ & $0.00415 \pm 0.0023$ &
+          $0.021 \pm 0.016$ & 6 & 6 & 5 & 3 & 2 \\
+        Torque limit $0.3\,\tau_{\max}$ & $0.01488 \pm 0.0197$ & $0.026 \pm 0.010$ & $0.00489 \pm 0.0031$ &
+          $0.021 \pm 0.015$ & 8 & 9 & 7 & 5 & 2 \\
+        External disturbance & $0.01289 \pm 0.0145$ & $0.066 \pm 0.024$ & $0.00506 \pm 0.0028$ &
+          $0.055 \pm 0.023$ & 5 & 4 & 2 & 3 & 2 \\
+        Parameters $\times 1.5$ & $0.02847 \pm 0.0267$ & $0.022 \pm 0.008$ & $0.01421 \pm 0.0061$ &
+          $0.019 \pm 0.011$ & 7 & 7 & 5 & 3 & 2 \\
+        Combined & $0.02790 \pm 0.0228$ & $0.058 \pm 0.021$ & $0.01434 \pm 0.0060$ & $0.049 \pm 0.021$ &
+          6 & 7 & 5 & 4 & 2 \\
+        \bottomrule
+    \end{tabular}
+\end{table*}
+
+\textbf{TRPO and Optimized PPO Agent.} Both agents completed all runs without a terminated episode under
+every tested condition (\cref{tab:robustness_eval}). Sensor noise and the torque limit of
+$0.75\,\tau_{\max}$ changed their tracking and base orientation errors by less than 1\%. The noise increased
+the jerk $K_7$ of both agents by about two thirds, from 0.0097 to 0.0161 for the optimized PPO agent,
+likely because the noise enters the torque commands directly. The torque limit of $0.3\,\tau_{\max}$
+increased the tracking error of the optimized PPO agent by 18\% (0.00415 to 0.00489) and changed that of
+TRPO by 2\%. The external disturbance mainly affected the base. $K_4$ rose from 0.021 to 0.055 for the
+optimized PPO agent and from 0.026 to 0.066 for TRPO, while $K_2$ stayed at 0.00506 and 0.01289. The
+parameter change had the largest effect on tracking. $K_2$ rose to 0.01421 for the optimized PPO agent and
+to 0.02847 for TRPO, about three and two times the nominal values. The combined case showed the same
+increase in $K_2$ together with the increase in $K_4$ caused by the disturbance. Under every condition, the
+optimized PPO agent kept a lower mean tracking error than TRPO.
+
+\textbf{Other Agents.} Under the torque limit of $0.3\,\tau_{\max}$, more runs of the other default agents
+succeeded. TD3 succeeded in nine, SAC in eight, DDPG in seven, and the default PPO agent in five of ten
+runs, compared with five, six, four, and three in the nominal case. This suggests that the lower limit
+prevented part of the fast motions that otherwise ended at a joint limit. The tracking error of TD3, DDPG,
+and SAC remained high in these runs ($K_2$ between 0.139 and 0.248). Under the external disturbance, fewer
+runs of SAC, TD3, and DDPG succeeded (five, four, and two runs).
+
+\textbf{Scope.} The monitored properties were not violated by TRPO and the optimized PPO agent in any
+stress test. Each perturbation was tested at a single level, except for the torque limit, and the noise
+model assumes independent Gaussian noise per channel and step. These stress tests therefore do not replace
+a systematic robustness characterization.
 
 \subsection{Piecewise-Linear Trajectory}
-The previous evaluations consider tracking of a smooth circular end-effector reference. To assess
-how the controller transfers to a different reference geometry, an additional evaluation is performed
-on a piecewise-linear trajectory. This case is relevant for on-orbit manipulation tasks in which
-approach and retreat motions are planned as straight-line segments rather than continuous curves.
+The previous evaluations consider tracking of a smooth circular end-effector reference. To
+assess whether the results carry over to a different reference geometry, the optimized PPO agent, the
+default PPO agent, and TRPO were retrained with ten seeds on a piecewise-linear trajectory. The
+hyperparameters and the reward weights were the same as for the circular path. The experiment therefore
+tests whether the configurations carry over to another path, not whether a policy trained on the circle
+generalizes. This case is relevant for on-orbit manipulation tasks in which approach and retreat motions
+are planned as straight-line segments rather than continuous curves.
 
 \textbf{Trajectory Definition.} The linear reference uses the same circle parameters (center and radius) as the
 circular benchmark. The end-effector is commanded to move along two straight segments that connect three points on
@@ -1698,10 +1719,10 @@ P_1 + \frac{t-t_1}{T-t_1}\left(P_2-P_1\right), & t_1 < t \leq T.
 \end{cases}
 \label{eq:linear_traj}
 \end{equation}
-The reference is sampled at $T_s=0.01\,\mathrm{s}$, and the PPO agent acts every $\Delta t=0.1\,\mathrm{s}$ as in
-the other experiments.
+The reference is sampled at $T_s=0.01\,\mathrm{s}$, and the agents act every
+$\Delta t=0.1\,\mathrm{s}$ as in the other experiments.
 
-\begin{figure*}[!t]
+\begin{figure*}[t]
     \centering
     \begin{subfigure}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/rampe_1.png}
@@ -1714,11 +1735,13 @@ the other experiments.
         \caption{PPO (optimized)}
         \label{fig:r_traj_opt}
     \end{subfigure}
-    \caption{Reference and actual piecewise-linear end-effector trajectory in the $XY$ plane.}
+    \caption{Reference and actual end-effector path on the piecewise-linear reference for one evaluation
+    episode from the nominal initial state. The panels show the only successful run of the default PPO agent
+    (seed 9) and the run of the optimized PPO agent with the median $K_2$ (seed 5).}
     \label{fig:r_trajektorie_xy_compare}
 \end{figure*}
 
-\begin{figure*}[!t]
+\begin{figure*}[t]
     \centering
     \begin{subfigure}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/basis_ori_1.png}
@@ -1731,52 +1754,57 @@ the other experiments.
         \caption{PPO (optimized)}
         \label{fig:r_basis_opt}
     \end{subfigure}
-    \caption{Time evolution of the base orientation (quaternion components) during a test episode with a
-    piecewise-linear trajectory.}
+    \caption{Vector part of the base orientation quaternion during the episodes of
+    \cref{fig:r_trajektorie_xy_compare}. The base rotates only about the $z$-axis. The scalar part stays above
+    0.992 for the default and above 0.999 for the optimized agent.}
     \label{fig:r_basis_orientation_compare}
 \end{figure*}
-\textbf{Results.} \cref{tab:ppo_linear_kpi} reports the KPI averages over $N_{\mathrm{eval}} = 30$
-evaluation episodes for PPO with the default and the optimized configurations on the piecewise-linear
-reference. The optimized PPO agent increases the episodic return ($K_1$, $-0.4565 \to -0.2977$). It
-reduces the base attitude disturbance $K_4$ by approximately $44\%$
-(see~\cref{fig:r_basis_orientation_compare}), the residual base angular velocity $K_8$ by approximately
-$15\%$, and the energy consumption $K_9$ by approximately $35\%$. The mean and peak tracking errors
-($K_2$ and $K_3$) remain close to those of the default configuration, with a small reduction of the mean
-error (see~\cref{fig:r_trajektorie_xy_compare}). The control smoothness metric $K_7$, however, is worse
-than for the default PPO agent. This suggests that the hyperparameter configuration tuned for circular
-tracking does not fully transfer to piecewise-linear references. A possible mitigation is to include a
-mixture of reference types (circular, linear, and hybrid trajectories) during training or during the
-hyperparameter search.
 
-\begin{table}[!b]
+\begin{table*}[t]
 \centering
-\caption{Evaluation on a piecewise-linear end-effector trajectory (two-segment path). Values are
-averaged over $N_{\mathrm{eval}}=30$ episodes. Bold indicates the better value according to the KPI definition
-($K_1$ higher is better, $K_2$--$K_9$ lower is better).}
+\caption{Default PPO agent, optimized PPO agent, and TRPO on the piecewise-linear trajectory. The first row
+gives the number of successful runs out of ten. All other values are the mean and the standard deviation over
+the successful runs, which is a single run for the default PPO agent. $K_5$ and $K_6$ are zero for every
+successful run and are omitted.}
 \label{tab:ppo_linear_kpi}
 \renewcommand{\arraystretch}{1.2}
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{lcc}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{lccc}
 \toprule
-\textbf{Metric (KPI)} & \textbf{PPO (default)} & \textbf{PPO (optimized)} \\
+\textbf{Metric (KPI)} & \textbf{PPO (default)} & \textbf{PPO (optimized)} & \textbf{TRPO} \\
 \midrule
-Mean Episodic Return ($K_1$)            & $-0.4565$ & $\mathbf{-0.2977}$ \\
-Mean Squared EE Position Error ($K_2$)  & 0.0078 & \textbf{0.0070} \\
-Maximum EE Position Error ($K_3$)           & 0.2037 & \textbf{0.2036} \\
-Mean Base Orientation Error ($K_4$)     & 0.0412 & \textbf{0.0231} \\
-Collision Rate ($K_5$)                 & 0 & 0 \\
-Joint Limit Violation Rate ($K_6$)     & 0 & 0 \\
-Control Smoothness ($K_7$, Jerk)       & \textbf{0.5520} & 0.6839 \\
-Mean Base Angular Velocity ($K_8$)      & 0.0399 & \textbf{0.0339} \\
-Energy Consumption ($K_9$)              & 7.7144 & \textbf{5.0341} \\
+Successful runs & 1/10 & 10/10 & 10/10 \\
+Mean Episodic Return ($K_1$) & $-2.43$ & $-0.19 \pm 0.15$ & $-0.41 \pm 0.37$ \\
+Mean Squared EE Position Error ($K_2$) & $0.0528$ & $0.0059 \pm 0.0053$ & $0.0125 \pm 0.0105$ \\
+Maximum EE Position Error ($K_3$) & $0.415$ & $0.150 \pm 0.013$ & $0.194 \pm 0.055$ \\
+Mean Base Orientation Error ($K_4$) & $0.129$ & $0.019 \pm 0.011$ & $0.029 \pm 0.023$ \\
+Control Smoothness ($K_7$, Jerk) & $0.402$ & $0.0117 \pm 0.0019$ & $0.0105 \pm 0.0029$ \\
+Mean Base Angular Velocity ($K_8$) & $0.048$ & $0.013 \pm 0.006$ & $0.020 \pm 0.010$ \\
+Energy Consumption ($K_9$) & $11.8$ & $3.42 \pm 1.85$ & $2.49 \pm 1.26$ \\
+Reward Std.\ (Late Training, $T_1$) & $3.55$ & $0.12 \pm 0.11$ & $0.94 \pm 1.37$ \\
+Training Time ($T_2$, min) & $6.08$ & $7.30 \pm 0.04$ & $8.60 \pm 0.11$ \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
+\textbf{Results.} \cref{tab:ppo_linear_kpi} summarizes the results on the piecewise-linear reference. The
+optimized PPO agent and TRPO completed all ten runs without a terminated episode, whereas the default PPO
+agent succeeded in only one run (Fisher's exact test against TRPO, $p < 0.001$). Over the successful runs,
+the optimized PPO agent reached a mean squared tracking error of $K_2 = 0.0059$, compared with 0.0125 for
+TRPO. On the seed level, the optimized PPO agent had a significantly higher return and lower mean and
+maximum tracking errors than TRPO ($K_1$, $K_2$, and $K_3$, Mann--Whitney, $p \le 0.038$). The difference
+in the base orientation error was not significant ($K_4$, 0.019 compared with 0.029, $p = 0.054$).
 
-Both evaluations support the use of hyperparameter tuning for space-robot control under the considered conditions.
-The piecewise-linear results also indicate that trajectory-specific tuning may be needed to maintain control
-smoothness across reference geometries.
+\cref{fig:r_trajektorie_xy_compare} shows the end-effector path of one episode for the default and the
+optimized PPO agent. The only successful run of the default agent lags behind the reference, oscillates
+along both segments, and ends far from the final point. The optimized agent approaches the first segment on
+a curved path, cuts the corner, and then follows the second segment closely.
+\cref{fig:r_basis_orientation_compare} shows the corresponding base orientations. The largest vector
+component of the quaternion was 0.121 for the default and 0.039 for the optimized agent.
+
+Under the tested conditions, the configurations of TRPO and the optimized PPO agent carried over to the
+piecewise-linear path without changes, and the optimized agent tracked this path more accurately than
+TRPO. The default PPO agent succeeded in only one of ten runs.
 
 The following section discusses the implications, limitations, and future steps toward deployment on physical
 testbeds for space robotics.
@@ -1793,14 +1821,16 @@ successful runs of the default PPO agent. Its advantage over TRPO was not statis
 it trained faster. No violations of the monitored safety properties were recorded for
 TRPO and the tuned PPO agent in any evaluation episode \cite{b1,b7}.
 
-An additional evaluation on a piecewise-linear end-effector reference assessed the transfer to a different
-trajectory. The optimized PPO agent performs better than the default configuration on most metrics. It increases
-the return $K_1$ from $-0.4565$ to $-0.2977$ and reduces the base orientation error $K_4$ by $44\%$ and the energy
-consumption $K_9$ by $35\%$. This indicates a partial transfer of the learned policy.
-The control smoothness $K_7$, however, is worse than for the default configuration. The hyperparameter
-configuration tuned for circular tracking therefore does not fully transfer to piecewise-linear references.
-This motivates either trajectory-diverse training or trajectory-specific tuning to improve the transfer across
-reference geometries \cite{b8}.
+An additional evaluation on a piecewise-linear end-effector reference tested whether the configurations
+carry over to a different path. With the same hyperparameters and reward weights, the optimized PPO agent
+and TRPO again completed all ten runs, and the optimized agent tracked the path significantly more
+accurately than TRPO ($K_2$, 0.0059 compared with 0.0125). The default PPO agent succeeded in only one of
+ten runs. The ablation and the sensitivity analysis indicate that $W_p$ and $W_{\mathrm{ori}}$ dominate the
+reward design. The order of TRPO, PPO, and SAC by tracking error did not change when these weights were
+halved or doubled. In the stress tests, TRPO and the optimized PPO agent completed all runs under
+sensor noise, reduced torque limits, an external joint torque, and a 50\% change of the model parameters.
+The parameter change increased their tracking errors by a factor of two to three. These results are limited
+to a few perturbation levels and two reference paths \cite{b8}.
 
 \textbf{Practical Implications.} The results of TRPO and the tuned PPO agent indicate that
 policy-gradient methods with constrained updates are suitable candidates for continuous control tasks
