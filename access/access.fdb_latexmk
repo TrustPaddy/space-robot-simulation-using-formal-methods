@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1789983723.11465 "c:/Users/Deermste/Documents/FraUas/Mechatronikprojekt/Paper/space-robot-simulation-using-formal-methods/access/access.tex" "access.pdf" "access" 1789983724.56127 0
+["pdflatex"] 1790255404.84427 "access.tex" "access.pdf" "access" 1790255406.34602 0
   "../Figures/Bewerbungsfoto_Ermisch.jpg" 1770139137 157821 805ce44403a548efdb2ddd2ce4424099 ""
   "../Figures/Spacerobot_slx.pdf" 1779043214 337713 442e272ee80ecdea42f5287dff5edbaa ""
   "../Figures/basis_ori_1.png" 1789978605 45928 fd75deb23f28eb93801dc0e700addb2a ""
@@ -17,7 +17,6 @@
   "../Figures/egk.jpg" 1770467643 194870 8009c40f3b471fd77366c6e89f390e51 ""
   "../Figures/impuls_monitor.pdf" 1779049559 43562 076f52edda63f64d798c25c44f95fd9a ""
   "../Figures/impulserhaltung_scope.png" 1789978607 39424 b38e8e0a4d1d3a104048a24a2c5608af ""
-  "../Figures/oos0.png" 1778520029 2776817 eb2c0e8a5211a0efdffec931a57e74d1 ""
   "../Figures/oos1.png" 1778520029 2583631 374352c7ca309e81ea7c53a6ee7f1c87 ""
   "../Figures/rampe_1.png" 1789978602 44086 bbf0c5e932ac1ccf878a5bfd1a9a2e6f ""
   "../Figures/rampe_opt_1.png" 1789978604 41118 c33b930bf9df107b83f4b2e052130297 ""
@@ -29,6 +28,7 @@
   "../Figures/spacerobot_slx_reference.pdf" 1779043255 41720 9540a9c4219e1003afb161979930e890 ""
   "../Figures/spacerobot_slx_robot.pdf" 1779043235 137109 c698bb06ef42cce1765516da69086b79 ""
   "../Figures/tau_collision.png" 1779037715 276588 61820d5118d47dff0199679747c58110 ""
+  "../Figures/trainingsverlauf_defaults.png" 1790254388 545212 32e901e3bb60038e5b58598bd4580f30 ""
   "../Figures/trainingsverlauf_ppo_default.png" 1789978562 192358 75816d08d9e9f2dc622b22f6aead4a13 ""
   "../Figures/trainingsverlauf_ppo_optimized.png" 1789978563 86522 15d237bf15ee19a4e7ecc82485070b12 ""
   "../Figures/verify_tau_reslult.png" 1779049349 348620 305e9c44fcf64f3007cd6e165f4ecf3a ""
@@ -38,10 +38,9 @@
   "../logo.png" 1770139137 9705 f6e56955b0b8a334759253caf7856307 ""
   "../notaglinelogo.png" 1770139137 3150 09e11acc4d6224bb6d89a97a56b59fb4 ""
   "IEEEtran.cls" 1784836676 288304 5b2e4fa15b0f7eabb840ebf67df4c0f7 ""
-  "access.aux" 1789983724 43745 bc435e07f19c6b41db820c62f9f20a6e "pdflatex"
-  "access.out" 1789983724 5421 f2723638204728dd341f9a07a63e6442 "pdflatex"
-  "access.tex" 1789983721 140767 7064f77fa5dac030a70079ed84cebe95 ""
-  "c:/Users/Deermste/Documents/FraUas/Mechatronikprojekt/Paper/space-robot-simulation-using-formal-methods/access/access.tex" 1789983721 140767 7064f77fa5dac030a70079ed84cebe95 ""
+  "access.aux" 1790255406 44632 08d31cfc9d317001ad2bf3a593e193a0 "pdflatex"
+  "access.out" 1790255406 5421 f2723638204728dd341f9a07a63e6442 "pdflatex"
+  "access.tex" 1790255401 146399 591abe915305526ec47a0c060025f52f ""
   "c:/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc" 1770133905 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1770134165 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/adobe/courier/pcrr8c.tfm" 1770133726 1268 8bd405dc5751cfed76cb6fb2db78cb50 ""
