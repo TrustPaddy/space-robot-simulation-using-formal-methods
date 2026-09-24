@@ -468,6 +468,7 @@ tooling of Gazebo in exchange for a close coupling of the dynamics, the RL agent
 \renewcommand{\arraystretch}{1.25}
 \caption{Comparison of the simulation platforms considered for this work.}
 \label{tab:sim_comparison}
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{p{2.4cm}p{1.8cm}p{1.5cm}p{1.5cm}}
 \toprule
 \textbf{Criterion} & \textbf{MATLAB/ Simulink} & \textbf{Gazebo} & \textbf{MuJoCo} \\
@@ -803,8 +804,11 @@ behaviors.
   \item $\boldsymbol{K_6}$ (\emph{Joint Limit Violation Rate}). Fraction of joint samples outside the
   mechanical limits, averaged over all joints and time steps of an episode. Zero is ideal.
   \begin{equation*}
-  K_6=\frac{1}{N_{\mathrm{eval}}}\sum_{i=1}^{N_{\mathrm{eval}}}\frac{1}{T_i n_J}\sum_{k=1}^{T_i}\sum_{j=1}^{n_J}
-  \mathbb{I}\!\big(q_{i,j}[k]\notin[q_j^{\min},q_j^{\max}]\big).
+  \begin{aligned}
+  K_6 &= \frac{1}{N_{\mathrm{eval}}}\sum_{i=1}^{N_{\mathrm{eval}}}\frac{1}{T_i n_J}\sum_{k=1}^{T_i}\sum_{j=1}^{n_J}
+  V_{i,j}[k],\\
+  V_{i,j}[k] &= \mathbb{I}\!\big(q_{i,j}[k]\notin[q_j^{\min},q_j^{\max}]\big).
+  \end{aligned}
   \end{equation*}
 
   \item $\boldsymbol{K_7}$ (\emph{Control Smoothness (Jerk)}). Second difference of joint torques. Lower
@@ -826,8 +830,10 @@ behaviors.
   \item $\boldsymbol{K_9}$ (\emph{Energy Consumption}). Average absolute mechanical power integrated over
   each episode. Lower is better when not at the expense of tracking quality.
   \begin{equation*}
-  E_i=\int\sum_{j=1}^{n_J}\big|\tau_{i,j}(t)\,\dot q_{i,j}(t)\big|\,dt, \qquad
-  K_9=\frac{1}{N_{\mathrm{eval}}}\sum_{i=1}^{N_{\mathrm{eval}}} E_i.
+  \begin{aligned}
+  E_i &= \int\sum_{j=1}^{n_J}\big|\tau_{i,j}(t)\,\dot q_{i,j}(t)\big|\,dt,\\
+  K_9 &= \frac{1}{N_{\mathrm{eval}}}\sum_{i=1}^{N_{\mathrm{eval}}} E_i.
+  \end{aligned}
   \end{equation*}
 \end{itemize}
 
@@ -1181,7 +1187,7 @@ Mean Squared EE Position Error ($K_2$) & $0.0145 \pm 0.0196$ & $0.2168 \pm 0.109
   $0.0886 \pm 0.0560$ & $0.1599 \pm 0.0919$ & $0.0134 \pm 0.0081$ & $0.0177 \pm 0.0036$ \\
 Maximum EE Position Error ($K_3$) & $0.229 \pm 0.095$ & $0.975 \pm 0.225$ & $0.609 \pm 0.248$ &
   $1.001 \pm 0.504$ & $0.215 \pm 0.040$ & $0.262 \pm 0.004$ \\
-Mean Base Orientation Error ($K_4$) & $0.026 \pm 0.009$ & $0.145 \pm 0.092$ & $0.098 \pm 0.080$ &
+Mean Base Orientation Error ($K_4$) & $0.026 \pm 0.009$ & $0.144 \pm 0.092$ & $0.098 \pm 0.080$ &
   $0.353 \pm 0.171$ & $0.050 \pm 0.014$ & $0.030 \pm 0.011$ \\
 Control Smoothness ($K_7$, Jerk) & $0.0098 \pm 0.0017$ & $0.197 \pm 0.222$ & $0.515 \pm 0.213$ &
   $0.549 \pm 0.193$ & $0.383 \pm 0.068$ & $0.0056 \pm 0.0008$ \\
@@ -1261,8 +1267,8 @@ DDPG & 4 & $-7.81^{**}$ & $+0.128^{**}$ & $+0.770^{**}$ & $+0.299^{**}$ & $+0.56
 with those of TRPO on the seed level. PPO and PG are not tested because they have fewer than four
 successful runs. SAC, TD3, and DDPG had a significantly lower return $K_1$ and significantly larger
 tracking errors $K_2$ and $K_3$ than TRPO (Holm-corrected $p \le 0.005$). Their base orientation error
-$K_4$ was also significantly larger ($p \le 0.031$). For SAC, the differences in $K_7$ and $K_9$ were not
-significant.
+$K_4$ was also significantly larger ($p = 0.031$ for SAC and $p \le 0.006$ for TD3 and DDPG).
+For SAC, the differences in $K_7$ and $K_9$ were not significant.
 
 \cref{fig:boxplots} shows the distribution of four KPIs over the successful runs, and
 \cref{fig:ci_plots} shows the corresponding 95\% bootstrap confidence intervals of the mean. Both figures
@@ -1548,24 +1554,24 @@ the return $K_1$ is comparable across the variants. The reference row contains t
         \midrule
         Nominal weights & 5/5 & $-0.20 \pm 0.13$ & $0.0050 \pm 0.0016$ & $0.025 \pm 0.021$ &
           $0.0101 \pm 0.0013$ & $2.22 \pm 0.85$ \\
-        $W_p = 0$ & 5/5 & $-6.79 \pm 1.41$ & $0.2592 \pm 0.0552$ & $0.014 \pm 0.005$ &
+        $W_p = 0$ & 5/5 & $-6.79 \pm 1.41$ & $0.2592 \pm 0.0552$ & $0.014 \pm 0.004$ &
           $0.0046 \pm 0.0007$ & $0.56 \pm 0.30$ \\
         $W_v = 0$ & 5/5 & $-0.26 \pm 0.18$ & $0.0054 \pm 0.0030$ & $0.033 \pm 0.025$ &
-          $0.0088 \pm 0.0013$ & $1.99 \pm 0.42$ \\
+          $0.0088 \pm 0.0013$ & $1.98 \pm 0.42$ \\
         $W_{\mathrm{ori}} = 0$ & 4/5 & $-0.83 \pm 0.51$ & $0.0030 \pm 0.0015$ & $0.104 \pm 0.053$ &
           $0.0095 \pm 0.0018$ & $2.01 \pm 0.29$ \\
         $W_{\omega_b} = 0$ & 5/5 & $-0.14 \pm 0.10$ & $0.0041 \pm 0.0026$ & $0.022 \pm 0.007$ &
-          $0.0086 \pm 0.0009$ & $2.00 \pm 0.62$ \\
+          $0.0086 \pm 0.0009$ & $1.99 \pm 0.62$ \\
         $W_{v_b} = 0$ & 5/5 & $-0.16 \pm 0.08$ & $0.0048 \pm 0.0022$ & $0.017 \pm 0.014$ &
           $0.0088 \pm 0.0003$ & $2.12 \pm 0.55$ \\
         $W_u = 0$ & 5/5 & $-0.14 \pm 0.10$ & $0.0042 \pm 0.0030$ & $0.019 \pm 0.010$ &
           $0.0094 \pm 0.0014$ & $1.94 \pm 0.48$ \\
-        $W_d = 0$ & 5/5 & $-0.27 \pm 0.19$ & $0.0063 \pm 0.0042$ & $0.035 \pm 0.025$ &
+        $W_d = 0$ & 5/5 & $-0.27 \pm 0.18$ & $0.0063 \pm 0.0042$ & $0.035 \pm 0.025$ &
           $0.0100 \pm 0.0016$ & $2.45 \pm 0.46$ \\
         $k_p = 0$ ($r_{\mathrm{prog}}$ off) & 5/5 & $-0.11 \pm 0.06$ & $0.0036 \pm 0.0020$ &
           $0.015 \pm 0.006$ & $0.0084 \pm 0.0014$ & $2.16 \pm 0.87$ \\
         $k_b = 0$ ($r_{\mathrm{bonus}}$ off) & 5/5 & $-0.23 \pm 0.09$ & $0.0057 \pm 0.0042$ &
-          $0.031 \pm 0.018$ & $0.0095 \pm 0.0011$ & $2.03 \pm 0.43$ \\
+          $0.031 \pm 0.018$ & $0.0095 \pm 0.0011$ & $2.03 \pm 0.42$ \\
         \bottomrule
     \end{tabular}
 \end{table*}
@@ -1619,11 +1625,11 @@ agents and seeds of \cref{comparison} and \cref{sec:ppo_opt}.
         Nominal weights & 5/5 & $-0.20 \pm 0.13$ & $0.0050 \pm 0.0016$ & $0.025 \pm 0.021$ &
           $0.0101 \pm 0.0013$ & $2.22 \pm 0.85$ \\
         $W_p \times 0.5$ & 5/5 & $-0.33 \pm 0.14$ & $0.0114 \pm 0.0049$ & $0.018 \pm 0.007$ &
-          $0.0082 \pm 0.0004$ & $1.83 \pm 0.53$ \\
+          $0.0082 \pm 0.0004$ & $1.83 \pm 0.52$ \\
         $W_p \times 2$ & 5/5 & $-0.55 \pm 0.69$ & $0.0063 \pm 0.0043$ & $0.070 \pm 0.060$ &
           $0.0093 \pm 0.0015$ & $2.81 \pm 1.00$ \\
         $W_v \times 0.5$ & 5/5 & $-0.09 \pm 0.03$ & $0.0026 \pm 0.0010$ & $0.016 \pm 0.003$ &
-          $0.0089 \pm 0.0006$ & $2.41 \pm 0.35$ \\
+          $0.0089 \pm 0.0005$ & $2.41 \pm 0.35$ \\
         $W_v \times 2$ & 5/5 & $-0.19 \pm 0.17$ & $0.0058 \pm 0.0051$ & $0.021 \pm 0.012$ &
           $0.0119 \pm 0.0025$ & $2.32 \pm 0.67$ \\
         $W_{\mathrm{ori}} \times 0.5$ & 5/5 & $-0.18 \pm 0.11$ & $0.0044 \pm 0.0030$ & $0.028 \pm 0.013$ &
@@ -1729,13 +1735,13 @@ parameter change at the same time.
           6 & 5 & 3 & 3 & 2 \\
         Torque limit $0.75\,\tau_{\max}$ & $0.01454 \pm 0.0196$ & $0.026 \pm 0.009$ & $0.00415 \pm 0.0023$ &
           $0.021 \pm 0.016$ & 6 & 6 & 5 & 3 & 2 \\
-        Torque limit $0.3\,\tau_{\max}$ & $0.01488 \pm 0.0197$ & $0.026 \pm 0.010$ & $0.00489 \pm 0.0031$ &
+        Torque limit $0.3\,\tau_{\max}$ & $0.01488 \pm 0.0197$ & $0.026 \pm 0.009$ & $0.00489 \pm 0.0031$ &
           $0.021 \pm 0.015$ & 8 & 9 & 7 & 5 & 2 \\
         External disturbance & $0.01289 \pm 0.0145$ & $0.066 \pm 0.024$ & $0.00506 \pm 0.0028$ &
           $0.055 \pm 0.023$ & 5 & 4 & 2 & 3 & 2 \\
-        Parameters $\times 1.5$ & $0.02847 \pm 0.0267$ & $0.022 \pm 0.008$ & $0.01421 \pm 0.0061$ &
+        Parameters $\times 1.5$ & $0.02847 \pm 0.0267$ & $0.021 \pm 0.008$ & $0.01421 \pm 0.0061$ &
           $0.019 \pm 0.011$ & 7 & 7 & 5 & 3 & 2 \\
-        Combined & $0.02790 \pm 0.0228$ & $0.058 \pm 0.021$ & $0.01434 \pm 0.0060$ & $0.049 \pm 0.021$ &
+        Combined & $0.02790 \pm 0.0227$ & $0.058 \pm 0.021$ & $0.01434 \pm 0.0060$ & $0.049 \pm 0.020$ &
           6 & 7 & 5 & 4 & 2 \\
         \bottomrule
     \end{tabular}
@@ -1748,7 +1754,7 @@ the jerk $K_7$ of both agents by about two thirds, from 0.0097 to 0.0161 for the
 likely because the noise enters the torque commands directly. The torque limit of $0.3\,\tau_{\max}$
 increased the tracking error of the optimized PPO agent by 18\% (0.00415 to 0.00489) and changed that of
 TRPO by 2\%. The external disturbance mainly affected the base. $K_4$ rose from 0.021 to 0.055 for the
-optimized PPO agent and from 0.026 to 0.066 for TRPO, while $K_2$ stayed at 0.00506 and 0.01289. The
+optimized PPO agent and from 0.026 to 0.066 for TRPO, while $K_2$ was 0.00506 and 0.01289. The
 parameter scaling had the largest effect on tracking. $K_2$ rose to 0.01421 for the optimized PPO agent
 and to 0.02847 for TRPO, about three and two times the nominal values. One possible reason is that the
 scaling weakens every torque command, whereas the torque limits clip only large commands. The combined
