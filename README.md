@@ -37,5 +37,6 @@ latexmk -pdf <name>.tex
 Folgende Dateien in `Figures/` werden weder von `access/access.tex` noch von `submission_1/orig_submitted.tex`
 eingebunden (nicht gelöscht): `SPART.png`, `oos.png`, `kreisbahn_3.png`, `Collsidion_detected_cw.png`,
 `collison_detected_scope.png`, `spacerobot_slx_redardfcn.png`, `rlPPOAgent_09_10_16_59.png`,
-`fra-uas_logo.pdf`, `YourSignature_w.jpg`, `ethnomethodologisches Beziehungsmodell_25.02.2022_2.pdf`,
+`fra-uas_logo.pdf`, `YourSignature_w.jpg`, `warning_collision.png` und `tau_collision.png` (seit A60 ersetzt durch
+`collision_test_dmin.png` und `collision_test_tau.png`), `ethnomethodologisches Beziehungsmodell_25.02.2022_2.pdf`,
 `ethnomethodologisches Einflussmodell_25.02.2022_.pdf`.

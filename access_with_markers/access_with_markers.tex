@@ -400,7 +400,9 @@ conditions.}
 	\caption{Overview of the Simulink model \texttt{SpaceRobot.slx}. The closed-loop model of the free-floating space
   robot integrates the robot dynamics, reference generation, observation assembly, reward computation, and
   \hlone{[A56] an RL agent block that outputs joint torques. The same model is used for all six algorithms.}
-  The reward and termination logic evaluate end-effector tracking, base motion, and control effort.}
+  The reward and termination logic evaluate end-effector tracking, base motion, and control effort.
+  \hlone{[A60] Two further blocks add the observation noise and the external joint torque of the stress
+  tests. Both are zero in the nominal case.}}
 	\label{fig:spacerobot_slx}
 \end{figure*}
 
@@ -918,28 +920,31 @@ momentum observer is a diagnostic tool. It is evaluated offline and does not inf
 
 \begin{figure*}[!t]
     \centering    \includegraphics[width=0.75\linewidth]{Figures/spacerobot_slx_colissionmonitor.pdf}
-    \caption{Collision monitor subsystem of the Simulink model \texttt{SpaceRobot.slx}. The joint and link
-    configurations are used to compute the minimum distance between non-adjacent robot bodies. A distance below the
-    safety threshold raises a warning. A detected contact sets the collision flag, which terminates the episode.}
+    \caption{Collision monitor subsystem of the Simulink model \texttt{SpaceRobot.slx}. \hlone{[A60] The joint
+    angles $q$ are used to compute the minimum distance between non-adjacent robot bodies. A distance below the
+    safety threshold $d_{\mathrm{safe}}$ triggers the assertion block, which raises a warning.} A detected
+    contact sets the collision flag, which terminates the episode.}
     \label{fig:spacerobot_slx_colissionmonitor}
 \end{figure*}
 
-\begin{figure*}[!t] 
+\begin{figure*}[!t]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{Figures/warning_collision.png}
-        \caption{Automatically triggered collision warning}
-        \label{fig:collision_warning}
+        \includegraphics[width=\linewidth]{Figures/collision_test_dmin.png}
+        \caption{\hlone{Minimum distance between non-adjacent bodies}}
+        \label{fig:collision_dmin}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{Figures/tau_collision.png}
-        \caption{Joint torques in the event of a collision}
-        \label{fig:collision_scope}
+        \includegraphics[width=\linewidth]{Figures/collision_test_tau.png}
+        \caption{\hlone{Commanded joint torques}}
+        \label{fig:collision_tau}
     \end{subfigure}
-    \caption{Test of the collision monitor and the associated joint torques.}
+    \caption{\hlone{[A60] Test of the collision monitor with constant joint torques that fold the arm toward
+    the base. The warning is raised when $d_{\min}$ falls below $d_{\mathrm{safe}}$. After the detected
+    contact, the torques are set to zero and the episode ends at $t = 8.2\,\mathrm{s}$.}}
     \label{fig:collision_combined}
 \end{figure*}
 \textbf{Collision Monitor.} \hlone{[A11, A26] At every agent step, a collision monitor computes the
@@ -949,10 +954,17 @@ block that applies the} \texttt{checkCollision} \hlone{function of the Robotics 
 \hlone{to the collision geometry of the URDF model.} \hlone{If $d_{\min}$ falls below the safety
 threshold $d_{\mathrm{safe}} = 2\,\mathrm{cm}$, a warning is raised and logged. If a contact between two
 bodies is detected, all commanded joint torques are overridden to zero and the episode is terminated with
-the penalty in} \eqref{eq:rfail}\hlone{. The monitor was tested by intentionally commanding the arm
-toward the base and by starting an episode in a colliding configuration. In both cases, the contact was
-detected, and the robot was stopped} (see~\cref{fig:collision_combined}). \hlone{[A19] During training,
-collisions occurred mainly in early exploratory episodes. The monitor detected them and terminated the
+the penalty in} \eqref{eq:rfail}\hlone{.}
+
+\hlone{[A60] The monitor was tested in two cases without a trained agent. In the first case, constant
+joint torques of 0.2, 0.6, 0.4, and 0.5\,N\,m folded the arm from the nominal pose toward the base}
+(\cref{fig:collision_combined})\hlone{. The distance $d_{\min}$ fell below $d_{\mathrm{safe}}$ at
+$t = 8.0\,\mathrm{s}$, and the warning was raised. The contact was detected at $t = 8.1\,\mathrm{s}$. At
+the next agent step, the torques were set to zero and the episode ended. In the second case, an episode
+started in a colliding configuration and was terminated after the first agent step. With larger torques,
+$d_{\min}$ can drop from above $d_{\mathrm{safe}}$ to a contact within one agent step. The warning
+therefore does not always precede the contact.} \hlone{[A19] During training, collisions occurred mainly
+in early exploratory episodes. The monitor detected them and terminated the
 episode. In the evaluation of the 70 trained agents, 108 of 2170 episodes ended with a detected contact.
 These episodes belong to six runs of DDPG, TD3, PG, and the default PPO agent. No contact occurred in the
 evaluation episodes of TRPO, SAC, and the optimized PPO agent.}

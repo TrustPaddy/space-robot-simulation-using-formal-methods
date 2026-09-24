@@ -68,18 +68,18 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Tracking the desired end-effector circular path using inverse kinematics.}}{5}{figure.caption.3}\protected@file@percent }
 \newlabel{fig:ref_kreis_gesamt}{{2}{5}{Tracking the desired end-effector circular path using inverse kinematics}{figure.caption.3}{}}
 \newlabel{fig:ref_kreis_gesamt@cref}{{[figure][2][]2}{[1][4][]5}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Overview of the Simulink model \texttt  {SpaceRobot.slx}. The closed-loop model of the free-floating space robot integrates the robot dynamics, reference generation, observation assembly, reward computation, and {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A56] an RL agent block that outputs joint torques. The same model is used for all six algorithms.}} The reward and termination logic evaluate end-effector tracking, base motion, and control effort.}}{5}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:spacerobot_slx}{{3}{5}{Overview of the Simulink model \texttt {SpaceRobot.slx}. The closed-loop model of the free-floating space robot integrates the robot dynamics, reference generation, observation assembly, reward computation, and \hlone {[A56] an RL agent block that outputs joint torques. The same model is used for all six algorithms.} The reward and termination logic evaluate end-effector tracking, base motion, and control effort}{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Overview of the Simulink model \texttt  {SpaceRobot.slx}. The closed-loop model of the free-floating space robot integrates the robot dynamics, reference generation, observation assembly, reward computation, and {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A56] an RL agent block that outputs joint torques. The same model is used for all six algorithms.}} The reward and termination logic evaluate end-effector tracking, base motion, and control effort. {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A60] Two further blocks add the observation noise and the external joint torque of the stress tests. Both are zero in the nominal case.}}}}{5}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:spacerobot_slx}{{3}{5}{Overview of the Simulink model \texttt {SpaceRobot.slx}. The closed-loop model of the free-floating space robot integrates the robot dynamics, reference generation, observation assembly, reward computation, and \hlone {[A56] an RL agent block that outputs joint torques. The same model is used for all six algorithms.} The reward and termination logic evaluate end-effector tracking, base motion, and control effort. \hlone {[A60] Two further blocks add the observation noise and the external joint torque of the stress tests. Both are zero in the nominal case.}}{figure.caption.4}{}}
 \newlabel{fig:spacerobot_slx@cref}{{[figure][3][]3}{[1][4][]5}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A21] Parameters of the simulated free-floating space robot.}}}}{5}{table.caption.5}\protected@file@percent }
-\newlabel{tab:robot_params}{{2}{5}{\hlone {[A21] Parameters of the simulated free-floating space robot.}}{table.caption.5}{}}
-\newlabel{tab:robot_params@cref}{{[table][2][]2}{[1][4][]5}{}{}{}}
 \citation{koenig2004gazebo}
 \citation{todorov2012mujoco}
 \citation{korber2021comparing}
 \citation{collins2021review}
 \citation{b6}
 \citation{b29,b30}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A21] Parameters of the simulated free-floating space robot.}}}}{6}{table.caption.5}\protected@file@percent }
+\newlabel{tab:robot_params}{{2}{6}{\hlone {[A21] Parameters of the simulated free-floating space robot.}}{table.caption.5}{}}
+\newlabel{tab:robot_params@cref}{{[table][2][]2}{[1][4][]6}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A46] Comparison of the simulation platforms considered for this work.}}}}{6}{table.caption.6}\protected@file@percent }
 \newlabel{tab:sim_comparison}{{3}{6}{\hlone {[A46] Comparison of the simulation platforms considered for this work.}}{table.caption.6}{}}
 \newlabel{tab:sim_comparison@cref}{{[table][3][]3}{[1][6][]6}{}{}{}}
@@ -103,12 +103,12 @@
 \newlabel{tab:reward_weights}{{4}{9}{Reward function weights used in all experiments}{table.caption.9}{}}
 \newlabel{tab:reward_weights@cref}{{[table][4][]4}{[1][9][]9}{}{}{}}
 \citation{b7,b22}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Safety Monitoring and Constraint Enforcement}{10}{section.5}\protected@file@percent }
-\newlabel{formal}{{V}{10}{Safety Monitoring and Constraint Enforcement}{section.5}{}}
-\newlabel{formal@cref}{{[section][5][]V}{[1][10][]10}{}{}{}}
 \citation{b6}
 \citation{b31}
 \citation{b5}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Safety Monitoring and Constraint Enforcement}{11}{section.5}\protected@file@percent }
+\newlabel{formal}{{V}{11}{Safety Monitoring and Constraint Enforcement}{section.5}{}}
+\newlabel{formal@cref}{{[section][5][]V}{[1][10][]11}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Momentum monitor subsystem (momentum observer) of the Simulink model \texttt  {SpaceRobot.slx}. {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A27] The velocities and orientations of the base and of all manipulator links are measured and combined in a MATLAB function to compute the total linear momentum of the free-floating space robot.}} The monitor is used to check momentum conservation in the simulation.}}{12}{figure.caption.10}\protected@file@percent }
 \newlabel{fig:impuls_monitor}{{6}{12}{Momentum monitor subsystem (momentum observer) of the Simulink model \texttt {SpaceRobot.slx}. \hlone {[A27] The velocities and orientations of the base and of all manipulator links are measured and combined in a MATLAB function to compute the total linear momentum of the free-floating space robot.} The monitor is used to check momentum conservation in the simulation}{figure.caption.10}{}}
 \newlabel{fig:impuls_monitor@cref}{{[figure][6][]6}{[1][11][]12}{}{}{}}
@@ -120,25 +120,25 @@
 \citation{b14}
 \citation{b16}
 \citation{b17}
-\citation{b18}
-\citation{b2,b7}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Collision monitor subsystem of the Simulink model \texttt  {SpaceRobot.slx}. The joint and link configurations are used to compute the minimum distance between non-adjacent robot bodies. A distance below the safety threshold raises a warning. A detected contact sets the collision flag, which terminates the episode.}}{13}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:spacerobot_slx_colissionmonitor}{{8}{13}{Collision monitor subsystem of the Simulink model \texttt {SpaceRobot.slx}. The joint and link configurations are used to compute the minimum distance between non-adjacent robot bodies. A distance below the safety threshold raises a warning. A detected contact sets the collision flag, which terminates the episode}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Collision monitor subsystem of the Simulink model \texttt  {SpaceRobot.slx}. {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A60] The joint angles $q$ are used to compute the minimum distance between non-adjacent robot bodies. A distance below the safety threshold $d_{\mathrm  {safe}}$ triggers the assertion block, which raises a warning.}} A detected contact sets the collision flag, which terminates the episode.}}{13}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:spacerobot_slx_colissionmonitor}{{8}{13}{Collision monitor subsystem of the Simulink model \texttt {SpaceRobot.slx}. \hlone {[A60] The joint angles $q$ are used to compute the minimum distance between non-adjacent robot bodies. A distance below the safety threshold $d_{\mathrm {safe}}$ triggers the assertion block, which raises a warning.} A detected contact sets the collision flag, which terminates the episode}{figure.caption.12}{}}
 \newlabel{fig:spacerobot_slx_colissionmonitor@cref}{{[figure][8][]8}{[1][11][]13}{}{}{}}
-\newlabel{fig:collision_warning}{{9a}{13}{Automatically triggered collision warning}{figure.caption.13}{}}
-\newlabel{fig:collision_warning@cref}{{[subfigure][1][9]9a}{[1][11][]13}{}{}{}}
-\newlabel{sub@fig:collision_warning}{{a}{13}{Automatically triggered collision warning}{figure.caption.13}{}}
-\newlabel{sub@fig:collision_warning@cref}{{[subfigure][1][9]9a}{[1][11][]13}{}{}{}}
-\newlabel{fig:collision_scope}{{9b}{13}{Joint torques in the event of a collision}{figure.caption.13}{}}
-\newlabel{fig:collision_scope@cref}{{[subfigure][2][9]9b}{[1][11][]13}{}{}{}}
-\newlabel{sub@fig:collision_scope}{{b}{13}{Joint torques in the event of a collision}{figure.caption.13}{}}
-\newlabel{sub@fig:collision_scope@cref}{{[subfigure][2][9]9b}{[1][11][]13}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Test of the collision monitor and the associated joint torques.}}{13}{figure.caption.13}\protected@file@percent }
-\newlabel{fig:collision_combined}{{9}{13}{Test of the collision monitor and the associated joint torques}{figure.caption.13}{}}
+\newlabel{fig:collision_dmin}{{9a}{13}{\hlone {Minimum distance between non-adjacent bodies}}{figure.caption.13}{}}
+\newlabel{fig:collision_dmin@cref}{{[subfigure][1][9]9a}{[1][11][]13}{}{}{}}
+\newlabel{sub@fig:collision_dmin}{{a}{13}{\hlone {Minimum distance between non-adjacent bodies}}{figure.caption.13}{}}
+\newlabel{sub@fig:collision_dmin@cref}{{[subfigure][1][9]9a}{[1][11][]13}{}{}{}}
+\newlabel{fig:collision_tau}{{9b}{13}{\hlone {Commanded joint torques}}{figure.caption.13}{}}
+\newlabel{fig:collision_tau@cref}{{[subfigure][2][9]9b}{[1][11][]13}{}{}{}}
+\newlabel{sub@fig:collision_tau}{{b}{13}{\hlone {Commanded joint torques}}{figure.caption.13}{}}
+\newlabel{sub@fig:collision_tau@cref}{{[subfigure][2][9]9b}{[1][11][]13}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A60] Test of the collision monitor with constant joint torques that fold the arm toward the base. The warning is raised when $d_{\min }$ falls below $d_{\mathrm  {safe}}$. After the detected contact, the torques are set to zero and the episode ends at $t = 8.2\,\mathrm  {s}$.}}}}{13}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:collision_combined}{{9}{13}{\hlone {[A60] Test of the collision monitor with constant joint torques that fold the arm toward the base. The warning is raised when $d_{\min }$ falls below $d_{\mathrm {safe}}$. After the detected contact, the torques are set to zero and the episode ends at $t = 8.2\,\mathrm {s}$.}}{figure.caption.13}{}}
 \newlabel{fig:collision_combined@cref}{{[figure][9][]9}{[1][11][]13}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Comparison of Continuous RL Agents}{13}{section.6}\protected@file@percent }
 \newlabel{comparison}{{VI}{13}{Comparison of Continuous RL Agents}{section.6}{}}
 \newlabel{comparison@cref}{{[section][6][]VI}{[1][13][]13}{}{}{}}
+\citation{b18}
+\citation{b2,b7}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A45] Verification model for Simulink Design Verifier}} (\texttt  {verify\_tau.slx}){\def \textcolor {yellow}{\textcolor {rone}}\texthl  {. The torque command $\tau $ is an unconstrained input and passes through a saturation block with the limits $\pm \tau _{\max }$. A relational operator compares the absolute saturated torques with $\tau _{\max } = 2\,\mathrm  {N\,m}$, and a proof objective (P) requires this comparison to be true.}}}}{14}{figure.caption.14}\protected@file@percent }
 \newlabel{fig:verify_tau}{{10}{14}{\hlone {[A45] Verification model for Simulink Design Verifier} (\texttt {verify\_tau.slx})\hlone {. The torque command $\tau $ is an unconstrained input and passes through a saturation block with the limits $\pm \tau _{\max }$. A relational operator compares the absolute saturated torques with $\tau _{\max } = 2\,\mathrm {N\,m}$, and a proof objective (P) requires this comparison to be true.}}{figure.caption.14}{}}
 \newlabel{fig:verify_tau@cref}{{[figure][10][]10}{[1][11][]14}{}{}{}}
@@ -147,45 +147,45 @@
 \newlabel{fig:verify_tau_result@cref}{{[figure][11][]11}{[1][13][]14}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Classification of the evaluated reinforcement learning algorithms.}}{14}{table.caption.16}\protected@file@percent }
 \newlabel{tab:on_off_policy}{{5}{14}{Classification of the evaluated reinforcement learning algorithms}{table.caption.16}{}}
-\newlabel{tab:on_off_policy@cref}{{[table][5][]5}{[1][13][]14}{}{}{}}
+\newlabel{tab:on_off_policy@cref}{{[table][5][]5}{[1][14][]14}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A17] Hyperparameters of the benchmarked agents. The six default agents use the default values of the Reinforcement Learning Toolbox (R2026a). All agents act every $\Delta t = 0.1\,\mathrm  {s}$ and use networks with two hidden layers of 128 ReLU units.}} {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A49] In contrast to the default PPO agent, the policy mean of the optimized PPO agent has no tanh output layer.}} {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A17] $\alpha _a$ and $\alpha _c$ denote the actor and critic learning rates.}}}}{15}{table.caption.17}\protected@file@percent }
 \newlabel{tab:hyperparameters}{{6}{15}{\hlone {[A17] Hyperparameters of the benchmarked agents. The six default agents use the default values of the Reinforcement Learning Toolbox (R2026a). All agents act every $\Delta t = 0.1\,\mathrm {s}$ and use networks with two hidden layers of 128 ReLU units.} \hlone {[A49] In contrast to the default PPO agent, the policy mean of the optimized PPO agent has no tanh output layer.} \hlone {[A17] $\alpha _a$ and $\alpha _c$ denote the actor and critic learning rates.}}{table.caption.17}{}}
 \newlabel{tab:hyperparameters@cref}{{[table][6][]6}{[1][14][]15}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A55] Episode rewards during training of the six default agents over ten seeds each. Each thin line shows one seed as a moving average over 25 episodes. Blue lines are successful runs, orange lines are failed runs, and the black line is the mean over the ten seeds. All panels use the same axis.}}}}{15}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:training_defaults}{{12}{15}{\hlone {[A55] Episode rewards during training of the six default agents over ten seeds each. Each thin line shows one seed as a moving average over 25 episodes. Blue lines are successful runs, orange lines are failed runs, and the black line is the mean over the ten seeds. All panels use the same axis.}}{figure.caption.20}{}}
-\newlabel{fig:training_defaults@cref}{{[figure][12][]12}{[1][14][]15}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3, A9] Success of the default agents over ten training runs each. A run is successful when none of its 31 evaluation episodes is terminated by a monitor. The abort rate is the share of terminated episodes among the 310 evaluation episodes of an agent.}} {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A47, A56] The column ``Aborts by contact'' gives the share of these terminated episodes that ended with a detected contact. The remaining terminations were caused by joint-limit violations. The last column gives the $p$-value of Fisher's exact test on the number of successful runs against TRPO, Holm-corrected over the five compared agents.}}}}{15}{table.caption.18}\protected@file@percent }
+\newlabel{tab:robustness_seeds}{{7}{15}{\hlone {[R2.3, A9] Success of the default agents over ten training runs each. A run is successful when none of its 31 evaluation episodes is terminated by a monitor. The abort rate is the share of terminated episodes among the 310 evaluation episodes of an agent.} \hlone {[A47, A56] The column ``Aborts by contact'' gives the share of these terminated episodes that ended with a detected contact. The remaining terminations were caused by joint-limit violations. The last column gives the $p$-value of Fisher's exact test on the number of successful runs against TRPO, Holm-corrected over the five compared agents.}}{table.caption.18}{}}
+\newlabel{tab:robustness_seeds@cref}{{[table][7][]7}{[1][14][]15}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3, A9, A54] Performance of the successful runs of the default agents on the circular path. The first row gives the number of successful runs out of ten. All other values are the mean and the standard deviation over the successful runs of an agent. The collision rate $K_5$ and the joint limit violation rate $K_6$ are zero for every successful run and are omitted.}}}}{16}{table.caption.19}\protected@file@percent }
+\newlabel{tab:kpi_comp}{{8}{16}{\hlone {[R2.3, A9, A54] Performance of the successful runs of the default agents on the circular path. The first row gives the number of successful runs out of ten. All other values are the mean and the standard deviation over the successful runs of an agent. The collision rate $K_5$ and the joint limit violation rate $K_6$ are zero for every successful run and are omitted.}}{table.caption.19}{}}
+\newlabel{tab:kpi_comp@cref}{{[table][8][]8}{[1][15][]16}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A55] Episode rewards during training of the six default agents over ten seeds each. Each thin line shows one seed as a moving average over 25 episodes. Blue lines are successful runs, orange lines are failed runs, and the black line is the mean over the ten seeds. All panels use the same axis.}}}}{16}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:training_defaults}{{12}{16}{\hlone {[A55] Episode rewards during training of the six default agents over ten seeds each. Each thin line shows one seed as a moving average over 25 episodes. Blue lines are successful runs, orange lines are failed runs, and the black line is the mean over the ten seeds. All panels use the same axis.}}{figure.caption.20}{}}
+\newlabel{fig:training_defaults@cref}{{[figure][12][]12}{[1][15][]16}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3, A9] Seed-level comparison of the successful runs of the default agents with those of TRPO. Each cell gives the median difference $\Delta \tilde  {x}$ (agent minus TRPO) with the Holm-corrected significance of a two-sided Mann--Whitney $U$ test as superscript (${}^{***}p<0.001$, ${}^{**}p<0.01$, ${}^{*}p<0.05$, ${}^{\mathrm  {n.s.}}p\geq 0.05$). For $K_1$, a negative difference means a lower return than TRPO. For the other KPIs, a positive difference means a larger error, jerk, angular velocity, or energy than TRPO.}} {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A47] The Holm correction covers the three tested agents for each KPI.}} {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3, A9] PPO and PG are not tested because they have fewer than four successful runs.}}}}{16}{table.caption.21}\protected@file@percent }
+\newlabel{tab:significance}{{9}{16}{\hlone {[R2.3, A9] Seed-level comparison of the successful runs of the default agents with those of TRPO. Each cell gives the median difference $\Delta \tilde {x}$ (agent minus TRPO) with the Holm-corrected significance of a two-sided Mann--Whitney $U$ test as superscript (${}^{***}p<0.001$, ${}^{**}p<0.01$, ${}^{*}p<0.05$, ${}^{\mathrm {n.s.}}p\geq 0.05$). For $K_1$, a negative difference means a lower return than TRPO. For the other KPIs, a positive difference means a larger error, jerk, angular velocity, or energy than TRPO.} \hlone {[A47] The Holm correction covers the three tested agents for each KPI.} \hlone {[R2.3, A9] PPO and PG are not tested because they have fewer than four successful runs.}}{table.caption.21}{}}
+\newlabel{tab:significance@cref}{{[table][9][]9}{[1][15][]16}{}{}{}}
 \citation{b4}
-\newlabel{fig:boxplot_k2}{{13a}{16}{$K_2$: Mean Squared EE Position Error}{figure.caption.22}{}}
-\newlabel{fig:boxplot_k2@cref}{{[subfigure][1][13]13a}{[1][15][]16}{}{}{}}
-\newlabel{sub@fig:boxplot_k2}{{a}{16}{$K_2$: Mean Squared EE Position Error}{figure.caption.22}{}}
-\newlabel{sub@fig:boxplot_k2@cref}{{[subfigure][1][13]13a}{[1][15][]16}{}{}{}}
-\newlabel{fig:boxplot_k4}{{13b}{16}{$K_4$: Mean Base Orientation Error}{figure.caption.22}{}}
-\newlabel{fig:boxplot_k4@cref}{{[subfigure][2][13]13b}{[1][15][]16}{}{}{}}
-\newlabel{sub@fig:boxplot_k4}{{b}{16}{$K_4$: Mean Base Orientation Error}{figure.caption.22}{}}
-\newlabel{sub@fig:boxplot_k4@cref}{{[subfigure][2][13]13b}{[1][15][]16}{}{}{}}
-\newlabel{fig:boxplot_k7}{{13c}{16}{$K_7$: Control Smoothness (Jerk)}{figure.caption.22}{}}
-\newlabel{fig:boxplot_k7@cref}{{[subfigure][3][13]13c}{[1][15][]16}{}{}{}}
-\newlabel{sub@fig:boxplot_k7}{{c}{16}{$K_7$: Control Smoothness (Jerk)}{figure.caption.22}{}}
-\newlabel{sub@fig:boxplot_k7@cref}{{[subfigure][3][13]13c}{[1][15][]16}{}{}{}}
-\newlabel{fig:boxplot_k9}{{13d}{16}{$K_9$: Energy Consumption}{figure.caption.22}{}}
-\newlabel{fig:boxplot_k9@cref}{{[subfigure][4][13]13d}{[1][15][]16}{}{}{}}
-\newlabel{sub@fig:boxplot_k9}{{d}{16}{$K_9$: Energy Consumption}{figure.caption.22}{}}
-\newlabel{sub@fig:boxplot_k9@cref}{{[subfigure][4][13]13d}{[1][15][]16}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3, A9] Distribution of selected KPIs over the successful runs of each agent. Each point is one run, averaged over the 30 random initial states, and the number of successful runs is given below each agent. Each box spans the interquartile range, and the center line marks the median. Axes are logarithmic where the values span more than a factor of 50. The optimized PPO agent of}} \cref  {sec:ppo_opt} {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {is included for reference.}}}}{16}{figure.caption.22}\protected@file@percent }
-\newlabel{fig:boxplots}{{13}{16}{\hlone {[R2.3, A9] Distribution of selected KPIs over the successful runs of each agent. Each point is one run, averaged over the 30 random initial states, and the number of successful runs is given below each agent. Each box spans the interquartile range, and the center line marks the median. Axes are logarithmic where the values span more than a factor of 50. The optimized PPO agent of} \cref {sec:ppo_opt} \hlone {is included for reference.}}{figure.caption.22}{}}
-\newlabel{fig:boxplots@cref}{{[figure][13][]13}{[1][15][]16}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3, A9] Success of the default agents over ten training runs each. A run is successful when none of its 31 evaluation episodes is terminated by a monitor. The abort rate is the share of terminated episodes among the 310 evaluation episodes of an agent.}} {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A47, A56] The column ``Aborts by contact'' gives the share of these terminated episodes that ended with a detected contact. The remaining terminations were caused by joint-limit violations. The last column gives the $p$-value of Fisher's exact test on the number of successful runs against TRPO, Holm-corrected over the five compared agents.}}}}{16}{table.caption.18}\protected@file@percent }
-\newlabel{tab:robustness_seeds}{{7}{16}{\hlone {[R2.3, A9] Success of the default agents over ten training runs each. A run is successful when none of its 31 evaluation episodes is terminated by a monitor. The abort rate is the share of terminated episodes among the 310 evaluation episodes of an agent.} \hlone {[A47, A56] The column ``Aborts by contact'' gives the share of these terminated episodes that ended with a detected contact. The remaining terminations were caused by joint-limit violations. The last column gives the $p$-value of Fisher's exact test on the number of successful runs against TRPO, Holm-corrected over the five compared agents.}}{table.caption.18}{}}
-\newlabel{tab:robustness_seeds@cref}{{[table][7][]7}{[1][14][]16}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Optimization of the PPO Agent}{16}{section.7}\protected@file@percent }
-\newlabel{sec:ppo_opt}{{VII}{16}{Optimization of the PPO Agent}{section.7}{}}
-\newlabel{sec:ppo_opt@cref}{{[section][7][]VII}{[1][16][]16}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3, A9, A54] Performance of the successful runs of the default agents on the circular path. The first row gives the number of successful runs out of ten. All other values are the mean and the standard deviation over the successful runs of an agent. The collision rate $K_5$ and the joint limit violation rate $K_6$ are zero for every successful run and are omitted.}}}}{17}{table.caption.19}\protected@file@percent }
-\newlabel{tab:kpi_comp}{{8}{17}{\hlone {[R2.3, A9, A54] Performance of the successful runs of the default agents on the circular path. The first row gives the number of successful runs out of ten. All other values are the mean and the standard deviation over the successful runs of an agent. The collision rate $K_5$ and the joint limit violation rate $K_6$ are zero for every successful run and are omitted.}}{table.caption.19}{}}
-\newlabel{tab:kpi_comp@cref}{{[table][8][]8}{[1][14][]17}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3, A9] Seed-level comparison of the successful runs of the default agents with those of TRPO. Each cell gives the median difference $\Delta \tilde  {x}$ (agent minus TRPO) with the Holm-corrected significance of a two-sided Mann--Whitney $U$ test as superscript (${}^{***}p<0.001$, ${}^{**}p<0.01$, ${}^{*}p<0.05$, ${}^{\mathrm  {n.s.}}p\geq 0.05$). For $K_1$, a negative difference means a lower return than TRPO. For the other KPIs, a positive difference means a larger error, jerk, angular velocity, or energy than TRPO.}} {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A47] The Holm correction covers the three tested agents for each KPI.}} {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3, A9] PPO and PG are not tested because they have fewer than four successful runs.}}}}{17}{table.caption.21}\protected@file@percent }
-\newlabel{tab:significance}{{9}{17}{\hlone {[R2.3, A9] Seed-level comparison of the successful runs of the default agents with those of TRPO. Each cell gives the median difference $\Delta \tilde {x}$ (agent minus TRPO) with the Holm-corrected significance of a two-sided Mann--Whitney $U$ test as superscript (${}^{***}p<0.001$, ${}^{**}p<0.01$, ${}^{*}p<0.05$, ${}^{\mathrm {n.s.}}p\geq 0.05$). For $K_1$, a negative difference means a lower return than TRPO. For the other KPIs, a positive difference means a larger error, jerk, angular velocity, or energy than TRPO.} \hlone {[A47] The Holm correction covers the three tested agents for each KPI.} \hlone {[R2.3, A9] PPO and PG are not tested because they have fewer than four successful runs.}}{table.caption.21}{}}
-\newlabel{tab:significance@cref}{{[table][9][]9}{[1][15][]17}{}{}{}}
+\newlabel{fig:boxplot_k2}{{13a}{17}{$K_2$: Mean Squared EE Position Error}{figure.caption.22}{}}
+\newlabel{fig:boxplot_k2@cref}{{[subfigure][1][13]13a}{[1][15][]17}{}{}{}}
+\newlabel{sub@fig:boxplot_k2}{{a}{17}{$K_2$: Mean Squared EE Position Error}{figure.caption.22}{}}
+\newlabel{sub@fig:boxplot_k2@cref}{{[subfigure][1][13]13a}{[1][15][]17}{}{}{}}
+\newlabel{fig:boxplot_k4}{{13b}{17}{$K_4$: Mean Base Orientation Error}{figure.caption.22}{}}
+\newlabel{fig:boxplot_k4@cref}{{[subfigure][2][13]13b}{[1][15][]17}{}{}{}}
+\newlabel{sub@fig:boxplot_k4}{{b}{17}{$K_4$: Mean Base Orientation Error}{figure.caption.22}{}}
+\newlabel{sub@fig:boxplot_k4@cref}{{[subfigure][2][13]13b}{[1][15][]17}{}{}{}}
+\newlabel{fig:boxplot_k7}{{13c}{17}{$K_7$: Control Smoothness (Jerk)}{figure.caption.22}{}}
+\newlabel{fig:boxplot_k7@cref}{{[subfigure][3][13]13c}{[1][15][]17}{}{}{}}
+\newlabel{sub@fig:boxplot_k7}{{c}{17}{$K_7$: Control Smoothness (Jerk)}{figure.caption.22}{}}
+\newlabel{sub@fig:boxplot_k7@cref}{{[subfigure][3][13]13c}{[1][15][]17}{}{}{}}
+\newlabel{fig:boxplot_k9}{{13d}{17}{$K_9$: Energy Consumption}{figure.caption.22}{}}
+\newlabel{fig:boxplot_k9@cref}{{[subfigure][4][13]13d}{[1][15][]17}{}{}{}}
+\newlabel{sub@fig:boxplot_k9}{{d}{17}{$K_9$: Energy Consumption}{figure.caption.22}{}}
+\newlabel{sub@fig:boxplot_k9@cref}{{[subfigure][4][13]13d}{[1][15][]17}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3, A9] Distribution of selected KPIs over the successful runs of each agent. Each point is one run, averaged over the 30 random initial states, and the number of successful runs is given below each agent. Each box spans the interquartile range, and the center line marks the median. Axes are logarithmic where the values span more than a factor of 50. The optimized PPO agent of}} \cref  {sec:ppo_opt} {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {is included for reference.}}}}{17}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:boxplots}{{13}{17}{\hlone {[R2.3, A9] Distribution of selected KPIs over the successful runs of each agent. Each point is one run, averaged over the 30 random initial states, and the number of successful runs is given below each agent. Each box spans the interquartile range, and the center line marks the median. Axes are logarithmic where the values span more than a factor of 50. The optimized PPO agent of} \cref {sec:ppo_opt} \hlone {is included for reference.}}{figure.caption.22}{}}
+\newlabel{fig:boxplots@cref}{{[figure][13][]13}{[1][15][]17}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Optimization of the PPO Agent}{17}{section.7}\protected@file@percent }
+\newlabel{sec:ppo_opt}{{VII}{17}{Optimization of the PPO Agent}{section.7}{}}
+\newlabel{sec:ppo_opt@cref}{{[section][7][]VII}{[1][17][]17}{}{}{}}
 \newlabel{fig:ci_k2}{{14a}{18}{$K_2$: Mean Squared EE Position Error}{figure.caption.23}{}}
 \newlabel{fig:ci_k2@cref}{{[subfigure][1][14]14a}{[1][15][]18}{}{}{}}
 \newlabel{sub@fig:ci_k2}{{a}{18}{$K_2$: Mean Squared EE Position Error}{figure.caption.23}{}}
@@ -220,9 +220,6 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-B}}Ablation Study of Reward Components}{19}{subsection.7.2}\protected@file@percent }
 \newlabel{sec:reward_ablation}{{\mbox  {VII-B}}{19}{Ablation Study of Reward Components}{subsection.7.2}{}}
 \newlabel{sec:reward_ablation@cref}{{[subsection][2][7]\mbox  {VII-B}}{[1][19][]19}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-C}}Sensitivity Analysis of Reward Weights}{19}{subsection.7.3}\protected@file@percent }
-\newlabel{sec:reward_sensitivity}{{\mbox  {VII-C}}{19}{Sensitivity Analysis of Reward Weights}{subsection.7.3}{}}
-\newlabel{sec:reward_sensitivity@cref}{{[subsection][3][7]\mbox  {VII-C}}{[1][19][]19}{}{}{}}
 \newlabel{fig:traj_default}{{16a}{20}{PPO (default)}{figure.caption.25}{}}
 \newlabel{fig:traj_default@cref}{{[subfigure][1][16]16a}{[1][19][]20}{}{}{}}
 \newlabel{sub@fig:traj_default}{{a}{20}{PPO (default)}{figure.caption.25}{}}
@@ -245,6 +242,9 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3, A9] Vector part of the base orientation quaternion during the episodes of}} \cref  {fig:trajektorie_xy_compare}{\def \textcolor {yellow}{\textcolor {rone}}\texthl  {. The base rotates only about the $z$-axis. The scalar part stays above 0.9996 in both episodes.}}}}{20}{figure.caption.26}\protected@file@percent }
 \newlabel{fig:basis_orientation_compare}{{17}{20}{\hlone {[R2.3, A9] Vector part of the base orientation quaternion during the episodes of} \cref {fig:trajektorie_xy_compare}\hlone {. The base rotates only about the $z$-axis. The scalar part stays above 0.9996 in both episodes.}}{figure.caption.26}{}}
 \newlabel{fig:basis_orientation_compare@cref}{{[figure][17][]17}{[1][19][]20}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-C}}Sensitivity Analysis of Reward Weights}{20}{subsection.7.3}\protected@file@percent }
+\newlabel{sec:reward_sensitivity}{{\mbox  {VII-C}}{20}{Sensitivity Analysis of Reward Weights}{subsection.7.3}{}}
+\newlabel{sec:reward_sensitivity@cref}{{[subsection][3][7]\mbox  {VII-C}}{[1][20][]20}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3, A9] Default PPO agent, optimized PPO agent, and TRPO on the circular path. The first row gives the number of successful runs out of ten. All other values are the mean and the standard deviation over the successful runs. $K_5$ and $K_6$ are zero for every successful run and are omitted.}}}}{21}{table.caption.27}\protected@file@percent }
 \newlabel{tab:ppo_optimization_kpi}{{10}{21}{\hlone {[R2.3, A9] Default PPO agent, optimized PPO agent, and TRPO on the circular path. The first row gives the number of successful runs out of ten. All other values are the mean and the standard deviation over the successful runs. $K_5$ and $K_6$ are zero for every successful run and are omitted.}}{table.caption.27}{}}
 \newlabel{tab:ppo_optimization_kpi@cref}{{[table][10][]10}{[1][19][]21}{}{}{}}
@@ -259,28 +259,27 @@
 \newlabel{tab:reward_sensitivity@cref}{{[table][12][]12}{[1][20][]22}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.4b] Success and tracking error of TRPO, the default PPO agent, and SAC under changed reward weights on the circular trajectory. Each cell gives the number of successful runs out of five and the mean $K_2$ over the successful runs.}}}}{22}{table.caption.30}\protected@file@percent }
 \newlabel{tab:reward_ranking}{{13}{22}{\hlone {[R2.4b] Success and tracking error of TRPO, the default PPO agent, and SAC under changed reward weights on the circular trajectory. Each cell gives the number of successful runs out of five and the mean $K_2$ over the successful runs.}}{table.caption.30}{}}
-\newlabel{tab:reward_ranking@cref}{{[table][13][]13}{[1][20][]22}{}{}{}}
+\newlabel{tab:reward_ranking@cref}{{[table][13][]13}{[1][21][]22}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-E}}Piecewise-Linear Trajectory}{22}{subsection.7.5}\protected@file@percent }
-\newlabel{eq:linear_traj}{{6}{22}{Piecewise-Linear Trajectory}{equation.6}{}}
-\newlabel{eq:linear_traj@cref}{{[equation][6][]6}{[1][22][]22}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {14}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.2, R2.3, A2] Stress tests of the trained policies on the circular trajectory, evaluated without retraining. TRPO and the optimized PPO agent completed all ten runs under every condition. For these two agents, the table gives the mean and the standard deviation of $K_2$ and $K_4$ over the ten runs. For the other default agents, it gives the number of successful runs out of ten.}} {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[A52] ``Parameters $\times 1.5$'' denotes masses, inertias, and joint damping uniformly multiplied by 1.5.}}}}{23}{table.caption.31}\protected@file@percent }
 \newlabel{tab:robustness_eval}{{14}{23}{\hlone {[R2.2, R2.3, A2] Stress tests of the trained policies on the circular trajectory, evaluated without retraining. TRPO and the optimized PPO agent completed all ten runs under every condition. For these two agents, the table gives the mean and the standard deviation of $K_2$ and $K_4$ over the ten runs. For the other default agents, it gives the number of successful runs out of ten.} \hlone {[A52] ``Parameters $\times 1.5$'' denotes masses, inertias, and joint damping uniformly multiplied by 1.5.}}{table.caption.31}{}}
-\newlabel{tab:robustness_eval@cref}{{[table][14][]14}{[1][21][]23}{}{}{}}
+\newlabel{tab:robustness_eval@cref}{{[table][14][]14}{[1][22][]23}{}{}{}}
+\newlabel{eq:linear_traj}{{6}{23}{Piecewise-Linear Trajectory}{equation.6}{}}
+\newlabel{eq:linear_traj@cref}{{[equation][6][]6}{[1][23][]23}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Conclusion}{23}{section.8}\protected@file@percent }
 \newlabel{sec:discussion}{{VIII}{23}{Discussion and Conclusion}{section.8}{}}
 \newlabel{sec:discussion@cref}{{[section][8][]VIII}{[1][23][]23}{}{}{}}
-\citation{b8}
 \newlabel{fig:r_traj_default}{{18a}{24}{PPO (default)}{figure.caption.32}{}}
-\newlabel{fig:r_traj_default@cref}{{[subfigure][1][18]18a}{[1][22][]24}{}{}{}}
+\newlabel{fig:r_traj_default@cref}{{[subfigure][1][18]18a}{[1][23][]24}{}{}{}}
 \newlabel{sub@fig:r_traj_default}{{a}{24}{PPO (default)}{figure.caption.32}{}}
-\newlabel{sub@fig:r_traj_default@cref}{{[subfigure][1][18]18a}{[1][22][]24}{}{}{}}
+\newlabel{sub@fig:r_traj_default@cref}{{[subfigure][1][18]18a}{[1][23][]24}{}{}{}}
 \newlabel{fig:r_traj_opt}{{18b}{24}{PPO (optimized)}{figure.caption.32}{}}
-\newlabel{fig:r_traj_opt@cref}{{[subfigure][2][18]18b}{[1][22][]24}{}{}{}}
+\newlabel{fig:r_traj_opt@cref}{{[subfigure][2][18]18b}{[1][23][]24}{}{}{}}
 \newlabel{sub@fig:r_traj_opt}{{b}{24}{PPO (optimized)}{figure.caption.32}{}}
-\newlabel{sub@fig:r_traj_opt@cref}{{[subfigure][2][18]18b}{[1][22][]24}{}{}{}}
+\newlabel{sub@fig:r_traj_opt@cref}{{[subfigure][2][18]18b}{[1][23][]24}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3] Reference and actual end-effector path on the piecewise-linear reference for one evaluation episode from the nominal initial state. The panels show the only successful run of the default PPO agent (seed 9) and the run of the optimized PPO agent with the median $K_2$ (seed 5).}}}}{24}{figure.caption.32}\protected@file@percent }
 \newlabel{fig:r_trajektorie_xy_compare}{{18}{24}{\hlone {[R2.3] Reference and actual end-effector path on the piecewise-linear reference for one evaluation episode from the nominal initial state. The panels show the only successful run of the default PPO agent (seed 9) and the run of the optimized PPO agent with the median $K_2$ (seed 5).}}{figure.caption.32}{}}
-\newlabel{fig:r_trajektorie_xy_compare@cref}{{[figure][18][]18}{[1][22][]24}{}{}{}}
+\newlabel{fig:r_trajektorie_xy_compare@cref}{{[figure][18][]18}{[1][23][]24}{}{}{}}
 \newlabel{fig:r_basis_default}{{19a}{24}{PPO (default)}{figure.caption.33}{}}
 \newlabel{fig:r_basis_default@cref}{{[subfigure][1][19]19a}{[1][23][]24}{}{}{}}
 \newlabel{sub@fig:r_basis_default}{{a}{24}{PPO (default)}{figure.caption.33}{}}
@@ -292,6 +291,7 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3] Vector part of the base orientation quaternion during the episodes of}} \cref  {fig:r_trajektorie_xy_compare}{\def \textcolor {yellow}{\textcolor {rone}}\texthl  {. The base rotates only about the $z$-axis. The scalar part stays above 0.992 for the default and above 0.999 for the optimized agent.}}}}{24}{figure.caption.33}\protected@file@percent }
 \newlabel{fig:r_basis_orientation_compare}{{19}{24}{\hlone {[R2.3] Vector part of the base orientation quaternion during the episodes of} \cref {fig:r_trajektorie_xy_compare}\hlone {. The base rotates only about the $z$-axis. The scalar part stays above 0.992 for the default and above 0.999 for the optimized agent.}}{figure.caption.33}{}}
 \newlabel{fig:r_basis_orientation_compare@cref}{{[figure][19][]19}{[1][23][]24}{}{}{}}
+\citation{b8}
 \citation{b8}
 \citation{b22,b24,b23,b34}
 \@writefile{lot}{\contentsline {table}{\numberline {15}{\ignorespaces {\def \textcolor {yellow}{\textcolor {rone}}\texthl  {[R2.3] Default PPO agent, optimized PPO agent, and TRPO on the piecewise-linear trajectory. The first row gives the number of successful runs out of ten. All other values are the mean and the standard deviation over the successful runs, which is a single run for the default PPO agent. $K_5$ and $K_6$ are zero for every successful run and are omitted.}}}}{25}{table.caption.34}\protected@file@percent }
@@ -328,13 +328,13 @@
 \bibcite{b25}{26}
 \bibcite{b26}{27}
 \bibcite{b27}{28}
+\@writefile{toc}{\contentsline {section}{REFERENCES}{26}{section*.36}\protected@file@percent }
 \bibcite{b28}{29}
 \bibcite{b2}{30}
 \bibcite{b24}{31}
 \bibcite{b34}{32}
 \bibcite{leutert2024ai}{33}
 \bibcite{muhlbauer2025towards}{34}
-\@writefile{toc}{\contentsline {section}{REFERENCES}{26}{section*.36}\protected@file@percent }
 \bibcite{maqbool2025systems}{35}
 \bibcite{b9}{36}
 \bibcite{b12}{37}
