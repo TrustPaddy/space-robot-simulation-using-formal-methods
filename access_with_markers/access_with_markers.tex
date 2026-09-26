@@ -65,7 +65,7 @@
 \history{Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.}
 \doi{10.1109/ACCESS.2017.DOI}
 
-\title{Benchmarking Deep Reinforcement Learning for Cartesian Path Tracking of Free-Floating Space Robot Manipulators}
+\title{\hlone{[A62] Deep Reinforcement Learning with Runtime Safety Monitoring for Cartesian Path Tracking of Free-Floating Space Robot Manipulators: A Benchmark}}
 \author{\uppercase{Patrick S. Ermisch}\authorrefmark{1}, and 
 \uppercase{Eric Guiffo Kaigom\authorrefmark{1}} }
 \address[1]{Department of Computer Science \& Engineering, Frankfurt University of Applied Sciences,
@@ -83,28 +83,29 @@ Frankfurt am Main, Germany \\(e-mail: steven.ermisch@stud.fra-uas.de, kaigom@fra
 \corresp{Corresponding author: Eric Guiffo Kaigom (e-mail: kaigom@fra-uas.de).}
 
 \begin{abstract}
-\hlone{[R2.1, R2.2, R2.3, A37, A45, A47, A51, A52] Free-floating space robots exhibit a strong dynamic
-coupling between manipulator motion and base attitude, which complicates Cartesian path tracking of the
-end-effector. Labeled on-orbit data for supervised learning are scarce. This work therefore benchmarks six
-reinforcement learning (RL) algorithms (TRPO, TD3, SAC, PPO, PG, and DDPG) for planar Cartesian path
-tracking of a free-floating space robot in a physics-based Simulink/Simscape environment with runtime
-safety monitoring. Each configuration is trained with ten seeds, and success rate and performance of
+\hlone{[R2.1, R2.2, R2.3, A37, A45, A47, A51, A52, A62] The base reaction of free-floating space robots
+(FFSRs) complicates Cartesian path tracking of their end-effector. On-orbit data are scarce, making
+simulation-based control policy training through interaction and task-specific rewards attractive. This
+work benchmarks six deep reinforcement learning algorithms (TRPO, TD3, SAC, PPO, PG, and DDPG) for
+planar Cartesian path tracking of a FFSR in a physics-based Simulink/Simscape environment with runtime
+safety monitoring. Each configuration is trained with ten seeds. Success rate and performance of
 successful runs are evaluated separately with unified metrics. With default hyperparameters, only TRPO
-completes all ten runs without a safety abort, whereas the other agents terminate 40\% to 80\% of their
-evaluation episodes. Even in their successful runs, SAC, DDPG, and TD3 track the path with a
-significantly larger error than TRPO. A tuned PPO configuration also completes all runs and reaches the
-lowest mean squared tracking error (0.0041 compared with 0.0145 for TRPO) in less training time, but
-this difference is not statistically significant. On a piecewise-linear path, its tracking error is
-again lower than that of TRPO, but not significantly after a multiple-comparison correction. Both
-agents complete all runs under observation noise, reduced torque limits, an external joint torque, and
-masses, inertias, and damping uniformly increased by 50\%. All results are obtained in simulation under
-controlled assumptions and do not establish operational readiness. The safety component comprises
-runtime monitors for selected properties and a formal check of the torque saturation, not a formal
-proof of closed-loop safety.}
+completes all ten runs without a safety abort caused by a monitored collision or joint-limit violation,
+whereas other agents terminate 40\% to 80\% of their evaluation episodes. Even in their successful runs,
+SAC, DDPG, and TD3 track the path with a significantly larger error than TRPO. A tuned PPO configuration
+also completes all runs and reaches the lowest mean squared tracking error (0.0041 compared with 0.0145
+for TRPO) in less training time, but this difference is not statistically significant. On a
+piecewise-linear path, its tracking error is again lower than that of TRPO, but not significantly after
+a multiple-comparison correction. Both agents complete all runs under observation noise, reduced torque
+limits, an external joint torque, and masses, inertias, and joint damping uniformly increased by 50\%.
+All results are simulation-based under controlled assumptions and do not establish operational
+readiness. The safety component comprises runtime monitors for selected properties and a check of
+torque saturation, but does not constitute a formal proof of closed-loop safety.}
 \end{abstract}
 \begin{keywords}
 Free-floating on-orbit servicing, Proximal Policy Optimization (PPO), reinforcement learning,
-\hlone{safety monitoring}, space robotics,  trajectory tracking
+\hlone{safety monitoring}, space robotics, trajectory tracking, \hlone{[A62] extended agentic systems
+intelligence (EASI)}
 \end{keywords}
 
 \titlepgskip=-15pt
@@ -119,10 +120,10 @@ Free-floating on-orbit servicing, Proximal Policy Optimization (PPO), reinforcem
 		\centering
 		\includegraphics[width=\linewidth]{Figures/oos1.png}
 	\end{subfigure}
-	\caption{\hlone{[A44] Concept of a hybrid testbed for in-space robotic services. An AI-driven digital twin (left)
-	is linked to the physical setup at Frankfurt University of Applied Sciences (right). This work covers only the
-	simulation side, and the physical setup is intended for future sim-to-real studies. Illustration created with
-	GPT-Image-2 from a photograph of the physical setup.}}
+	\caption{\hlone{[A44, A62] Concept of a hybrid testbed for in-space robotic services. An AI-driven digital
+	twin (left) is linked to the physical setup (right). This work covers only the simulation side, and the
+	physical setup is intended for future sim-to-real studies. Illustration created with GPT-Image-2 from a
+	photograph of the physical setup.}}
 	\label{fig:oos}
 \end{figure}
 
@@ -155,7 +156,8 @@ demonstrated before the physical system is assembled and deployed
 
 
 These challenges motivate the development and simulation of AI-enabled digital twins (DTs)
-\cite{kaigom2025deep}, as illustrated in \cref{fig:oos}. Unlike standard DTs that primarily mirror sensed
+\cite{kaigom2025deep,la2025deep} \hlone{[A62]}, as illustrated in \cref{fig:oos}. Unlike standard DTs that
+primarily mirror sensed
 real-time data from physical counterparts, \hlone{[A53] AI-enabled DTs} combine physics-based simulation with
 learning components to contextualize system states and evaluate representative operating conditions.
 \hlone{[A53] Such conditions can include} uncertain dynamics, disturbances, faults, and contact-rich
@@ -274,7 +276,8 @@ The main contributions of this work are summarized as follows:
  \cite{b7}.
  \item \textit{Optimization of the PPO agent.} \hlone{[R2.3] The default PPO agent succeeded in only three
  of ten runs, but its successful runs tracked the path with an error similar to that of TRPO. PPO is
- therefore tuned to reduce this seed dependence.} \hlone{[A14] Hyperparameters such as the learning rates,
+ therefore tuned} \hlone{[A62] to assess whether more conservative update settings reduce this seed
+ dependence.} \hlone{[A14] Hyperparameters such as the learning rates,
  the rollout horizon, the mini-batch size, and the entropy weight are adjusted. The hidden layers of the
  default networks are kept,} \hlone{[A49] but the mean output of the policy is not bounded by a tanh
  layer.} \hlone{[R2.3, R2.5, A47] The tuned agent completes all ten runs without an observed violation of
@@ -373,12 +376,13 @@ formally}.
 \noindent
 \subsection{Advantages of AI-Endowed Digital Twin Technology in On-Orbit Servicing}
 
-AI-driven DTs have been applied in on-orbit servicing, for example for the automated lifecycle management of
-satellites and for the orchestration of agents that carry out assembly, integration, and testing tasks
-\cite{leutert2024ai,muhlbauer2025towards}. DTs combine contextualized real-time sensor data with AI methods that
-account for uncertainty. This allows simulation-based analysis under various operational conditions at reduced
-cost. Verification and validation can also benefit, because changes in system design or operational scenarios can
-be described in scenario spaces and linked to DTs \cite{maqbool2025systems}.
+AI-driven DTs have been applied in on-orbit servicing, for example for the automated lifecycle management
+of satellites and for the orchestration of agents that carry out assembly, integration, and testing tasks
+\cite{leutert2024ai,muhlbauer2025towards,kaigom2020value,kaigom2023metarobotics} \hlone{[A62]}. DTs
+combine contextualized real-time sensor data with AI methods that account for uncertainty. This allows
+simulation-based analysis under various operational conditions at reduced cost. Verification and
+validation can also benefit, because changes in system design or operational scenarios can be described
+in scenario spaces and linked to DTs \cite{maqbool2025systems}.
 
 \hlone{[A53] In this work, the DT covers only the chaser space robot. A target satellite and the contact
 with it are not modeled. The DT is based on an information model that consists of the URDF description of
@@ -1927,8 +1931,13 @@ testbeds for space robotics.
 
 \section{Discussion and Conclusion}\label{sec:discussion} This work investigated continuous-action deep
 RL for the control of a free-floating space robotic arm, with a focus on control performance and the
-monitored safety properties. The results show that an RL-based controller can perform the considered
-manipulation task in the simulated space environment under the stated assumptions. \hlone{[R2.3] With the
+monitored safety properties. \hlone{[A62] The main observation is that no RL algorithm is universally
+superior. The benchmark indicates that bounding the size of policy updates is important when Cartesian
+tracking, stabilization of the base attitude, and constraint satisfaction are coupled in a free-floating
+robot system.}
+
+The results show that an RL-based controller can perform the \hlone{[A62] desired} manipulation task in
+the simulated space environment under the \hlone{considered} assumptions. \hlone{[R2.3] With the
 toolbox default hyperparameters, the agents differed more in how often training succeeded than in the
 performance of their successful runs. TRPO completed all ten runs, whereas the other default agents
 terminated 40.0\% to 80.0\% of their evaluation episodes. The tuned PPO agent also completed all runs. It
@@ -1983,15 +1992,20 @@ task-specific and may require re-tuning for different trajectories or mission sc
 was selected in an earlier grid search with a single run per candidate.} \hlone{[A49] It also differs from
 the default agent in the output layer of the policy mean, which has no tanh bound, and the effects of the
 two changes were not separated.} \hlone{[A43] The other algorithms were compared only with their toolbox
-default hyperparameters, and tuning them might change their ranking.} \hlone{[R2.3] Third, the}
+default hyperparameters, and tuning them might change their ranking.}
+
+\hlone{[R2.3] Third, the}
 \emph{evaluation scope} \hlone{is limited. Each configuration was trained with ten seeds and evaluated on
 31 initial states within $\pm 1^\circ$ of the nominal pose, for a single robot model and two reference
 paths.} \hlone{[A51] Both paths lie in one plane, and all joint axes are parallel, so the task is planar
 and the base rotates about a single axis. Out-of-plane motion and three-axis base rotation were not
 tested.} \hlone{[R2.3] Ten runs per configuration allow only coarse estimates of the success rate, and the
 KPIs of agents with few successful runs rest on two to four runs. The stress tests cover a small set of
-perturbations. The reported ranking and improvements are therefore conditional on the tested setup.
-Fourth}, the \emph{state representation} was manually designed. Learned representations or recurrent
+perturbations. The reported ranking and improvements are therefore conditional on the tested setup.}
+\hlone{[A62] The comparison is mainly evidence of how robust training is to the choice of seed in this
+setup. It is not a definitive ranking of all considered RL algorithms.}
+
+\hlone{Fourth}, the \emph{state representation} was manually designed. Learned representations or recurrent
 architectures (LSTM) might improve performance under partial observability. \hlone{[R2.1] Fifth}, the
 \emph{safety monitoring} \hlone{covers selected properties (collision events, joint limits, torque bound,
 and momentum consistency).} \hlone{[A45] Only the torque bound of the actuation path is checked formally,
@@ -2108,6 +2122,10 @@ robot with base disturbance minimization,'' in \emph{Proc. 11th Symp. Adv. Space
 E. Guiffo Kaigom, ``Deep generative and discriminative digital twin endowed with variational autoencoder for
 unsupervised predictive thermal condition monitoring of physical robots in Industry 6.0 and Society 6.0,''
 \emph{IFAC-PapersOnLine}, vol.~59, pp. 7--12, 2025.
+
+\bibitem{la2025deep}
+\hlone{[A62] T. K. La and E. Guiffo Kaigom, ``Deep learning for model-free prediction of thermal states of
+robot joint motors,'' \emph{IFAC-PapersOnLine}, vol.~59, no.~18, pp. 211--216, 2025.}
 
 \bibitem{huang2023obstacle} Z. Huang, G. Chen, Y. Shen, R. Wang, C. Liu, and L. Zhang, ``An
 obstacle-avoidance motion planning method for redundant space robot via reinforcement learning,''
@@ -2260,6 +2278,14 @@ for robotic small satellite production,'' \emph{Acta Astronaut.}, vol.~217, pp. 
 \bibitem{muhlbauer2025towards} M. M{\"u}hlbauer \emph{et al.}, ``Towards an in-orbit cubesat factory,''
 in \emph{Proc. 76th Int. Astronaut. Congr. (IAC)}, 2025.
 
+\bibitem{kaigom2020value}
+\hlone{[A62] E. Guiffo Kaigom and J. Roßmann, ``Value-driven robotic digital twins in cyber--physical
+applications,'' \emph{IEEE Trans. Ind. Informat.}, vol.~17, no.~5, pp. 3609--3619, 2021.}
+
+\bibitem{kaigom2023metarobotics}
+\hlone{[A62] E. Guiffo Kaigom, ``Metarobotics for industry and society: Vision, technologies, and
+opportunities,'' \emph{IEEE Trans. Ind. Informat.}, vol.~20, no.~4, pp. 5725--5736, 2024.}
+
 
 
 \bibitem{maqbool2025systems}
@@ -2372,8 +2398,9 @@ he led the ``Intelligent Robots'' team and coordinated technology development an
 partners in robotics-based manufacturing and on-orbit servicing, including projects funded under the European Union's
 Horizon 2020 and In-Space Automation programs. He then worked in industry as Head of
 Emerging Technologies. Dr. Kaigom is currently a Full Professor with Frankfurt University of Applied
-Sciences, Germany. His research interests include robotics, digital twins, and artificial intelligence $\slash$ machine
-learning. 
+Sciences, Germany. He serves the academic community as an Associate Editor. His current research
+interests include robotics, digital twins, agentic systems, and AI $\slash$ ML.
+% [A62] Biography updated (Associate Editor, research interests). \hl cannot be used inside IEEEbiography.
 \end{IEEEbiography}
 
 \EOD

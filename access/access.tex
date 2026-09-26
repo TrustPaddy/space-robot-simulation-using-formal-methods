@@ -77,11 +77,28 @@ Frankfurt am Main, Germany \\(e-mail: steven.ermisch@stud.fra-uas.de, kaigom@fra
 \corresp{Corresponding author: Eric Guiffo Kaigom (e-mail: kaigom@fra-uas.de).}
 
 \begin{abstract}
-The base reaction of free-floating space robots (FFSRs) complicates Cartesian path tracking of their end-effector. On-orbit data are scarce, making simulation-based control policy training through interaction and task-specific rewards attractive. This work benchmarks six deep reinforcement learning algorithms (TRPO, TD3, SAC, PPO, PG, and DDPG) for planar Cartesian path tracking of a FFSR in a physics-based Simulink/Simscape environment with runtime safety monitoring. Each configuration is trained with ten seeds. Success rate and performance of successful runs are evaluated separately with unified metrics. With default hyperparameters, only TRPO completes all ten runs without a safety abort caused by a monitored collision or joint-limit violation, whereas other agents terminate 40\% to 80\% of their evaluation episodes. Even in their successful runs, SAC, DDPG, and TD3 track the path with a significantly larger error than TRPO. A tuned PPO configuration also completes all runs and reaches the lowest mean squared tracking error (0.0041 compared with 0.0145 for TRPO) in less training time, but this difference is not statistically significant. On a piecewise-linear path, its tracking error is again lower than that of TRPO, but not significantly after a multiple-comparison correction. Both agents complete all runs under observation noise, reduced torque limits, an external joint torque, and masses, inertias, and joint damping uniformly increased by 50\%. All results are simulation-based under controlled assumptions and do not establish operational readiness. The safety component comprises runtime monitors for selected properties and a check of torque saturation, but does not constitute a formal proof of closed-loop safety.
+The base reaction of free-floating space robots (FFSRs) complicates Cartesian path tracking of their
+end-effector. On-orbit data are scarce, making simulation-based control policy training through
+interaction and task-specific rewards attractive. This work benchmarks six deep reinforcement learning
+algorithms (TRPO, TD3, SAC, PPO, PG, and DDPG) for planar Cartesian path tracking of a FFSR in a
+physics-based Simulink/Simscape environment with runtime safety monitoring. Each configuration is
+trained with ten seeds. Success rate and performance of successful runs are evaluated separately with
+unified metrics. With default hyperparameters, only TRPO completes all ten runs without a safety abort
+caused by a monitored collision or joint-limit violation, whereas other agents terminate 40\% to 80\% of
+their evaluation episodes. Even in their successful runs, SAC, DDPG, and TD3 track the path with a
+significantly larger error than TRPO. A tuned PPO configuration also completes all runs and reaches the
+lowest mean squared tracking error (0.0041 compared with 0.0145 for TRPO) in less training time, but
+this difference is not statistically significant. On a piecewise-linear path, its tracking error is
+again lower than that of TRPO, but not significantly after a multiple-comparison correction. Both
+agents complete all runs under observation noise, reduced torque limits, an external joint torque, and
+masses, inertias, and joint damping uniformly increased by 50\%. All results are simulation-based under
+controlled assumptions and do not establish operational readiness. The safety component comprises
+runtime monitors for selected properties and a check of torque saturation, but does not constitute a
+formal proof of closed-loop safety.
 \end{abstract}
 \begin{keywords}
 Free-floating on-orbit servicing, Proximal Policy Optimization (PPO), reinforcement learning,
-safety monitoring, space robotics,  trajectory tracking, extended agentic systems intelligence (easi)
+safety monitoring, space robotics, trajectory tracking, extended agentic systems intelligence (EASI)
 \end{keywords}
 
 \titlepgskip=-15pt
@@ -96,10 +113,10 @@ safety monitoring, space robotics,  trajectory tracking, extended agentic system
 		\centering
 		\includegraphics[width=\linewidth]{Figures/oos1.png}
 	\end{subfigure}
-	\caption{Concept of a hybrid testbed for in-space robotic services. An AI-driven digital twin (left) is linked
-	to the physical setup (right). This work covers only the simulation
-	side, and the physical setup is intended for future sim-to-real studies. Illustration created with GPT-Image-2
-	from a photograph of the physical setup.}
+	\caption{Concept of a hybrid testbed for in-space robotic services. An AI-driven digital twin (left) is
+	linked to the physical setup (right). This work covers only the simulation side, and the physical setup
+	is intended for future sim-to-real studies. Illustration created with GPT-Image-2 from a photograph of
+	the physical setup.}
 	\label{fig:oos}
 \end{figure}
 
@@ -246,11 +263,12 @@ The main contributions of this work are summarized as follows:
  disturbance and violations of the monitored constraints \cite{b7}.
  \item \textit{Optimization of the PPO agent.} The default PPO agent succeeded in only three of ten runs,
  but its successful runs tracked the path with an error similar to that of TRPO. PPO is therefore tuned
- to reduce this seed dependence. The optimized PPO agent is therefore used to assess whether conservative update settings can reduce the dependence of PPO on seed. Hyperparameters such as the learning rates, the rollout horizon, the
- mini-batch size, and the entropy weight are adjusted. The hidden layers of the default networks are
- kept, but the mean output of the policy is not bounded by a tanh layer. The tuned agent completes all
- ten runs without an observed violation of the monitored properties. On the circular path, it reaches the
- lowest mean tracking error in the benchmark, although the difference from TRPO is not significant.
+ to assess whether more conservative update settings reduce this seed dependence. Hyperparameters such
+ as the learning rates, the rollout horizon, the mini-batch size, and the entropy weight are adjusted.
+ The hidden layers of the default networks are kept, but the mean output of the policy is not bounded
+ by a tanh layer. The tuned agent completes all ten runs without an observed violation of the monitored
+ properties. On the circular path, it reaches the lowest mean tracking error in the benchmark, although
+ the difference from TRPO is not significant.
 \end{itemize}
 
 Within the considered simulation setup, TRPO and the tuned PPO agent completed
@@ -343,12 +361,13 @@ evaluation loop. The torque bound of the actuation path is additionally checked 
 \noindent
 \subsection{Advantages of AI-Endowed Digital Twin Technology in On-Orbit Servicing}
 
-AI-driven DTs have been applied in on-orbit servicing, for example for the automated lifecycle management of
-satellites and for the orchestration of agents that carry out assembly, integration, and testing tasks
-\cite{leutert2024ai,muhlbauer2025towards,kaigom2020value,kaigom2023metarobotics}. DTs combine contextualized real-time sensor data with AI methods that
-account for uncertainty. This allows simulation-based analysis under various operational conditions at reduced
-cost. Verification and validation can also benefit, because changes in system design or operational scenarios can
-be described in scenario spaces and linked to DTs \cite{maqbool2025systems}.
+AI-driven DTs have been applied in on-orbit servicing, for example for the automated lifecycle management
+of satellites and for the orchestration of agents that carry out assembly, integration, and testing tasks
+\cite{leutert2024ai,muhlbauer2025towards,kaigom2020value,kaigom2023metarobotics}. DTs combine
+contextualized real-time sensor data with AI methods that account for uncertainty. This allows
+simulation-based analysis under various operational conditions at reduced cost. Verification and
+validation can also benefit, because changes in system design or operational scenarios can be described
+in scenario spaces and linked to DTs \cite{maqbool2025systems}.
 
 In this work, the DT covers only the chaser space robot. A target satellite and the contact with it are
 not modeled. The DT is based on an information model that consists of the URDF description of the robot
@@ -1874,17 +1893,20 @@ testbeds for space robotics.
 
 \section{Discussion and Conclusion}\label{sec:discussion} This work investigated continuous-action deep
 RL for the control of a free-floating space robotic arm, with a focus on control performance and the
-monitored safety properties. The main observation is that no RL algorithm is universally superior. The benchmark indicates that bounding the size of policy updates is important when Cartesian tracking, stabilization of the base attitude, and constraint satisfaction are coupled in a free-floating robot system.
+monitored safety properties. The main observation is that no RL algorithm is universally superior. The
+benchmark indicates that bounding the size of policy updates is important when Cartesian tracking,
+stabilization of the base attitude, and constraint satisfaction are coupled in a free-floating robot
+system.
 
-The results show that an RL-based controller can perform the desired
-manipulation task in the simulated space environment under the considered assumptions. With the
-toolbox default hyperparameters, the agents differed more in how often training succeeded than in the
-performance of their successful runs. TRPO completed all ten runs, whereas the other default agents
-terminated 40.0\% to 80.0\% of their evaluation episodes. The tuned PPO agent also completed all runs. It
-reached a mean squared tracking error of $K_2 = 0.0041$, compared with 0.0145 for TRPO and 0.0134 for the
-successful runs of the default PPO agent. Its advantage over TRPO was not statistically significant, but
-it trained faster. No violations of the monitored safety properties were recorded for TRPO and the tuned
-PPO agent in any evaluation episode.
+The results show that an RL-based controller can perform the desired manipulation task in the simulated
+space environment under the considered assumptions. With the toolbox default hyperparameters, the agents
+differed more in how often training succeeded than in the performance of their successful runs. TRPO
+completed all ten runs, whereas the other default agents terminated 40.0\% to 80.0\% of their evaluation
+episodes. The tuned PPO agent also completed all runs. It reached a mean squared tracking error of
+$K_2 = 0.0041$, compared with 0.0145 for TRPO and 0.0134 for the successful runs of the default PPO
+agent. Its advantage over TRPO was not statistically significant, but it trained faster. No violations
+of the monitored safety properties were recorded for TRPO and the tuned PPO agent in any evaluation
+episode.
 
 An additional evaluation on a piecewise-linear end-effector reference tested whether the configurations
 carry over to a different path. With the same hyperparameters and reward weights, the optimized PPO agent
@@ -1930,26 +1952,27 @@ task-specific and may require re-tuning for different trajectories or mission sc
 in an earlier grid search with a single run per candidate. It also differs from the default agent in the
 output layer of the policy mean, which has no tanh bound, and the effects of the two changes were not
 separated. The other algorithms were compared only with their toolbox default hyperparameters, and
-tuning them might change their ranking. 
+tuning them might change their ranking.
 
-Third, the \emph{evaluation scope} is limited. Each
-configuration was trained with ten seeds and evaluated on 31 initial states within $\pm 1^\circ$ of the
-nominal pose, for a single robot model and two reference paths. Both paths lie in one plane, and all
-joint axes are parallel, so the task is planar and the base rotates about a single axis. Out-of-plane
-motion and three-axis base rotation were not tested. Ten runs per configuration allow only coarse
-estimates of the success rate, and the KPIs of agents with few successful runs rest on two to four runs.
-The stress tests cover a small set of perturbations. The reported ranking and improvements are therefore
-conditional on the tested setup. The comparison should therefore be understood primarily as evidence of training robustness that depends on seed under the tested setup. It is not a definitive ranking of all considered RL algorithms. 
+Third, the \emph{evaluation scope} is limited. Each configuration was trained with ten seeds and
+evaluated on 31 initial states within $\pm 1^\circ$ of the nominal pose, for a single robot model and
+two reference paths. Both paths lie in one plane, and all joint axes are parallel, so the task is planar
+and the base rotates about a single axis. Out-of-plane motion and three-axis base rotation were not
+tested. Ten runs per configuration allow only coarse estimates of the success rate, and the KPIs of
+agents with few successful runs rest on two to four runs. The stress tests cover a small set of
+perturbations. The reported ranking and improvements are therefore conditional on the tested setup.
+The comparison is mainly evidence of how robust training is to the choice of seed in this setup. It is
+not a definitive ranking of all considered RL algorithms.
 
-Fourth, the \emph{state representation} was manually designed. Learned
-representations or recurrent architectures (LSTM) might improve performance under partial
-observability. Fifth, the \emph{safety monitoring} covers selected properties (collision events, joint
-limits, torque bound, and momentum consistency). Only the torque bound of the actuation path is checked
-formally, and the other properties are monitored at runtime. The safety components do not constitute a
-formal proof of closed-loop stability, task completion, or collision avoidance for the full nonlinear
-model, nor an exhaustive formal verification of the mission. Finally, \emph{no hardware testing} was
-performed. Real-time computation limits, communication delays, and physical interactions remain to be
-validated on physical testbeds.
+Fourth, the \emph{state representation} was manually designed. Learned representations or recurrent
+architectures (LSTM) might improve performance under partial observability. Fifth, the \emph{safety
+monitoring} covers selected properties (collision events, joint limits, torque bound, and momentum
+consistency). Only the torque bound of the actuation path is checked formally, and the other properties
+are monitored at runtime. The safety components do not constitute a formal proof of closed-loop
+stability, task completion, or collision avoidance for the full nonlinear model, nor an exhaustive
+formal verification of the mission. Finally, \emph{no hardware testing} was performed. Real-time
+computation limits, communication delays, and physical interactions remain to be validated on physical
+testbeds.
 
 Future work could address these limitations in four directions. The first is domain randomization over
 simulation parameters and latency injection to improve the sim-to-real transfer~\cite{b8} (see
@@ -2058,11 +2081,9 @@ E. Guiffo Kaigom, ``Deep generative and discriminative digital twin endowed with
 unsupervised predictive thermal condition monitoring of physical robots in Industry 6.0 and Society 6.0,''
 \emph{IFAC-PapersOnLine}, vol.~59, pp. 7--12, 2025.
 
-\bibitem{la2025deep}La, T. \& Kaigom, E. Deep learning for model-free prediction of thermal states of robot joint motors. {\em IFAC-PapersOnLine}. 211-216 (2025)
-
-\bibitem{kaigom2020value}Kaigom, E. \& Roßmann, J. Value-driven robotic digital twins in cyber–physical applications. {\em IEEE Transactions On Industrial Informatics}. 3609-3619 (2020)
-
-\bibitem{kaigom2023metarobotics}Kaigom, E. Metarobotics for industry and society: Vision, technologies, and opportunities. {\em IEEE Transactions On Industrial Informatics}.  5725-5736 (2023)
+\bibitem{la2025deep}
+T. K. La and E. Guiffo Kaigom, ``Deep learning for model-free prediction of thermal states of robot joint
+motors,'' \emph{IFAC-PapersOnLine}, vol.~59, no.~18, pp. 211--216, 2025.
 
 \bibitem{huang2023obstacle} Z. Huang, G. Chen, Y. Shen, R. Wang, C. Liu, and L. Zhang, ``An
 obstacle-avoidance motion planning method for redundant space robot via reinforcement learning,''
@@ -2215,6 +2236,14 @@ for robotic small satellite production,'' \emph{Acta Astronaut.}, vol.~217, pp. 
 \bibitem{muhlbauer2025towards} M. M{\"u}hlbauer \emph{et al.}, ``Towards an in-orbit cubesat factory,''
 in \emph{Proc. 76th Int. Astronaut. Congr. (IAC)}, 2025.
 
+\bibitem{kaigom2020value}
+E. Guiffo Kaigom and J. Roßmann, ``Value-driven robotic digital twins in cyber--physical applications,''
+\emph{IEEE Trans. Ind. Informat.}, vol.~17, no.~5, pp. 3609--3619, 2021.
+
+\bibitem{kaigom2023metarobotics}
+E. Guiffo Kaigom, ``Metarobotics for industry and society: Vision, technologies, and opportunities,''
+\emph{IEEE Trans. Ind. Informat.}, vol.~20, no.~4, pp. 5725--5736, 2024.
+
 
 
 \bibitem{maqbool2025systems}
@@ -2328,7 +2357,8 @@ he led the ``Intelligent Robots'' team and coordinated technology development an
 partners in robotics-based manufacturing and on-orbit servicing, including projects funded under the European Union's
 Horizon 2020 and In-Space Automation programs. He then worked in industry as Head of
 Emerging Technologies. Dr. Kaigom is currently a Full Professor with Frankfurt University of Applied
-Sciences, Germany. He serves the academic community as an Associate Editor. His current research interests include robotics, digital twins, agentic systems, and AI $\slash$ ML. 
+Sciences, Germany. He serves the academic community as an Associate Editor. His current research
+interests include robotics, digital twins, agentic systems, and AI $\slash$ ML.
 \end{IEEEbiography}
 
 \EOD
