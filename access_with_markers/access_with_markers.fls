@@ -341,6 +341,11 @@ INPUT c:/texlive/2025/texmf-dist/tex/latex/psnfss/t1pcr.fd
 INPUT c:/texlive/2025/texmf-dist/tex/latex/psnfss/t1pcr.fd
 INPUT c:/texlive/2025/texmf-dist/tex/latex/psnfss/t1pcr.fd
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/adobe/courier/pcrr8t.tfm
+INPUT ../notaglinelogo.png
+INPUT ../notaglinelogo.png
+INPUT ../notaglinelogo.png
+INPUT c:/texlive/2025/texmf-dist/fonts/vf/adobe/courier/pcrr8t.vf
+INPUT c:/texlive/2025/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
@@ -354,11 +359,6 @@ INPUT c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
-INPUT ../notaglinelogo.png
-INPUT ../notaglinelogo.png
-INPUT ../notaglinelogo.png
-INPUT c:/texlive/2025/texmf-dist/fonts/vf/adobe/courier/pcrr8t.vf
-INPUT c:/texlive/2025/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
 INPUT ../notaglinelogo.png
 INPUT ../notaglinelogo.png
 INPUT ../notaglinelogo.png

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.2.3)  26 SEP 2026 20:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.2.3)  26 SEP 2026 20:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -708,6 +708,13 @@ File: ../Figures/oos1.png Graphic file (type png)
 Package pdftex.def Info: ../Figures/oos1.png  used on input line 121.
 (pdftex.def)             Requested size: 240.24814pt x 180.17023pt.
 
+Underfull \vbox (badness 1968) has occurred while \output is active []
+
+
+Underfull \vbox (badness 1975) has occurred while \output is active []
+
+
+
 Package xcolor Warning: Incompatible color definition on input line 156.
 
 <../Logo.png, id=114, 206.27063pt x 53.44969pt>
@@ -744,10 +751,10 @@ Underfull \hbox (badness 1735) in paragraph at lines 182--182
 position/attitude; pos./ori.=position/orientation; EE=end-
  []
 
-<../notaglineLogo.png, id=164, 169.38281pt x 42.91031pt>
+<../notaglineLogo.png, id=160, 169.38281pt x 42.91031pt>
 File: ../notaglineLogo.png Graphic file (type png)
 <use ../notaglineLogo.png>
-Package pdftex.def Info: ../notaglineLogo.png  used on input line 277.
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 267.
 (pdftex.def)             Requested size: 91.32pt x 23.1352pt.
 
 Overfull \hbox (505.12177pt too wide) has occurred while \output is active
@@ -774,15 +781,9 @@ Package xcolor Warning: Incompatible color definition on input line 300.
 
 Package xcolor Warning: Incompatible color definition on input line 302.
 
-
-Package xcolor Warning: Incompatible color definition on input line 313.
-
-
-Underfull \vbox (badness 4144) has occurred while \output is active []
-
 File: ../notaglineLogo.png Graphic file (type png)
 <use ../notaglineLogo.png>
-Package pdftex.def Info: ../notaglineLogo.png  used on input line 323.
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 312.
 (pdftex.def)             Requested size: 91.32pt x 23.1352pt.
 
 Overfull \hbox (505.12177pt too wide) has occurred while \output is active
@@ -801,6 +802,9 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [3]
 
+Package xcolor Warning: Incompatible color definition on input line 313.
+
+
 Package xcolor Warning: Incompatible color definition on input line 324.
 
 
@@ -812,13 +816,13 @@ Package xcolor Warning: Incompatible color definition on input line 343.
 
 Package xcolor Warning: Incompatible color definition on input line 356.
 
-<../Figures/ref_kreisbahn_2.png, id=234, 1077.02374pt x 722.7pt>
+<../Figures/ref_kreisbahn_2.png, id=233, 1077.02374pt x 722.7pt>
 File: ../Figures/ref_kreisbahn_2.png Graphic file (type png)
 <use ../Figures/ref_kreisbahn_2.png>
 Package pdftex.def Info: ../Figures/ref_kreisbahn_2.png  used on input line 366
 .
 (pdftex.def)             Requested size: 227.30324pt x 152.52135pt.
-<../Figures/ref_kreisbahn_3.png, id=235, 1077.02374pt x 722.7pt>
+<../Figures/ref_kreisbahn_3.png, id=234, 1077.02374pt x 722.7pt>
 File: ../Figures/ref_kreisbahn_3.png Graphic file (type png)
 <use ../Figures/ref_kreisbahn_3.png>
 Package pdftex.def Info: ../Figures/ref_kreisbahn_3.png  used on input line 371
@@ -827,7 +831,7 @@ Package pdftex.def Info: ../Figures/ref_kreisbahn_3.png  used on input line 371
 
 Package xcolor Warning: Incompatible color definition on input line 377.
 
-<../Figures/Spacerobot_slx.pdf, id=241, 776.9025pt x 430.60875pt>
+<../Figures/Spacerobot_slx.pdf, id=240, 776.9025pt x 430.60875pt>
 File: ../Figures/Spacerobot_slx.pdf Graphic file (type pdf)
 <use ../Figures/Spacerobot_slx.pdf>
 Package pdftex.def Info: ../Figures/Spacerobot_slx.pdf  used on input line 403.
@@ -845,12 +849,9 @@ Package xcolor Warning: Incompatible color definition on input line 413.
 LaTeX Font Warning: Font shape `T1/pcr/n/n' undefined
 (Font)              using `T1/pcr/m/n' instead on input line 417.
 
-
-Package xcolor Warning: Incompatible color definition on input line 444.
-
 File: ../notaglineLogo.png Graphic file (type png)
 <use ../notaglineLogo.png>
-Package pdftex.def Info: ../notaglineLogo.png  used on input line 452.
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 420.
 (pdftex.def)             Requested size: 91.32pt x 23.1352pt.
 
 Overfull \hbox (505.12177pt too wide) has occurred while \output is active
@@ -868,8 +869,8 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  []
 
 [4]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
+Package xcolor Warning: Incompatible color definition on input line 444.
 
 
 LaTeX Font Warning: Font shape `T1/ptm/n/it' undefined
@@ -986,6 +987,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 570.
 
+
+Underfull \vbox (badness 1496) has occurred while \output is active []
+
 File: ../notaglineLogo.png Graphic file (type png)
 <use ../notaglineLogo.png>
 Package pdftex.def Info: ../notaglineLogo.png  used on input line 579.
@@ -1007,8 +1011,6 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [7 <../Figures/spacerobot_slx_robot.pdf> <../Figures/spacerobot_slx_reference.p
 df>]
-Underfull \vbox (badness 1024) has occurred while \output is active []
-
 File: ../notaglineLogo.png Graphic file (type png)
 <use ../notaglineLogo.png>
 Package pdftex.def Info: ../notaglineLogo.png  used on input line 688.
@@ -1740,7 +1742,7 @@ Package rerunfilecheck Info: File `access_with_markers.out' has not changed.
 Here is how much of TeX's memory you used:
  16539 strings out of 467533
  278591 string characters out of 5423669
- 944723 words of memory out of 5000000
+ 944773 words of memory out of 5000000
  45042 multiletter control sequences out of 15000+600000
  736564 words of font info for 204 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1779,7 +1781,7 @@ ist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1
 uhvr8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/tex
 live/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2025/texmf-di
 st/fonts/type1/urw/times/utmri8a.pfb>
-Output written on access_with_markers.pdf (27 pages, 6942718 bytes).
+Output written on access_with_markers.pdf (27 pages, 6943055 bytes).
 PDF statistics:
  1155 PDF objects out of 1200 (max. 8388607)
  886 compressed objects within 9 object streams
