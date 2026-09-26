@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.2.3)  26 SEP 2026 20:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.2.3)  26 SEP 2026 21:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1697,19 +1697,19 @@ ine 2369.
 <../Figures/egk.jpg, id=962, 138.2766pt x 153.6942pt>
 File: ../Figures/egk.jpg Graphic file (type jpg)
 <use ../Figures/egk.jpg>
-Package pdftex.def Info: ../Figures/egk.jpg  used on input line 2392.
+Package pdftex.def Info: ../Figures/egk.jpg  used on input line 2390.
 (pdftex.def)             Requested size: 72.27136pt x 80.32948pt.
 File: ../Figures/egk.jpg Graphic file (type jpg)
 <use ../Figures/egk.jpg>
-Package pdftex.def Info: ../Figures/egk.jpg  used on input line 2392.
+Package pdftex.def Info: ../Figures/egk.jpg  used on input line 2390.
 (pdftex.def)             Requested size: 72.27136pt x 80.32948pt.
 File: ../bullet.png Graphic file (type png)
 <use ../bullet.png>
-Package pdftex.def Info: ../bullet.png  used on input line 2404.
+Package pdftex.def Info: ../bullet.png  used on input line 2402.
 (pdftex.def)             Requested size: 5.0pt x 14.6871pt.
 File: ../notaglineLogo.png Graphic file (type png)
 <use ../notaglineLogo.png>
-Package pdftex.def Info: ../notaglineLogo.png  used on input line 2415.
+Package pdftex.def Info: ../notaglineLogo.png  used on input line 2413.
 (pdftex.def)             Requested size: 91.32pt x 23.1352pt.
 
 Overfull \hbox (505.12177pt too wide) has occurred while \output is active
@@ -1742,7 +1742,7 @@ Package rerunfilecheck Info: File `access_with_markers.out' has not changed.
 Here is how much of TeX's memory you used:
  16539 strings out of 467533
  278591 string characters out of 5423669
- 944773 words of memory out of 5000000
+ 945768 words of memory out of 5000000
  45042 multiletter control sequences out of 15000+600000
  736564 words of font info for 204 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1781,7 +1781,7 @@ ist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1
 uhvr8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/tex
 live/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2025/texmf-di
 st/fonts/type1/urw/times/utmri8a.pfb>
-Output written on access_with_markers.pdf (27 pages, 6943055 bytes).
+Output written on access_with_markers.pdf (27 pages, 6943287 bytes).
 PDF statistics:
  1155 PDF objects out of 1200 (max. 8388607)
  886 compressed objects within 9 object streams
