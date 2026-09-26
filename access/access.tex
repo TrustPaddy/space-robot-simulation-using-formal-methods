@@ -71,8 +71,8 @@ Frankfurt am Main, Germany \\(e-mail: steven.ermisch@stud.fra-uas.de, kaigom@fra
 %\tfootnote{This paragraph of the first footnote will contain support  information, including sponsor and financial support acknowledgment. For example, ``This work was supported in part by the U.S. Department of Commerce under Grant BS123456.''}
 
 \markboth
-{P. S. Ermisch and E. G. Kaigom: Benchmarking Deep RL for Free-Floating Space Robot Manipulators}
-{P. S. Ermisch and E. G. Kaigom: Benchmarking Deep RL for Free-Floating Space Robot Manipulators}
+{P. S. Ermisch and E. G. Kaigom: Deep RL with Runtime Safety Monitoring for Free-Floating Space Manipulators}
+{P. S. Ermisch and E. G. Kaigom: Deep RL with Runtime Safety Monitoring for Free-Floating Space Manipulators}
 
 \corresp{Corresponding author: Eric Guiffo Kaigom (e-mail: kaigom@fra-uas.de).}
 
@@ -80,7 +80,7 @@ Frankfurt am Main, Germany \\(e-mail: steven.ermisch@stud.fra-uas.de, kaigom@fra
 The base reaction of free-floating space robots (FFSRs) complicates Cartesian path tracking of their
 end-effector. On-orbit data are scarce, making simulation-based control policy training through
 interaction and task-specific rewards attractive. This work benchmarks six deep reinforcement learning
-algorithms (TRPO, TD3, SAC, PPO, PG, and DDPG) for planar Cartesian path tracking of a FFSR in a
+algorithms (TRPO, TD3, SAC, PPO, PG, and DDPG) for planar Cartesian path tracking of an FFSR in a
 physics-based Simulink/Simscape environment with runtime safety monitoring. Each configuration is
 trained with ten seeds. Success rate and performance of successful runs are evaluated separately with
 unified metrics. With default hyperparameters, only TRPO completes all ten runs without a safety abort
@@ -93,8 +93,8 @@ again lower than that of TRPO, but not significantly after a multiple-comparison
 agents complete all runs under observation noise, reduced torque limits, an external joint torque, and
 masses, inertias, and joint damping uniformly increased by 50\%. All results are simulation-based under
 controlled assumptions and do not establish operational readiness. The safety component comprises
-runtime monitors for selected properties and a check of torque saturation, but does not constitute a
-formal proof of closed-loop safety.
+runtime monitors for selected properties and a formal check of torque saturation, but is not a formal
+proof of closed-loop safety.
 \end{abstract}
 \begin{keywords}
 Free-floating on-orbit servicing, Proximal Policy Optimization (PPO), reinforcement learning,
