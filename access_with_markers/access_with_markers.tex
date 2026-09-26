@@ -920,12 +920,11 @@ deviations may arise from time-integration errors. A persistent, systematic drif
 would indicate an unintended external force or a modeling error, such as an unmodeled constraint.
 \cref{fig:impulserhaltung_scope} shows $p_{\mathrm{tot}}$ for an evaluation episode of the
 optimized PPO agent from the nominal initial state. An offset of $2.7 \times 10^{-7}\,\mathrm{N\,s}$
-appears in the first agent step, after which $p_{\mathrm{tot}}$ stays constant. For TRPO and the
-optimized PPO agent, $|p_{\mathrm{tot}}|$ remained below $10^{-6}\,\mathrm{N\,s}$ in all 620 evaluation
-episodes. The other agents reached up to $4.3 \times 10^{-4}\,\mathrm{N\,s}$. These larger deviations
-may be explained by the integration error of the fixed-step solver for rapidly changing torque commands.
-The values indicate that the simulation conserves momentum within the numerical tolerance. The
-momentum observer is a diagnostic tool. It is evaluated offline and does not influence the training.
+appears in the first agent step, after which $p_{\mathrm{tot}}$ stays constant. In the evaluated
+episodes, no systematic drift of $p_{\mathrm{tot}}$ was observed, and the deviations remained within the
+numerical tolerance of the solver. The deviations were larger for agents with rapidly changing torque
+commands, which may be explained by the integration error of the fixed-step solver. The momentum
+observer is a diagnostic tool. It is evaluated offline and does not influence the training.
 
 \begin{figure*}[!t]
     \centering    \includegraphics[width=0.75\linewidth]{Figures/spacerobot_slx_colissionmonitor.pdf}
