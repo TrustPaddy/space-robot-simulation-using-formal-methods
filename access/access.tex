@@ -77,21 +77,7 @@ Frankfurt am Main, Germany \\(e-mail: steven.ermisch@stud.fra-uas.de, kaigom@fra
 \corresp{Corresponding author: Eric Guiffo Kaigom (e-mail: kaigom@fra-uas.de).}
 
 \begin{abstract}
-Free-floating space robots exhibit a strong dynamic coupling between manipulator motion and base
-attitude, which complicates Cartesian path tracking of the end-effector. Labeled on-orbit data for
-supervised learning are scarce, which makes simulation-driven policy training through interaction and task-specific rewards attractive. This work therefore benchmarks six deep reinforcement learning (RL)
-algorithms (TRPO, TD3, SAC, PPO, PG, and DDPG) for planar Cartesian path tracking of a free-floating
-space robot in a physics-based Simulink/Simscape environment with runtime safety monitoring. Each
-configuration is trained with ten seeds. Success rate and performance of successful runs are
-evaluated separately with unified metrics. With default hyperparameters, only TRPO completes all ten
-runs without a safety abort caused by a monitored collision or violation of joint limit, whereas the other agents terminate 40\% to 80\% of their evaluation
-episodes. Even in their successful runs, SAC, DDPG, and TD3 track the path with a significantly larger
-error than TRPO. A tuned PPO configuration also completes all runs and reaches the lowest mean squared
-tracking error (0.0041 compared with 0.0145 for TRPO) in less training time, but this difference is not
-statistically significant. On a piecewise-linear path, its tracking error is again lower than that of
-TRPO, but not significantly after a multiple-comparison correction. Both agents complete all runs under observation noise, reduced torque limits, an external joint torque, and masses, inertias, and joint damping coefficients uniformly increased by 50\%. All results are obtained in simulation under controlled assumptions and do
-not establish operational readiness. The safety component comprises runtime monitors for selected
-properties and a formal check of torque saturation, but does not constitute a formal proof of closed-loop safety.
+The base reaction of free-floating space robots (FFSRs) complicates Cartesian path tracking of their end-effector. On-orbit data are scarce, making simulation-based control policy training through interaction and task-specific rewards attractive. This work benchmarks six deep reinforcement learning algorithms (TRPO, TD3, SAC, PPO, PG, and DDPG) for planar Cartesian path tracking of a FFSR in a physics-based Simulink/Simscape environment with runtime safety monitoring. Each configuration is trained with ten seeds. Success rate and performance of successful runs are evaluated separately with unified metrics. With default hyperparameters, only TRPO completes all ten runs without a safety abort caused by a monitored collision or joint-limit violation, whereas other agents terminate 40\% to 80\% of their evaluation episodes. Even in their successful runs, SAC, DDPG, and TD3 track the path with a significantly larger error than TRPO. A tuned PPO configuration also completes all runs and reaches the lowest mean squared tracking error (0.0041 compared with 0.0145 for TRPO) in less training time, but this difference is not statistically significant. On a piecewise-linear path, its tracking error is again lower than that of TRPO, but not significantly after a multiple-comparison correction. Both agents complete all runs under observation noise, reduced torque limits, an external joint torque, and masses, inertias, and joint damping uniformly increased by 50\%. All results are simulation-based under controlled assumptions and do not establish operational readiness. The safety component comprises runtime monitors for selected properties and a check of torque saturation, but does not constitute a formal proof of closed-loop safety.
 \end{abstract}
 \begin{keywords}
 Free-floating on-orbit servicing, Proximal Policy Optimization (PPO), reinforcement learning,
@@ -2342,8 +2328,7 @@ he led the ``Intelligent Robots'' team and coordinated technology development an
 partners in robotics-based manufacturing and on-orbit servicing, including projects funded under the European Union's
 Horizon 2020 and In-Space Automation programs. He then worked in industry as Head of
 Emerging Technologies. Dr. Kaigom is currently a Full Professor with Frankfurt University of Applied
-Sciences, Germany. He serves the academic community as an Associate Editor. His current research interests include robotics, digital twins, agentic systems, and artificial intelligence $\slash$ machine
-learning. 
+Sciences, Germany. He serves the academic community as an Associate Editor. His current research interests include robotics, digital twins, agentic systems, and AI $\slash$ ML. 
 \end{IEEEbiography}
 
 \EOD
